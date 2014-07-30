@@ -45,6 +45,15 @@
       <filter-name>LocalHostRestrictionFilter</filter-name>
       <filter-class>org.dspace.solr.filters.LocalHostRestrictionFilter</filter-class>
   </filter>
+  
+  <!-- Limit access to solr webapp.
+      'true': allow requests from localhost only.
+      'false': allow requests from all remotes. -->
+  <context-param>
+    <param-name>LocalHostRestrictionFilter.localhost</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  
 
   <!-- Any path (name) registered in solrconfig.xml will be sent to that filter -->
   <filter>
