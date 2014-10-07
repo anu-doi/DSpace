@@ -362,7 +362,7 @@
 
 	<!-- PubMed -->
 	<bean id="pubmedOnlineDataLoader" class="org.dspace.submit.lookup.PubmedOnlineDataLoader">
-		<property name="searchProvider" value="false" />
+		<property name="searchProvider" value="true" />
 		<property name="fieldMap" ref="pubmedInputMap" />
 	</bean>
 
@@ -403,7 +403,7 @@
 
 	<!-- Arxiv Data Loaders -->
 	<bean id="arXivOnlineDataLoader" class="org.dspace.submit.lookup.ArXivOnlineDataLoader">
-		<property name="searchProvider" value="false" />
+		<property name="searchProvider" value="true" />
 		<property name="fieldMap" ref="arxivInputMap" />
 	</bean>
 

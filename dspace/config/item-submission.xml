@@ -80,13 +80,15 @@
      <!-- beginning of each 'submission-process' (therefore it should not be -->
      <!-- referenced by any of the below 'submission-process' tags).  Also as-->
      <!-- a special step, it is currently NEVER editable in a workflow.      -->                              
+     <!--
      <step id="collection">
-       <heading></heading> <!--can specify heading, if you want it to appear in Progress Bar-->
+       <heading></heading>
 	   <processing-class>org.dspace.submit.step.SelectCollectionStep</processing-class>
        <jspui-binding>org.dspace.app.webui.submit.step.JSPSelectCollectionStep</jspui-binding>
        <xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.SelectCollectionStep</xmlui-binding>
        <workflow-editable>false</workflow-editable>
      </step>
+     -->
      
 	 <!-- Uncomment this to make available the bibliographic import from external source - note ONLY for JSPUI -->     
 	 <!-- <step id="collection">
@@ -96,6 +98,14 @@
        <xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.SelectCollectionStep</xmlui-binding>
        <workflow-editable>false</workflow-editable>
      </step> -->
+
+	 <step id="collection">
+       <heading></heading>
+	   <processing-class>org.dspace.submit.step.StartSubmissionLookupStep</processing-class>
+       <jspui-binding>org.dspace.app.webui.submit.step.JSPStartSubmissionLookupStep</jspui-binding>
+       <xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.SelectCollectionStep</xmlui-binding>
+       <workflow-editable>false</workflow-editable>
+     </step>
    
      <!-- The "complete" step is a "special step" which is *REQUIRED* to be-->
      <!-- in this section!  In DSpace, when a submission is completed,       -->
