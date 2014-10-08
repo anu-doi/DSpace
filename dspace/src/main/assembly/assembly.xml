@@ -57,6 +57,7 @@
             <exclude>config/dspace.cfg</exclude>
             <exclude>config/log4j.properties</exclude>
             <exclude>config/modules/**</exclude>
+            <exclude>config/spring/api/bte.xml</exclude>
          </excludes>
       </fileSet>
       <!-- Copy over all module configs & filter them -->
@@ -84,6 +85,11 @@
       <file>
          <source>config/crosswalks/oai/description.xml</source>
          <outputDirectory>config</outputDirectory>
+         <filtered>true</filtered>
+      </file>
+      <file>
+         <source>config/spring/api/bte.xml</source>
+         <outputDirectory>config/spring/api</outputDirectory>
          <filtered>true</filtered>
       </file>
    </files>
