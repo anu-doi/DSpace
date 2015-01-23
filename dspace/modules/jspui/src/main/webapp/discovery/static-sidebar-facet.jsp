@@ -78,10 +78,9 @@
  	    }
 	    String fkey = "jsp.search.facet.refine."+f;
 	    int limit = facetConf.getFacetLimit()+1;
-	    %><div id="facet_<%= f %>" class="w-narrow facet col-md-<%= discovery_facet_cols %>">
-	    <div class="w-narrow facetName box-header"><fmt:message key="<%= fkey %>" /></div>
-	    <div class="w-narrow box-solid">
-	    <%
+	    %><div id="facet_<%= f %>" class="facet col-md-<%= discovery_facet_cols %> w-narrow">
+	    <span class="facetName"><fmt:message key="<%= fkey %>" /></span>
+	    <ul class="list-group"><%
 	    int idx = 1;
 	    int currFp = UIUtil.getIntParameter(request, f+"_page");
 	    if (currFp < 0)
@@ -94,16 +93,13 @@
 		    { 
 		        if (idx != limit)
 		        {
-		        %>
-		        	<p>
-		        		<a href="<%= request.getContextPath()
+		        %><li class="list-group-item"><span class="badge"><%= fvalue.getCount() %></span> <a href="<%= request.getContextPath()
 		            + searchScope
 	                + "/simple-search?filterquery="+URLEncoder.encode(fvalue.getAsFilterQuery(),"UTF-8")
 	                + "&amp;filtername="+URLEncoder.encode(f,"UTF-8")
 	                + "&amp;filtertype="+URLEncoder.encode(fvalue.getFilterType(),"UTF-8") %>"
 	                title="<fmt:message key="jsp.search.facet.narrow"><fmt:param><%=fvalue.getDisplayedValue() %></fmt:param></fmt:message>">
-	                <%= StringUtils.abbreviate(fvalue.getDisplayedValue(),36) %></a>
-	                <span class="badge"><%= fvalue.getCount() %></span></p><%
+	                <%= StringUtils.abbreviate(fvalue.getDisplayedValue(),36) %></a></li><%
 		        }
 		        idx++;
 		    }
@@ -124,7 +120,7 @@
 	            %></li><%
 		    }
 	    }
-	    %></div></div></div><%
+	    %></ul></div><%
 	}
 %></div></div><%
 	}

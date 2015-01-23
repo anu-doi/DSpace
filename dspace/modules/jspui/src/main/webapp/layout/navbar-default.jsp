@@ -74,7 +74,46 @@
 
 
 <anu:menu showSearch="false" id="1108" shortTitle="CAS" ssl="true">
-	<anu:submenu title="Main">
+	<%
+		if (user != null)
+		{
+	%>
+		<anu:box style="solid">
+			<small>
+			<fmt:message key="jsp.layout.navbar-default.loggedin" var="signin">
+				  <fmt:param><%= StringUtils.abbreviate(navbarEmail, 20) %></fmt:param>
+			</fmt:message>
+			${signin}
+			
+			(<a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a>)
+			</small>
+		</anu:box>
+	<%
+		}
+	%>
+	<%-- Search Box --%>
+	<div class="search-box">
+		<p><label for="tequery"><fmt:message key="jsp.layout.navbar-default.search"/></label></p>
+		<form method="get" action="<%= request.getContextPath() %>/simple-search" class="navbar-form navbar-right" scope="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="<fmt:message key="jsp.layout.navbar-default.search"/>" name="query" id="tequery" size="25"/>
+			</div>
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+			<%--
+			Disabled. advanced search is not decoding search query properly.
+			<br/><a href="<%= request.getContextPath() %>/advanced-search"><fmt:message key="jsp.layout.navbar-default.advanced"/></a>
+<%
+			if (ConfigurationManager.getBooleanProperty("webui.controlledvocabulary.enable"))
+			{
+%>        
+              <br/><a href="<%= request.getContextPath() %>/subject-search"><fmt:message key="jsp.layout.navbar-default.subjectsearch"/></a>
+<%
+            }
+%> --%>
+		</form>
+	</div>
+	<fmt:message key="jsp.layout.navbar-default.browse" var="browse"/>
+	<anu:submenu title="${browse}">
 		<li><a href="<%= request.getContextPath() %>/"><fmt:message	key="jsp.layout.navbar-default.home" /></a></li>
 		<li><a href="<%= request.getContextPath() %>/community-list"><fmt:message key="jsp.layout.navbar-default.communities-collections" /></a></li>
 		<%
@@ -106,15 +145,21 @@
 	<anu:submenu title="${signin}">
 	    <li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
 	    <li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
-	    <li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
 	    <%
 	    	if (user != null)
 	    	{
 	    %>
+	    <li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
 	    <li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
 	    <%
 	    	}
 	    %>
+	</anu:submenu>
+	
+	<fmt:message key="jsp.layout.navbar-default.submit" var="submit"/>
+	<anu:submenu title="${submit}">
+	    <li><a href="https://research.anu.edu.au/access/submit.php"><fmt:message key="jsp.layout.navbar-default.submit-research"/></a></li>
+	    <li><a href="https://research.anu.edu.au/thesis/deposit.php"><fmt:message key="jsp.layout.navbar-default.submit-thesis"/></a></li>
 	</anu:submenu>
 	
 	<%
@@ -128,7 +173,10 @@
 		  }
 		%>
 		
-	<anu:submenu title="About">
+	<fmt:message key="jsp.layout.navbar-default.about" var="about"/>
+	<anu:submenu title="${about}">
+	    <li><a href="<%= request.getContextPath() %>/contacts"><fmt:message key="jsp.layout.navbar-default.contacts"/></a></li>
+	    <li><a href="http://anulib.anu.edu.au/"><fmt:message key="jsp.layout.navbar-default.library"/></a></li>
 		<li><dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") %>"><fmt:message key="jsp.layout.navbar-default.help"/></dspace:popup></li>
 	</anu:submenu>
 	
