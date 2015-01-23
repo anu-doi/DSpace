@@ -48,8 +48,7 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="Generator" content="<%= generator %>" />
-        <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css.jsp" type="text/css" />
-        <link rel="stylesheet" href="<%= request.getContextPath() %>/print.css" media="print" type="text/css" />
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/css/anu-dspace.css" media="screen" type="text/css" />
         
 <%
     if (!"NONE".equals(feedRef))
@@ -78,6 +77,7 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
         
 	<script type='text/javascript' src="<%= request.getContextPath() %>/static/js/jquery/jquery-1.10.2.min.js"></script>
 	<script type='text/javascript' src='<%= request.getContextPath() %>/static/js/jquery/jquery-ui-1.10.3.custom.min.js'></script>
+	<script type='text/javascript' src='<%= request.getContextPath() %>/static/js/bootstrap/bootstrap.min.js'></script>
 	<script type='text/javascript' src='<%= request.getContextPath() %>/static/js/holder.js'></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/utils.js"></script>
     <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/choice-support.js"> </script>
@@ -85,7 +85,7 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 </anu:header>
 
 <anu:body />
-<anu:alertbar text="This is the TEST environment" />
+<anu:alertbar text="This is the TEST environment" environment="devl" />
 
 <anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Information Technology Services" primaryTitleUrl="/" />
 

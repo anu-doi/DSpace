@@ -1,0 +1,1958 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<node id="ANZSRC-FOR" label="ANZSRC-FOR">
+  <isComposedBy>
+    <node id="01" label="01 - MATHEMATICAL SCIENCES">
+      <isComposedBy>
+        <node id="0101" label="0101 - Pure Mathematics">
+          <isComposedBy>
+            <node id="010101" label="010101 - Algebra and Number Theory" />
+            <node id="010102" label="010102 - Algebraic and Differential Geometry" />
+            <node id="010103" label="010103 - Category Theory, K Theory, Homological Algebra" />
+            <node id="010104" label="010104 - Combinatorics and Discrete Mathematics (excl. Physical Combinatorics)" />
+            <node id="010105" label="010105 - Group Theory and Generalisations" />
+            <node id="010106" label="010106 - Lie Groups, Harmonic and Fourier Analysis" />
+            <node id="010107" label="010107 - Mathematical Logic, Set Theory, Lattices and Universal Algebra" />
+            <node id="010108" label="010108 - Operator Algebras and Functional Analysis" />
+            <node id="010109" label="010109 - Ordinary Differential Equations, Difference Equations and Dynamical Systems" />
+            <node id="010110" label="010110 - Partial Differential Equations" />
+            <node id="010111" label="010111 - Real and Complex Functions (incl. Several Variables)" />
+            <node id="010112" label="010112 - Topology" />
+            <node id="010199" label="010199 - Pure Mathematics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0102" label="0102 - Applied Mathematics">
+          <isComposedBy>
+            <node id="010201" label="010201 - Approximation Theory and Asymptotic Methods" />
+            <node id="010202" label="010202 - Biological Mathematics" />
+            <node id="010203" label="010203 - Calculus of Variations, Systems Theory and Control Theory" />
+            <node id="010204" label="010204 - Dynamical Systems in Applications" />
+            <node id="010205" label="010205 - Financial Mathematics" />
+            <node id="010206" label="010206 - Operations Research" />
+            <node id="010207" label="010207 - Theoretical and Applied Mechanics" />
+            <node id="010299" label="010299 - Applied Mathematics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0103" label="0103 - Numerical and Computational Mathematics">
+          <isComposedBy>
+            <node id="010301" label="010301 - Numerical Analysis" />
+            <node id="010302" label="010302 - Numerical Solution of Differential and Integral Equations" />
+            <node id="010303" label="010303 - Optimisation" />
+            <node id="010399" label="010399 - Numerical and Computational Mathematics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0104" label="0104 - Statistics">
+          <isComposedBy>
+            <node id="010401" label="010401 - Applied Statistics" />
+            <node id="010402" label="010402 - Biostatistics" />
+            <node id="010403" label="010403 - Forensic Statistics" />
+            <node id="010404" label="010404 - Probability Theory" />
+            <node id="010405" label="010405 - Statistical Theory" />
+            <node id="010406" label="010406 - Stochastic Analysis and Modelling" />
+            <node id="010499" label="010499 - Statistics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0105" label="0105 - Mathematical Physics">
+          <isComposedBy>
+            <node id="010501" label="010501 - Algebraic Structures in Mathematical Physics" />
+            <node id="010502" label="010502 - Integrable Systems (Classical and Quantum)" />
+            <node id="010503" label="010503 - Mathematical Aspects of Classical Mechanics, Quantum Mechanics and Quantum Information Theory" />
+            <node id="010504" label="010504 - Mathematical Aspects of General Relativity" />
+            <node id="010505" label="010505 - Mathematical Aspects of Quantum and Conformal Field Theory, Quantum Gravity and String Theory" />
+            <node id="010506" label="010506 - Statistical Mechanics, Physical Combinatorics and Mathematical Aspects of Condensed Matter" />
+            <node id="010599" label="010599 - Mathematical Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0199" label="0199 - Other Mathematical Science">
+          <isComposedBy>
+            <node id="019999" label="019999 - Mathematical Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="02" label="02 - PHYSICAL SCIENCES">
+      <isComposedBy>
+        <node id="0201" label="0201 - Astronomical and Space Sciences">
+          <isComposedBy>
+            <node id="020102" label="020102 - Astronomical and Space Instrumentation" />
+            <node id="020103" label="020103 - Cosmology and Extragalactic Astronomy" />
+            <node id="020104" label="020104 - Galactic Astronomy" />
+            <node id="020105" label="020105 - General Relativity and Gravitational Waves" />
+            <node id="020106" label="020106 - High Energy Astrophysics; Cosmic Rays" />
+            <node id="020107" label="020107 - Mesospheric, Ionospheric and Magnetospheric Physics" />
+            <node id="020108" label="020108 - Planetary Science (excl. Extraterrestrial Geology)" />
+            <node id="020109" label="020109 - Space and Solar Physics" />
+            <node id="020110" label="020110 - Stellar Astronomy and Planetary Systems" />
+            <node id="020199" label="020199 - Astronomical and Space Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0202" label="0202 - Atomic, Molecular, Nuclear, Particle and Plasma Physics">
+          <isComposedBy>
+            <node id="020201" label="020201 - Atomic and Molecular Physics" />
+            <node id="020202" label="020202 - Nuclear Physics" />
+            <node id="020203" label="020203 - Particle Physics" />
+            <node id="020204" label="020204 - Plasma Physics; Fusion Plasmas; Electrical Discharges" />
+            <node id="020299" label="020299 - Atomic, Molecular, Nuclear, Particle and Plasma Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0203" label="0203 - Classical Physics">
+          <isComposedBy>
+            <node id="020301" label="020301 - Acoustics and Acoustical Devices; Waves" />
+            <node id="020302" label="020302 - Electrostatics and Electrodynamics" />
+            <node id="020303" label="020303 - Fluid Physics" />
+            <node id="020304" label="020304 - Thermodynamics and Statistical Physics" />
+            <node id="020399" label="020399 - Classical Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0204" label="0204 - Condensed Matter Physics">
+          <isComposedBy>
+            <node id="020401" label="020401 - Condensed Matter Characterisation Technique Development" />
+            <node id="020402" label="020402 - Condensed Matter Imaging" />
+            <node id="020403" label="020403 - Condensed Matter Modelling and Density Functional Theory" />
+            <node id="020404" label="020404 - Electronic and Magnetic Properties of Condensed Matter; Superconductivity" />
+            <node id="020405" label="020405 - Soft Condensed Matter" />
+            <node id="020406" label="020406 - Surfaces and Structural Properties of Condensed Matter" />
+            <node id="020499" label="020499 - Condensed Matter Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0205" label="0205 - Optical Physics">
+          <isComposedBy>
+            <node id="020501" label="020501 - Classical and Physical Optics" />
+            <node id="020502" label="020502 - Lasers and Quantum Electronics" />
+            <node id="020503" label="020503 - Nonlinear Optics and Spectroscopy" />
+            <node id="020504" label="020504 - Photonics, Optoelectronics and Optical Communications" />
+            <node id="020599" label="020599 - Optical Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0206" label="0206 - Quantum Physics">
+          <isComposedBy>
+            <node id="020601" label="020601 - Degenerate Quantum Gases and Atom Optics" />
+            <node id="020602" label="020602 - Field Theory and String Theory" />
+            <node id="020603" label="020603 - Quantum Information, Computation and Communication" />
+            <node id="020604" label="020604 - Quantum Optics" />
+            <node id="020699" label="020699 - Quantum Physics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0299" label="0299 - 020101 Astrobiology">
+          <isComposedBy>
+            <node id="029901" label="029901 - Biological Physics" />
+            <node id="029902" label="029902 - Complex Physical Systems" />
+            <node id="029903" label="029903 - Medical Physics" />
+            <node id="029904" label="029904 - Synchrotrons; Accelerators; Instruments and Techniques" />
+            <node id="029999" label="029999 - Physical Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="03" label="03 - CHEMICAL SCIENCES">
+      <isComposedBy>
+        <node id="0301" label="0301 - Analytical Chemistry">
+          <isComposedBy>
+            <node id="030101" label="030101 - Analytical Spectrometry" />
+            <node id="030102" label="030102 - Electroanalytical Chemistry" />
+            <node id="030103" label="030103 - Flow Analysis" />
+            <node id="030104" label="030104 - Immunological and Bioassay Methods" />
+            <node id="030105" label="030105 - Instrumental Methods (excl. Immunological and Bioassay Methods)" />
+            <node id="030106" label="030106 - Quality Assurance, Chemometrics, Traceability and Metrological Chemistry" />
+            <node id="030107" label="030107 - Sensor Technology (Chemical aspects)" />
+            <node id="030108" label="030108 - Separation Science" />
+            <node id="030199" label="030199 - Analytical Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0302" label="0302 - Inorganic Chemistry">
+          <isComposedBy>
+            <node id="030201" label="030201 - Bioinorganic Chemistry" />
+            <node id="030202" label="030202 - f-Block Chemistry" />
+            <node id="030203" label="030203 - Inorganic Green Chemistry" />
+            <node id="030204" label="030204 - Main Group Metal Chemistry" />
+            <node id="030205" label="030205 - Non-metal Chemistry" />
+            <node id="030206" label="030206 - Solid State Chemistry" />
+            <node id="030207" label="030207 - Transition Metal Chemistry" />
+            <node id="030299" label="030299 - Inorganic Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0303" label="0303 - Macromolecular and Materials Chemistry">
+          <isComposedBy>
+            <node id="030301" label="030301 - Chemical Characterisation of Materials" />
+            <node id="030302" label="030302 - Nanochemistry and Supramolecular Chemistry" />
+            <node id="030303" label="030303 - Optical Properties of Materials" />
+            <node id="030304" label="030304 - Physical Chemistry of Materials" />
+            <node id="030305" label="030305 - Polymerisation Mechanisms" />
+            <node id="030306" label="030306 - Synthesis of Materials" />
+            <node id="030307" label="030307 - Theory and Design of Materials" />
+            <node id="030399" label="030399 - Macromolecular and Materials Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0304" label="0304 - Medicinal and Biomolecular Chemistry">
+          <isComposedBy>
+            <node id="030401" label="030401 - Biologically Active Molecules" />
+            <node id="030402" label="030402 - Biomolecular Modelling and Design" />
+            <node id="030403" label="030403 - Characterisation of Biological Macromolecules" />
+            <node id="030404" label="030404 - Cheminformatics and Quantitative Structure-Activity Relationships" />
+            <node id="030405" label="030405 - Molecular Medicine" />
+            <node id="030406" label="030406 - Proteins and Peptides" />
+            <node id="030499" label="030499 - Medicinal and Biomolecular Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0305" label="0305 - Organic Chemistry">
+          <isComposedBy>
+            <node id="030501" label="030501 - Free Radical Chemistry" />
+            <node id="030502" label="030502 - Natural Products Chemistry" />
+            <node id="030503" label="030503 - Organic Chemical Synthesis" />
+            <node id="030504" label="030504 - Organic Green Chemistry" />
+            <node id="030505" label="030505 - Physical Organic Chemistry" />
+            <node id="030599" label="030599 - Organic Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0306" label="0306 - Physical Chemistry (incl. Structural)">
+          <isComposedBy>
+            <node id="030601" label="030601 - Catalysis and Mechanisms of Reactions" />
+            <node id="030602" label="030602 - Chemical Thermodynamics and Energetics" />
+            <node id="030603" label="030603 - Colloid and Surface Chemistry" />
+            <node id="030604" label="030604 - Electrochemistry" />
+            <node id="030605" label="030605 - Solution Chemistry" />
+            <node id="030606" label="030606 - Structural Chemistry and Spectroscopy" />
+            <node id="030607" label="030607 - Transport Properties and Non-equilibrium Processes" />
+            <node id="030699" label="030699 - Physical Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0307" label="0307 - Theoretical and Computational Chemistry">
+          <isComposedBy>
+            <node id="030701" label="030701 - Quantum Chemistry" />
+            <node id="030702" label="030702 - Radiation and Matter" />
+            <node id="030703" label="030703 - Reaction Kinetics and Dynamics" />
+            <node id="030704" label="030704 - Statistical Mechanics in Chemistry" />
+            <node id="030799" label="030799 - Theoretical and Computational Chemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0399" label="0399 - Other Chemical Sciences">
+          <isComposedBy>
+            <node id="039901" label="039901 - Environmental Chemistry (incl. Atmospheric Chemistry)" />
+            <node id="039902" label="039902 - Forensic Chemistry" />
+            <node id="039903" label="039903 - Industrial Chemistry" />
+            <node id="039904" label="039904 - Organometallic Chemistry" />
+            <node id="039999" label="039999 - Chemical Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="04" label="04 - EARTH SCIENCES">
+      <isComposedBy>
+        <node id="0401" label="0401 - Atmospheric Sciences">
+          <isComposedBy>
+            <node id="040101" label="040101 - Atmospheric Aerosols" />
+            <node id="040102" label="040102 - Atmospheric Dynamics" />
+            <node id="040103" label="040103 - Atmospheric Radiation" />
+            <node id="040104" label="040104 - Climate Change Processes" />
+            <node id="040105" label="040105 - Climatology (excl. Climate Change Processes)" />
+            <node id="040106" label="040106 - Cloud Physics" />
+            <node id="040107" label="040107 - Meteorology" />
+            <node id="040108" label="040108 - Tropospheric and Stratospheric Physics" />
+            <node id="040199" label="040199 - Atmospheric Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0402" label="0402 - Geochemistry">
+          <isComposedBy>
+            <node id="040201" label="040201 - Exploration Geochemistry" />
+            <node id="040202" label="040202 - Inorganic Geochemistry" />
+            <node id="040203" label="040203 - Isotope Geochemistry" />
+            <node id="040204" label="040204 - Organic Geochemistry" />
+            <node id="040299" label="040299 - Geochemistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0403" label="0403 - Geology">
+          <isComposedBy>
+            <node id="040301" label="040301 - Basin Analysis" />
+            <node id="040302" label="040302 - Extraterrestrial Geology" />
+            <node id="040303" label="040303 - Geochronology" />
+            <node id="040304" label="040304 - Igneous and Metamorphic Petrology" />
+            <node id="040305" label="040305 - Marine Geoscience" />
+            <node id="040306" label="040306 - Mineralogy and Crystallography" />
+            <node id="040307" label="040307 - Ore Deposit Petrology" />
+            <node id="040308" label="040308 - Palaeontology (incl. Palynology)" />
+            <node id="040309" label="040309 - Petroleum and Coal Geology" />
+            <node id="040310" label="040310 - Sedimentology" />
+            <node id="040311" label="040311 - Stratigraphy (incl. Biostratigraphy and Sequence Stratigraphy)" />
+            <node id="040312" label="040312 - Structural Geology" />
+            <node id="040313" label="040313 - Tectonics" />
+            <node id="040314" label="040314 - Volcanology" />
+            <node id="040399" label="040399 - Geology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0404" label="0404 - Geophysics">
+          <isComposedBy>
+            <node id="040401" label="040401 - Electrical and Electromagnetic Methods in Geophysics" />
+            <node id="040402" label="040402 - Geodynamics" />
+            <node id="040403" label="040403 - Geophysical Fluid Dynamics" />
+            <node id="040404" label="040404 - Geothermics and Radiometrics" />
+            <node id="040405" label="040405 - Gravimetrics" />
+            <node id="040406" label="040406 - Magnetism and Palaeomagnetism" />
+            <node id="040407" label="040407 - Seismology and Seismic Exploration" />
+            <node id="040499" label="040499 - Geophysics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0405" label="0405 - Oceanography">
+          <isComposedBy>
+            <node id="040501" label="040501 - Biological Oceanography" />
+            <node id="040502" label="040502 - Chemical Oceanography" />
+            <node id="040503" label="040503 - Physical Oceanography" />
+            <node id="040599" label="040599 - Oceanography not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0406" label="0406 - Physical Geography and Environmental Geoscience">
+          <isComposedBy>
+            <node id="040601" label="040601 - Geomorphology and Regolith and Landscape Evolution" />
+            <node id="040602" label="040602 - Glaciology" />
+            <node id="040603" label="040603 - Hydrogeology" />
+            <node id="040604" label="040604 - Natural Hazards" />
+            <node id="040605" label="040605 - Palaeoclimatology" />
+            <node id="040606" label="040606 - Quaternary Environments" />
+            <node id="040607" label="040607 - Surface Processes" />
+            <node id="040608" label="040608 - Surfacewater Hydrology" />
+            <node id="040699" label="040699 - Physical Geography and Environmental Geoscience not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0499" label="0499 - Other Earth Sciences">
+          <isComposedBy>
+            <node id="049999" label="049999 - Earth Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="05" label="05 - ENVIRONMENTAL SCIENCES">
+      <isComposedBy>
+        <node id="0501" label="0501 - Ecological Applications">
+          <isComposedBy>
+            <node id="050101" label="050101 - Ecological Impacts of Climate Change" />
+            <node id="050102" label="050102 - Ecosystem Function" />
+            <node id="050103" label="050103 - Invasive Species Ecology" />
+            <node id="050104" label="050104 - Landscape Ecology" />
+            <node id="050199" label="050199 - Ecological Applications not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0502" label="0502 - Environmental Science and Management">
+          <isComposedBy>
+            <node id="050201" label="050201 - Aboriginal and Torres Strait Islander Environmental Knowledge" />
+            <node id="050202" label="050202 - Conservation and Biodiversity" />
+            <node id="050203" label="050203 - Environmental Education and Extension" />
+            <node id="050204" label="050204 - Environmental Impact Assessment" />
+            <node id="050205" label="050205 - Environmental Management" />
+            <node id="050206" label="050206 - Environmental Monitoring" />
+            <node id="050207" label="050207 - Environmental Rehabilitation (excl. Bioremediation)" />
+            <node id="050208" label="050208 - Maori Environmental Knowledge" />
+            <node id="050209" label="050209 - Natural Resource Management" />
+            <node id="050210" label="050210 - Pacific Peoples Environmental Knowledge" />
+            <node id="050211" label="050211 - Wildlife and Habitat Management" />
+            <node id="050299" label="050299 - Environmental Science and Management not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0503" label="0503 - Soil Sciences">
+          <isComposedBy>
+            <node id="050301" label="050301 - Carbon Sequestration Science" />
+            <node id="050302" label="050302 - Land Capability and Soil Degradation" />
+            <node id="050303" label="050303 - Soil Biology" />
+            <node id="050304" label="050304 - Soil Chemistry (excl. Carbon Sequestration Science)" />
+            <node id="050305" label="050305 - Soil Physics" />
+            <node id="050399" label="050399 - Soil Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0599" label="0599 - Other Environmental Sciences">
+          <isComposedBy>
+            <node id="059999" label="059999 - Environmental Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="06" label="06 - BIOLOGICAL SCIENCES">
+      <isComposedBy>
+        <node id="0601" label="0601 - Biochemistry and Cell Biology">
+          <isComposedBy>
+            <node id="060101" label="060101 - Analytical Biochemistry" />
+            <node id="060102" label="060102 - Bioinformatics" />
+            <node id="060103" label="060103 - Cell Development, Proliferation and Death" />
+            <node id="060104" label="060104 - Cell Metabolism" />
+            <node id="060105" label="060105 - Cell Neurochemistry" />
+            <node id="060106" label="060106 - Cellular Interactions (incl. Adhesion, Matrix, Cell Wall)" />
+            <node id="060107" label="060107 - Enzymes" />
+            <node id="060108" label="060108 - Protein Trafficking" />
+            <node id="060109" label="060109 - Proteomics and Intermolecular Interactions (excl. Medical Proteomics)" />
+            <node id="060110" label="060110 - Receptors and Membrane Biology" />
+            <node id="060111" label="060111 - Signal Transduction" />
+            <node id="060112" label="060112 - Structural Biology (incl. Macromolecular Modelling)" />
+            <node id="060113" label="060113 - Synthetic Biology" />
+            <node id="060114" label="060114 - Systems Biology" />
+            <node id="060199" label="060199 - Biochemistry and Cell Biology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0602" label="0602 - Ecology">
+          <isComposedBy>
+            <node id="060201" label="060201 - Behavioural Ecology" />
+            <node id="060202" label="060202 - Community Ecology (excl. Invasive Species Ecology)" />
+            <node id="060203" label="060203 - Ecological Physiology" />
+            <node id="060204" label="060204 - Freshwater Ecology" />
+            <node id="060205" label="060205 - Marine and Estuarine Ecology (incl. Marine Ichthyology)" />
+            <node id="060206" label="060206 - Palaeoecology" />
+            <node id="060207" label="060207 - Population Ecology" />
+            <node id="060208" label="060208 - Terrestrial Ecology" />
+            <node id="060299" label="060299 - Ecology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0603" label="0603 - Evolutionary Biology">
+          <isComposedBy>
+            <node id="060301" label="060301 - Animal Systematics and Taxonomy" />
+            <node id="060302" label="060302 - Biogeography and Phylogeography" />
+            <node id="060303" label="060303 - Biological Adaptation" />
+            <node id="060304" label="060304 - Ethology and Sociobiology" />
+            <node id="060305" label="060305 - Evolution of Developmental Systems" />
+            <node id="060306" label="060306 - Evolutionary Impacts of Climate Change" />
+            <node id="060307" label="060307 - Host-Parasite Interactions" />
+            <node id="060308" label="060308 - Life Histories" />
+            <node id="060309" label="060309 - Phylogeny and Comparative Analysis" />
+            <node id="060310" label="060310 - Plant Systematics and Taxonomy" />
+            <node id="060311" label="060311 - Speciation and Extinction" />
+            <node id="060399" label="060399 - Evolutionary Biology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0604" label="0604 - Genetics">
+          <isComposedBy>
+            <node id="060401" label="060401 - Anthropological Genetics" />
+            <node id="060402" label="060402 - Cell and Nuclear Division" />
+            <node id="060403" label="060403 - Developmental Genetics (incl. Sex Determination)" />
+            <node id="060404" label="060404 - Epigenetics (incl. Genome Methylation and Epigenomics)" />
+            <node id="060405" label="060405 - Gene Expression (incl. Microarray and other genome-wide approaches)" />
+            <node id="060406" label="060406 - Genetic Immunology" />
+            <node id="060407" label="060407 - Genome Structure and Regulation" />
+            <node id="060408" label="060408 - Genomics" />
+            <node id="060409" label="060409 - Molecular Evolution" />
+            <node id="060410" label="060410 - Neurogenetics" />
+            <node id="060411" label="060411 - Population, Ecological and Evolutionary Genetics" />
+            <node id="060412" label="060412 - Quantitative Genetics (incl. Disease and Trait Mapping Genetics)" />
+            <node id="060499" label="060499 - Genetics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0605" label="0605 - Microbiology">
+          <isComposedBy>
+            <node id="060501" label="060501 - Bacteriology" />
+            <node id="060502" label="060502 - Infectious Agents" />
+            <node id="060503" label="060503 - Microbial Genetics" />
+            <node id="060504" label="060504 - Microbial Ecology" />
+            <node id="060505" label="060505 - Mycology" />
+            <node id="060506" label="060506 - Virology" />
+            <node id="060599" label="060599 - Microbiology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0606" label="0606 - Physiology">
+          <isComposedBy>
+            <node id="060601" label="060601 - Animal Physiology - Biophysics" />
+            <node id="060602" label="060602 - Animal Physiology - Cell" />
+            <node id="060603" label="060603 - Animal Physiology - Systems" />
+            <node id="060604" label="060604 - Comparative Physiology" />
+            <node id="060699" label="060699 - Physiology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0607" label="0607 - Plant Biology">
+          <isComposedBy>
+            <node id="060701" label="060701 - Phycology (incl. Marine Grasses)" />
+            <node id="060702" label="060702 - Plant Cell and Molecular Biology" />
+            <node id="060703" label="060703 - Plant Developmental and Reproductive Biology" />
+            <node id="060704" label="060704 - Plant Pathology" />
+            <node id="060705" label="060705 - Plant Physiology" />
+            <node id="060799" label="060799 - Plant Biology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0608" label="0608 - Zoology">
+          <isComposedBy>
+            <node id="060801" label="060801 - Animal Behaviour" />
+            <node id="060802" label="060802 - Animal Cell and Molecular Biology" />
+            <node id="060803" label="060803 - Animal Developmental and Reproductive Biology" />
+            <node id="060804" label="060804 - Animal Immunology" />
+            <node id="060805" label="060805 - Animal Neurobiology" />
+            <node id="060806" label="060806 - Animal Physiological Ecology" />
+            <node id="060807" label="060807 - Animal Structure and Function" />
+            <node id="060808" label="060808 - Invertebrate Biology" />
+            <node id="060809" label="060809 - Vertebrate Biology" />
+            <node id="060899" label="060899 - Zoology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0699" label="0699 - Other Biological Sciences">
+          <isComposedBy>
+            <node id="069901" label="069901 - Forensic Biology" />
+            <node id="069902" label="069902 - Global Change Biology" />
+            <node id="069999" label="069999 - Biological Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="07" label="07 - AGRICULTURAL AND VETERINARY SCIENCES">
+      <isComposedBy>
+        <node id="0701" label="0701 - Agriculture, Land and Farm Management">
+          <isComposedBy>
+            <node id="070101" label="070101 - Agricultural Land Management" />
+            <node id="070102" label="070102 - Agricultural Land Planning" />
+            <node id="070103" label="070103 - Agricultural Production Systems Simulation" />
+            <node id="070104" label="070104 - Agricultural Spatial Analysis and Modelling" />
+            <node id="070105" label="070105 - Agricultural Systems Analysis and Modelling" />
+            <node id="070106" label="070106 - Farm Management, Rural Management and Agribusiness" />
+            <node id="070107" label="070107 - Farming Systems Research" />
+            <node id="070108" label="070108 - Sustainable Agricultural Development" />
+            <node id="070199" label="070199 - Agriculture, Land and Farm Management not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0702" label="0702 - Animal Production">
+          <isComposedBy>
+            <node id="070201" label="070201 - Animal Breeding" />
+            <node id="070202" label="070202 - Animal Growth and Development" />
+            <node id="070203" label="070203 - Animal Management" />
+            <node id="070204" label="070204 - Animal Nutrition" />
+            <node id="070205" label="070205 - Animal Protection (Pests and Pathogens)" />
+            <node id="070206" label="070206 - Animal Reproduction" />
+            <node id="070207" label="070207 - Humane Animal Treatment" />
+            <node id="070299" label="070299 - Animal Production not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0703" label="0703 - Crop and Pasture Production">
+          <isComposedBy>
+            <node id="070301" label="070301 - Agro-ecosystem Function and Prediction" />
+            <node id="070302" label="070302 - Agronomy" />
+            <node id="070303" label="070303 - Crop and Pasture Biochemistry and Physiology" />
+            <node id="070304" label="070304 - Crop and Pasture Biomass and Bioproducts" />
+            <node id="070305" label="070305 - Crop and Pasture Improvement (Selection and Breeding)" />
+            <node id="070306" label="070306 - Crop and Pasture Nutrition" />
+            <node id="070307" label="070307 - Crop and Pasture Post Harvest Technologies (incl. Transportation and Storage)" />
+            <node id="070308" label="070308 - Crop and Pasture Protection (Pests, Diseases and Weeds)" />
+            <node id="070399" label="070399 - Crop and Pasture Production not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0704" label="0704 - Fisheries Sciences">
+          <isComposedBy>
+            <node id="070401" label="070401 - Aquaculture" />
+            <node id="070402" label="070402 - Aquatic Ecosystem Studies and Stock Assessment" />
+            <node id="070403" label="070403 - Fisheries Management" />
+            <node id="070404" label="070404 - Fish Pests and Diseases" />
+            <node id="070405" label="070405 - Fish Physiology and Genetics" />
+            <node id="070406" label="070406 - Post-Harvest Fisheries Technologies (incl. Transportation)" />
+            <node id="070499" label="070499 - Fisheries Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0705" label="0705 - Forestry Sciences">
+          <isComposedBy>
+            <node id="070501" label="070501 - Agroforestry" />
+            <node id="070502" label="070502 - Forestry Biomass and Bioproducts" />
+            <node id="070503" label="070503 - Forestry Fire Management" />
+            <node id="070504" label="070504 - Forestry Management and Environment" />
+            <node id="070505" label="070505 - Forestry Pests, Health and Diseases" />
+            <node id="070506" label="070506 - Forestry Product Quality Assessment" />
+            <node id="070507" label="070507 - Tree Improvement (Selection and Breeding)" />
+            <node id="070508" label="070508 - Tree Nutrition and Physiology" />
+            <node id="070509" label="070509 - Wood Fibre Processing" />
+            <node id="070510" label="070510 - Wood Processing" />
+            <node id="070599" label="070599 - Forestry Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0706" label="0706 - Horticultural Production">
+          <isComposedBy>
+            <node id="070601" label="070601 - Horticultural Crop Growth and Development" />
+            <node id="070602" label="070602 - Horticultural Crop Improvement (Selection and Breeding)" />
+            <node id="070603" label="070603 - Horticultural Crop Protection (Pests, Diseases and Weeds)" />
+            <node id="070604" label="070604 - Oenology and Viticulture" />
+            <node id="070605" label="070605 - Post Harvest Horticultural Technologies (incl. Transportation and Storage)" />
+            <node id="070699" label="070699 - Horticultural Production not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="0707" label="0707 - Veterinary Sciences">
+          <isComposedBy>
+            <node id="070701" label="070701 - Veterinary Anaesthesiology and Intensive Care" />
+            <node id="070702" label="070702 - Veterinary Anatomy and Physiology" />
+            <node id="070703" label="070703 - Veterinary Diagnosis and Diagnostics" />
+            <node id="070704" label="070704 - Veterinary Epidemiology" />
+            <node id="070705" label="070705 - Veterinary Immunology" />
+            <node id="070706" label="070706 - Veterinary Medicine" />
+            <node id="070707" label="070707 - Veterinary Microbiology (excl. Virology)" />
+            <node id="070708" label="070708 - Veterinary Parasitology" />
+            <node id="070709" label="070709 - Veterinary Pathology" />
+            <node id="070710" label="070710 - Veterinary Pharmacology" />
+            <node id="070711" label="070711 - Veterinary Surgery" />
+            <node id="070712" label="070712 - Veterinary Virology" />
+            <node id="070799" label="070799 - Veterinary Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0799" label="0799 - Other Agricultural and Veterinary Sciences">
+          <isComposedBy>
+            <node id="079901" label="079901 - Agricultural Hydrology (Drainage, Flooding, Irrigation, Quality, etc.)" />
+            <node id="079902" label="079902 - Fertilisers and Agrochemicals (incl. Application)" />
+            <node id="079999" label="079999 - Agricultural and Veterinary Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="08" label="08 - INFORMATION AND COMPUTING SCIENCES">
+      <isComposedBy>
+        <node id="0801" label="0801 - Artificial Intelligence and Image Processing">
+          <isComposedBy>
+            <node id="080101" label="080101 - Adaptive Agents and Intelligent Robotics" />
+            <node id="080102" label="080102 - Artificial Life" />
+            <node id="080103" label="080103 - Computer Graphics" />
+            <node id="080104" label="080104 - Computer Vision" />
+            <node id="080105" label="080105 - Expert Systems" />
+            <node id="080106" label="080106 - Image Processing" />
+            <node id="080107" label="080107 - Natural Language Processing" />
+            <node id="080108" label="080108 - Neural, Evolutionary and Fuzzy Computation" />
+            <node id="080109" label="080109 - Pattern Recognition and Data Mining" />
+            <node id="080110" label="080110 - Simulation and Modelling" />
+            <node id="080111" label="080111 - Virtual Reality and Related Simulation" />
+            <node id="080199" label="080199 - Artificial Intelligence and Image Processing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0802" label="0802 - Computation Theory and Mathematics">
+          <isComposedBy>
+            <node id="080201" label="080201 - Analysis of Algorithms and Complexity" />
+            <node id="080202" label="080202 - Applied Discrete Mathematics" />
+            <node id="080203" label="080203 - Computational Logic and Formal Languages" />
+            <node id="080204" label="080204 - Mathematical Software" />
+            <node id="080205" label="080205 - Numerical Computation" />
+            <node id="080299" label="080299 - Computation Theory and Mathematics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0803" label="0803 - Computer Software">
+          <isComposedBy>
+            <node id="080301" label="080301 - Bioinformatics Software" />
+            <node id="080302" label="080302 - Computer System Architecture" />
+            <node id="080303" label="080303 - Computer System Security" />
+            <node id="080304" label="080304 - Concurrent Programming" />
+            <node id="080305" label="080305 - Multimedia Programming" />
+            <node id="080306" label="080306 - Open Software" />
+            <node id="080307" label="080307 - Operating Systems" />
+            <node id="080308" label="080308 - Programming Languages" />
+            <node id="080309" label="080309 - Software Engineering" />
+            <node id="080399" label="080399 - Computer Software not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0804" label="0804 - Data Format">
+          <isComposedBy>
+            <node id="080401" label="080401 - Coding and Information Theory" />
+            <node id="080402" label="080402 - Data Encryption" />
+            <node id="080403" label="080403 - Data Structures" />
+            <node id="080404" label="080404 - Markup Languages" />
+            <node id="080499" label="080499 - Data Format not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0805" label="0805 - Distributed Computing">
+          <isComposedBy>
+            <node id="080501" label="080501 - Distributed and Grid Systems" />
+            <node id="080502" label="080502 - Mobile Technologies" />
+            <node id="080503" label="080503 - Networking and Communications" />
+            <node id="080504" label="080504 - Ubiquitous Computing" />
+            <node id="080505" label="080505 - Web Technologies (excl. Web Search)" />
+            <node id="080599" label="080599 - Distributed Computing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0806" label="0806 - Information Systems">
+          <isComposedBy>
+            <node id="080601" label="080601 - Aboriginal and Torres Strait Islander Information and Knowledge Systems" />
+            <node id="080602" label="080602 - Computer-Human Interaction" />
+            <node id="080603" label="080603 - Conceptual Modelling" />
+            <node id="080604" label="080604 - Database Management" />
+            <node id="080605" label="080605 - Decision Support and Group Support Systems" />
+            <node id="080606" label="080606 - Global Information Systems" />
+            <node id="080607" label="080607 - Information Engineering and Theory" />
+            <node id="080608" label="080608 - Information Systems Development Methodologies" />
+            <node id="080609" label="080609 - Information Systems Management" />
+            <node id="080610" label="080610 - Information Systems Organisation" />
+            <node id="080611" label="080611 - Information Systems Theory" />
+            <node id="080612" label="080612 - Interorganisational Information Systems and Web Services" />
+            <node id="080613" label="080613 - Maori Information and Knowledge Systems" />
+            <node id="080614" label="080614 - Pacific Peoples Information and Knowledge Systems" />
+            <node id="080699" label="080699 - Information Systems not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0807" label="0807 - Library and Information Studies">
+          <isComposedBy>
+            <node id="080701" label="080701 - Aboriginal and Torres Strait Islander Knowledge Management" />
+            <node id="080702" label="080702 - Health Informatics" />
+            <node id="080703" label="080703 - Human Information Behaviour" />
+            <node id="080704" label="080704 - Information Retrieval and Web Search" />
+            <node id="080705" label="080705 - Informetrics" />
+            <node id="080706" label="080706 - Librarianship" />
+            <node id="080707" label="080707 - Organisation of Information and Knowledge Resources" />
+            <node id="080708" label="080708 - Records and Information Management (excl. Business Records and Information Management)" />
+            <node id="080709" label="080709 - Social and Community Informatics" />
+            <node id="080799" label="080799 - Library and Information Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0899" label="0899 - Other Information and Computing Sciences">
+          <isComposedBy>
+            <node id="089999" label="089999 - Information and Computing Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="09" label="09 - ENGINEERING">
+      <isComposedBy>
+        <node id="0901" label="0901 - Aerospace Engineering">
+          <isComposedBy>
+            <node id="090101" label="090101 - Aerodynamics (excl. Hypersonic Aerodynamics)" />
+            <node id="090102" label="090102 - Aerospace Materials" />
+            <node id="090103" label="090103 - Aerospace Structures" />
+            <node id="090104" label="090104 - Aircraft Performance and Flight Control Systems" />
+            <node id="090105" label="090105 - Avionics" />
+            <node id="090106" label="090106 - Flight Dynamics" />
+            <node id="090107" label="090107 - Hypersonic Propulsion and Hypersonic Aerodynamics" />
+            <node id="090108" label="090108 - Satellite, Space Vehicle and Missile Design and Testing" />
+            <node id="090199" label="090199 - Aerospace Engineering not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="0902" label="0902 - Automotive Engineering">
+          <isComposedBy>
+            <node id="090201" label="090201 - Automotive Combustion and Fuel Engineering (incl. Alternative/Renewable Fuels)" />
+            <node id="090202" label="090202 - Automotive Engineering Materials" />
+            <node id="090203" label="090203 - Automotive Mechatronics" />
+            <node id="090204" label="090204 - Automotive Safety Engineering" />
+            <node id="090205" label="090205 - Hybrid Vehicles and Powertrains" />
+            <node id="090299" label="090299 - Automotive Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0903" label="0903 - Biomedical Engineering">
+          <isComposedBy>
+            <node id="090301" label="090301 - Biomaterials" />
+            <node id="090302" label="090302 - Biomechanical Engineering" />
+            <node id="090303" label="090303 - Biomedical Instrumentation" />
+            <node id="090304" label="090304 - Medical Devices" />
+            <node id="090305" label="090305 - Rehabilitation Engineering" />
+            <node id="090399" label="090399 - Biomedical Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0904" label="0904 - Chemical Engineering">
+          <isComposedBy>
+            <node id="090401" label="090401 - Carbon Capture Engineering (excl. Sequestration)" />
+            <node id="090402" label="090402 - Catalytic Process Engineering" />
+            <node id="090403" label="090403 - Chemical Engineering Design" />
+            <node id="090404" label="090404 - Membrane and Separation Technologies" />
+            <node id="090405" label="090405 - Non-automotive Combustion and Fuel Engineering (incl. Alternative/Renewable Fuels)" />
+            <node id="090406" label="090406 - Powder and Particle Technology" />
+            <node id="090407" label="090407 - Process Control and Simulation" />
+            <node id="090408" label="090408 - Rheology" />
+            <node id="090409" label="090409 - Wastewater Treatment Processes" />
+            <node id="090410" label="090410 - Water Treatment Processes" />
+            <node id="090499" label="090499 - Chemical Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0905" label="0905 - Civil Engineering">
+          <isComposedBy>
+            <node id="090501" label="090501 - Civil Geotechnical Engineering" />
+            <node id="090502" label="090502 - Construction Engineering" />
+            <node id="090503" label="090503 - Construction Materials" />
+            <node id="090504" label="090504 - Earthquake Engineering" />
+            <node id="090505" label="090505 - Infrastructure Engineering and Asset Management" />
+            <node id="090506" label="090506 - Structural Engineering" />
+            <node id="090507" label="090507 - Transport Engineering" />
+            <node id="090508" label="090508 - Water Quality Engineering" />
+            <node id="090509" label="090509 - Water Resources Engineering" />
+            <node id="090599" label="090599 - Civil Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0906" label="0906 - Electrical and Electronic Engineering">
+          <isComposedBy>
+            <node id="090601" label="090601 - Circuits and Systems" />
+            <node id="090602" label="090602 - Control Systems, Robotics and Automation" />
+            <node id="090603" label="090603 - Industrial Electronics" />
+            <node id="090604" label="090604 - Microelectronics and Integrated Circuits" />
+            <node id="090605" label="090605 - Photodetectors, Optical Sensors and Solar Cells" />
+            <node id="090606" label="090606 - Photonics and Electro-Optical Engineering (excl. Communications)" />
+            <node id="090607" label="090607 - Power and Energy Systems Engineering (excl. Renewable Power)" />
+            <node id="090608" label="090608 - Renewable Power and Energy Systems Engineering (excl. Solar Cells)" />
+            <node id="090609" label="090609 - Signal Processing" />
+            <node id="090699" label="090699 - Electrical and Electronic Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0907" label="0907 - Environmental Engineering">
+          <isComposedBy>
+            <node id="090701" label="090701 - Environmental Engineering Design" />
+            <node id="090702" label="090702 - Environmental Engineering Modelling" />
+            <node id="090703" label="090703 - Environmental Technologies" />
+            <node id="090799" label="090799 - Environmental Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0908" label="0908 - Food Sciences">
+          <isComposedBy>
+            <node id="090801" label="090801 - Food Chemistry and Molecular Gastronomy (excl. Wine)" />
+            <node id="090802" label="090802 - Food Engineering" />
+            <node id="090803" label="090803 - Food Nutritional Balance" />
+            <node id="090804" label="090804 - Food Packaging, Preservation and Safety" />
+            <node id="090805" label="090805 - Food Processing" />
+            <node id="090806" label="090806 - Wine Chemistry and Wine Sensory Science" />
+            <node id="090899" label="090899 - Food Sciences not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="0909" label="0909 - Geomatic Engineering">
+          <isComposedBy>
+            <node id="090901" label="090901 - Cartography" />
+            <node id="090902" label="090902 - Geodesy" />
+            <node id="090903" label="090903 - Geospatial Information Systems" />
+            <node id="090904" label="090904 - Navigation and Position Fixing" />
+            <node id="090905" label="090905 - Photogrammetry and Remote Sensing" />
+            <node id="090906" label="090906 - Surveying (incl. Hydrographic Surveying)" />
+            <node id="090999" label="090999 - Geomatic Engineering not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="0910" label="0910 - Manufacturing Engineering">
+          <isComposedBy>
+            <node id="091001" label="091001 - CAD/CAM Systems" />
+            <node id="091002" label="091002 - Flexible Manufacturing Systems" />
+            <node id="091003" label="091003 - Machine Tools" />
+            <node id="091004" label="091004 - Machining" />
+            <node id="091005" label="091005 - Manufacturing Management" />
+            <node id="091006" label="091006 - Manufacturing Processes and Technologies (excl. Textiles)" />
+            <node id="091007" label="091007 - Manufacturing Robotics and Mechatronics (excl. Automotive Mechatronics)" />
+            <node id="091008" label="091008 - Manufacturing Safety and Quality" />
+            <node id="091009" label="091009 - Microtechnology" />
+            <node id="091010" label="091010 - Packaging, Storage and Transportation (excl. Food and Agricultural Products)" />
+            <node id="091011" label="091011 - Precision Engineering" />
+            <node id="091012" label="091012 - Textile Technology" />
+            <node id="091099" label="091099 - Manufacturing Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0911" label="0911 - Maritime Engineering">
+          <isComposedBy>
+            <node id="091101" label="091101 - Marine Engineering" />
+            <node id="091102" label="091102 - Naval Architecture" />
+            <node id="091103" label="091103 - Ocean Engineering" />
+            <node id="091104" label="091104 - Ship and Platform Hydrodynamics" />
+            <node id="091105" label="091105 - Ship and Platform Structures" />
+            <node id="091106" label="091106 - Special Vehicles" />
+            <node id="091199" label="091199 - Maritime Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0912" label="0912 - Materials Engineering">
+          <isComposedBy>
+            <node id="091201" label="091201 - Ceramics" />
+            <node id="091202" label="091202 - Composite and Hybrid Materials" />
+            <node id="091203" label="091203 - Compound Semiconductors" />
+            <node id="091204" label="091204 - Elemental Semiconductors" />
+            <node id="091205" label="091205 - Functional Materials" />
+            <node id="091206" label="091206 - Glass" />
+            <node id="091207" label="091207 - Metals and Alloy Materials" />
+            <node id="091208" label="091208 - Organic Semiconductors" />
+            <node id="091209" label="091209 - Polymers and Plastics" />
+            <node id="091210" label="091210 - Timber, Pulp and Paper" />
+            <node id="091299" label="091299 - Materials Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0913" label="0913 - Mechanical Engineering">
+          <isComposedBy>
+            <node id="091301" label="091301 - Acoustics and Noise Control (excl. Architectural Acoustics)" />
+            <node id="091302" label="091302 - Automation and Control Engineering" />
+            <node id="091303" label="091303 - Autonomous Vehicles" />
+            <node id="091304" label="091304 - Dynamics, Vibration and Vibration Control" />
+            <node id="091305" label="091305 - Energy Generation, Conversion and Storage Engineering" />
+            <node id="091306" label="091306 - Microelectromechanical Systems (MEMS)" />
+            <node id="091307" label="091307 - Numerical Modelling and Mechanical Characterisation" />
+            <node id="091308" label="091308 - Solid Mechanics" />
+            <node id="091309" label="091309 - Tribology" />
+            <node id="091399" label="091399 - Mechanical Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0914" label="0914 - Resources Engineering and Extractive Metallurgy">
+          <isComposedBy>
+            <node id="091401" label="091401 - Electrometallurgy" />
+            <node id="091402" label="091402 - Geomechanics and Resources Geotechnical Engineering" />
+            <node id="091403" label="091403 - Hydrometallurgy" />
+            <node id="091404" label="091404 - Mineral Processing/Beneficiation" />
+            <node id="091405" label="091405 - Mining Engineering" />
+            <node id="091406" label="091406 - Petroleum and Reservoir Engineering" />
+            <node id="091407" label="091407 - Pyrometallurgy" />
+            <node id="091499" label="091499 - Resources Engineering and Extractive Metallurgy not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0915" label="0915 - Interdisciplinary Engineering">
+          <isComposedBy>
+            <node id="091501" label="091501 - Computational Fluid Dynamics" />
+            <node id="091502" label="091502 - Computational Heat Transfer" />
+            <node id="091503" label="091503 - Engineering Practice" />
+            <node id="091504" label="091504 - Fluidisation and Fluid Mechanics" />
+            <node id="091505" label="091505 - Heat and Mass Transfer Operations" />
+            <node id="091506" label="091506 - Nuclear Engineering (incl. Fuel Enrichment and Waste Processing and Storage)" />
+            <node id="091507" label="091507 - Risk Engineering (excl. Earthquake Engineering)" />
+            <node id="091508" label="091508 - Turbulent Flows" />
+            <node id="091599" label="091599 - Interdisciplinary Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="0999" label="0999 - Other Engineering">
+          <isComposedBy>
+            <node id="099901" label="099901 - Agricultural Engineering" />
+            <node id="099902" label="099902 - Engineering Instrumentation" />
+            <node id="099999" label="099999 - Engineering not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="10" label="10 - TECHNOLOGY">
+      <isComposedBy>
+        <node id="1001" label="1001 - Agricultural Biotechnology">
+          <isComposedBy>
+            <node id="100101" label="100101 - Agricultural Biotechnology Diagnostics (incl. Biosensors)" />
+            <node id="100102" label="100102 - Agricultural Marine Biotechnology" />
+            <node id="100103" label="100103 - Agricultural Molecular Engineering of Nucleic Acids and Proteins" />
+            <node id="100104" label="100104 - Genetically Modified Animals" />
+            <node id="100105" label="100105 - Genetically Modified Field Crops and Pasture" />
+            <node id="100106" label="100106 - Genetically Modified Horticulture Plants" />
+            <node id="100107" label="100107 - Genetically Modified Trees" />
+            <node id="100108" label="100108 - Livestock Cloning" />
+            <node id="100109" label="100109 - Transgenesis" />
+            <node id="100199" label="100199 - Agricultural Biotechnology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1002" label="1002 - Environmental Biotechnology">
+          <isComposedBy>
+            <node id="100201" label="100201 - Biodiscovery" />
+            <node id="100202" label="100202 - Biological Control" />
+            <node id="100203" label="100203 - Bioremediation" />
+            <node id="100204" label="100204 - Environmental Biotechnology Diagnostics (incl. Biosensors)" />
+            <node id="100205" label="100205 - Environmental Marine Biotechnology" />
+            <node id="100206" label="100206 - Environmental Molecular Engineering of Nucleic Acids and Proteins" />
+            <node id="100299" label="100299 - Environmental Biotechnology not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="1003" label="1003 - Industrial Biotechnology">
+          <isComposedBy>
+            <node id="100301" label="100301 - Biocatalysis and Enzyme Technology" />
+            <node id="100302" label="100302 - Bioprocessing, Bioproduction and Bioproducts" />
+            <node id="100303" label="100303 - Fermentation" />
+            <node id="100304" label="100304 - Industrial Biotechnology Diagnostics (incl. Biosensors)" />
+            <node id="100305" label="100305 - Industrial Microbiology (incl. Biofeedstocks)" />
+            <node id="100306" label="100306 - Industrial Molecular Engineering of Nucleic Acids and Proteins" />
+            <node id="100399" label="100399 - Industrial Biotechnology not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="1004" label="1004 - Medical Biotechnology">
+          <isComposedBy>
+            <node id="100401" label="100401 - Gene and Molecular Therapy" />
+            <node id="100402" label="100402 - Medical Biotechnology Diagnostics (incl. Biosensors)" />
+            <node id="100403" label="100403 - Medical Molecular Engineering of Nucleic Acids and Proteins" />
+            <node id="100404" label="100404 - Regenerative Medicine (incl. Stem Cells and Tissue Engineering)" />
+            <node id="100499" label="100499 - Medical Biotechnology not elsewhere classified " />
+          </isComposedBy>
+        </node>
+        <node id="1005" label="1005 - Communications Technologies">
+          <isComposedBy>
+            <node id="100501" label="100501 - Antennas and Propagation" />
+            <node id="100502" label="100502 - Broadband and Modem Technology" />
+            <node id="100503" label="100503 - Computer Communications Networks" />
+            <node id="100504" label="100504 - Data Communications" />
+            <node id="100505" label="100505 - Microwave and Millimetrewave Theory and Technology" />
+            <node id="100506" label="100506 - Optical Fibre Communications" />
+            <node id="100507" label="100507 - Optical Networks and Systems" />
+            <node id="100508" label="100508 - Satellite Communications" />
+            <node id="100509" label="100509 - Video Communications" />
+            <node id="100510" label="100510 - Wireless Communications" />
+            <node id="100599" label="100599 - Communications Technologies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1006" label="1006 - Computer Hardware">
+          <isComposedBy>
+            <node id="100601" label="100601 - Arithmetic and Logic Structures" />
+            <node id="100602" label="100602 - Input, Output and Data Devices" />
+            <node id="100603" label="100603 - Logic Design" />
+            <node id="100604" label="100604 - Memory Structures" />
+            <node id="100605" label="100605 - Performance Evaluation; Testing and Simulation of Reliability" />
+            <node id="100606" label="100606 - Processor Architectures" />
+            <node id="100699" label="100699 - Computer Hardware not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1007" label="1007 - Nanotechnology">
+          <isComposedBy>
+            <node id="100701" label="100701 - Environmental Nanotechnology" />
+            <node id="100702" label="100702 - Molecular and Organic Electronics" />
+            <node id="100703" label="100703 - Nanobiotechnology" />
+            <node id="100704" label="100704 - Nanoelectromechanical Systems" />
+            <node id="100705" label="100705 - Nanoelectronics" />
+            <node id="100706" label="100706 - Nanofabrication, Growth and Self Assembly" />
+            <node id="100707" label="100707 - Nanomanufacturing" />
+            <node id="100708" label="100708 - Nanomaterials" />
+            <node id="100709" label="100709 - Nanomedicine" />
+            <node id="100710" label="100710 - Nanometrology" />
+            <node id="100711" label="100711 - Nanophotonics" />
+            <node id="100712" label="100712 - Nanoscale Characterisation" />
+            <node id="100713" label="100713 - Nanotoxicology, Health and Safety" />
+            <node id="100799" label="100799 - Nanotechnology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1099" label="1099 - Other Technology">
+          <isComposedBy>
+            <node id="109999" label="109999 - Technology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="11" label="11 - MEDICAL AND HEALTH SCIENCES">
+      <isComposedBy>
+        <node id="1101" label="1101 - Medical Biochemistry and Metabolomics">
+          <isComposedBy>
+            <node id="110101" label="110101 - Medical Biochemistry: Amino Acids and Metabolites" />
+            <node id="110102" label="110102 - Medical Biochemistry: Carbohydrates" />
+            <node id="110103" label="110103 - Medical Biochemistry: Inorganic Elements and Compounds" />
+            <node id="110104" label="110104 - Medical Biochemistry: Lipids" />
+            <node id="110105" label="110105 - Medical Biochemistry: Nucleic Acids" />
+            <node id="110106" label="110106 - Medical Biochemistry: Proteins and Peptides (incl. Medical Proteomics)" />
+            <node id="110107" label="110107 - Metabolic Medicine" />
+            <node id="110199" label="110199 - Medical Biochemistry and Metabolomics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1102" label="1102 - Cardiorespiratory Medicine and Haematology">
+          <isComposedBy>
+            <node id="110201" label="110201 - Cardiology (incl. Cardiovascular Diseases)" />
+            <node id="110202" label="110202 - Haematology" />
+            <node id="110203" label="110203 - Respiratory Diseases" />
+            <node id="110299" label="110299 - Cardiorespiratory Medicine and Haematology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1103" label="1103 - Clinical Sciences">
+          <isComposedBy>
+            <node id="110301" label="110301 - Anaesthesiology" />
+            <node id="110302" label="110302 - Clinical Chemistry (diagnostics)" />
+            <node id="110303" label="110303 - Clinical Microbiology" />
+            <node id="110304" label="110304 - Dermatology" />
+            <node id="110305" label="110305 - Emergency Medicine" />
+            <node id="110306" label="110306 - Endocrinology" />
+            <node id="110307" label="110307 - Gastroenterology and Hepatology" />
+            <node id="110308" label="110308 - Geriatrics and Gerontology" />
+            <node id="110309" label="110309 - Infectious Diseases" />
+            <node id="110310" label="110310 - Intensive Care" />
+            <node id="110311" label="110311 - Medical Genetics (excl. Cancer Genetics)" />
+            <node id="110312" label="110312 - Nephrology and Urology" />
+            <node id="110313" label="110313 - Nuclear Medicine" />
+            <node id="110314" label="110314 - Orthopaedics" />
+            <node id="110315" label="110315 - Otorhinolaryngology" />
+            <node id="110316" label="110316 - Pathology (excl. Oral Pathology)" />
+            <node id="110317" label="110317 - Physiotherapy" />
+            <node id="110318" label="110318 - Podiatry" />
+            <node id="110319" label="110319 - Psychiatry (incl. Psychotherapy)" />
+            <node id="110320" label="110320 - Radiology and Organ Imaging" />
+            <node id="110321" label="110321 - Rehabilitation and Therapy (excl. Physiotherapy)" />
+            <node id="110322" label="110322 - Rheumatology and Arthritis" />
+            <node id="110323" label="110323 - Surgery" />
+            <node id="110324" label="110324 - Venereology" />
+            <node id="110399" label="110399 - Clinical Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1104" label="1104 - Complementary and Alternative Medicine">
+          <isComposedBy>
+            <node id="110401" label="110401 - Chiropractic" />
+            <node id="110402" label="110402 - Naturopathy" />
+            <node id="110403" label="110403 - Traditional Aboriginal and Torres Strait Islander Medicine and Treatments" />
+            <node id="110404" label="110404 - Traditional Chinese Medicine and Treatments" />
+            <node id="110405" label="110405 - Traditional Maori Medicine and Treatments" />
+            <node id="110499" label="110499 - Complementary and Alternative Medicine not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1105" label="1105 - Dentistry">
+          <isComposedBy>
+            <node id="110501" label="110501 - Dental Materials and Equipment" />
+            <node id="110502" label="110502 - Dental Therapeutics, Pharmacology and Toxicology" />
+            <node id="110503" label="110503 - Endodontics" />
+            <node id="110504" label="110504 - Oral and Maxillofacial Surgery" />
+            <node id="110505" label="110505 - Oral Medicine and Pathology" />
+            <node id="110506" label="110506 - Orthodontics and Dentofacial Orthopaedics" />
+            <node id="110507" label="110507 - Paedodontics" />
+            <node id="110508" label="110508 - Periodontics" />
+            <node id="110509" label="110509 - Special Needs Dentistry" />
+            <node id="110599" label="110599 - Dentistry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1106" label="1106 - Human Movement and Sports Science">
+          <isComposedBy>
+            <node id="110601" label="110601 - Biomechanics" />
+            <node id="110602" label="110602 - Exercise Physiology" />
+            <node id="110603" label="110603 - Motor Control" />
+            <node id="110604" label="110604 - Sports Medicine" />
+            <node id="110699" label="110699 - Human Movement and Sports Science not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1107" label="1107 - Immunology">
+          <isComposedBy>
+            <node id="110701" label="110701 - Allergy" />
+            <node id="110702" label="110702 - Applied Immunology (incl. Antibody Engineering, Xenotransplantation and T-cell Therapies)" />
+            <node id="110703" label="110703 - Autoimmunity" />
+            <node id="110704" label="110704 - Cellular Immunology" />
+            <node id="110705" label="110705 - Humoural Immunology and Immunochemistry" />
+            <node id="110706" label="110706 - Immunogenetics (incl. Genetic Immunology)" />
+            <node id="110707" label="110707 - Innate Immunity" />
+            <node id="110708" label="110708 - Transplantation Immunology" />
+            <node id="110709" label="110709 - Tumour Immunology" />
+            <node id="110799" label="110799 - Immunology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1108" label="1108 - Medical Microbiology">
+          <isComposedBy>
+            <node id="110801" label="110801 - Medical Bacteriology" />
+            <node id="110802" label="110802 - Medical Infection Agents (incl. Prions)" />
+            <node id="110803" label="110803 - Medical Parasitology" />
+            <node id="110804" label="110804 - Medical Virology" />
+            <node id="110899" label="110899 - Medical Microbiology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1109" label="1109 - Neurosciences">
+          <isComposedBy>
+            <node id="110901" label="110901 - Autonomic Nervous System" />
+            <node id="110902" label="110902 - Cellular Nervous System" />
+            <node id="110903" label="110903 - Central Nervous System" />
+            <node id="110904" label="110904 - Neurology and Neuromuscular Diseases" />
+            <node id="110905" label="110905 - Peripheral Nervous System" />
+            <node id="110906" label="110906 - Sensory Systems" />
+            <node id="110999" label="110999 - Neurosciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1110" label="1110 - Nursing">
+          <isComposedBy>
+            <node id="111001" label="111001 - Aged Care Nursing" />
+            <node id="111002" label="111002 - Clinical Nursing: Primary (Preventative)" />
+            <node id="111003" label="111003 - Clinical Nursing: Secondary (Acute Care)" />
+            <node id="111004" label="111004 - Clinical Nursing: Tertiary (Rehabilitative)" />
+            <node id="111005" label="111005 - Mental Health Nursing" />
+            <node id="111006" label="111006 - Midwifery" />
+            <node id="111099" label="111099 - Nursing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1111" label="1111 - Nutrition and Dietetics">
+          <isComposedBy>
+            <node id="111101" label="111101 - Clinical and Sports Nutrition" />
+            <node id="111102" label="111102 - Dietetics and Nutrigenomics" />
+            <node id="111103" label="111103 - Nutritional Physiology" />
+            <node id="111104" label="111104 - Public Nutrition Intervention" />
+            <node id="111199" label="111199 - Nutrition and Dietetics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1112" label="1112 - Oncology and Carcinogenesis">
+          <isComposedBy>
+            <node id="111201" label="111201 - Cancer Cell Biology" />
+            <node id="111202" label="111202 - Cancer Diagnosis" />
+            <node id="111203" label="111203 - Cancer Genetics" />
+            <node id="111204" label="111204 - Cancer Therapy (excl. Chemotherapy and Radiation Therapy)" />
+            <node id="111205" label="111205 - Chemotherapy" />
+            <node id="111206" label="111206 - Haematological Tumours" />
+            <node id="111207" label="111207 - Molecular Targets" />
+            <node id="111208" label="111208 - Radiation Therapy" />
+            <node id="111209" label="111209 - Solid Tumours" />
+            <node id="111299" label="111299 - Oncology and Carcinogenesis not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1113" label="1113 - Ophthalmology and Optometry">
+          <isComposedBy>
+            <node id="111301" label="111301 - Ophthalmology" />
+            <node id="111302" label="111302 - Optical Technology" />
+            <node id="111303" label="111303 - Vision Science" />
+            <node id="111399" label="111399 - Ophthalmology and Optometry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1114" label="1114 - Paediatrics and Reproductive Medicine">
+          <isComposedBy>
+            <node id="111401" label="111401 - Foetal Development and Medicine" />
+            <node id="111402" label="111402 - Obstetrics and Gynaecology" />
+            <node id="111403" label="111403 - Paediatrics" />
+            <node id="111404" label="111404 - Reproduction" />
+            <node id="111499" label="111499 - Paediatrics and Reproductive Medicine not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1115" label="1115 - Pharmacology and Pharmaceutical Sciences">
+          <isComposedBy>
+            <node id="111501" label="111501 - Basic Pharmacology" />
+            <node id="111502" label="111502 - Clinical Pharmacology and Therapeutics" />
+            <node id="111503" label="111503 - Clinical Pharmacy and Pharmacy Practice" />
+            <node id="111504" label="111504 - Pharmaceutical Sciences" />
+            <node id="111505" label="111505 - Pharmacogenomics" />
+            <node id="111506" label="111506 - Toxicology (incl. Clinical Toxicology)" />
+            <node id="111599" label="111599 - Pharmacology and Pharmaceutical Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1116" label="1116 - Medical Physiology">
+          <isComposedBy>
+            <node id="111601" label="111601 - Cell Physiology" />
+            <node id="111602" label="111602 - Human Biophysics" />
+            <node id="111603" label="111603 - Systems Physiology" />
+            <node id="111699" label="111699 - Medical Physiology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1117" label="1117 - Public Health and Health Services">
+          <isComposedBy>
+            <node id="111701" label="111701 - Aboriginal and Torres Strait Islander Health" />
+            <node id="111702" label="111702 - Aged Health Care" />
+            <node id="111703" label="111703 - Care for Disabled" />
+            <node id="111704" label="111704 - Community Child Health" />
+            <node id="111705" label="111705 - Environmental and Occupational Health and Safety" />
+            <node id="111706" label="111706 - Epidemiology" />
+            <node id="111707" label="111707 - Family Care" />
+            <node id="111708" label="111708 - Health and Community Services" />
+            <node id="111709" label="111709 - Health Care Administration" />
+            <node id="111710" label="111710 - Health Counselling" />
+            <node id="111711" label="111711 - Health Information Systems (incl. Surveillance)" />
+            <node id="111712" label="111712 - Health Promotion" />
+            <node id="111713" label="111713 - Maori Health" />
+            <node id="111714" label="111714 - Mental Health" />
+            <node id="111715" label="111715 - Pacific Peoples Health" />
+            <node id="111716" label="111716 - Preventive Medicine" />
+            <node id="111717" label="111717 - Primary Health Care" />
+            <node id="111718" label="111718 - Residential Client Care" />
+            <node id="111799" label="111799 - Public Health and Health Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1199" label="1199 - Other Medical and Health Sciences">
+          <isComposedBy>
+            <node id="119999" label="119999 - Medical and Health Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="12" label="12 - BUILT ENVIRONMENT AND DESIGN">
+      <isComposedBy>
+        <node id="1201" label="1201 - Architecture">
+          <isComposedBy>
+            <node id="120101" label="120101 - Architectural Design" />
+            <node id="120102" label="120102 - Architectural Heritage and Conservation" />
+            <node id="120103" label="120103 - Architectural History and Theory" />
+            <node id="120104" label="120104 - Architectural Science and Technology (incl. Acoustics, Lighting, Structure and Ecologically Sustainable Design)" />
+            <node id="120105" label="120105 - Architecture Management" />
+            <node id="120106" label="120106 - Interior Design" />
+            <node id="120107" label="120107 - Landscape Architecture" />
+            <node id="120199" label="120199 - Architecture not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1202" label="1202 - Building">
+          <isComposedBy>
+            <node id="120201" label="120201 - Building Construction Management and Project Planning" />
+            <node id="120202" label="120202 - Building Science and Techniques" />
+            <node id="120203" label="120203 - Quantity Surveying" />
+            <node id="120299" label="120299 - Building not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1203" label="1203 - Design Practice and Management">
+          <isComposedBy>
+            <node id="120301" label="120301 - Design History and Theory" />
+            <node id="120302" label="120302 - Design Innovation" />
+            <node id="120303" label="120303 - Design Management and Studio and Professional Practice" />
+            <node id="120304" label="120304 - Digital and Interaction Design" />
+            <node id="120305" label="120305 - Industrial Design" />
+            <node id="120306" label="120306 - Textile and Fashion Design" />
+            <node id="120307" label="120307 - Visual Communication Design (incl. Graphic Design)" />
+            <node id="120399" label="120399 - Design Practice and Management not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1204" label="1204 - Engineering Design">
+          <isComposedBy>
+            <node id="120401" label="120401 - Engineering Design Empirical Studies" />
+            <node id="120402" label="120402 - Engineering Design Knowledge" />
+            <node id="120403" label="120403 - Engineering Design Methods" />
+            <node id="120404" label="120404 - Engineering Systems Design" />
+            <node id="120405" label="120405 - Models of Engineering Design" />
+            <node id="120499" label="120499 - Engineering Design not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1205" label="1205 - Urban and Regional Planning">
+          <isComposedBy>
+            <node id="120501" label="120501 - Community Planning" />
+            <node id="120502" label="120502 - History and Theory of the Built Environment (excl. Architecture)" />
+            <node id="120503" label="120503 - Housing Markets, Development, Management" />
+            <node id="120504" label="120504 - Land Use and Environmental Planning" />
+            <node id="120505" label="120505 - Regional Analysis and Development" />
+            <node id="120506" label="120506 - Transport Planning" />
+            <node id="120507" label="120507 - Urban Analysis and Development" />
+            <node id="120508" label="120508 - Urban Design" />
+            <node id="120599" label="120599 - Urban and Regional Planning not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1299" label="1299 - Other Built Environment and Design">
+          <isComposedBy>
+            <node id="129999" label="129999 - Built Environment and Design not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="13" label="13 - EDUCATION">
+      <isComposedBy>
+        <node id="1301" label="1301 - Education Systems">
+          <isComposedBy>
+            <node id="130101" label="130101 - Continuing and Community Education" />
+            <node id="130102" label="130102 - Early Childhood Education (excl. Maori)" />
+            <node id="130103" label="130103 - Higher Education" />
+            <node id="130104" label="130104 - Kura Kaupapa Maori (Maori Primary Education)" />
+            <node id="130105" label="130105 - Primary Education (excl. Maori)" />
+            <node id="130106" label="130106 - Secondary Education" />
+            <node id="130107" label="130107 - Te Whariki (Maori Early Childhood Education)" />
+            <node id="130108" label="130108 - Technical, Further and Workplace Education" />
+            <node id="130199" label="130199 - Education systems not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1302" label="1302 - Curriculum and Pedagogy">
+          <isComposedBy>
+            <node id="130201" label="130201 - Creative Arts, Media and Communication Curriculum and Pedagogy" />
+            <node id="130202" label="130202 - Curriculum and Pedagogy Theory and Development" />
+            <node id="130203" label="130203 - Economics, Business and Management Curriculum and Pedagogy" />
+            <node id="130204" label="130204 - English and Literacy Curriculum and Pedagogy (excl. LOTE, ESL and TESOL)" />
+            <node id="130205" label="130205 - Humanities and Social Sciences Curriculum and Pedagogy (excl. Economics, Business and Management)" />
+            <node id="130206" label="130206 - Kohanga Reo (Maori Language Curriculum and Pedagogy)" />
+            <node id="130207" label="130207 - LOTE, ESL and TESOL Curriculum and Pedagogy (excl. Maori)" />
+            <node id="130208" label="130208 - Mathematics and Numeracy Curriculum and Pedagogy" />
+            <node id="130209" label="130209 - Medicine, Nursing and Health Curriculum and Pedagogy" />
+            <node id="130210" label="130210 - Physical Education and Development Curriculum and Pedagogy" />
+            <node id="130211" label="130211 - Religion Curriculum and Pedagogy" />
+            <node id="130212" label="130212 - Science, Technology and Engineering Curriculum and Pedagogy" />
+            <node id="130213" label="130213 - Vocational Education and Training Curriculum and Pedagogy" />
+            <node id="130299" label="130299 - Curriculum and Pedagogy not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1303" label="1303 - Specialist Studies in Education">
+          <isComposedBy>
+            <node id="130301" label="130301 - Aboriginal and Torres Strait Islander Education" />
+            <node id="130302" label="130302 - Comparative and Cross-Cultural Education" />
+            <node id="130303" label="130303 - Education Assessment and Evaluation" />
+            <node id="130304" label="130304 - Educational Administration, Management and Leadership" />
+            <node id="130305" label="130305 - Educational Counselling" />
+            <node id="130306" label="130306 - Educational Technology and Computing" />
+            <node id="130307" label="130307 - Ethnic Education (excl. Aboriginal and Torres Strait Islander, Maori and Pacific Peoples)" />
+            <node id="130308" label="130308 - Gender, Sexuality and Education" />
+            <node id="130309" label="130309 - Learning Sciences" />
+            <node id="130310" label="130310 - Maori Education (excl. Early Childhood and Primary Education)" />
+            <node id="130311" label="130311 - Pacific Peoples Education" />
+            <node id="130312" label="130312 - Special Education and Disability" />
+            <node id="130313" label="130313 - Teacher Education and Professional Development of Educators" />
+            <node id="130399" label="130399 - Specialist Studies in Education not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1399" label="1399 - Other Education">
+          <isComposedBy>
+            <node id="139999" label="139999 - Education not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="14" label="14 - ECONOMICS">
+      <isComposedBy>
+        <node id="1401" label="1401 - Economic Theory">
+          <isComposedBy>
+            <node id="140101" label="140101 - History of Economic Thought" />
+            <node id="140102" label="140102 - Macroeconomic Theory" />
+            <node id="140103" label="140103 - Mathematical Economics" />
+            <node id="140104" label="140104 - Microeconomic Theory" />
+            <node id="140199" label="140199 - Economic Theory not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1402" label="1402 - Applied Economics">
+          <isComposedBy>
+            <node id="140201" label="140201 - Agricultural Economics" />
+            <node id="140202" label="140202 - Economic Development and Growth" />
+            <node id="140203" label="140203 - Economic History" />
+            <node id="140204" label="140204 - Economics of Education" />
+            <node id="140205" label="140205 - Environment and Resource Economics" />
+            <node id="140206" label="140206 - Experimental Economics" />
+            <node id="140207" label="140207 - Financial Economics" />
+            <node id="140208" label="140208 - Health Economics" />
+            <node id="140209" label="140209 - Industry Economics and Industrial Organisation" />
+            <node id="140210" label="140210 - International Economics and International Finance" />
+            <node id="140211" label="140211 - Labour Economics" />
+            <node id="140212" label="140212 - Macroeconomics (incl. Monetary and Fiscal Theory)" />
+            <node id="140213" label="140213 - Public Economics- Public Choice" />
+            <node id="140214" label="140214 - Public Economics- Publically Provided Goods" />
+            <node id="140215" label="140215 - Public Economics- Taxation and Revenue" />
+            <node id="140216" label="140216 - Tourism Economics" />
+            <node id="140217" label="140217 - Transport Economics" />
+            <node id="140218" label="140218 - Urban and Regional Economics" />
+            <node id="140219" label="140219 - Welfare Economics" />
+            <node id="140299" label="140299 - Applied Economics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1403" label="1403 - Econometrics">
+          <isComposedBy>
+            <node id="140301" label="140301 - Cross-Sectional Analysis" />
+            <node id="140302" label="140302 - Econometric and Statistical Methods" />
+            <node id="140303" label="140303 - Economic Models and Forecasting" />
+            <node id="140304" label="140304 - Panel Data Analysis" />
+            <node id="140305" label="140305 - Time-Series Analysis" />
+            <node id="140399" label="140399 - Econometrics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1499" label="1499 - Other Economics">
+          <isComposedBy>
+            <node id="149901" label="149901 - Comparative Economic Systems" />
+            <node id="149902" label="149902 - Ecological Economics" />
+            <node id="149903" label="149903 - Heterodox Economics" />
+            <node id="149999" label="149999 - Economics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="15" label="15 - COMMERCE, MANAGEMENT, TOURISM AND SERVICES">
+      <isComposedBy>
+        <node id="1501" label="1501 - Accounting, Auditing and Accountability">
+          <isComposedBy>
+            <node id="150101" label="150101 - Accounting Theory and Standards" />
+            <node id="150102" label="150102 - Auditing and Accountability" />
+            <node id="150103" label="150103 - Financial Accounting" />
+            <node id="150104" label="150104 - International Accounting" />
+            <node id="150105" label="150105 - Management Accounting" />
+            <node id="150106" label="150106 - Sustainability Accounting and Reporting" />
+            <node id="150107" label="150107 - Taxation Accounting" />
+            <node id="150199" label="150199 - Accounting, Auditing and Accountability not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1502" label="1502 - Banking, Finance and Investment">
+          <isComposedBy>
+            <node id="150201" label="150201 - Finance" />
+            <node id="150202" label="150202 - Financial Econometrics" />
+            <node id="150203" label="150203 - Financial Institutions (incl. Banking)" />
+            <node id="150204" label="150204 - Insurance Studies" />
+            <node id="150205" label="150205 - Investment and Risk Management" />
+            <node id="150299" label="150299 - Banking, Finance and Investment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1503" label="1503 - Business and Management">
+          <isComposedBy>
+            <node id="150301" label="150301 - Business Information Management (incl. Records, Knowledge and Information Management, and Intelligence)" />
+            <node id="150302" label="150302 - Business Information Systems" />
+            <node id="150303" label="150303 - Corporate Governance and Stakeholder Engagement" />
+            <node id="150304" label="150304 - Entrepreneurship" />
+            <node id="150305" label="150305 - Human Resources Management" />
+            <node id="150306" label="150306 - Industrial Relations" />
+            <node id="150307" label="150307 - Innovation and Technology Management" />
+            <node id="150308" label="150308 - International Business" />
+            <node id="150309" label="150309 - Logistics and Supply Chain Management" />
+            <node id="150310" label="150310 - Organisation and Management Theory" />
+            <node id="150311" label="150311 - Organisational Behaviour" />
+            <node id="150312" label="150312 - Organisational Planning and Management" />
+            <node id="150313" label="150313 - Quality Management" />
+            <node id="150314" label="150314 - Small Business Management" />
+            <node id="150399" label="150399 - Business and Management not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1504" label="1504 - Commercial Services">
+          <isComposedBy>
+            <node id="150401" label="150401 - Food and Hospitality Services" />
+            <node id="150402" label="150402 - Hospitality Management" />
+            <node id="150403" label="150403 - Real Estate and Valuation Services" />
+            <node id="150404" label="150404 - Sport and Leisure Management" />
+            <node id="150499" label="150499 - Commercial Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1505" label="1505 - Marketing">
+          <isComposedBy>
+            <node id="150501" label="150501 - Consumer-Oriented Product or Service Development" />
+            <node id="150502" label="150502 - Marketing Communications" />
+            <node id="150503" label="150503 - Marketing Management (incl. Strategy and Customer Relations)" />
+            <node id="150504" label="150504 - Marketing Measurement" />
+            <node id="150505" label="150505 - Marketing Research Methodology" />
+            <node id="150506" label="150506 - Marketing Theory" />
+            <node id="150507" label="150507 - Pricing (incl. Consumer Value Estimation)" />
+            <node id="150599" label="150599 - Marketing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1506" label="1506 - Tourism">
+          <isComposedBy>
+            <node id="150601" label="150601 - Impacts of Tourism" />
+            <node id="150602" label="150602 - Tourism Forecasting" />
+            <node id="150603" label="150603 - Tourism Management" />
+            <node id="150604" label="150604 - Tourism Marketing" />
+            <node id="150605" label="150605 - Tourism Resource Appraisal" />
+            <node id="150606" label="150606 - Tourist Behaviour and Visitor Experience" />
+            <node id="150699" label="150699 - Tourism not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1507" label="1507 - Transportation and Freight Services">
+          <isComposedBy>
+            <node id="150701" label="150701 - Air Transportation and Freight Services" />
+            <node id="150702" label="150702 - Rail Transportation and Freight Services" />
+            <node id="150703" label="150703 - Road Transportation and Freight Services" />
+            <node id="150799" label="150799 - Transportation and Freight Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1599" label="1599 - Other Commerce, Management, Tourism and Services">
+          <isComposedBy>
+            <node id="159999" label="159999 - Commerce, Management, Tourism and Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="16" label="16 - STUDIES IN HUMAN SOCIETY">
+      <isComposedBy>
+        <node id="1601" label="1601 - Anthropology">
+          <isComposedBy>
+            <node id="160101" label="160101 - Anthropology of Development" />
+            <node id="160102" label="160102 - Biological (Physical) Anthropology" />
+            <node id="160103" label="160103 - Linguistic Anthropology" />
+            <node id="160104" label="160104 - Social and Cultural Anthropology" />
+            <node id="160199" label="160199 - Anthropology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1602" label="1602 - Criminology">
+          <isComposedBy>
+            <node id="160201" label="160201 - Causes and Prevention of Crime" />
+            <node id="160202" label="160202 - Correctional Theory, Offender Treatment and Rehabilitation" />
+            <node id="160203" label="160203 - Courts and Sentencing" />
+            <node id="160204" label="160204 - Criminological Theories" />
+            <node id="160205" label="160205 - Police Administration, Procedures and Practice" />
+            <node id="160206" label="160206 - Private Policing and Security Services" />
+            <node id="160299" label="160299 - Criminology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1603" label="1603 - Demography">
+          <isComposedBy>
+            <node id="160301" label="160301 - Family and Household Studies" />
+            <node id="160302" label="160302 - Fertility" />
+            <node id="160303" label="160303 - Migration" />
+            <node id="160304" label="160304 - Mortality" />
+            <node id="160305" label="160305 - Population Trends and Policies" />
+            <node id="160399" label="160399 - Demography not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1604" label="1604 - Human Geography">
+          <isComposedBy>
+            <node id="160401" label="160401 - Economic Geography" />
+            <node id="160402" label="160402 - Recreation, Leisure and Tourism Geography" />
+            <node id="160403" label="160403 - Social and Cultural Geography" />
+            <node id="160404" label="160404 - Urban and Regional Studies (excl. Planning)" />
+            <node id="160499" label="160499 - Human Geography not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1605" label="1605 - Policy and Administration">
+          <isComposedBy>
+            <node id="160501" label="160501 - Aboriginal and Torres Strait Islander Policy" />
+            <node id="160502" label="160502 - Arts and Cultural Policy" />
+            <node id="160503" label="160503 - Communications and Media Policy" />
+            <node id="160504" label="160504 - Crime Policy" />
+            <node id="160505" label="160505 - Economic Development Policy" />
+            <node id="160506" label="160506 - Education Policy" />
+            <node id="160507" label="160507 - Environment Policy" />
+            <node id="160508" label="160508 - Health Policy" />
+            <node id="160509" label="160509 - Public Administration" />
+            <node id="160510" label="160510 - Public Policy" />
+            <node id="160511" label="160511 - Research, Science and Technology Policy" />
+            <node id="160512" label="160512 - Social Policy" />
+            <node id="160513" label="160513 - Tourism Policy" />
+            <node id="160514" label="160514 - Urban Policy" />
+            <node id="160599" label="160599 - Policy and Administration not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1606" label="1606 - Political Science">
+          <isComposedBy>
+            <node id="160601" label="160601 - Australian Government and Politics" />
+            <node id="160602" label="160602 - Citizenship" />
+            <node id="160603" label="160603 - Comparative Government and Politics" />
+            <node id="160604" label="160604 - Defence Studies" />
+            <node id="160605" label="160605 - Environmental Politics" />
+            <node id="160606" label="160606 - Government and Politics of Asia and the Pacific" />
+            <node id="160607" label="160607 - International Relations" />
+            <node id="160608" label="160608 - New Zealand Government and Politics" />
+            <node id="160609" label="160609 - Political Theory and Political Philosophy" />
+            <node id="160699" label="160699 - Political Science not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1607" label="1607 - Social Work">
+          <isComposedBy>
+            <node id="160701" label="160701 - Clinical Social Work Practice" />
+            <node id="160702" label="160702 - Counselling, Welfare and Community Services" />
+            <node id="160703" label="160703 - Social Program Evaluation" />
+            <node id="160799" label="160799 - Social Work not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1608" label="1608 - Sociology">
+          <isComposedBy>
+            <node id="160801" label="160801 - Applied Sociology, Program Evaluation and Social Impact Assessment" />
+            <node id="160802" label="160802 - Environmental Sociology" />
+            <node id="160803" label="160803 - Race and Ethnic Relations" />
+            <node id="160804" label="160804 - Rural Sociology" />
+            <node id="160805" label="160805 - Social Change" />
+            <node id="160806" label="160806 - Social Theory" />
+            <node id="160807" label="160807 - Sociological Methodology and Research Methods" />
+            <node id="160808" label="160808 - Sociology and Social Studies of Science and Technology" />
+            <node id="160809" label="160809 - Sociology of Education" />
+            <node id="160810" label="160810 - Urban Sociology and Community Studies" />
+            <node id="160899" label="160899 - Sociology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1699" label="1699 - Other Studies in Human Society">
+          <isComposedBy>
+            <node id="169901" label="169901 - Gender Specific Studies" />
+            <node id="169902" label="169902 - Studies of Aboriginal and Torres Strait Islander Society" />
+            <node id="169903" label="169903 - Studies of Asian Society" />
+            <node id="169904" label="169904 - Studies of Maori Society" />
+            <node id="169905" label="169905 - Studies of Pacific Peoples' Societies" />
+            <node id="169999" label="169999 - Studies in Human Society not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="17" label="17 - PSYCHOLOGY AND COGNITIVE SCIENCES">
+      <isComposedBy>
+        <node id="1701" label="1701 - Psychology">
+          <isComposedBy>
+            <node id="170101" label="170101 - Biological Psychology (Neuropsychology, Psychopharmacology, Physiological Psychology)" />
+            <node id="170102" label="170102 - Developmental Psychology and Ageing" />
+            <node id="170103" label="170103 - Educational Psychology" />
+            <node id="170104" label="170104 - Forensic Psychology" />
+            <node id="170105" label="170105 - Gender Psychology" />
+            <node id="170106" label="170106 - Health, Clinical and Counselling Psychology" />
+            <node id="170107" label="170107 - Industrial and Organisational Psychology" />
+            <node id="170108" label="170108 - Kaupapa Maori Psychology" />
+            <node id="170109" label="170109 - Personality, Abilities and Assessment" />
+            <node id="170110" label="170110 - Psychological Methodology, Design and Analysis" />
+            <node id="170111" label="170111 - Psychology of Religion" />
+            <node id="170112" label="170112 - Sensory Processes, Perception and Performance" />
+            <node id="170113" label="170113 - Social and Community Psychology" />
+            <node id="170114" label="170114 - Sport and Exercise Psychology" />
+            <node id="170199" label="170199 - Psychology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1702" label="1702 - Cognitive Sciences">
+          <isComposedBy>
+            <node id="170201" label="170201 - Computer Perception, Memory and Attention" />
+            <node id="170202" label="170202 - Decision Making" />
+            <node id="170203" label="170203 - Knowledge Representation and Machine Learning" />
+            <node id="170204" label="170204 - Linguistic Processes (incl. Speech Production and Comprehension)" />
+            <node id="170205" label="170205 - Neurocognitive Patterns and Neural Networks" />
+            <node id="170299" label="170299 - Cognitive Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1799" label="1799 - Other Psychology and Cognitive Sciences">
+          <isComposedBy>
+            <node id="179999" label="179999 - Psychology and Cognitive Sciences not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="18" label="18 - LAW AND LEGAL STUDIES">
+      <isComposedBy>
+        <node id="1801" label="1801 - Law">
+          <isComposedBy>
+            <node id="180101" label="180101 - Aboriginal and Torres Strait Islander Law" />
+            <node id="180102" label="180102 - Access to Justice" />
+            <node id="180103" label="180103 - Administrative Law" />
+            <node id="180104" label="180104 - Civil Law and Procedure" />
+            <node id="180105" label="180105 - Commercial and Contract Law" />
+            <node id="180106" label="180106 - Comparative Law" />
+            <node id="180107" label="180107 - Conflict of Laws (Private International Law)" />
+            <node id="180108" label="180108 - Constitutional Law" />
+            <node id="180109" label="180109 - Corporations and Associations Law" />
+            <node id="180110" label="180110 - Criminal Law and Procedure" />
+            <node id="180111" label="180111 - Environmental and Natural Resources Law" />
+            <node id="180112" label="180112 - Equity and Trusts Law" />
+            <node id="180113" label="180113 - Family Law" />
+            <node id="180114" label="180114 - Human Rights Law" />
+            <node id="180115" label="180115 - Intellectual Property Law" />
+            <node id="180116" label="180116 - International Law (excl. International Trade Law)" />
+            <node id="180117" label="180117 - International Trade Law" />
+            <node id="180118" label="180118 - Labour Law" />
+            <node id="180119" label="180119 - Law and Society" />
+            <node id="180120" label="180120 - Legal Institutions (incl. Courts and Justice Systems)" />
+            <node id="180121" label="180121 - Legal Practice, Lawyering and the Legal Profession" />
+            <node id="180122" label="180122 - Legal Theory, Jurisprudence and Legal Interpretation" />
+            <node id="180123" label="180123 - Litigation, Adjudication and Dispute Resolution" />
+            <node id="180124" label="180124 - Property Law (excl. Intellectual Property Law)" />
+            <node id="180125" label="180125 - Taxation Law" />
+            <node id="180126" label="180126 - Tort Law" />
+            <node id="180199" label="180199 - Law not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1802" label="1802 - Maori Law">
+          <isComposedBy>
+            <node id="180201" label="180201 - Nga Tikanga Maori (Maori Customary Law)" />
+            <node id="180202" label="180202 - Te Maori Whakahaere Rauemi (Maori Resource Law))" />
+            <node id="180203" label="180203 - Te Tiriti o Waitangi (The Treaty of Waitangi)" />
+            <node id="180204" label="180204 - Te Ture Whenua (Maori Land Law)" />
+            <node id="180299" label="180299 - Maori Law not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1899" label="1899 - Other Law and Legal Studies">
+          <isComposedBy>
+            <node id="189999" label="189999 - Law and Legal Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="19" label="19 - STUDIES IN CREATIVE ARTS AND WRITING">
+      <isComposedBy>
+        <node id="1901" label="1901 - Art Theory and Criticism">
+          <isComposedBy>
+            <node id="190101" label="190101 - Art Criticism" />
+            <node id="190102" label="190102 - Art History" />
+            <node id="190103" label="190103 - Art Theory" />
+            <node id="190104" label="190104 - Visual Cultures" />
+            <node id="190199" label="190199 - Art Theory and Criticism not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1902" label="1902 - Film, Television and Digital Media">
+          <isComposedBy>
+            <node id="190201" label="190201 - Cinema Studies" />
+            <node id="190202" label="190202 - Computer Gaming and Animation" />
+            <node id="190203" label="190203 - Electronic Media Art" />
+            <node id="190204" label="190204 - Film and Television" />
+            <node id="190205" label="190205 - Interactive Media" />
+            <node id="190299" label="190299 - Film, Television and Digital Media not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1903" label="1903 - Journalism and Professional Writing">
+          <isComposedBy>
+            <node id="190301" label="190301 - Journalism Studies" />
+            <node id="190302" label="190302 - Professional Writing" />
+            <node id="190303" label="190303 - Technical Writing" />
+            <node id="190399" label="190399 - Journalism and Professional Writing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1904" label="1904 - Performing Arts and Creative Writing">
+          <isComposedBy>
+            <node id="190401" label="190401 - Aboriginal and Torres Strait Islander Performing Arts" />
+            <node id="190402" label="190402 - Creative Writing (incl. Playwriting)" />
+            <node id="190403" label="190403 - Dance" />
+            <node id="190404" label="190404 - Drama, Theatre and Performance Studies" />
+            <node id="190405" label="190405 - Maori Performing Arts" />
+            <node id="190406" label="190406 - Music Composition" />
+            <node id="190407" label="190407 - Music Performance" />
+            <node id="190408" label="190408 - Music Therapy" />
+            <node id="190409" label="190409 - Musicology and Ethnomusicology" />
+            <node id="190410" label="190410 - Pacific Peoples Performing Arts" />
+            <node id="190499" label="190499 - Performing Arts and Creative Writing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1905" label="1905 - Visual Arts and Crafts">
+          <isComposedBy>
+            <node id="190501" label="190501 - Crafts" />
+            <node id="190502" label="190502 - Fine Arts (incl. Sculpture and Painting)" />
+            <node id="190503" label="190503 - Lens-based Practice" />
+            <node id="190504" label="190504 - Performance and Installation Art" />
+            <node id="190599" label="190599 - Visual Arts and Crafts not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="1999" label="1999 - Other Studies in Creative Arts and Writing">
+          <isComposedBy>
+            <node id="199999" label="199999 - Studies in Creative Arts and Writing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="20" label="20 - LANGUAGE, COMMUNICATION AND CULTURE">
+      <isComposedBy>
+        <node id="2001" label="2001 - Communication and Media Studies">
+          <isComposedBy>
+            <node id="200101" label="200101 - Communication Studies" />
+            <node id="200102" label="200102 - Communication Technology and Digital Media Studies" />
+            <node id="200103" label="200103 - International and Development Communication" />
+            <node id="200104" label="200104 - Media Studies" />
+            <node id="200105" label="200105 - Organisational, Interpersonal and Intercultural Communication" />
+            <node id="200199" label="200199 - Communication and Media Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2002" label="2002 - Cultural Studies">
+          <isComposedBy>
+            <node id="200201" label="200201 - Aboriginal and Torres Strait Islander Cultural Studies" />
+            <node id="200202" label="200202 - Asian Cultural Studies" />
+            <node id="200203" label="200203 - Consumption and Everyday Life" />
+            <node id="200204" label="200204 - Cultural Theory" />
+            <node id="200205" label="200205 - Culture, Gender, Sexuality" />
+            <node id="200206" label="200206 - Globalisation and Culture" />
+            <node id="200207" label="200207 - Maori Cultural Studies" />
+            <node id="200208" label="200208 - Migrant Cultural Studies" />
+            <node id="200209" label="200209 - Multicultural, Intercultural and Cross-cultural Studies" />
+            <node id="200210" label="200210 - Pacific Cultural Studies" />
+            <node id="200211" label="200211 - Postcolonial Studies" />
+            <node id="200212" label="200212 - Screen and Media Culture" />
+            <node id="200299" label="200299 - Cultural Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2003" label="2003 - Language Studies">
+          <isComposedBy>
+            <node id="200301" label="200301 - Early English Languages" />
+            <node id="200302" label="200302 - English Language" />
+            <node id="200303" label="200303 - English as a Second Language" />
+            <node id="200304" label="200304 - Central and Eastern European Languages (incl. Russian)" />
+            <node id="200305" label="200305 - Latin and Classical Greek Languages" />
+            <node id="200306" label="200306 - French Language" />
+            <node id="200307" label="200307 - German Language" />
+            <node id="200308" label="200308 - Iberian Languages" />
+            <node id="200309" label="200309 - Italian Language" />
+            <node id="200310" label="200310 - Other European Languages" />
+            <node id="200311" label="200311 - Chinese Languages" />
+            <node id="200312" label="200312 - Japanese Language" />
+            <node id="200313" label="200313 - Indonesian Languages" />
+            <node id="200314" label="200314 - South-East Asian Languages (excl. Indonesian)" />
+            <node id="200315" label="200315 - Indian Languages" />
+            <node id="200316" label="200316 - Korean Language" />
+            <node id="200317" label="200317 - Other Asian Languages (excl. South-East Asian)" />
+            <node id="200318" label="200318 - Middle Eastern Languages" />
+            <node id="200319" label="200319 - Aboriginal and Torres Strait Islander Languages" />
+            <node id="200320" label="200320 - Pacific Languages" />
+            <node id="200321" label="200321 - Te Reo Maori (Maori Language)" />
+            <node id="200322" label="200322 - Comparative Language Studies" />
+            <node id="200323" label="200323 - Translation and Interpretation Studies" />
+            <node id="200399" label="200399 - Language Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2004" label="2004 - Linguistics">
+          <isComposedBy>
+            <node id="200401" label="200401 - Applied Linguistics and Educational Linguistics" />
+            <node id="200402" label="200402 - Computational Linguistics" />
+            <node id="200403" label="200403 - Discourse and Pragmatics" />
+            <node id="200404" label="200404 - Laboratory Phonetics and Speech Science" />
+            <node id="200405" label="200405 - Language in Culture and Society (Sociolinguistics)" />
+            <node id="200406" label="200406 - Language in Time and Space (incl. Historical Linguistics, Dialectology)" />
+            <node id="200407" label="200407 - Lexicography" />
+            <node id="200408" label="200408 - Linguistic Structures (incl. Grammar, Phonology, Lexicon, Semantics)" />
+            <node id="200499" label="200499 - Linguistics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2005" label="2005 - Literary Studies">
+          <isComposedBy>
+            <node id="200501" label="200501 - Aboriginal and Torres Strait Islander Literature" />
+            <node id="200502" label="200502 - Australian Literature (excl. Aboriginal and Torres Strait Islander Literature)" />
+            <node id="200503" label="200503 - British and Irish Literature" />
+            <node id="200504" label="200504 - Maori Literature" />
+            <node id="200505" label="200505 - New Zealand Literature (excl. Maori Literature)" />
+            <node id="200506" label="200506 - North American Literature" />
+            <node id="200507" label="200507 - Pacific Literature" />
+            <node id="200508" label="200508 - Other Literatures in English" />
+            <node id="200509" label="200509 - Central and Eastern European Literature (incl. Russian)" />
+            <node id="200510" label="200510 - Latin and Classical Greek Literature" />
+            <node id="200511" label="200511 - Literature in French" />
+            <node id="200512" label="200512 - Literature in German" />
+            <node id="200513" label="200513 - Literature in Italian" />
+            <node id="200514" label="200514 - Literature in Spanish and Portuguese" />
+            <node id="200515" label="200515 - Other European Literature" />
+            <node id="200516" label="200516 - Indonesian Literature" />
+            <node id="200517" label="200517 - Literature in Chinese" />
+            <node id="200518" label="200518 - Literature in Japanese" />
+            <node id="200519" label="200519 - South-East Asian Literature (excl. Indonesian)" />
+            <node id="200520" label="200520 - Indian Literature" />
+            <node id="200521" label="200521 - Korean Literature" />
+            <node id="200522" label="200522 - Other Asian Literature (excl. South-East Asian)" />
+            <node id="200523" label="200523 - Middle Eastern Literature" />
+            <node id="200524" label="200524 - Comparative Literature Studies" />
+            <node id="200525" label="200525 - Literary Theory" />
+            <node id="200526" label="200526 - Stylistics and Textual Analysis" />
+            <node id="200599" label="200599 - Literary Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2099" label="2099 - Other Language, Communication and Culture">
+          <isComposedBy>
+            <node id="209999" label="209999 - Language, Communication and Culture not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="21" label="21 - HISTORY AND ARCHAEOLOGY">
+      <isComposedBy>
+        <node id="2101" label="2101 - Archaeology">
+          <isComposedBy>
+            <node id="210101" label="210101 - Aboriginal and Torres Strait Islander Archaeology" />
+            <node id="210102" label="210102 - Archaeological Science" />
+            <node id="210103" label="210103 - Archaeology of Asia, Africa and the Americas" />
+            <node id="210104" label="210104 - Archaeology of Australia (excl. Aboriginal and Torres Strait Islander)" />
+            <node id="210105" label="210105 - Archaeology of Europe, the Mediterranean and the Levant" />
+            <node id="210106" label="210106 - Archaeology of New Guinea and Pacific Islands (excl. New Zealand)" />
+            <node id="210107" label="210107 - Archaeology of New Zealand (excl. Maori)" />
+            <node id="210108" label="210108 - Historical Archaeology (incl. Industrial Archaeology)" />
+            <node id="210109" label="210109 - Maori Archaeology" />
+            <node id="210110" label="210110 - Maritime Archaeology" />
+            <node id="210199" label="210199 - Archaeology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2102" label="2102 - Curatorial and Related Studies">
+          <isComposedBy>
+            <node id="210201" label="210201 - Archival, Repository and Related Studies" />
+            <node id="210202" label="210202 - Heritage and Cultural Conservation" />
+            <node id="210203" label="210203 - Materials Conservation" />
+            <node id="210204" label="210204 - Museum Studies" />
+            <node id="210299" label="210299 - Curatorial and Related Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2103" label="2103 - Historical Studies">
+          <isComposedBy>
+            <node id="210301" label="210301 - Aboriginal and Torres Strait Islander History" />
+            <node id="210302" label="210302 - Asian History" />
+            <node id="210303" label="210303 - Australian History (excl. Aboriginal and Torres Strait Islander History)" />
+            <node id="210304" label="210304 - Biography" />
+            <node id="210305" label="210305 - British History" />
+            <node id="210306" label="210306 - Classical Greek and Roman History" />
+            <node id="210307" label="210307 - European History (excl. British, Classical Greek and Roman)" />
+            <node id="210308" label="210308 - Latin American History" />
+            <node id="210309" label="210309 - Maori History" />
+            <node id="210310" label="210310 - Middle Eastern and African History" />
+            <node id="210311" label="210311 - New Zealand History" />
+            <node id="210312" label="210312 - North American History" />
+            <node id="210313" label="210313 - Pacific History (excl. New Zealand and Maori)" />
+            <node id="210399" label="210399 - Historical Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2199" label="2199 - Other History and Archaeology">
+          <isComposedBy>
+            <node id="219999" label="219999 - History and Archaeology not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="22" label="22 - PHILOSOPHY AND RELIGIOUS STUDIES">
+      <isComposedBy>
+        <node id="2201" label="2201 - Applied Ethics">
+          <isComposedBy>
+            <node id="220101" label="220101 - Bioethics (human and animal)" />
+            <node id="220102" label="220102 - Business Ethics" />
+            <node id="220103" label="220103 - Ethical Use of New Technology (e.g. Nanotechnology, Biotechnology)" />
+            <node id="220104" label="220104 - Human Rights and Justice Issues" />
+            <node id="220105" label="220105 - Legal Ethics" />
+            <node id="220106" label="220106 - Medical Ethics" />
+            <node id="220107" label="220107 - Professional Ethics (incl. police and research ethics)" />
+            <node id="220199" label="220199 - Applied Ethics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2202" label="2202 - History and Philosophy of Specific Fields">
+          <isComposedBy>
+            <node id="220201" label="220201 - Business and Labour History" />
+            <node id="220202" label="220202 - History and Philosophy of Education" />
+            <node id="220203" label="220203 - History and Philosophy of Engineering and Technology" />
+            <node id="220204" label="220204 - History and Philosophy of Law and Justice" />
+            <node id="220205" label="220205 - History and Philosophy of Medicine" />
+            <node id="220206" label="220206 - History and Philosophy of Science (incl. Non-historical Philosophy of Science)" />
+            <node id="220207" label="220207 - History and Philosophy of the Humanities" />
+            <node id="220208" label="220208 - History and Philosophy of the Social Sciences" />
+            <node id="220209" label="220209 - History of Ideas" />
+            <node id="220210" label="220210 - History of Philosophy" />
+            <node id="220299" label="220299 - History and Philosophy of Specific Fields not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2203" label="2203 - Philosophy">
+          <isComposedBy>
+            <node id="220301" label="220301 - Aesthetics" />
+            <node id="220302" label="220302 - Decision Theory" />
+            <node id="220303" label="220303 - Environmental Philosophy" />
+            <node id="220304" label="220304 - Epistemology" />
+            <node id="220305" label="220305 - Ethical Theory" />
+            <node id="220306" label="220306 - Feminist Theory" />
+            <node id="220307" label="220307 - Hermeneutic and Critical Theory" />
+            <node id="220308" label="220308 - Logic" />
+            <node id="220309" label="220309 - Metaphysics" />
+            <node id="220310" label="220310 - Phenomenology" />
+            <node id="220311" label="220311 - Philosophical Psychology (incl. Moral Psychology and Philosophy of Action)" />
+            <node id="220312" label="220312 - Philosophy of Cognition" />
+            <node id="220313" label="220313 - Philosophy of Language" />
+            <node id="220314" label="220314 - Philosophy of Mind (excl. Cognition)" />
+            <node id="220315" label="220315 - Philosophy of Religion" />
+            <node id="220316" label="220316 - Philosophy of Specific Cultures (incl. Comparative Philosophy)" />
+            <node id="220317" label="220317 - Poststructuralism" />
+            <node id="220318" label="220318 - Psychoanalytic Philosophy" />
+            <node id="220319" label="220319 - Social Philosophy" />
+            <node id="220399" label="220399 - Philosophy not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2204" label="2204 - Religion and Religious Studies">
+          <isComposedBy>
+            <node id="220401" label="220401 - Christian Studies (incl. Biblical Studies and Church History)" />
+            <node id="220402" label="220402 - Comparative Religious Studies" />
+            <node id="220403" label="220403 - Islamic Studies" />
+            <node id="220404" label="220404 - Jewish Studies" />
+            <node id="220405" label="220405 - Religion and Society" />
+            <node id="220406" label="220406 - Studies in Eastern Religious Traditions" />
+            <node id="220407" label="220407 - Studies in Religious Traditions (excl. Eastern, Jewish, Christian and Islamic Traditions)" />
+            <node id="220499" label="220499 - Religion and Religious Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="2299" label="2299 - Other Philosophy and Religious Studies">
+          <isComposedBy>
+            <node id="229999" label="229999 - Philosophy and Religious Studies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+  </isComposedBy>
+</node>

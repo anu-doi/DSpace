@@ -50,6 +50,7 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico" type="image/x-icon"/>
 	    <link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/jquery-ui-1.10.3.custom/redmond/jquery-ui-1.10.3.custom.css" type="text/css" />
+		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/anu-dspace.css" media="screen" type="text/css" />
 <%
     if (!"NONE".equals(feedRef))
     {
@@ -81,11 +82,12 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 	<script type='text/javascript' src='<%= request.getContextPath() %>/static/js/holder.js'></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/utils.js"></script>
     <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/choice-support.js"> </script>
+    <script type="text/javascript" src="<%= request.getContextPath() %>/static/js/anu-dspace.js"> </script>
 
 </anu:header>
 
 <anu:body />
-<anu:alertbar text="This is the TEST environment" />
+<anu:alertbar text="This is the TEST environment" environment="devl" />
 
 <anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Information Technology Services" primaryTitleUrl="/" />
 
