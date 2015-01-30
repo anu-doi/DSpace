@@ -146,7 +146,6 @@
 <%
         if (admin_button)  // admin edit button
         { %>
-        <dspace:sidebar>
             <div class="panel panel-warning">
             	<div class="panel-heading"><fmt:message key="jsp.admintools"/></div>
             	<div class="panel-body">
@@ -184,7 +183,6 @@
 					<% } %>
              </div>
           </div>
-        </dspace:sidebar>
 <%      } %>
 
 <%
