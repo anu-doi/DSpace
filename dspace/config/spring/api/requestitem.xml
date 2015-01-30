@@ -29,6 +29,8 @@
 		<property name="fullNameMatadata" value="schema.element.qualifier" /> 
 		
 	-->	
+		<property name="emailMetadata" value="local.request.email" />
+		<property name="fullNameMatadata" value="local.request.name" />
 	</bean>
 
     <!-- HelpDesk to instead get RequestItem emails-->

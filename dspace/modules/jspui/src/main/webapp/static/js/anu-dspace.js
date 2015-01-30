@@ -11,9 +11,7 @@ jQuery(document).ready(function()
 		}
 	});
 	var action = jQuery("#edit_metadata").attr('action');
-	console.log(action);
 	var actionSubStr = action.substring(action.indexOf('#'));
-	console.log(actionSubStr);
 	if (actionSubStr.length == 0 || actionSubStr == '#null') {
 		element = jQuery(".form-control:visible:first");
 	}
@@ -21,6 +19,5 @@ jQuery(document).ready(function()
 		element = jQuery(actionSubStr);
 	}
 	var firstEmptyElement = element.parent().parent().parent().find(":text[value='']:first");
-	console.log(firstEmptyElement.attr('id'));
 	firstEmptyElement.focus();
 });
