@@ -26,6 +26,7 @@
     prefix="fmt" %>
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
+<%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page  import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
@@ -98,6 +99,7 @@
 	
 %>
 
+<anu:content layout="doublewide">
 <dspace:layout style="submission" titlekey="jsp.mydspace" nocache="true">
 	<div class="panel panel-primary">
         <div class="panel-heading">
@@ -429,3 +431,4 @@
 	</div>
 </div>	
 </dspace:layout>
+</anu:content>

@@ -22,6 +22,7 @@
     prefix="fmt" %>
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
+<%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -42,6 +43,7 @@
 	Arrays.sort(items, itemComparator);
 %>
 
+<anu:content layout="doublewide">
 <dspace:layout style="submission" locbar="link"
                parentlink="/mydspace"
                parenttitlekey="jsp.mydspace"
@@ -90,3 +92,4 @@
     <%-- <p align="center"><a href="<%= request.getContextPath() %>/mydspace">Back to My DSpace</a></p> --%>
 	<p align="center"><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.mydspace.general.backto-mydspace"/></a></p>
 </dspace:layout>
+</anu:content>

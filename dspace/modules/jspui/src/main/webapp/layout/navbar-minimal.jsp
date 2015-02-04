@@ -16,7 +16,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<%@ taglib uri="/WEB-INF/dspace-tags.tld" prefix="dspace" %>
+<%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page import="java.util.ArrayList" %>
