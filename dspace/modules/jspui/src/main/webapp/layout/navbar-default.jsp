@@ -16,7 +16,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<%@ taglib uri="/WEB-INF/dspace-tags.tld" prefix="dspace" %>
+<%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page import="java.util.ArrayList" %>
@@ -98,7 +98,7 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="<fmt:message key="jsp.layout.navbar-default.search"/>" name="query" id="tequery" size="25"/>
 			</div>
-			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+			<button type="submit" class="btn"><span>GO</span></button>
 			<%--
 			Disabled. advanced search is not decoding search query properly.
 			<br/><a href="<%= request.getContextPath() %>/advanced-search"><fmt:message key="jsp.layout.navbar-default.advanced"/></a>
