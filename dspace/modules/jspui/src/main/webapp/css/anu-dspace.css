@@ -332,6 +332,9 @@ ul.media-list ul a:link, ul.media-list ul a:visited{
 .table {
 	width: 100%;
 }
+#loginform table {
+	border: none;
+}
 .pull-right {
 	float: right !important;
 }
@@ -580,10 +583,8 @@ a.btn-primary:visited {
 #recent-submissions-carousel {
 	width: 100%;
 }
-
-
 #breadcrumb {
-	margin-top: 20px;
+	margin: 20px 20px 0px 20px;
 }
 .pagination {
 	display: inline-block;
