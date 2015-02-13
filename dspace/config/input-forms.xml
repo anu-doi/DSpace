@@ -461,6 +461,18 @@
         <required />
 		<!--<vocabulary>anzfor</vocabulary>-->
       </field>
+      
+      <field>
+            <dc-schema>local</dc-schema>
+        <dc-element>identifier</dc-element>
+        <dc-qualifier>absseo</dc-qualifier>
+        <repeatable>true</repeatable>
+        <label>Socio-Economic Objective (ABS ANZSRC)</label>
+        <input-type>onebox</input-type>
+        <hint>If known.</hint>
+        <required />
+		<!--<vocabulary>anzseo</vocabulary>-->
+      </field>
 
         <field>
             <dc-schema>dc</dc-schema>
