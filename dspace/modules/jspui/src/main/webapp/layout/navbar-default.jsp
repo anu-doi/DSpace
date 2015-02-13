@@ -158,7 +158,7 @@
 	
 	<fmt:message key="jsp.layout.navbar-default.submit" var="submit"/>
 	<anu:submenu title="${submit}">
-	    <li><a href="https://research.anu.edu.au/access/submit.php"><fmt:message key="jsp.layout.navbar-default.submit-research"/></a></li>
+	    <li><a href="<%= request.getContextPath() %>/submit"><fmt:message key="jsp.layout.navbar-default.submit-research"/></a></li>
 	    <li><a href="https://research.anu.edu.au/thesis/deposit.php"><fmt:message key="jsp.layout.navbar-default.submit-thesis"/></a></li>
 	</anu:submenu>
 	
