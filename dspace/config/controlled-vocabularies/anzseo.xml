@@ -1,0 +1,1396 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<node id="ANZSRC-SEO" label="ANZSRC-SEO">
+  <isComposedBy>
+    <node id="81" label="81 - DEFENCE">
+      <isComposedBy>
+        <node id="8101" label="8101 - DEFENCE">
+          <isComposedBy>
+            <node id="810101" label="810101 - Air Force" />
+            <node id="810102" label="810102 - Army" />
+            <node id="810103" label="810103 - Command, Control and Communications" />
+            <node id="810104" label="810104 - Emerging Defence Technologies" />
+            <node id="810105" label="810105 - Intelligence" />
+            <node id="810106" label="810106 - Logistics" />
+            <node id="810107" label="810107 - National Security" />
+            <node id="810108" label="810108 - Navy" />
+            <node id="810109" label="810109 - Personnel" />
+            <node id="810199" label="810199 - Defence not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="82" label="82 - PLANT PRODUCTION AND PLANT PRIMARY PRODUCTS">
+      <isComposedBy>
+        <node id="8201" label="8201 - Forestry">
+          <isComposedBy>
+            <node id="820101" label="820101 - Hardwood Plantations" />
+            <node id="820102" label="820102 - Harvesting and Transport of Forest Products" />
+            <node id="820103" label="820103 - Integration of Farm and Forestry" />
+            <node id="820104" label="820104 - Native Forests" />
+            <node id="820105" label="820105 - Softwood Plantations" />
+            <node id="820199" label="820199 - Forestry not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8202" label="8202 - Horticultural Crops">
+          <isComposedBy>
+            <node id="820201" label="820201 - Almonds" />
+            <node id="820202" label="820202 - Berry Fruit (excl. Kiwifruit)" />
+            <node id="820203" label="820203 - Citrus Fruit" />
+            <node id="820204" label="820204 - Hops" />
+            <node id="820205" label="820205 - Kiwifruit" />
+            <node id="820206" label="820206 - Macadamias" />
+            <node id="820207" label="820207 - Mushrooms and Truffles" />
+            <node id="820208" label="820208 - Olives" />
+            <node id="820209" label="820209 - Ornamentals, Natives, Flowers and Nursery Plants" />
+            <node id="820210" label="820210 - Pome Fruit, Pip Fruit" />
+            <node id="820211" label="820211 - Stone Fruit" />
+            <node id="820212" label="820212 - Table Grapes" />
+            <node id="820213" label="820213 - Tree Nuts (excl. Almonds and Macadamias)" />
+            <node id="820214" label="820214 - Tropical Fruit" />
+            <node id="820215" label="820215 - Vegetables" />
+            <node id="820299" label="820299 - Horticultural Crops not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8203" label="8203 - Industrial Crops">
+          <isComposedBy>
+            <node id="820301" label="820301 - Cotton" />
+            <node id="820302" label="820302 - Essential Oil Crops (e.g. Tea Tree, Eucalyptus, Lavender, Peppermint, Boronia, Sandalwood)" />
+            <node id="820303" label="820303 - Plant Extract Crops (e.g. Pyrethrum, Jojoba)" />
+            <node id="820304" label="820304 - Sugar" />
+            <node id="820305" label="820305 - Tobacco" />
+            <node id="820306" label="820306 - Wine Grapes" />
+            <node id="820399" label="820399 - Industrial Crops not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8204" label="8204 - Summer Grains and Oilseeds">
+          <isComposedBy>
+            <node id="820401" label="820401 - Maize" />
+            <node id="820402" label="820402 - Rice" />
+            <node id="820403" label="820403 - Safflower Seed" />
+            <node id="820404" label="820404 - Sorghum" />
+            <node id="820405" label="820405 - Soybeans" />
+            <node id="820499" label="820499 - Summer Grains and Oilseeds not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8205" label="8205 - Winter Grains and Oilseeds">
+          <isComposedBy>
+            <node id="820501" label="820501 - Barley" />
+            <node id="820502" label="820502 - Canola" />
+            <node id="820503" label="820503 - Grain Legumes" />
+            <node id="820504" label="820504 - Linseed" />
+            <node id="820505" label="820505 - Lupins" />
+            <node id="820506" label="820506 - Oats" />
+            <node id="820507" label="820507 - Wheat" />
+            <node id="820599" label="820599 - Winter Grains and Oilseeds not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8206" label="8206 - Harvesting and Packing of Plant Products">
+          <isComposedBy>
+            <node id="820601" label="820601 - Cotton Lint and Cotton Seed" />
+            <node id="820602" label="820602 - Fresh Fruits and Vegetables (Post Harvest)" />
+            <node id="820603" label="820603 - Sugar Cane (Cut for Crushing)" />
+            <node id="820604" label="820604 - Tobacco Leaf" />
+            <node id="820605" label="820605 - Unprocessed Grains" />
+            <node id="820606" label="820606 - Unprocessed Industrial Crops (excl. Sugar, Tobacco and Cotton)" />
+            <node id="820607" label="820607 - Unprocessed Oilseeds" />
+            <node id="820699" label="820699 - Harvesting and Packing of Plant Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8298" label="8298 - Environmentally Sustainable Plant Production">
+          <isComposedBy>
+            <node id="829801" label="829801 - Management of Gaseous Waste from Plant Production (excl. Greenhouse Gases)" />
+            <node id="829802" label="829802 - Management of Greenhouse Gas Emissions from Plant Production" />
+            <node id="829803" label="829803 - Management of Liquid Waste from Plant Production (excl. Water)" />
+            <node id="829804" label="829804 - Management of Solid Waste from Plant Production" />
+            <node id="829805" label="829805 - Management of Water Consumption by Plant Production" />
+            <node id="829899" label="829899 - Environmentally Sustainable Plant Production not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8299" label="8299 - Other Plant Production and Plant Primary Products">
+          <isComposedBy>
+            <node id="829901" label="829901 - Forest Product Traceability and Quality Assurance" />
+            <node id="829902" label="829902 - Plant Product Traceability and Quality Assurance (excl. Forest Products)" />
+            <node id="829999" label="829999 - Plant Production and Plant Primary Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="83" label="83 - Animal Production and Animal Primary Products">
+      <isComposedBy>
+        <node id="8301" label="8301 - Fisheries - Aquaculture">
+          <isComposedBy>
+            <node id="830101" label="830101 - Aquaculture Crustaceans (excl. Rock Lobster and Prawns)" />
+            <node id="830102" label="830102 - Aquaculture Fin Fish (excl. Tuna)" />
+            <node id="830103" label="830103 - Aquaculture Molluscs (excl. Oysters)" />
+            <node id="830104" label="830104 - Aquaculture Oysters" />
+            <node id="830105" label="830105 - Aquaculture Prawns" />
+            <node id="830106" label="830106 - Aquaculture Rock Lobster" />
+            <node id="830107" label="830107 - Aquaculture Tuna" />
+            <node id="830199" label="830199 - Fisheries - Aquaculture not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8302" label="8302 - Fisheries - Wild Caught">
+          <isComposedBy>
+            <node id="830201" label="830201 - Fisheries - Recreational" />
+            <node id="830202" label="830202 - Wild Caught Crustaceans (excl. Rock Lobster and Prawns)" />
+            <node id="830203" label="830203 - Wild Caught Edible Molluscs" />
+            <node id="830204" label="830204 - Wild Caught Fin Fish (excl. Tuna)" />
+            <node id="830205" label="830205 - Wild Caught Prawns" />
+            <node id="830206" label="830206 - Wild Caught Rock Lobster" />
+            <node id="830207" label="830207 - Wild Caught Tuna" />
+            <node id="830299" label="830299 - Fisheries - Wild Caught not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8303" label="8303 - Livestock Raising">
+          <isComposedBy>
+            <node id="830301" label="830301 - Beef Cattle" />
+            <node id="830302" label="830302 - Dairy Cattle" />
+            <node id="830303" label="830303 - Deer" />
+            <node id="830304" label="830304 - Goats" />
+            <node id="830305" label="830305 - Game Livestock (e.g. Kangaroos, Wallabies, Camels, Buffaloes, Possums)" />
+            <node id="830306" label="830306 - Horses" />
+            <node id="830307" label="830307 - Minor Livestock (e.g. Alpacas, Ostriches, Crocodiles, Farmed Rabbits)" />
+            <node id="830308" label="830308 - Pigs" />
+            <node id="830309" label="830309 - Poultry" />
+            <node id="830310" label="830310 - Sheep - Meat" />
+            <node id="830311" label="830311 - Sheep - Wool" />
+            <node id="830399" label="830399 - Livestock Raising not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8304" label="8304 - Pasture, Browse and Fodder Crops">
+          <isComposedBy>
+            <node id="830401" label="830401 - Browse Crops" />
+            <node id="830402" label="830402 - Lucerne" />
+            <node id="830403" label="830403 - Native and Residual Pastures" />
+            <node id="830404" label="830404 - Non-Cereal Crops for Hay" />
+            <node id="830405" label="830405 - Non-Cereal Crops for Silage/Green Feed" />
+            <node id="830406" label="830406 - Sown Pastures (excl. Lucerne)" />
+            <node id="830499" label="830499 - Pasture, Browse and Fodder Crops not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8305" label="8305 - Primary Animal Products">
+          <isComposedBy>
+            <node id="830501" label="830501 - Eggs" />
+            <node id="830502" label="830502 - Honey" />
+            <node id="830503" label="830503 - Live Animals" />
+            <node id="830504" label="830504 - Pearls" />
+            <node id="830505" label="830505 - Raw Wool" />
+            <node id="830506" label="830506 - Unprocessed or Minimally Processed Fish" />
+            <node id="830507" label="830507 - Unprocessed or Minimally Processed Milk" />
+            <node id="830599" label="830599 - Primary Animal Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8398" label="8398 - Environmentally Sustainable Animal Production">
+          <isComposedBy>
+            <node id="839801" label="839801 - Management of Gaseous Waste from Animal Production (excl. Greenhouse Gases)" />
+            <node id="839802" label="839802 - Management of Greenhouse Gas Emissions from Animal Production" />
+            <node id="839803" label="839803 - Management of Liquid Waste from Animal Production (excl. Water)" />
+            <node id="839804" label="839804 - Management of Solid Waste from Animal Production" />
+            <node id="839805" label="839805 - Management of Water Consumption by Animal Production" />
+            <node id="839899" label="839899 - Environmentally Sustainable Animal Production not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8399" label="8399 - Other Animal Production and Animal Primary Products">
+          <isComposedBy>
+            <node id="839901" label="839901 - Animal Welfare" />
+            <node id="839902" label="839902 - Fish Product Traceability and Quality Assurance" />
+            <node id="839903" label="839903 - Livestock Product Traceability and Quality Assurance" />
+            <node id="839999" label="839999 - Animal Production and Animal Primary Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="84" label="84 - MINERAL RESOURCES (EXCL. ENERGY RESOURCES)">
+      <isComposedBy>
+        <node id="8401" label="8401 - Mineral Exploration">
+          <isComposedBy>
+            <node id="840101" label="840101 - Aluminium Ore Exploration" />
+            <node id="840102" label="840102 - Copper Ore Exploration" />
+            <node id="840103" label="840103 - Diamond Exploration" />
+            <node id="840104" label="840104 - Iron Ore Exploration" />
+            <node id="840105" label="840105 - Precious (Noble) Metal Ore Exploration" />
+            <node id="840106" label="840106 - Stone and Clay Exploration" />
+            <node id="840107" label="840107 - Titanium Minerals, Zircon, and Rare Earth Metal Ore (e.g. Monazite) Exploration" />
+            <node id="840108" label="840108 - Zinc Ore Exploration" />
+            <node id="840199" label="840199 - Mineral Exploration not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8402" label="8402 - Primary Mining and Extraction of Mineral Resources">
+          <isComposedBy>
+            <node id="840201" label="840201 - Mining and Extraction of Aluminium Ores" />
+            <node id="840202" label="840202 - Mining and Extraction of Copper Ores" />
+            <node id="840203" label="840203 - Mining and Extraction of Diamonds" />
+            <node id="840204" label="840204 - Mining and Extraction of Iron Ores" />
+            <node id="840205" label="840205 - Mining and Extraction of Precious (Noble) Metal Ores" />
+            <node id="840206" label="840206 - Mining and Extraction of Stone and Clay" />
+            <node id="840207" label="840207 - Mining and Extraction of Titanium Minerals, Zircon, and Rare Earth Metal Ores (e.g. Monazite)" />
+            <node id="840208" label="840208 - Mining and Extraction of Zinc Ores" />
+            <node id="840299" label="840299 - Primary Mining and Extraction of Mineral Resources not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8403" label="8403 - First Stage Treatment of Ores and Minerals">
+          <isComposedBy>
+            <node id="840301" label="840301 - Alumina Production" />
+            <node id="840302" label="840302 - Beneficiation of Bauxite and Aluminium Ores (excl. Alumina Production)" />
+            <node id="840303" label="840303 - Beneficiation or Dressing of Iron Ores" />
+            <node id="840304" label="840304 - Beneficiation or Dressing of Non-Metallic Minerals (incl. Diamonds)" />
+            <node id="840305" label="840305 - Concentrating Processes of Base Metal Ores (excl. Aluminium and Iron Ores)" />
+            <node id="840306" label="840306 - Production of Unrefined Precious Metal Ingots and Concentrates" />
+            <node id="840399" label="840399 - First Stage Treatment of Ores and Minerals not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8498" label="8498 - Environmentally Sustainable Mineral Resource Activities">
+          <isComposedBy>
+            <node id="849801" label="849801 - Management of Gaseous Waste from Mineral Resource Activities (excl. Greenhouse Gases)" />
+            <node id="849802" label="849802 - Management of Greenhouse Gas Emissions from Mineral Resource Activities" />
+            <node id="849803" label="849803 - Management of Liquid Waste from Mineral Resource Activities (excl. Water)" />
+            <node id="849804" label="849804 - Management of Solid Waste from Mineral Resource Activities" />
+            <node id="849805" label="849805 - Management of Water Consumption by Mineral Resource Activities" />
+            <node id="849899" label="849899 - Environmentally Sustainable Mineral Resource Activities not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8499" label="8499 - Other Mineral Resources (excl. Energy Resources)">
+          <isComposedBy>
+            <node id="849999" label="849999 - Mineral Resources (excl. Energy Resources) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="85" label="85 - ENERGY">
+      <isComposedBy>
+        <node id="8501" label="8501 - Energy Exploration">
+          <isComposedBy>
+            <node id="850101" label="850101 - Coal Exploration" />
+            <node id="850102" label="850102 - Geothermal Exploration" />
+            <node id="850103" label="850103 - Oil and Gas Exploration" />
+            <node id="850104" label="850104 - Oil Shale and Tar Sands Exploration" />
+            <node id="850105" label="850105 - Uranium Exploration" />
+            <node id="850199" label="850199 - Energy Exploration not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8502" label="8502 - Mining and Extraction of Energy Resources">
+          <isComposedBy>
+            <node id="850201" label="850201 - Coal Mining and Extraction" />
+            <node id="850202" label="850202 - Geothermal Energy Extraction" />
+            <node id="850203" label="850203 - Oil and Gas Extraction" />
+            <node id="850204" label="850204 - Oil Shale and Tar Sands Mining and Extraction" />
+            <node id="850205" label="850205 - Uranium Mining and Extraction" />
+            <node id="850299" label="850299 - Mining and Extraction of Energy Resources not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8503" label="8503 - Preparation and Production of Energy Sources">
+          <isComposedBy>
+            <node id="850301" label="850301 - Hydrogen Production from Fossil Fuels" />
+            <node id="850302" label="850302 - Hydrogen Production from Nuclear Energy" />
+            <node id="850303" label="850303 - Hydrogen Production from Renewable Energy" />
+            <node id="850304" label="850304 - Oil and Gas Refining" />
+            <node id="850305" label="850305 - Preparation of Black Coal" />
+            <node id="850306" label="850306 - Preparation of Brown Coal (Lignite)" />
+            <node id="850307" label="850307 - Preparation of Oil Shale and Tar Sands" />
+            <node id="850308" label="850308 - Preparation of Uranium" />
+            <node id="850309" label="850309 - Production of Biofuels (Biomass)" />
+            <node id="850399" label="850399 - Preparation and Production of Energy Sources not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8504" label="8504 - Energy Transformation">
+          <isComposedBy>
+            <node id="850401" label="850401 - Fuel Cells (excl. Solid Oxide)" />
+            <node id="850402" label="850402 - Hydrogen-based Energy Systems (incl. Internal Hydrogen Combustion Engines)" />
+            <node id="850403" label="850403 - Nuclear Energy" />
+            <node id="850404" label="850404 - Solid Oxide Fuel Cells" />
+            <node id="850405" label="850405 - Transformation of Black Coal into Electricity" />
+            <node id="850406" label="850406 - Transformation of Brown Coal (Lignite) into Electricity" />
+            <node id="850407" label="850407 - Transformation of Coal into Gaseous Fuels" />
+            <node id="850408" label="850408 - Transformation of Coal into Liquid Fuels" />
+            <node id="850409" label="850409 - Transformation of Gas into Electricity" />
+            <node id="850410" label="850410 - Transformation of Gas into Liquid Fuels" />
+            <node id="850499" label="850499 - Energy Transformation not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8505" label="8505 - Renewable Energy">
+          <isComposedBy>
+            <node id="850501" label="850501 - Biofuel (Biomass) Energy" />
+            <node id="850502" label="850502 - Geothermal Energy" />
+            <node id="850503" label="850503 - Hydro-Electric Energy" />
+            <node id="850504" label="850504 - Solar-Photovoltaic Energy" />
+            <node id="850505" label="850505 - Solar-Thermal Electric Energy" />
+            <node id="850506" label="850506 - Solar-Thermal Energy" />
+            <node id="850507" label="850507 - Tidal Energy" />
+            <node id="850508" label="850508 - Wave Energy" />
+            <node id="850509" label="850509 - Wind Energy" />
+            <node id="850599" label="850599 - Renewable Energy not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8506" label="8506 - Energy Storage, Distribution and Supply">
+          <isComposedBy>
+            <node id="850601" label="850601 - Energy Services and Utilities" />
+            <node id="850602" label="850602 - Energy Storage (excl. Hydrogen)" />
+            <node id="850603" label="850603 - Energy Systems Analysis" />
+            <node id="850604" label="850604 - Energy Transmission and Distribution (excl. Hydrogen)" />
+            <node id="850605" label="850605 - Hydrogen Distribution" />
+            <node id="850606" label="850606 - Hydrogen Storage" />
+            <node id="850699" label="850699 - Energy Storage, Distribution and Supply not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8507" label="8507 - Energy Conservation and Efficiency">
+          <isComposedBy>
+            <node id="850701" label="850701 - Commercial Energy Conservation and Efficiency" />
+            <node id="850702" label="850702 - Energy Conservation and Efficiency in Transport" />
+            <node id="850703" label="850703 - Industrial Energy Conservation and Efficiency" />
+            <node id="850704" label="850704 - Residential Energy Conservation and Efficiency" />
+            <node id="850799" label="850799 - Energy Conservation and Efficiency not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8598" label="8598 - Environmentally Sustainable Energy Activities">
+          <isComposedBy>
+            <node id="859801" label="859801 - Management of Gaseous Waste from Energy Activities (excl. Greenhouse Gases)" />
+            <node id="859802" label="859802 - Management of Greenhouse Gas Emissions from Electricity Generation" />
+            <node id="859803" label="859803 - Management of Greenhouse Gas Emissions from Energy Activities (excl. Electricity Generation)" />
+            <node id="859804" label="859804 - Management of Liquid Waste from Energy Activities (excl. Water)" />
+            <node id="859805" label="859805 - Management of Solid Waste from Energy Activities" />
+            <node id="859806" label="859806 - Management of Water Consumption by Energy Activities" />
+            <node id="859899" label="859899 - Environmentally Sustainable Energy Activities not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8599" label="8599 - Other Energy">
+          <isComposedBy>
+            <node id="859999" label="859999 - Energy not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="86" label="86 - MANUFACTURING">
+      <isComposedBy>
+        <node id="8601" label="8601 - Processed Food Products and Beverages (excl. Dairy Products)">
+          <isComposedBy>
+            <node id="860101" label="860101 - Bakery Products" />
+            <node id="860102" label="860102 - Beverages (excl. Fruit Juices)" />
+            <node id="860103" label="860103 - Carcass Meat (incl. Fish and Seafood)" />
+            <node id="860104" label="860104 - Flour Mill and Cereal Food" />
+            <node id="860105" label="860105 - Nutraceuticals and Functional Foods" />
+            <node id="860106" label="860106 - Oils and Fats (incl. Margarines)" />
+            <node id="860107" label="860107 - Processed Fish and Seafood Products" />
+            <node id="860108" label="860108 - Processed Fruit and Vegetable Products (incl. Fruit Juices)" />
+            <node id="860109" label="860109 - Processed Meat Products" />
+            <node id="860110" label="860110 - Soy Products" />
+            <node id="860111" label="860111 - Sugar and Confectionery Products" />
+            <node id="860199" label="860199 - Processed Food Products and Beverages (excl. Dairy Products) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8602" label="8602 - Dairy Products">
+          <isComposedBy>
+            <node id="860201" label="860201 - Butter and Milk-Derived Fats and Oils (excl. Cream)" />
+            <node id="860202" label="860202 - Casein" />
+            <node id="860203" label="860203 - Cheese" />
+            <node id="860204" label="860204 - Processed Milk and Cream (incl. Powder, Evaporated and Condensed)" />
+            <node id="860205" label="860205 - Whey" />
+            <node id="860299" label="860299 - Dairy Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8603" label="8603 - Processed Non-Food Agriculture Products (excl. Wood, Paper and Fibre)">
+          <isComposedBy>
+            <node id="860301" label="860301 - Essential Oils (e.g. Tea Tree, Eucalyptus, Lavender, Peppermint, Boronia, Sandalwood)" />
+            <node id="860302" label="860302 - Organic Fertilisers" />
+            <node id="860303" label="860303 - Plant Extracts (e.g. Pyrethrum, Alkaloids, Jojoba Oil)" />
+            <node id="860304" label="860304 - Prepared Animal Feed" />
+            <node id="860399" label="860399 - Processed Non-Food Agricultural Products (excl. Wood, Paper and Fibre) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8604" label="8604 - Leather Products, Fibre Processing and Textiles">
+          <isComposedBy>
+            <node id="860401" label="860401 - Clothing" />
+            <node id="860402" label="860402 - Cotton Ginning" />
+            <node id="860403" label="860403 - Natural Fibres, Yarns and Fabrics" />
+            <node id="860404" label="860404 - Non-Fabric Textiles (e.g. Felt)" />
+            <node id="860405" label="860405 - Processed Skins, Leather and Leather Products" />
+            <node id="860406" label="860406 - Synthetic Fibres, Yarns and Fabrics" />
+            <node id="860407" label="860407 - Wool Scouring and Top Making" />
+            <node id="860499" label="860499 - Leather Products, Fibre Processing and Textiles not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8605" label="8605 - Wood, Wood Products and Paper">
+          <isComposedBy>
+            <node id="860501" label="860501 - Paper Products (incl. Coated Paper)" />
+            <node id="860502" label="860502 - Printing and Publishing Processes" />
+            <node id="860503" label="860503 - Pulp and Paper" />
+            <node id="860504" label="860504 - Reconstituted Timber Products (e.g. Chipboard, Particleboard)" />
+            <node id="860505" label="860505 - Wood Sawing and Veneer" />
+            <node id="860599" label="860599 - Wood, Wood Products and Paper not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8606" label="8606 - Industrial Chemicals and Related Products">
+          <isComposedBy>
+            <node id="860601" label="860601 - Industrial Gases" />
+            <node id="860602" label="860602 - Inorganic Industrial Chemicals" />
+            <node id="860603" label="860603 - Lubricants" />
+            <node id="860604" label="860604 - Organic Industrial Chemicals (excl. Resins, Rubber and Plastics)" />
+            <node id="860605" label="860605 - Paints" />
+            <node id="860606" label="860606 - Plastics in Primary Forms" />
+            <node id="860607" label="860607 - Plastic Products (incl. Construction Materials)" />
+            <node id="860608" label="860608 - Rubber and Synthetic Resins" />
+            <node id="860609" label="860609 - Soaps and Cosmetics" />
+            <node id="860699" label="860699 - Industrial Chemicals and Related Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8607" label="8607 - Agricultural Chemicals">
+          <isComposedBy>
+            <node id="860701" label="860701 - Animal Protection Chemicals" />
+            <node id="860702" label="860702 - Chemical Fertilisers" />
+            <node id="860703" label="860703 - Crop Protection Chemicals" />
+            <node id="860799" label="860799 - Agricultural Chemicals not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8608" label="8608 - Human Pharmaceutical Products">
+          <isComposedBy>
+            <node id="860801" label="860801 - Human Biological Preventatives (e.g. Vaccines)" />
+            <node id="860802" label="860802 - Human Diagnostics" />
+            <node id="860803" label="860803 - Human Pharmaceutical Treatments (e.g. Antibiotics)" />
+            <node id="860899" label="860899 - Human Pharmaceutical Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8609" label="8609 - Veterinary Pharmaceutical Products">
+          <isComposedBy>
+            <node id="860901" label="860901 - Veterinary Biological Preventatives (e.g. Vaccines)" />
+            <node id="860902" label="860902 - Veterinary Diagnostics" />
+            <node id="860903" label="860903 - Veterinary Pharmaceutical Treatments (e.g. Antibiotics)" />
+            <node id="860999" label="860999 - Veterinary Pharmaceutical Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8610" label="8610 - Ceramics, Glass and Industrial Mineral Products">
+          <isComposedBy>
+            <node id="861001" label="861001 - Cement Products and Concrete Materials" />
+            <node id="861002" label="861002 - Ceramics" />
+            <node id="861003" label="861003 - Clay Products" />
+            <node id="861004" label="861004 - Plaster and Plaster Products" />
+            <node id="861005" label="861005 - Structural Glass and Glass Products" />
+            <node id="861099" label="861099 - Ceramics, Glass and Industrial Mineral Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8611" label="8611 - Basic Metal Products (incl. Smelting, Rolling, Drawing and Extruding)">
+          <isComposedBy>
+            <node id="861101" label="861101 - Basic Aluminium Products" />
+            <node id="861102" label="861102 - Basic Copper Products" />
+            <node id="861103" label="861103 - Basic Iron and Steel Products" />
+            <node id="861104" label="861104 - Basic Precious Metal Products" />
+            <node id="861105" label="861105 - Basic Zinc Products" />
+            <node id="861199" label="861199 - Basic Metal Products (incl. Smelting, Rolling, Drawing and Extruding) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8612" label="8612 - Fabricated Metal Products">
+          <isComposedBy>
+            <node id="861201" label="861201 - Coated Metal and Metal-Coated Products" />
+            <node id="861202" label="861202 - Machined Metal Products" />
+            <node id="861203" label="861203 - Metal Castings" />
+            <node id="861204" label="861204 - Semi-Finished Metal Products" />
+            <node id="861205" label="861205 - Sheet Metal Products" />
+            <node id="861206" label="861206 - Structural Metal Products" />
+            <node id="861299" label="861299 - Fabricated Metal Products not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8613" label="8613 - Transport Equipment">
+          <isComposedBy>
+            <node id="861301" label="861301 - Aerospace Equipment" />
+            <node id="861302" label="861302 - Automotive Equipment" />
+            <node id="861303" label="861303 - Nautical Equipment (excl. Yachts)" />
+            <node id="861304" label="861304 - Rail Equipment" />
+            <node id="861305" label="861305 - Yachts" />
+            <node id="861399" label="861399 - Transport Equipment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8614" label="8614 - Machinery and Equipment">
+          <isComposedBy>
+            <node id="861401" label="861401 - Agricultural Machinery and Equipment" />
+            <node id="861402" label="861402 - Appliances and Electrical Machinery and Equipment" />
+            <node id="861403" label="861403 - Industrial Machinery and Equipment" />
+            <node id="861404" label="861404 - Mining Machinery and Equipment" />
+            <node id="861499" label="861499 - Machinery and Equipment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8615" label="8615 - Instrumentation">
+          <isComposedBy>
+            <node id="861501" label="861501 - Industrial Instruments" />
+            <node id="861502" label="861502 - Medical Instruments" />
+            <node id="861503" label="861503 - Scientific Instruments" />
+            <node id="861599" label="861599 - Instrumentation not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8616" label="8616 - Computer Hardware and Electronic Equipment">
+          <isComposedBy>
+            <node id="861601" label="861601 - Computer and Electronic Office Equipment" />
+            <node id="861602" label="861602 - Consumer Electronic Equipment (excl. Communication Equipment)" />
+            <node id="861603" label="861603 - Integrated Circuits and Devices" />
+            <node id="861604" label="861604 - Integrated Systems" />
+            <node id="861605" label="861605 - Processor Modules" />
+            <node id="861606" label="861606 - Satellite Navigation Equipment" />
+            <node id="861699" label="861699 - Computer Hardware and Electronic Equipment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8617" label="8617 - Communication Equipment">
+          <isComposedBy>
+            <node id="861701" label="861701 - Network Infrastructure Equipment" />
+            <node id="861702" label="861702 - Telemetry Equipment" />
+            <node id="861703" label="861703 - Voice and Data Equipment" />
+            <node id="861799" label="861799 - Communication Equipment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8698" label="8698 - Environmentally Sustainable Manufacturing">
+          <isComposedBy>
+            <node id="869801" label="869801 - Management of Gaseous Waste from Manufacturing Activities (excl. Greenhouse Gases)" />
+            <node id="869802" label="869802 - Management of Greenhouse Gas Emissions from Manufacturing Activities" />
+            <node id="869803" label="869803 - Management of Liquid Waste from Manufacturing Activities (excl. Water)" />
+            <node id="869804" label="869804 - Management of Solid Waste from Manufacturing Activities" />
+            <node id="869805" label="869805 - Management of Water Consumption by Manufacturing Activities" />
+            <node id="869899" label="869899 - Environmentally Sustainable Manufacturing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8699" label="8699 - Other Manufacturing">
+          <isComposedBy>
+            <node id="869901" label="869901 - Furniture" />
+            <node id="869999" label="869999 - Manufacturing not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="87" label="87 - CONSTRUCTION">
+      <isComposedBy>
+        <node id="8701" label="8701 - Construction Planning">
+          <isComposedBy>
+            <node id="870101" label="870101 - Civil Construction Planning" />
+            <node id="870102" label="870102 - Commercial Construction Planning" />
+            <node id="870103" label="870103 - Regional Planning" />
+            <node id="870104" label="870104 - Residential Construction Planning" />
+            <node id="870105" label="870105 - Urban Planning" />
+            <node id="870199" label="870199 - Construction Planning not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8702" label="8702 - Construction Design">
+          <isComposedBy>
+            <node id="870201" label="870201 - Civil Construction Design" />
+            <node id="870202" label="870202 - Commercial Construction Design" />
+            <node id="870203" label="870203 - Industrial Construction Design" />
+            <node id="870204" label="870204 - Residential Construction Design" />
+            <node id="870299" label="870299 - Construction Design not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8703" label="8703 - Construction Materials Performance and Processes">
+          <isComposedBy>
+            <node id="870301" label="870301 - Cement and Concrete Materials" />
+            <node id="870302" label="870302 - Metals (e.g. Composites, Coatings, Bonding)" />
+            <node id="870303" label="870303 - Polymeric Materials (e.g. Paints)" />
+            <node id="870304" label="870304 - Stone, Ceramics and Clay Materials" />
+            <node id="870305" label="870305 - Timber Materials" />
+            <node id="870399" label="870399 - Construction Materials Performance and Processes not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8704" label="8704 - Construction Processes">
+          <isComposedBy>
+            <node id="870401" label="870401 - Civil Construction Processes" />
+            <node id="870402" label="870402 - Commercial Construction Processes" />
+            <node id="870403" label="870403 - Industrial Construction Processes" />
+            <node id="870404" label="870404 - Residential Construction Processes" />
+            <node id="870499" label="870499 - Construction Processes not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8705" label="8705 - Building Management and Services">
+          <isComposedBy>
+            <node id="870501" label="870501 - Civil Building Management and Services" />
+            <node id="870502" label="870502 - Commercial Building Management and Services" />
+            <node id="870503" label="870503 - Residential Building Management and Services" />
+            <node id="870599" label="870599 - Building Management and Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8798" label="8798 - Environmentally Sustainable Construction">
+          <isComposedBy>
+            <node id="879801" label="879801 - Management of Gaseous Waste from Construction Activities (excl. Greenhouse Gases)" />
+            <node id="879802" label="879802 - Management of Greenhouse Gas Emissions from Construction Activities" />
+            <node id="879803" label="879803 - Management of Liquid Waste from Construction Activities (excl. Water)" />
+            <node id="879804" label="879804 - Management of Solid Waste from Construction Activities" />
+            <node id="879805" label="879805 - Management of Water Consumption by Construction Activities" />
+            <node id="879899" label="879899 - Environmentally Sustainable Construction not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8799" label="8799 - Other Construction">
+          <isComposedBy>
+            <node id="879999" label="879999 - Construction not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="88" label="88 - TRANSPORT">
+      <isComposedBy>
+        <node id="8801" label="8801 - Ground Transport">
+          <isComposedBy>
+            <node id="880101" label="880101 - Rail Freight" />
+            <node id="880102" label="880102 - Rail Infrastructure and Networks" />
+            <node id="880103" label="880103 - Rail Passenger Movements" />
+            <node id="880104" label="880104 - Rail Safety" />
+            <node id="880105" label="880105 - Road Freight" />
+            <node id="880106" label="880106 - Road Infrastructure and Networks" />
+            <node id="880107" label="880107 - Road Passenger Movements (excl. Public Transport)" />
+            <node id="880108" label="880108 - Road Public Transport" />
+            <node id="880109" label="880109 - Road Safety" />
+            <node id="880199" label="880199 - Ground Transport not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8802" label="8802 - Water Transport">
+          <isComposedBy>
+            <node id="880201" label="880201 - Coastal Sea Freight Transport" />
+            <node id="880202" label="880202 - International Sea Freight Transport (excl. Live Animal Transport)" />
+            <node id="880203" label="880203 - International Sea Transport of Live Animals" />
+            <node id="880204" label="880204 - Passenger Water Transport" />
+            <node id="880205" label="880205 - Port Infrastructure and Management" />
+            <node id="880206" label="880206 - Water Safety" />
+            <node id="880299" label="880299 - Water Transport not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8803" label="8803 - Aerospace Transport">
+          <isComposedBy>
+            <node id="880301" label="880301 - Air Freight" />
+            <node id="880302" label="880302 - Air Passenger Transport" />
+            <node id="880303" label="880303 - Air Safety" />
+            <node id="880304" label="880304 - Air Terminal Infrastructure and Management" />
+            <node id="880305" label="880305 - Space Transport" />
+            <node id="880399" label="880399 - Aerospace Transport not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8898" label="8898 - Environmentally Sustainable Transport">
+          <isComposedBy>
+            <node id="889801" label="889801 - Management of Gaseous Waste from Transport Activities (excl. Greenhouse Gases)" />
+            <node id="889802" label="889802 - Management of Greenhouse Gas Emissions from Transport Activities" />
+            <node id="889803" label="889803 - Management of Liquid Waste from Transport Activities (excl. Water)" />
+            <node id="889804" label="889804 - Management of Noise and Vibration from Transport Activities" />
+            <node id="889805" label="889805 - Management of Solid Waste from Transport Activities" />
+            <node id="889806" label="889806 - Management of Water Consumption by Transport Activities" />
+            <node id="889899" label="889899 - Environmentally Sustainable Transport not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8899" label="8899 - Other Transport">
+          <isComposedBy>
+            <node id="889901" label="889901 - Intermodal Materials Handling" />
+            <node id="889902" label="889902 - Multimodal Transport" />
+            <node id="889903" label="889903 - Pipeline Transport" />
+            <node id="889904" label="889904 - Postal and Package Services (incl. Courier Services)" />
+            <node id="889999" label="889999 - Transport not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="89" label="89 - INFORMATION AND COMMUNICATION SERVICES">
+      <isComposedBy>
+        <node id="8901" label="8901 - Communication Networks and Services">
+          <isComposedBy>
+            <node id="890101" label="890101 - Fixed Line Data Networks and Services" />
+            <node id="890102" label="890102 - Fixed Line Telephone Networks and Services" />
+            <node id="890103" label="890103 - Mobile Data Networks and Services" />
+            <node id="890104" label="890104 - Mobile Telephone Networks and Services" />
+            <node id="890105" label="890105 - Satellite Communication Networks and Services" />
+            <node id="890106" label="890106 - Videoconference Services" />
+            <node id="890199" label="890199 - Communication Networks and Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8902" label="8902 - Computer Software and Services">
+          <isComposedBy>
+            <node id="890201" label="890201 - Application Software Packages (excl. Computer Games)" />
+            <node id="890202" label="890202 - Application Tools and System Utilities" />
+            <node id="890203" label="890203 - Computer Gaming Software" />
+            <node id="890204" label="890204 - Computer Time Leasing, Sharing and Renting Services" />
+            <node id="890205" label="890205 - Information Processing Services (incl. Data Entry and Capture)" />
+            <node id="890206" label="890206 - Internet Hosting Services (incl. Application Hosting Services)" />
+            <node id="890299" label="890299 - Computer Software and Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8903" label="8903 - Information Services">
+          <isComposedBy>
+            <node id="890301" label="890301 - Electronic Information Storage and Retrieval Services" />
+            <node id="890302" label="890302 - Library and Archival Services" />
+            <node id="890303" label="890303 - News Collection Services" />
+            <node id="890399" label="890399 - Information Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8904" label="8904 - Media Services">
+          <isComposedBy>
+            <node id="890401" label="890401 - Animation and Computer Generated Imagery Services" />
+            <node id="890402" label="890402 - Film and Video Services (excl. Animation and Computer Generated Imagery)" />
+            <node id="890403" label="890403 - Internet Broadcasting" />
+            <node id="890404" label="890404 - Publishing and Print Services (incl. Internet Publishing)" />
+            <node id="890405" label="890405 - Radio and Television Broadcasting" />
+            <node id="890499" label="890499 - Media Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8998" label="8998 - Environmentally Sustainable Information and Communication Services">
+          <isComposedBy>
+            <node id="899801" label="899801 - Management of Greenhouse Gas Emissions from Information and Communication Services" />
+            <node id="899802" label="899802 - Management of Solid Waste from Information and Communication Services" />
+            <node id="899803" label="899803 - Management of Water Consumption by Information and Communication Services" />
+            <node id="899899" label="899899 - Environmentally Sustainable Information and Communication Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="8999" label="8999 - Other Information and Communication Services">
+          <isComposedBy>
+            <node id="899999" label="899999 - Information and Communication Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="90" label="90 - COMMERCIAL SERVICES AND TOURISM">
+      <isComposedBy>
+        <node id="9001" label="9001 - Financial Services">
+          <isComposedBy>
+            <node id="900101" label="900101 - Finance Services" />
+            <node id="900102" label="900102 - Investment Services (excl. Superannuation)" />
+            <node id="900103" label="900103 - Superannuation and Insurance Services" />
+            <node id="900199" label="900199 - Financial Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9002" label="9002 - Property, Business Support Services and Trade">
+          <isComposedBy>
+            <node id="900201" label="900201 - Administration and Business Support Services" />
+            <node id="900202" label="900202 - Professional, Scientific and Technical Services" />
+            <node id="900203" label="900203 - Property Services (incl. Security)" />
+            <node id="900204" label="900204 - Wholesale and Retail Trade" />
+            <node id="900299" label="900299 - Property, Business Support Services and Trade not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9003" label="9003 - Tourism">
+          <isComposedBy>
+            <node id="900301" label="900301 - Economic Issues in Tourism" />
+            <node id="900302" label="900302 - Socio-Cultural Issues in Tourism" />
+            <node id="900303" label="900303 - Tourism Infrastructure Development" />
+            <node id="900399" label="900399 - Tourism not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9004" label="9004 - Water and Waste Services">
+          <isComposedBy>
+            <node id="900401" label="900401 - Waste Management Services" />
+            <node id="900402" label="900402 - Waste Recycling Services" />
+            <node id="900403" label="900403 - Water Recycling Services (incl. Sewage and Greywater)" />
+            <node id="900404" label="900404 - Water Services and Utilities" />
+            <node id="900499" label="900499 - Water and Waste Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9098" label="9098 - Environmentally Sustainable Commercial Services and Tourism">
+          <isComposedBy>
+            <node id="909801" label="909801 - Management of Gaseous Waste from Commercial Services and Tourism (excl. Greenhouse Gases)" />
+            <node id="909802" label="909802 - Management of Greenhouse Gas Emissions from Commercial Services and Tourism" />
+            <node id="909803" label="909803 - Management of Liquid Waste from Commercial Services and Tourism (excl. Water)" />
+            <node id="909804" label="909804 - Management of Solid Waste from Commercial Services and Tourism" />
+            <node id="909805" label="909805 - Management of Water Consumption by Commercial Services and Tourism" />
+            <node id="909899" label="909899 - Environmentally Sustainable Commercial Services and Tourism not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9099" label="9099 - Other Commercial Services and Tourism">
+          <isComposedBy>
+            <node id="909901" label="909901 - Hospitality Services" />
+            <node id="909902" label="909902 - Recreational Services" />
+            <node id="909999" label="909999 - Commercial Services and Tourism not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="91" label="91 - ECONOMIC FRAMEWORK">
+      <isComposedBy>
+        <node id="9101" label="9101 - Macroeconomics">
+          <isComposedBy>
+            <node id="910101" label="910101 - Balance of Payments" />
+            <node id="910102" label="910102 - Demography" />
+            <node id="910103" label="910103 - Economic Growth" />
+            <node id="910104" label="910104 - Exchange Rates" />
+            <node id="910105" label="910105 - Fiscal Policy" />
+            <node id="910106" label="910106 - Income Distribution" />
+            <node id="910107" label="910107 - Macro Labour Market Issues" />
+            <node id="910108" label="910108 - Monetary Policy" />
+            <node id="910109" label="910109 - Savings and Investments" />
+            <node id="910110" label="910110 - Taxation" />
+            <node id="910199" label="910199 - Macroeconomics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9102" label="9102 - Microeconomics">
+          <isComposedBy>
+            <node id="910201" label="910201 - Consumption" />
+            <node id="910202" label="910202 - Human Capital Issues" />
+            <node id="910203" label="910203 - Industrial Organisations" />
+            <node id="910204" label="910204 - Industry Costs and Structure" />
+            <node id="910205" label="910205 - Industry Policy" />
+            <node id="910206" label="910206 - Market-Based Mechanisms" />
+            <node id="910207" label="910207 - Microeconomic Effects of Taxation" />
+            <node id="910208" label="910208 - Micro Labour Market Issues" />
+            <node id="910209" label="910209 - Preference, Behaviour and Welfare" />
+            <node id="910210" label="910210 - Production" />
+            <node id="910211" label="910211 - Supply and Demand" />
+            <node id="910299" label="910299 - Microeconomics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9103" label="9103 - International Trade">
+          <isComposedBy>
+            <node id="910301" label="910301 - International Agreements on Trade" />
+            <node id="910302" label="910302 - Trade Assistance and Protection" />
+            <node id="910303" label="910303 - Trade Policy" />
+            <node id="910399" label="910399 - International Trade not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9104" label="9104 - Management and Productivity">
+          <isComposedBy>
+            <node id="910401" label="910401 - Industrial Relations" />
+            <node id="910402" label="910402 - Management" />
+            <node id="910403" label="910403 - Marketing" />
+            <node id="910404" label="910404 - Productivity (excl. Public Sector)" />
+            <node id="910405" label="910405 - Public Sector Productivity" />
+            <node id="910406" label="910406 - Technological and Organisational Innovation" />
+            <node id="910499" label="910499 - Management and Productivity not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9105" label="9105 - Measurement Standards and Calibration Services">
+          <isComposedBy>
+            <node id="910501" label="910501 - Agricultural and Environmental Standards" />
+            <node id="910502" label="910502 - Defence Standards and Calibrations" />
+            <node id="910503" label="910503 - Manufacturing Standards and Calibrations" />
+            <node id="910504" label="910504 - Service Industries Standards and Calibrations" />
+            <node id="910599" label="910599 - Measurement Standards and Calibration Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9199" label="9199 - Other Economic Framework">
+          <isComposedBy>
+            <node id="919901" label="919901 - Carbon and Emissions Trading" />
+            <node id="919902" label="919902 - Ecological Economics" />
+            <node id="919999" label="919999 - Economic Framework not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="92" label="92 - HEALTH">
+      <isComposedBy>
+        <node id="9201" label="9201 - Clinical Health (Organs, Diseases and Abnormal Conditions)">
+          <isComposedBy>
+            <node id="920101" label="920101 - Blood Disorders" />
+            <node id="920102" label="920102 - Cancer and Related Disorders" />
+            <node id="920103" label="920103 - Cardiovascular System and Diseases" />
+            <node id="920104" label="920104 - Diabetes" />
+            <node id="920105" label="920105 - Digestive System Disorders" />
+            <node id="920106" label="920106 - Endocrine Organs and Diseases (excl. Diabetes)" />
+            <node id="920107" label="920107 - Hearing, Vision, Speech and Their Disorders" />
+            <node id="920108" label="920108 - Immune System and Allergy" />
+            <node id="920109" label="920109 - Infectious Diseases" />
+            <node id="920110" label="920110 - Inherited Diseases (incl. Gene Therapy)" />
+            <node id="920111" label="920111 - Nervous System and Disorders" />
+            <node id="920112" label="920112 - Neurodegenerative Disorders Related to Ageing" />
+            <node id="920113" label="920113 - Oro-Dental Disorders" />
+            <node id="920114" label="920114 - Reproductive System and Disorders" />
+            <node id="920115" label="920115 - Respiratory System and Diseases (incl. Asthma)" />
+            <node id="920116" label="920116 - Skeletal System and Disorders (incl. Arthritis)" />
+            <node id="920117" label="920117 - Skin and Related Disorders" />
+            <node id="920118" label="920118 - Surgical Methods and Procedures" />
+            <node id="920119" label="920119 - Urogenital System and Disorders" />
+            <node id="920120" label="920120 - Zoonoses" />
+            <node id="920199" label="920199 - Clinical Health (Organs, Diseases and Abnormal Conditions) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9202" label="9202 - Health and Support Services">
+          <isComposedBy>
+            <node id="920201" label="920201 - Allied Health Therapies (excl. Mental Health Services)" />
+            <node id="920202" label="920202 - Carer Health" />
+            <node id="920203" label="920203 - Diagnostic Methods" />
+            <node id="920204" label="920204 - Evaluation of Health Outcomes" />
+            <node id="920205" label="920205 - Health Education and Promotion" />
+            <node id="920206" label="920206 - Health Inequalities" />
+            <node id="920207" label="920207 - Health Policy Economic Outcomes" />
+            <node id="920208" label="920208 - Health Policy Evaluation" />
+            <node id="920209" label="920209 - Mental Health Services" />
+            <node id="920210" label="920210 - Nursing" />
+            <node id="920211" label="920211 - Palliative Care" />
+            <node id="920299" label="920299 - Health and Support Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9203" label="9203 - Indigenous Health">
+          <isComposedBy>
+            <node id="920301" label="920301 - Aboriginal and Torres Strait Islander Health - Determinants of Health" />
+            <node id="920302" label="920302 - Aboriginal and Torres Strait Islander Health - Health Status and Outcomes" />
+            <node id="920303" label="920303 - Aboriginal and Torres Strait Islander Health - Health System Performance (incl. Effectiveness of Interventions)" />
+            <node id="920304" label="920304 - Maori Health - Determinants of Health" />
+            <node id="920305" label="920305 - Maori Health - Health Status and Outcomes" />
+            <node id="920306" label="920306 - Maori Health - Health System Performance (incl. Effectiveness of Interventions)" />
+            <node id="920307" label="920307 - Pacific Peoples Health - Determinants of Health" />
+            <node id="920308" label="920308 - Pacific Peoples Health - Health Status and Outcomes" />
+            <node id="920309" label="920309 - Pacific Peoples Health - Health System Performance (incl. Effectiveness of Interventions)" />
+            <node id="920399" label="920399 - Indigenous Health not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9204" label="9204 - Public Health (excl. Specific Population Health)">
+          <isComposedBy>
+            <node id="920401" label="920401 - Behaviour and Health" />
+            <node id="920402" label="920402 - Dental Health" />
+            <node id="920403" label="920403 - Disability and Functional Capacity" />
+            <node id="920404" label="920404 - Disease Distribution and Transmission (incl. Surveillance and Response)" />
+            <node id="920405" label="920405 - Environmental Health" />
+            <node id="920406" label="920406 - Food Safety" />
+            <node id="920407" label="920407 - Health Protection and/or Disaster Response" />
+            <node id="920408" label="920408 - Health Status (e.g. Indicators of Well-Being)" />
+            <node id="920409" label="920409 - Injury Control" />
+            <node id="920410" label="920410 - Mental Health" />
+            <node id="920411" label="920411 - Nutrition" />
+            <node id="920412" label="920412 - Preventive Medicine" />
+            <node id="920413" label="920413 - Social Structure and Health" />
+            <node id="920414" label="920414 - Substance Abuse" />
+            <node id="920499" label="920499 - Public Health (excl. Specific Population Health) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9205" label="9205 - Specific Population Health (excl. Indigenous Health)">
+          <isComposedBy>
+            <node id="920501" label="920501 - Child Health" />
+            <node id="920502" label="920502 - Health Related to Ageing" />
+            <node id="920503" label="920503 - Health Related to Specific Ethnic Groups" />
+            <node id="920504" label="920504 - Men's Health" />
+            <node id="920505" label="920505 - Occupational Health" />
+            <node id="920506" label="920506 - Rural Health" />
+            <node id="920507" label="920507 - Women's Health" />
+            <node id="920599" label="920599 - Specific Population Health (excl. Indigenous Health) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9299" label="9299 - Other Health">
+          <isComposedBy>
+            <node id="929999" label="929999 - Health not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="93" label="93 - EDUCATION AND TRAINING">
+      <isComposedBy>
+        <node id="9301" label="9301 - Learner and Learning">
+          <isComposedBy>
+            <node id="930101" label="930101 - Learner and Learning Achievement" />
+            <node id="930102" label="930102 - Learner and Learning Processes" />
+            <node id="930103" label="930103 - Learner Development" />
+            <node id="930104" label="930104 - Moral and Social Development (incl. Affect)" />
+            <node id="930199" label="930199 - Learner and Learning not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9302" label="9302 - Teaching and Instruction">
+          <isComposedBy>
+            <node id="930201" label="930201 - Pedagogy" />
+            <node id="930202" label="930202 - Teacher and Instructor Development" />
+            <node id="930203" label="930203 - Teaching and Instruction Technologies" />
+            <node id="930299" label="930299 - Teaching and Instruction not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9303" label="9303 - Curriculum">
+          <isComposedBy>
+            <node id="930301" label="930301 - Assessment and Evaluation of Curriculum" />
+            <node id="930302" label="930302 - Syllabus and Curriculum Development" />
+            <node id="930399" label="930399 - Curriculum not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9304" label="9304 - School/Institution">
+          <isComposedBy>
+            <node id="930401" label="930401 - Management and Leadership of Schools/Institutions" />
+            <node id="930402" label="930402 - School/Institution Community and Environment" />
+            <node id="930403" label="930403 - School/Institution Policies and Development" />
+            <node id="930499" label="930499 - School/Institution not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9305" label="9305 - Education and Training Systems">
+          <isComposedBy>
+            <node id="930501" label="930501 - Education and Training Systems Policies and Development" />
+            <node id="930502" label="930502 - Management of Education and Training Systems" />
+            <node id="930503" label="930503 - Resourcing of Education and Training Systems" />
+            <node id="930599" label="930599 - Education and Training Systems not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9399" label="9399 - Other Education and Training">
+          <isComposedBy>
+            <node id="939901" label="939901 - Aboriginal and Torres Strait Islander Education" />
+            <node id="939902" label="939902 - Education and Training Theory and Methodology" />
+            <node id="939903" label="939903 - Equity and Access to Education" />
+            <node id="939904" label="939904 - Gender Aspects of Education" />
+            <node id="939905" label="939905 - Maori Education" />
+            <node id="939906" label="939906 - Pacific Peoples Education" />
+            <node id="939907" label="939907 - Special Needs Education" />
+            <node id="939908" label="939908 - Workforce Transition and Employment" />
+            <node id="939999" label="939999 - Education and Training not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="94" label="94 - LAW, POLITICS AND COMMUNITY SERVICES">
+      <isComposedBy>
+        <node id="9401" label="9401 - Community Service (excl. Work)">
+          <isComposedBy>
+            <node id="940101" label="940101 - Ability and Disability" />
+            <node id="940102" label="940102 - Aboriginal and Torres Strait Islander Development and Welfare" />
+            <node id="940103" label="940103 - Ageing and Older People" />
+            <node id="940104" label="940104 - CarersÃ¢â‚¬â„¢ Development and Welfare" />
+            <node id="940105" label="940105 - Children's/Youth Services and Childcare" />
+            <node id="940106" label="940106 - Citizenship and National Identity" />
+            <node id="940107" label="940107 - Comparative Structure and Development of Community Services" />
+            <node id="940108" label="940108 - Distribution of Income and Wealth" />
+            <node id="940109" label="940109 - Employment Services" />
+            <node id="940110" label="940110 - Environmental Services" />
+            <node id="940111" label="940111 - Ethnicity, Multiculturalism and Migrant Development and Welfare" />
+            <node id="940112" label="940112 - Families and Family Services" />
+            <node id="940113" label="940113 - Gender and Sexualities" />
+            <node id="940114" label="940114 - Maori Development and Welfare" />
+            <node id="940115" label="940115 - Pacific Peoples Development and Welfare" />
+            <node id="940116" label="940116 - Social Class and Inequalities" />
+            <node id="940117" label="940117 - Structure, Delivery and Financing of Community Services" />
+            <node id="940199" label="940199 - Community Service (excl. Work) not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9402" label="9402 - Government and Politics">
+          <isComposedBy>
+            <node id="940201" label="940201 - Civics and Citizenship" />
+            <node id="940202" label="940202 - Electoral Systems" />
+            <node id="940203" label="940203 - Political Systems" />
+            <node id="940204" label="940204 - Public Services Policy Advice and Analysis" />
+            <node id="940299" label="940299 - Government and Politics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9403" label="9403 - International Relations">
+          <isComposedBy>
+            <node id="940301" label="940301 - Defence and Security Policy" />
+            <node id="940302" label="940302 - International Aid and Development" />
+            <node id="940303" label="940303 - International Organisations" />
+            <node id="940304" label="940304 - International Political Economy (excl. International Trade)" />
+            <node id="940399" label="940399 - International Relations not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9404" label="9404 - Justice and the Law">
+          <isComposedBy>
+            <node id="940401" label="940401 - Civil Justice" />
+            <node id="940402" label="940402 - Crime Prevention" />
+            <node id="940403" label="940403 - Criminal Justice" />
+            <node id="940404" label="940404 - Law Enforcement" />
+            <node id="940405" label="940405 - Law Reform" />
+            <node id="940406" label="940406 - Legal Processes" />
+            <node id="940407" label="940407 - Legislation, Civil and Criminal Codes" />
+            <node id="940408" label="940408 - Rehabilitation and Correctional Services" />
+            <node id="940499" label="940499 - Justice and the Law not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9405" label="9405 - Work and Institutional Development">
+          <isComposedBy>
+            <node id="940501" label="940501 - Employment Patterns and Change" />
+            <node id="940502" label="940502 - Professions and Professionalisation" />
+            <node id="940503" label="940503 - Time Use, Unpaid Work and Volunteering" />
+            <node id="940504" label="940504 - Work and Family Responsibilities" />
+            <node id="940505" label="940505 - Workplace Safety" />
+            <node id="940599" label="940599 - Work and Institutional Development not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9499" label="9499 - Other Law, Politics and Community Services">
+          <isComposedBy>
+            <node id="949999" label="949999 - Law, Politics and Community Services not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="95" label="95 - CULTURAL UNDERSTANDING">
+      <isComposedBy>
+        <node id="9501" label="9501 - Arts and Leisure">
+          <isComposedBy>
+            <node id="950101" label="950101 - Music" />
+            <node id="950102" label="950102 - Organised Sports" />
+            <node id="950103" label="950103 - Recreation" />
+            <node id="950104" label="950104 - The Creative Arts (incl. Graphics and Craft)" />
+            <node id="950105" label="950105 - The Performing Arts (incl. Theatre and Dance)" />
+            <node id="950199" label="950199 - Arts and Leisure not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9502" label="9502 - Communication">
+          <isComposedBy>
+            <node id="950201" label="950201 - Communication Across Languages and Culture" />
+            <node id="950202" label="950202 - Languages and Literacy" />
+            <node id="950203" label="950203 - Languages and Literature" />
+            <node id="950204" label="950204 - The Media" />
+            <node id="950205" label="950205 - Visual Communication" />
+            <node id="950299" label="950299 - Communication not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9503" label="9503 - Heritage">
+          <isComposedBy>
+            <node id="950301" label="950301 - Ahuatanga Maori (Maori Tradition)" />
+            <node id="950302" label="950302 - Conserving Aboriginal and Torres Strait Islander Heritage" />
+            <node id="950303" label="950303 - Conserving Collections and Movable Cultural Heritage" />
+            <node id="950304" label="950304 - Conserving Intangible Cultural Heritage" />
+            <node id="950305" label="950305 - Conserving Natural Heritage" />
+            <node id="950306" label="950306 - Conserving Pacific Peoples Heritage" />
+            <node id="950307" label="950307 - Conserving the Historic Environment" />
+            <node id="950308" label="950308 - Matauranga Maori (Maori Knowledge)" />
+            <node id="950309" label="950309 - Taonga (Maori Artefacts)" />
+            <node id="950310" label="950310 - Tikanga Maori (Maori Customary Practices)" />
+            <node id="950311" label="950311 - Wahi Taonga (Maori Places of Significance)" />
+            <node id="950399" label="950399 - Heritage not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9504" label="9504 - Religion and Ethics">
+          <isComposedBy>
+            <node id="950401" label="950401 - Bioethics" />
+            <node id="950402" label="950402 - Business Ethics" />
+            <node id="950403" label="950403 - Environmental Ethics" />
+            <node id="950404" label="950404 - Religion and Society" />
+            <node id="950405" label="950405 - Religious Structures and Ritual" />
+            <node id="950406" label="950406 - Religious Traditions (excl. Structures and Rituals)" />
+            <node id="950407" label="950407 - Social Ethics" />
+            <node id="950408" label="950408 - Technological Ethics" />
+            <node id="950409" label="950409 - Workplace and Organisational Ethics" />
+            <node id="950499" label="950499 - Religion and Ethics not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9505" label="9505 - Understanding Past Societies">
+          <isComposedBy>
+            <node id="950501" label="950501 - Understanding Africa's Past" />
+            <node id="950502" label="950502 - Understanding Asia's Past" />
+            <node id="950503" label="950503 - Understanding Australia's Past" />
+            <node id="950504" label="950504 - Understanding Europe's Past" />
+            <node id="950505" label="950505 - Understanding New Zealand's Past" />
+            <node id="950506" label="950506 - Understanding the Past of the Americas" />
+            <node id="950599" label="950599 - Understanding Past Societies not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9599" label="9599 - Other Cultural Understanding">
+          <isComposedBy>
+            <node id="959999" label="959999 - Cultural Understanding not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="96" label="96 - ENVIRONMENT">
+      <isComposedBy>
+        <node id="9601" label="9601 - Air Quality">
+          <isComposedBy>
+            <node id="960101" label="960101 - Antarctic and Sub-Antarctic Air Quality" />
+            <node id="960102" label="960102 - Coastal and Estuarine Air Quality" />
+            <node id="960103" label="960103 - Farmland, Arable Cropland and Permanent Cropland Air Quality" />
+            <node id="960104" label="960104 - Marine Air Quality" />
+            <node id="960105" label="960105 - Mining Air Quality" />
+            <node id="960106" label="960106 - Urban and Industrial Air Quality" />
+            <node id="960199" label="960199 - Air Quality not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9602" label="9602 - Atmosphere and Weather">
+          <isComposedBy>
+            <node id="960201" label="960201 - Atmospheric Composition (incl. Greenhouse Gas Inventory)" />
+            <node id="960202" label="960202 - Atmospheric Processes and Dynamics" />
+            <node id="960203" label="960203 - Weather" />
+            <node id="960299" label="960299 - Atmosphere and Weather not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9603" label="9603 - Climate and Climate Change">
+          <isComposedBy>
+            <node id="960301" label="960301 - Climate Change Adaptation Measures" />
+            <node id="960302" label="960302 - Climate Change Mitigation Strategies" />
+            <node id="960303" label="960303 - Climate Change Models" />
+            <node id="960304" label="960304 - Climate Variability (excl. Social Impacts)" />
+            <node id="960305" label="960305 - Ecosystem Adaptation to Climate Change" />
+            <node id="960306" label="960306 - Effects of Climate Change and Variability on Antarctic and Sub-Antarctic Environments (excl. Social Impacts)" />
+            <node id="960307" label="960307 - Effects of Climate Change and Variability on Australia (excl. Social Impacts)" />
+            <node id="960308" label="960308 - Effects of Climate Change and Variability on New Zealand (excl. Social Impacts)" />
+            <node id="960309" label="960309 - Effects of Climate Change and Variability on the South Pacific (excl. Australia and New Zealand) (excl. Social Impacts)" />
+            <node id="960310" label="960310 - Global Effects of Climate Change and Variability (excl. Australia, New Zealand, Antarctica and the South Pacific) (excl. Social Impacts)" />
+            <node id="960311" label="960311 - Social Impacts of Climate Change and Variability" />
+            <node id="960399" label="960399 - Climate and Climate Change not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9604" label="9604 - Control of Pests, Diseases and Exotic Species">
+          <isComposedBy>
+            <node id="960401" label="960401 - Border Biosecurity (incl. Quarantine and Inspection)" />
+            <node id="960402" label="960402 - Control of Animal Pests, Diseases and Exotic Species in Coastal and Estuarine Environments" />
+            <node id="960403" label="960403 - Control of Animal Pests, Diseases and Exotic Species in Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="960404" label="960404 - Control of Animal Pests, Diseases and Exotic Species in Forest and Woodlands Environments" />
+            <node id="960405" label="960405 - Control of Pests, Diseases and Exotic Species at Regional or Larger Scales" />
+            <node id="960406" label="960406 - Control of Pests, Diseases and Exotic Species in Fresh, Ground and Surface Water Environments" />
+            <node id="960407" label="960407 - Control of Pests, Diseases and Exotic Species in Marine Environments" />
+            <node id="960408" label="960408 - Control of Pests, Diseases and Exotic Species in Mining Environments" />
+            <node id="960409" label="960409 - Control of Pests, Diseases and Exotic Species in Mountain and High Country Environments" />
+            <node id="960410" label="960410 - Control of Pests, Diseases and Exotic Species in Sparseland, Permanent Grassland and Arid Zone Environments" />
+            <node id="960411" label="960411 - Control of Pests, Diseases and Exotic Species in Urban and Industrial Environments" />
+            <node id="960412" label="960412 - Control of Plant Pests, Diseases and Exotic Species in Coastal and Estuarine Environments" />
+            <node id="960413" label="960413 - Control of Plant Pests, Diseases and Exotic Species in Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="960414" label="960414 - Control of Plant Pests, Diseases and Exotic Species in Forest and Woodlands Environments" />
+            <node id="960415" label="960415 - Pre-Border Biosecurity" />
+            <node id="960499" label="960499 - Control of Pests, Diseases and Exotic Species not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9605" label="9605 - Ecosystem Assessment and Management">
+          <isComposedBy>
+            <node id="960501" label="960501 - Ecosystem Assessment and Management at Regional or Larger Scales" />
+            <node id="960502" label="960502 - Ecosystem Assessment and Management of Antarctic and Sub-Antarctic Environments" />
+            <node id="960503" label="960503 - Ecosystem Assessment and Management of Coastal and Estuarine Environments" />
+            <node id="960504" label="960504 - Ecosystem Assessment and Management of Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="960505" label="960505 - Ecosystem Assessment and Management of Forest and Woodlands Environments" />
+            <node id="960506" label="960506 - Ecosystem Assessment and Management of Fresh, Ground and Surface Water Environments" />
+            <node id="960507" label="960507 - Ecosystem Assessment and Management of Marine Environments" />
+            <node id="960508" label="960508 - Ecosystem Assessment and Management of Mining Environments" />
+            <node id="960509" label="960509 - Ecosystem Assessment and Management of Mountain and High Country Environments" />
+            <node id="960510" label="960510 - Ecosystem Assessment and Management of Sparseland, Permanent Grassland and Arid Zone Environments" />
+            <node id="960511" label="960511 - Ecosystem Assessment and Management of Urban and Industrial Environments" />
+            <node id="960599" label="960599 - Ecosystem Assessment and Management not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9606" label="9606 - Environmental and Natural Resource Evaluation">
+          <isComposedBy>
+            <node id="960601" label="960601 - Economic Incentives for Environmental Protection" />
+            <node id="960602" label="960602 - Eco-Verification (excl. Environmental Lifecycle Assessment)" />
+            <node id="960603" label="960603 - Environmental Lifecycle Assessment" />
+            <node id="960604" label="960604 - Environmental Management Systems" />
+            <node id="960605" label="960605 - Institutional Arrangements for Environmental Protection" />
+            <node id="960606" label="960606 - Rights to Environmental and Natural Resources (excl. Water Allocation)" />
+            <node id="960607" label="960607 - Rural Land Evaluation" />
+            <node id="960608" label="960608 - Rural Water Evaluation (incl. Water Quality)" />
+            <node id="960609" label="960609 - Sustainability Indicators" />
+            <node id="960610" label="960610 - Urban Land Evaluation" />
+            <node id="960611" label="960611 - Urban Water Evaluation (incl. Water Quality)" />
+            <node id="960699" label="960699 - Environmental and Natural Resource Evaluation not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9607" label="9607 - Environmental Policy, Legislation and Standards">
+          <isComposedBy>
+            <node id="960701" label="960701 - Coastal and Marine Management Policy" />
+            <node id="960702" label="960702 - Consumption Patterns, Population Issues and the Environment" />
+            <node id="960703" label="960703 - Environmental Education and Awareness" />
+            <node id="960704" label="960704 - Land Stewardship" />
+            <node id="960705" label="960705 - Rural Land Policy" />
+            <node id="960706" label="960706 - Rural Water Policy" />
+            <node id="960707" label="960707 - Trade and Environment" />
+            <node id="960708" label="960708 - Urban Land Policy" />
+            <node id="960709" label="960709 - Urban Water Policy" />
+            <node id="960799" label="960799 - Environmental Policy, Legislation and Standards not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9608" label="9608 - Flora, Fauna and Biodiversity">
+          <isComposedBy>
+            <node id="960801" label="960801 - Antarctic and Sub-Antarctic Flora, Fauna and Biodiversity" />
+            <node id="960802" label="960802 - Coastal and Estuarine Flora, Fauna and Biodiversity" />
+            <node id="960803" label="960803 - Documentation of Undescribed Flora and Fauna" />
+            <node id="960804" label="960804 - Farmland, Arable Cropland and Permanent Cropland Flora, Fauna and Biodiversity" />
+            <node id="960805" label="960805 - Flora, Fauna and Biodiversity at Regional or Larger Scales" />
+            <node id="960806" label="960806 - Forest and Woodlands Flora, Fauna and Biodiversity" />
+            <node id="960807" label="960807 - Fresh, Ground and Surface Water Flora, Fauna and Biodiversity" />
+            <node id="960808" label="960808 - Marine Flora, Fauna and Biodiversity" />
+            <node id="960809" label="960809 - Mining Flora, Fauna and Biodiversity" />
+            <node id="960810" label="960810 - Mountain and High Country Flora, Fauna and Biodiversity" />
+            <node id="960811" label="960811 - Sparseland, Permanent Grassland and Arid Zone Flora, Fauna and Biodiversity" />
+            <node id="960812" label="960812 - Urban and Industrial Flora, Fauna and Biodiversity" />
+            <node id="960899" label="960899 - Flora, Fauna and Biodiversity of Environments not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9609" label="9609 - Land and Water Management">
+          <isComposedBy>
+            <node id="960901" label="960901 - Antarctic and Sub-Antarctic Land and Water Management" />
+            <node id="960902" label="960902 - Coastal and Estuarine Land Management" />
+            <node id="960903" label="960903 - Coastal and Estuarine Water Management" />
+            <node id="960904" label="960904 - Farmland, Arable Cropland and Permanent Cropland Land Management" />
+            <node id="960905" label="960905 - Farmland, Arable Cropland and Permanent Cropland Water Management" />
+            <node id="960906" label="960906 - Forest and Woodlands Land Management" />
+            <node id="960907" label="960907 - Forest and Woodlands Water Management" />
+            <node id="960908" label="960908 - Mining Land and Water Management" />
+            <node id="960909" label="960909 - Mountain and High Country Land and Water Management" />
+            <node id="960910" label="960910 - Sparseland, Permanent Grassland and Arid Zone Land and Water Management" />
+            <node id="960911" label="960911 - Urban and Industrial Land Management" />
+            <node id="960912" label="960912 - Urban and Industrial Water Management" />
+            <node id="960913" label="960913 - Water Allocation and Quantification" />
+            <node id="960999" label="960999 - Land and Water Management of Environments not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9610" label="9610 - Natural Hazards">
+          <isComposedBy>
+            <node id="961001" label="961001 - Natural Hazards in Antarctic and Sub-Antarctic Environments" />
+            <node id="961002" label="961002 - Natural Hazards in Coastal and Estuarine Environments" />
+            <node id="961003" label="961003 - Natural Hazards in Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="961004" label="961004 - Natural Hazards in Forest and Woodlands Environments" />
+            <node id="961005" label="961005 - Natural Hazards in Fresh, Ground and Surface Water Environments" />
+            <node id="961006" label="961006 - Natural Hazards in Marine Environments" />
+            <node id="961007" label="961007 - Natural Hazards in Mining Environments" />
+            <node id="961008" label="961008 - Natural Hazards in Mountain and High Country Environments" />
+            <node id="961009" label="961009 - Natural Hazards in Sparseland, Permanent Grassland and Arid Zone Environments" />
+            <node id="961010" label="961010 - Natural Hazards in Urban and Industrial Environments" />
+            <node id="961099" label="961099 - Natural Hazards not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9611" label="9611 - Physical and Chemical Conditions of Water">
+          <isComposedBy>
+            <node id="961101" label="961101 - Physical and Chemical Conditions of Water for Urban and Industrial Use" />
+            <node id="961102" label="961102 - Physical and Chemical Conditions of Water in Coastal and Estuarine Environments" />
+            <node id="961103" label="961103 - Physical and Chemical Conditions of Water in Fresh, Ground and Surface Water Environments (excl. Urban and Industrial Use)" />
+            <node id="961104" label="961104 - Physical and Chemical Conditions of Water in Marine Environments" />
+            <node id="961199" label="961199 - Physical and Chemical Conditions of Water not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9612" label="9612 - Rehabilitation of Degraded Environments">
+          <isComposedBy>
+            <node id="961201" label="961201 - Rehabilitation of Degraded Coastal and Estuarine Environments" />
+            <node id="961202" label="961202 - Rehabilitation of Degraded Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="961203" label="961203 - Rehabilitation of Degraded Forest and Woodlands Environments" />
+            <node id="961204" label="961204 - Rehabilitation of Degraded Fresh, Ground and Surface Water Environments" />
+            <node id="961205" label="961205 - Rehabilitation of Degraded Mining Environments" />
+            <node id="961206" label="961206 - Rehabilitation of Degraded Mountain and High Country Environments" />
+            <node id="961207" label="961207 - Rehabilitation of Degraded Sparseland, Permanent Grassland and Arid Zone Environments" />
+            <node id="961208" label="961208 - Rehabilitation of Degraded Urban and Industrial Environments" />
+            <node id="961299" label="961299 - Rehabilitation of Degraded Environments not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9613" label="9613 - Remnant Vegetation and Protected Conservation Areas">
+          <isComposedBy>
+            <node id="961301" label="961301 - Protected Conservation Areas in Antarctic and Sub-Antarctic Environments" />
+            <node id="961302" label="961302 - Protected Conservation Areas in Fresh, Ground and Surface Water Environments" />
+            <node id="961303" label="961303 - Protected Conservation Areas in Marine Environments" />
+            <node id="961304" label="961304 - Remnant Vegetation and Protected Conservation Areas in Coastal and Estuarine Environments" />
+            <node id="961305" label="961305 - Remnant Vegetation and Protected Conservation Areas in Farmland, Arable Cropland and Permanent Cropland Environments" />
+            <node id="961306" label="961306 - Remnant Vegetation and Protected Conservation Areas in Forest and Woodlands Environments" />
+            <node id="961307" label="961307 - Remnant Vegetation and Protected Conservation Areas in Mountain and High Country Environments" />
+            <node id="961308" label="961308 - Remnant Vegetation and Protected Conservation Areas at Regional or Larger Scales" />
+            <node id="961309" label="961309 - Remnant Vegetation and Protected Conservation Areas in Sparseland, Permanent Grassland and Arid Zone Environments" />
+            <node id="961310" label="961310 - Remnant Vegetation and Protected Conservation Areas in Urban and Industrial Environments" />
+            <node id="961399" label="961399 - Remnant Vegetation and Protected Conservation Areas not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9614" label="9614 - Soils">
+          <isComposedBy>
+            <node id="961401" label="961401 - Coastal and Estuarine Soils" />
+            <node id="961402" label="961402 - Farmland, Arable Cropland and Permanent Cropland Soils" />
+            <node id="961403" label="961403 - Forest and Woodlands Soils" />
+            <node id="961404" label="961404 - Mining Soils" />
+            <node id="961405" label="961405 - Mountain and High Country Soils" />
+            <node id="961406" label="961406 - Sparseland, Permanent Grassland and Arid Zone Soils" />
+            <node id="961407" label="961407 - Urban and Industrial Soils" />
+            <node id="961499" label="961499 - Soils not elsewhere classified" />
+          </isComposedBy>
+        </node>
+        <node id="9699" label="9699 - Other Environment">
+          <isComposedBy>
+            <node id="969901" label="969901 - Antarctic and Sub-Antarctic Oceanography" />
+            <node id="969902" label="969902 - Marine Oceanic Processes (excl. Climate Related)" />
+            <node id="969999" label="969999 - Environment not elsewhere classified" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+    <node id="97" label="97 - EXPANDING KNOWLEDGE">
+      <isComposedBy>
+        <node id="9701" label="9701 - EXPANDING KNOWLEDGE">
+          <isComposedBy>
+            <node id="970101" label="970101 - Expanding Knowledge in the Mathematical Sciences" />
+            <node id="970102" label="970102 - Expanding Knowledge in the Physical Sciences" />
+            <node id="970103" label="970103 - Expanding Knowledge in the Chemical Sciences" />
+            <node id="970104" label="970104 - Expanding Knowledge in the Earth Sciences" />
+            <node id="970105" label="970105 - Expanding Knowledge in the Environmental Sciences" />
+            <node id="970106" label="970106 - Expanding Knowledge in the Biological Sciences" />
+            <node id="970107" label="970107 - Expanding Knowledge in the Agricultural and Veterinary Sciences" />
+            <node id="970108" label="970108 - Expanding Knowledge in the Information and Computing Sciences" />
+            <node id="970109" label="970109 - Expanding Knowledge in Engineering" />
+            <node id="970110" label="970110 - Expanding Knowledge in Technology" />
+            <node id="970111" label="970111 - Expanding Knowledge in the Medical and Health Sciences" />
+            <node id="970112" label="970112 - Expanding Knowledge in Built Environment and Design" />
+            <node id="970113" label="970113 - Expanding Knowledge in Education" />
+            <node id="970114" label="970114 - Expanding Knowledge in Economics" />
+            <node id="970115" label="970115 - Expanding Knowledge in Commerce, Management, Tourism and Services" />
+            <node id="970116" label="970116 - Expanding Knowledge through Studies of Human Society" />
+            <node id="970117" label="970117 - Expanding Knowledge in Psychology and Cognitive Sciences" />
+            <node id="970118" label="970118 - Expanding Knowledge in Law and Legal Studies" />
+            <node id="970119" label="970119 - Expanding Knowledge through Studies of the Creative Arts and Writing" />
+            <node id="970120" label="970120 - Expanding Knowledge in Language, Communication and Culture" />
+            <node id="970121" label="970121 - Expanding Knowledge in History and Archaeology" />
+            <node id="970122" label="970122 - Expanding Knowledge in Philosophy and Religious Studies" />
+          </isComposedBy>
+        </node>
+      </isComposedBy>
+    </node>
+  </isComposedBy>
+</node>

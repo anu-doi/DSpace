@@ -694,7 +694,7 @@
            sb.append("<div class=\"col-md-10\">");
            if (authorityType != null)
            {
-        	   sb.append("<div class=\"row col-md-10\">");
+        	   //sb.append("<div class=\"row col-md-10\">");
            }
            sb.append("<input class=\"form-control\" type=\"text\" name=\"")
              .append(fieldNameIdx)
@@ -708,11 +708,11 @@
            
            if (authorityType != null)
            {
-        	   sb.append("<div class=\"col-md-2\">");
+        	   //sb.append("<div class=\"col-md-2\">");
 	           sb.append(doAuthority(pageContext, fieldName, i,  fieldCount,
                               fieldName, auth, conf, false, repeatable,
                               defaults, null, collectionID));
-           	   sb.append("</div></div>");
+           	   //sb.append("</div></div>");
            }             
 
           if (repeatable && !readonly && i < defaults.length)
