@@ -54,6 +54,6 @@
     </footer>
      -->
      
-    <anu:footer respOfficer="Steve Swinsburg" respOfficerContact="steve.swinsburg@anu.edu.au" siteContactName="Steve Swinsburg" siteContact="steve.swinsburg@anu.edu.au" ssl="true" />
+    <anu:footer respOfficer="University Library" respOfficerContact="library.web@anu.edu.au" siteContactName="Library Systems & Web Coordinator" siteContact="http://anulib.anu.edu.au/help/index.html?pageref=anulib.anu.edu.au/index.html" ssl="true" />
     </body>
 </html>
