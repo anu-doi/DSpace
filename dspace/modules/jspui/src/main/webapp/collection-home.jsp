@@ -186,7 +186,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Search <%= collection.getName() %></div>
 	<div class="panel-body">
-		<form method="get" action="/jspui/simple-search">
+		<form method="get" action="<%= request.getContextPath() %>/simple-search">
 			For:
 			<input type="text"  placeholder="" name="query" id="collectionquery" size="25" />
 			<input type="hidden" class="" name="location" value="<%= collection.getHandle() %>" />
