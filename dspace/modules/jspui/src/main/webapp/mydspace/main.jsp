@@ -284,6 +284,8 @@
                 workspaceItems[i].getItem().getDC("title", null, Item.ANY);
             String title = (titleArray.length > 0 ? titleArray[0].value
                     : LocaleSupport.getLocalizedMessage(pageContext,"jsp.general.untitled") );
+			DCValue[] provenanceArray =
+			    workspaceItems[i].getItem().getDC("description", "provenance", Item.ANY);
             EPerson submitter = workspaceItems[i].getItem().getSubmitter();
 %>
         <tr>
@@ -296,7 +298,22 @@
             <td headers="t10" class="<%= row %>RowEvenCol">
                 <a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a>
             </td>
-            <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
+            <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %>
+				<% if (provenanceArray.length > 0) { %>
+				<div class="rejected">
+					<img src="//style.anu.edu.au/_anu/images/icons/silk/exclamation.png" alt="exclamation icon" class="padleft"/>
+					<div class="rejectedHover">
+						<ul class="">
+						<%
+						for (int j = 0; j < provenanceArray.length; j++) {
+							out.println("<li>"+provenanceArray[j].value+"</li>");
+						}
+						%>
+						</ul>
+					</div>
+				</div>
+				<% } %>
+			</td>
             <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems[i].getCollection().getMetadata("name") %></td>
             <td headers="t13" class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/mydspace" method="post">

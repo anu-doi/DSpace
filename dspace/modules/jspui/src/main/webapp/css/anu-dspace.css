@@ -795,3 +795,17 @@ body.modal-open,
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 }
+.rejected {
+	display: inline;
+}
+.rejectedHover {
+	display: none;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+	position: absolute;
+	z-index: 99;
+}
+.rejected:hover .rejectedHover {
+	display: block;
+}
