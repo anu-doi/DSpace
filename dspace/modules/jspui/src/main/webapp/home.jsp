@@ -61,10 +61,10 @@
 
 <dspace:layout locbar="off" titlekey="jsp.home.title" feedData="<%= feedData %>">
 
-<%--<anu:content layout="doublewide">
-<img width="680" height="85" alt="Welcome" src="image/shutterstock.jpg">
-</anu:content>--%>
 <anu:content layout="doublewide">
+<img width="680" height="85" alt="Welcome" src="image/shutterstock.jpg">
+</anu:content>
+<%--<anu:content layout="doublewide">
 <div class="row">
 <%
 if (submissions != null && submissions.count() > 0)
@@ -157,7 +157,7 @@ if (submissions != null && submissions.count() > 0)
 }
 %>
 </div>
-</anu:content>
+</anu:content>--%>
 <anu:content layout="doublenarrow" title="Digital Collections">
 <% if (supportedLocales != null && supportedLocales.length > 1)
 {
@@ -217,7 +217,7 @@ if (communities != null && communities.length != 0)
 
 %>
 		</h4>
-		<p><%= communities[i].getMetadata("short_description") %></p>
+		<%--<p><%= communities[i].getMetadata("short_description") %></p>--%>
 		</div>
 		</div>
 <%
@@ -235,6 +235,43 @@ if (communities != null && communities.length != 0)
 <%--<div class="col-md-4">--%>
     <%= sideNews %>
 <%--</div>--%>
+
+              <%
+    if(feedEnabled)
+    {
+	%>
+	<anu:boxheader text="RSS" />
+	<anu:box style="solid">
+	<%
+	    	String[] fmts = feedData.substring(feedData.indexOf(':')+1).split(",");
+	    	String icon = null;
+	    	int width = 0;
+	    	for (int j = 0; j < fmts.length; j++)
+	    	{
+	    		if ("rss_1.0".equals(fmts[j]))
+	    		{
+	    		   icon = "rss1.gif";
+	    		   width = 80;
+	    		}
+	    		else if ("rss_2.0".equals(fmts[j]))
+	    		{
+	    		   icon = "rss2.gif";
+	    		   width = 80;
+	    		}
+	    		else
+	    	    {
+	    	       icon = "rss.gif";
+	    	       width = 36;
+	    	    }
+	%>
+	    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/site"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
+	<%
+	    	}
+	%>
+	</anu:box>
+	<%
+	    }
+	%>
 </anu:content>
 <anu:content layout="doublewide">
 	<%
