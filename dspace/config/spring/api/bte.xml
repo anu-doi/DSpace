@@ -218,7 +218,7 @@
 	</bean>
 	
 	<bean name="valueConcatenationModifier" class="org.dspace.submit.lookup.ValueConcatenationModifier">
-	    <property name="field" value="allkeywords"/>
+	    <!-- <property name="field" value="allkeywords"/> -->
 	    <property name="separator" value=";" />
 	    <property name="whitespaceAfter" value="true" />
 	</bean>
@@ -547,9 +547,10 @@
 				<entry value="chairs" key="dc.contributor.other" />
 				<entry value="abstract" key="dc.description.abstract" />
 				<entry value="allkeywords" key="dc.subject" />
-				<entry value="arxivCategory" key="dc.subject" />
-				<entry value="doi" key="dc.identifier" />
+				<!-- <entry value="arxivCategory" key="dc.subject" /> -->
+				<entry value="doi" key="dc.identifier.doi" />
 				<entry value="publisher" key="dc.publisher" />
+				<entry value="jeissn" key="local.identifier.essn" />
 				<!-- Not used - new metadata fields need to be declared for them in DSpace registry -->
 				<!-- 
 				<entry value="url" key="" />

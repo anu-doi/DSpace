@@ -73,13 +73,13 @@
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
 %>
 
-<anu:content layout="doublewide">
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
 <dspace:layout locbar="commLink" title="<%= name %>" feedData="<%= feedData %>">
+<anu:content layout="doublenarrow">
 <div class="well">
 <div class="row">
-	<div class="col-md-8">
-        <h2><%= name %>
+	<div>
+        <h1><%= name %>
         <%
             if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
             {
@@ -88,12 +88,11 @@
 <%
             }
 %>
-		<small><fmt:message key="jsp.community-home.heading1"/></small>
-        <a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><fmt:message key="jsp.community-home.display-statistics"/></a>
-		</h2>
+        </h1>
+		<h3><fmt:message key="jsp.community-home.heading1"/></h3>
 	</div>
 <%  if (logo != null) { %>
-     <div class="col-md-4">
+     <div>
      	<img class="img-responsive" alt="Logo" src="<%= request.getContextPath() %>/retrieve/<%= logo.getID() %>" />
      </div> 
 <% } %>
@@ -151,112 +150,6 @@
 		</div>
     <% } %>
 
-<% if (StringUtils.isNotBlank(intro)) { %>
-  <%= intro %>
-<% } %>
-</div>
-<p class="copyrightText"><%= copyright %></p>
-	<div class="row">
-<%
-	if (rs != null)
-	{ %>
-	<div class="col-md-8">
-        <div class="panel panel-primary">        
-        <div id="recent-submissions-carousel" class="panel-heading carousel slide">
-        <%-- Recently Submitted items --%>
-			<h3><fmt:message key="jsp.community-home.recentsub"/>
-<%
-    if(feedEnabled)
-    {
-    	String[] fmts = feedData.substring(5).split(",");
-    	String icon = null;
-    	int width = 0;
-    	for (int j = 0; j < fmts.length; j++)
-    	{
-    		if ("rss_1.0".equals(fmts[j]))
-    		{
-    		   icon = "rss1.gif";
-    		   width = 80;
-    		}
-    		else if ("rss_2.0".equals(fmts[j]))
-    		{
-    		   icon = "rss2.gif";
-    		   width = 80;
-    		}
-    		else
-    	    {
-    	       icon = "rss.gif";
-    	       width = 36;
-    	    }
-%>
-    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= community.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
-<%
-    	}
-    }
-%>
-			</h3>
-		
-	<%
-		Item[] items = rs.getRecentSubmissions();
-		boolean first = true;
-		if(items!=null && items.length>0) 
-		{ 
-	%>	
-		<!-- Wrapper for slides -->
-		  <div class="carousel-inner">
-	<%	for (int i = 0; i < items.length; i++)
-		{
-			DCValue[] dcv = items[i].getMetadata("dc", "title", null, Item.ANY);
-			String displayTitle = "Untitled";
-			if (dcv != null)
-			{
-				if (dcv.length > 0)
-				{
-					displayTitle = dcv[0].value;
-				}
-			}
-			%>
-		    <div style="padding-bottom: 50px; min-height: 200px;" class="item <%= first?"active":""%>">
-		      <div style="padding-left: 80px; padding-right: 80px; display: inline-block;"><%= StringUtils.abbreviate(displayTitle, 400) %> 
-		      	<a href="<%= request.getContextPath() %>/handle/<%=items[i].getHandle() %>"> 
-		      		<button class="btn btn-success" type="button">See</button>
-		      		</a>
-		      </div>
-		    </div>
-<%
-				first = false;
-		     }
-		%>
-		</div>
-		
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#recent-submissions-carousel" data-slide="prev">
-		    <span class="icon-prev"></span>
-		  </a>
-		  <a class="right carousel-control" href="#recent-submissions-carousel" data-slide="next">
-		    <span class="icon-next"></span>
-		  </a>
-
-          <ol class="carousel-indicators">
-		    <li data-target="#recent-submissions-carousel" data-slide-to="0" class="active"></li>
-		    <% for (int i = 1; i < rs.count(); i++){ %>
-		    <li data-target="#recent-submissions-carousel" data-slide-to="<%= i %>"></li>
-		    <% } %>
-	      </ol>
-		
-		<%
-		}
-		%>
-		  
-     </div></div></div>
-<%
-	}
-%>
-	<div class="col-md-4">
-    	<%= sidebar %>
-	</div>
-</div>	
-
 <div class="panel panel-primary">
 	<div class="panel-heading">Search <%= community.getName() %></div>
 	<div class="panel-body">
@@ -290,6 +183,17 @@
 			
 	</div>
 </div>
+<% if (StringUtils.isNotBlank(intro)) { %>
+  <%= intro %>
+<% } %>
+</div>
+<p class="copyrightText"><%= copyright %></p>
+	<div class="row">
+	<div class="col-md-4">
+    	<%= sidebar %>
+	</div>
+</div>	
+
 <div class="row">
 
     <%
@@ -413,6 +317,74 @@
     }
 %>
 </div>
-</dspace:layout>
-
 </anu:content>
+<anu:content layout="narrow">
+<%
+	if(rs != null) {
+%>
+	<anu:boxheader text="Recent Submissions" />
+	<anu:box style="solid">
+	<%
+		Item[] items = rs.getRecentSubmissions();
+		if(items!=null && items.length>0) 
+		{
+			for (int i = 0; i < items.length; i++)
+			{
+				DCValue[] dcv = items[i].getMetadata("dc", "title", null, Item.ANY);
+				String displayTitle = "Untitled";
+				if (dcv != null)
+				{
+					if (dcv.length > 0)
+					{
+						displayTitle = dcv[0].value;
+					}
+				}
+			%><p><a href="<%= request.getContextPath() %>/handle/<%= items[i].getHandle() %>"><%= displayTitle %></a></p><%
+			}
+		}
+	%>
+	</anu:box>
+<%
+	}
+%>
+
+<%
+    if(feedEnabled)
+    {
+	%>
+	<anu:boxheader text="RSS feeds" />
+	<anu:box style="solid">
+	<%
+    	String[] fmts = feedData.substring(5).split(",");
+    	String icon = null;
+    	int width = 0;
+    	for (int j = 0; j < fmts.length; j++)
+    	{
+    		if ("rss_1.0".equals(fmts[j]))
+    		{
+    		   icon = "rss1.gif";
+    		   width = 80;
+    		}
+    		else if ("rss_2.0".equals(fmts[j]))
+    		{
+    		   icon = "rss2.gif";
+    		   width = 80;
+    		}
+    		else
+    	    {
+    	       icon = "rss.gif";
+    	       width = 36;
+    	    }
+%>
+    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= community.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
+<%
+    	}
+	%>
+	</anu:box>
+	<%
+    }
+%>
+<p class="center"><a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><fmt:message key="jsp.community-home.display-statistics"/></a></p>
+		
+</anu:content>
+</dspace:layout>
