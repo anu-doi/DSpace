@@ -251,6 +251,9 @@ label {
 	float: left;
 	display: block;
 }
+h3.facets {
+	margin-top: 20px;
+}
 .facetName {
 	background-color: #F7F9F9;
 	border-color: #ACC0C6;
@@ -808,4 +811,8 @@ body.modal-open,
 }
 .rejected:hover .rejectedHover {
 	display: block;
+}
+.copyrightText {
+	font-style: italic;
+	text-align: center;
 }

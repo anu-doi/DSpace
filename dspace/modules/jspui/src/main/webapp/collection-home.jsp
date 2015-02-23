@@ -105,10 +105,10 @@
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
-<anu:content layout="doublewide">
 <dspace:layout locbar="commLink" title="<%= name %>" feedData="<%= feedData %>">
+<anu:content layout="doublenarrow">
     <div class="well">
-    <div class="row"><div class="col-md-8"><h2><%= name %>
+    <div class="row"><div><h1><%= name %>
 <%
             if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
             {
@@ -117,12 +117,12 @@
 <%
             }
 %>
-		<small><fmt:message key="jsp.collection-home.heading1"/></small>
-      <a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a>
-      </h2></div>
+	</h1>
+		<h3><fmt:message key="jsp.collection-home.heading1"/></h3>
+      </div>
 <%  if (logo != null) { %>
-        <div class="col-md-4">
-        	<img class="img-responsive pull-right" alt="Logo" src="<%= request.getContextPath() %>/retrieve/<%= logo.getID() %>" />
+        <div>
+        	<img class="img-responsive" alt="Logo" src="<%= request.getContextPath() %>/retrieve/<%= logo.getID() %>" />
         </div>
 <% 	} %>
 	</div>
@@ -175,14 +175,6 @@
 <% } %>
 
 <%  } %>
-<%
-	if (StringUtils.isNotBlank(intro)) { %>
-	<%= intro %>
-<% 	} %>
-  </div>
-  
-  <p class="copyrightText"><%= copyright %></p>
-  
 <div class="panel panel-primary">
 	<div class="panel-heading">Search <%= collection.getName() %></div>
 	<div class="panel-body">
@@ -215,13 +207,7 @@
 	}
 %>	</div>
 </div>
-<%  if (submit_button)
-    { %>
-          <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
-            <input type="hidden" name="collection" value="<%= collection.getID() %>" />
-			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
-          </form>
-<%  } %>
+
         <form class="well" method="get" action="">
 <%  if (loggedIn && subscribed)
     { %>
@@ -232,39 +218,24 @@
             		  <fmt:message key="jsp.collection-home.subscribe.msg"/>
                 </small>
 				<input class="btn btn-sm btn-info" type="submit" name="submit_subscribe" value="<fmt:message key="jsp.collection-home.subscribe"/>" />
-<%  }
-    if(feedEnabled)
-    { %>
-    <span class="pull-right">
-    <%
-    	String[] fmts = feedData.substring(5).split(",");
-    	String icon = null;
-    	int width = 0;
-    	for (int j = 0; j < fmts.length; j++)
-    	{
-    		if ("rss_1.0".equals(fmts[j]))
-    		{
-    		   icon = "rss1.gif";
-    		   width = 80;
-    		}
-    		else if ("rss_2.0".equals(fmts[j]))
-    		{
-    		   icon = "rss2.gif";
-    		   width = 80;
-    		}
-    		else
-    	    {
-    	       icon = "rss.gif";
-    	       width = 36;
-    	    }
-%>
-    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= collection.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
-<%
-    	} %>
-    	</span><%
-    }
-%>
+<%  } %>
+
         </form>
+<%
+	if (StringUtils.isNotBlank(intro)) { %>
+	<%= intro %>
+<% 	} %>
+  </div>
+  
+  <p class="copyrightText"><%= copyright %></p>
+  
+<%  if (submit_button)
+    { %>
+          <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
+            <input type="hidden" name="collection" value="<%= collection.getID() %>" />
+			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
+          </form>
+<%  } %>
 
 <% if (show_items)
    {
@@ -372,14 +343,23 @@
    } // end of if (show_title)
 %>
 
-  <dspace:sidebar>
+  <div>
+  
+    <%
+    	int discovery_panel_cols = 12;
+    	int discovery_facet_cols = 12;
+    %>
+    <%@ include file="discovery/static-sidebar-facet.jsp" %>
+  </div>
 
+</anu:content>
+<anu:content layout="narrow">
+<fmt:message key="jsp.collection-home.recentsub" var="recentSub" />
+<anu:boxheader text="${recentSub}" />
+<anu:box style="solid">
 <%
 	if (rs != null)
 	{
-%>
-	<h3><fmt:message key="jsp.collection-home.recentsub"/></h3>
-<%
 		Item[] items = rs.getRecentSubmissions();
 		for (int i = 0; i < items.length; i++)
 		{
@@ -395,19 +375,44 @@
 			%><p class="recentItem"><a href="<%= request.getContextPath() %>/handle/<%= items[i].getHandle() %>"><%= displayTitle %></a></p><%
 		}
 %>
-    <p>&nbsp;</p>
 <%      } %>
+</anu:box>
 
-  </dspace:sidebar>
-  <div>
-  
-    <%= sidebar %>
+<%
+    if(feedEnabled)
+    { %>
+	<anu:boxheader text="RSS feeds" />
+	<anu:box style="solid">
     <%
-    	int discovery_panel_cols = 12;
-    	int discovery_facet_cols = 12;
-    %>
-    <%@ include file="discovery/static-sidebar-facet.jsp" %>
-  </div>
-
-</dspace:layout>
+    	String[] fmts = feedData.substring(5).split(",");
+    	String icon = null;
+    	int width = 0;
+    	for (int j = 0; j < fmts.length; j++)
+    	{
+    		if ("rss_1.0".equals(fmts[j]))
+    		{
+    		   icon = "rss1.gif";
+    		   width = 80;
+    		}
+    		else if ("rss_2.0".equals(fmts[j]))
+    		{
+    		   icon = "rss2.gif";
+    		   width = 80;
+    		}
+    		else
+    	    {
+    	       icon = "rss.gif";
+    	       width = 36;
+    	    }
+%>
+    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= collection.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
+<%
+    	} %>
+    	</anu:box><%
+    }
+%>
+<p class="center"><a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a></p>
+      
+    <%= sidebar %>
 </anu:content>
+</dspace:layout>

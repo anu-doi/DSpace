@@ -70,10 +70,10 @@
             out.println(" <span class=\"badge\">" + ic.getCount(c) + "</span>");
         }
 		out.println("</h4>");
-		if (StringUtils.isNotBlank(c.getMetadata("short_description")))
+		/*if (StringUtils.isNotBlank(c.getMetadata("short_description")))
 		{
 			out.println(c.getMetadata("short_description"));
-		}
+		}*/
 		out.println("<br>");
         // Get the collections in this community
         Collection[] cols = (Collection[]) collectionMap.get(c.getID());
@@ -97,10 +97,10 @@
                     out.println(" [" + ic.getCount(cols[j]) + "]");
                 }
 				out.println("</h4>");
-				if (StringUtils.isNotBlank(cols[j].getMetadata("short_description")))
+				/*if (StringUtils.isNotBlank(cols[j].getMetadata("short_description")))
 				{
 					out.println(cols[j].getMetadata("short_description"));
-				}
+				}*/
 				out.println("</div>");
                 out.println("</li>");
             }
