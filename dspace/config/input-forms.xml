@@ -317,6 +317,17 @@
          <required></required>
        </field>
 
+        <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>identifier</dc-element>
+         <dc-qualifier>doi</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>DOI</label>
+         <input-type>onebox</input-type>
+         <hint></hint>
+         <required></required>
+       </field>
+
        <field>
          <dc-schema>local</dc-schema>
          <dc-element>identifier</dc-element>
@@ -394,6 +405,50 @@
         <hint>If known.</hint>
         <required />
        </field>
+	   
+	  <field>
+        <dc-schema>local</dc-schema>
+        <dc-element>identifier</dc-element>
+        <dc-qualifier>citationvolume</dc-qualifier>
+        <repeatable>false</repeatable>
+        <label>Volume</label>
+        <input-type>onebox</input-type>
+        <hint>If known.</hint>
+        <required />
+	  </field>
+	   
+	  <field>
+        <dc-schema>local</dc-schema>
+        <dc-element>bibliographicCitation</dc-element>
+        <dc-qualifier>issue</dc-qualifier>
+        <repeatable>false</repeatable>
+        <label>Issue</label>
+        <input-type>onebox</input-type>
+        <hint>If known.</hint>
+        <required />
+	  </field>
+	   
+	  <field>
+        <dc-schema>local</dc-schema>
+        <dc-element>bibliographicCitation</dc-element>
+        <dc-qualifier>startpage</dc-qualifier>
+        <repeatable>false</repeatable>
+        <label>Start Page</label>
+        <input-type>onebox</input-type>
+        <hint>If known.</hint>
+        <required />
+	  </field>
+	   
+	  <field>
+        <dc-schema>local</dc-schema>
+        <dc-element>bibliographicCitation</dc-element>
+        <dc-qualifier>lastpage</dc-qualifier>
+        <repeatable>false</repeatable>
+        <label>Last Page</label>
+        <input-type>onebox</input-type>
+        <hint>If known.</hint>
+        <required />
+	  </field>
 
       <field>
         <dc-schema>local</dc-schema>

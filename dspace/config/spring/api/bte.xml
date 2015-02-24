@@ -548,9 +548,13 @@
 				<entry value="abstract" key="dc.description.abstract" />
 				<entry value="allkeywords" key="dc.subject" />
 				<!-- <entry value="arxivCategory" key="dc.subject" /> -->
-				<entry value="doi" key="dc.identifier.doi" />
+				<entry value="doi" key="local.identifier.doi" />
 				<entry value="publisher" key="dc.publisher" />
 				<entry value="jeissn" key="local.identifier.essn" />
+				<entry value="volume" key="local.identifier.citationvolume" />
+				<entry value="issue" key="local.bibliographicCitation.issue" />
+				<entry value="firstpage" key="local.bibliographicCitation.startpage" />
+				<entry value="lastpage" key="local.bibliographicCitation.lastpage" />
 				<!-- Not used - new metadata fields need to be declared for them in DSpace registry -->
 				<!-- 
 				<entry value="url" key="" />
