@@ -85,7 +85,6 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 </anu:header>
 
 <anu:body />
-<anu:alertbar text="This is the TEST environment" environment="devl" />
 
 <anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Information Technology Services" primaryTitleUrl="/" />
 
