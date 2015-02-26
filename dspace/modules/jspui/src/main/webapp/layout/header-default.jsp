@@ -85,8 +85,16 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 </anu:header>
 
 <anu:body />
-
-<anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Information Technology Services" primaryTitleUrl="/" />
+<%
+	String alertEnvironment = ConfigurationManager.getProperty("alert.environment");
+	if (alertEnvironment != null && !"".equals(alertEnvironment)) 
+	{
+%>
+<anu:alertbar text="This is the TEST environment" environment="<%= alertEnvironment %>" />
+<%
+	}
+%>
+<anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Library" primaryTitleUrl="/" />
 
     <%--Gooogle Analytics recording.--%>
     <%
