@@ -104,6 +104,13 @@
            <artifactId>servlet-api</artifactId>
            <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+			<groupId>au.edu.anu.taglib</groupId>
+			<artifactId>anu-taglib</artifactId>
+			<version>1.9-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
     </dependencies>
 
 </project>

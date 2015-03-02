@@ -1195,6 +1195,11 @@
          <str name="pollInterval">00:00:60</str>
        </lst>
     -->
+    <lst name="master">
+    	<str name="backupAfter">optimize</str>
+    	<str name="confFiles">schema.xml</str>
+    </lst>
+    <int name="maxNumberOfBackups">1</int>
   </requestHandler>
 
   <!--

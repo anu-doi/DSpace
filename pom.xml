@@ -1334,6 +1334,16 @@
 
     <repositories>
         <repository>
+			<id>es-maven</id>
+			<url>https://es-maven.anu.edu.au/maven2</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+        </repository>
+        <repository>
             <id>sonatype-releases</id>
             <name>Sonatype Releases Repository</name>
             <url>https://oss.sonatype.org/content/repositories/releases/</url>
