@@ -41,6 +41,8 @@
     //get collections to choose from
     Collection[] collections =
         (Collection[]) request.getAttribute("collections");
+	
+    int selectedCollection = Integer.parseInt(request.getParameter("collection") != null? request.getParameter("collection") : "0");
 
     //get community handle
     int communityId = (Integer) request.getAttribute("collectionID");
@@ -256,7 +258,7 @@
 				<div class="col-md-6">
 				<select class="form-control submission-file-loader" name="select-collection-file" id="select-collection-file">
 					<% for (Collection c : collections) { %>
-					<option value="<%= c.getID() %>"><%= c.getName() %></option>
+					<option value="<%= c.getID() %>" <% if(c.getID() == selectedCollection) { out.println("selected");} %>><%= c.getName() %></option>
 					<% }  %>
 				</select>
 				</div>
@@ -286,7 +288,7 @@
 			<select class="form-control" id="select-collection-manual">
 				<option value="-1"><fmt:message key="jsp.submit.start-lookup-submission.select.collection.defaultoption"/></option>
 				<% for (Collection c : collections) { %>
-				<option value="<%= c.getID() %>"><%= c.getName() %></option>
+					<option value="<%= c.getID() %>" <% if(c.getID() == selectedCollection) { out.println("selected");} %>><%= c.getName() %></option>
 				<% }  %>
 			</select>
 			</div>
@@ -311,7 +313,7 @@
 			<div id="select-collection-div">
 				<select class="form-control" id="select-collection">
 					<% for (Collection c : collections) { %>
-					<option value="<%= c.getID() %>"><%= c.getName() %></option>
+					<option value="<%= c.getID() %>" <% if(c.getID() == selectedCollection) { out.println("selected");} %>><%= c.getName() %></option>
 					<% }  %>
 				</select>
 			</div>
