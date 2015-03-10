@@ -74,7 +74,7 @@
     }
 %>
     
-    <dspace:item item="<%= item %>" />
+    <dspace:item item="<%= item %>" style="full" />
 
     <p>&nbsp;</p>
 

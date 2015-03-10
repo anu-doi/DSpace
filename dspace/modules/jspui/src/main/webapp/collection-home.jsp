@@ -39,7 +39,6 @@
 <%@ page import="org.dspace.content.*"%>
 <%@ page import="org.dspace.core.ConfigurationManager"%>
 <%@ page import="org.dspace.core.Context" %>
-<%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.eperson.Group"     %>
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 <%@ page import="java.net.URLEncoder" %>
@@ -122,60 +121,12 @@
 		<h3><fmt:message key="jsp.collection-home.heading1"/></h3>
       </div>
 <%  if (logo != null) { %>
-        <div>
+        <div class="marginbottom">
         	<img class="img-responsive" alt="Logo" src="<%= request.getContextPath() %>/retrieve/<%= logo.getID() %>" />
         </div>
 <% 	} %>
 	</div>
 	
-<% if(admin_button || editor_button ) { %>
-                 <div class="panel panel-warning">
-                 <div class="panel-heading"><fmt:message key="jsp.admintools"/>
-                 	<span class="pull-right"><dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.collection-admin\")%>"><fmt:message key="jsp.adminhelp"/></dspace:popup></span>
-                 </div>
-                 <div class="panel-body">              
-<% if( editor_button ) { %>
-                <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
-                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                  <input type="hidden" name="community_id" value="<%= community.getID() %>" />
-                  <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_EDIT_COLLECTION %>" />
-                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
-                </form>
-<% } %>
-
-<% if( admin_button ) { %>
-                 <form method="post" action="<%=request.getContextPath()%>/tools/itemmap">
-                  <input type="hidden" name="cid" value="<%= collection.getID() %>" />
-				  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.collection-home.item.button"/>" />                  
-                </form>
-<% if(submitters != null) { %>
-		      <form method="get" action="<%=request.getContextPath()%>/tools/group-edit">
-		        <input type="hidden" name="group_id" value="<%=submitters.getID()%>" />
-		        <input class="btn btn-default col-md-12" type="submit" name="submit_edit" value="<fmt:message key="jsp.collection-home.editsub.button"/>" />
-		      </form>
-<% } %>
-<% if( editor_button || admin_button) { %>
-                <form method="post" action="<%=request.getContextPath()%>/mydspace">
-                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                  <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
-                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.collection"/>" />
-                </form>
-               <form method="post" action="<%=request.getContextPath()%>/mydspace">
-                 <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
-                 <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
-                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecollection"/>" />
-               </form>
-               <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
-                 <input type="hidden" name="handle" value="<%= collection.getHandle() %>" />
-                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
-               </form>
-               </div>
-               </div>
-<% } %>
-                 
-<% } %>
-
-<%  } %>
 <div class="panel panel-primary">
 	<div class="panel-heading">Search <%= collection.getName() %></div>
 	<div class="panel-body">
@@ -188,7 +139,7 @@
 	</div>
 </div>
   <%-- Browse --%>
-  <div class="panel panel-primary">
+  <div class="panel panel-primary marginbottom">
   	<div class="panel-heading">
         <fmt:message key="jsp.general.browse"/>
 	</div>
@@ -209,7 +160,7 @@
 %>	</div>
 </div>
 
-        <form class="well" method="get" action="">
+        <form class="well marginbottom" method="get" action="">
 <%  if (loggedIn && subscribed)
     { %>
                 <small><fmt:message key="jsp.collection-home.subscribed"/> <a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.collection-home.info"/></a></small>
@@ -228,15 +179,8 @@
 <% 	} %>
   </div>
   
-  <p class="copyrightText"><%= copyright %></p>
+  <p class="copyrightText marginbottom"><%= copyright %></p>
   
-<%  if (submit_button)
-    { %>
-          <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
-            <input type="hidden" name="collection" value="<%= collection.getID() %>" />
-			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
-          </form>
-<%  } %>
 
 <% if (show_items)
    {
@@ -355,6 +299,60 @@
 
 </anu:content>
 <anu:content layout="narrow">
+<% if(admin_button || editor_button ) { %>
+<fmt:message key="jsp.admintools" var="admintools"/>
+<anu:boxheader text="${admintools}" />
+<anu:box style="solid">           
+<% if( editor_button ) { %>
+                <form method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
+                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
+                  <input type="hidden" name="community_id" value="<%= community.getID() %>" />
+                  <input type="hidden" name="action" value="<%= EditCommunitiesServlet.START_EDIT_COLLECTION %>" />
+                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.edit.button"/>" />
+                </form>
+<% } %>
+
+<% if( admin_button ) { %>
+                 <form method="post" action="<%=request.getContextPath()%>/tools/itemmap">
+                  <input type="hidden" name="cid" value="<%= collection.getID() %>" />
+				  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.collection-home.item.button"/>" />                  
+                </form>
+<% if(submitters != null) { %>
+		      <form method="get" action="<%=request.getContextPath()%>/tools/group-edit">
+		        <input type="hidden" name="group_id" value="<%=submitters.getID()%>" />
+		        <input class="btn btn-default col-md-12" type="submit" name="submit_edit" value="<fmt:message key="jsp.collection-home.editsub.button"/>" />
+		      </form>
+<% } %>
+<% if( editor_button || admin_button) { %>
+                <form method="post" action="<%=request.getContextPath()%>/mydspace">
+                  <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
+                  <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_EXPORT_ARCHIVE %>" />
+                  <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.collection"/>" />
+                </form>
+               <form method="post" action="<%=request.getContextPath()%>/mydspace">
+                 <input type="hidden" name="collection_id" value="<%= collection.getID() %>" />
+                 <input type="hidden" name="step" value="<%= MyDSpaceServlet.REQUEST_MIGRATE_ARCHIVE %>" />
+                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.mydspace.request.export.migratecollection"/>" />
+               </form>
+               <form method="post" action="<%=request.getContextPath()%>/dspace-admin/metadataexport">
+                 <input type="hidden" name="handle" value="<%= collection.getHandle() %>" />
+                 <input class="btn btn-default col-md-12" type="submit" value="<fmt:message key="jsp.general.metadataexport.button"/>" />
+               </form>
+<% } %>
+                 
+<% } %>
+</anu:box>
+<%  } %>
+<%  if (submit_button)
+    { %>
+<anu:boxheader text="Submit" />
+<anu:box style="solid">
+          <form class="form-group" action="<%= request.getContextPath() %>/submit" method="post">
+            <input type="hidden" name="collection" value="<%= collection.getID() %>" />
+			<input class="btn btn-success col-md-12" type="submit" name="submit" value="<fmt:message key="jsp.collection-home.submit.button"/>" />
+          </form>
+</anu:box>
+<%  } %>
 <fmt:message key="jsp.collection-home.recentsub" var="recentSub" />
 <anu:boxheader text="${recentSub}" />
 <anu:box style="solid">
@@ -370,7 +368,7 @@
 			{
 				if (dcv.length > 0)
 				{
-					displayTitle = Utils.addEntities(dcv[0].value);
+					displayTitle = dcv[0].value;
 				}
 			}
 			%><p class="recentItem"><a href="<%= request.getContextPath() %>/handle/<%= items[i].getHandle() %>"><%= displayTitle %></a></p><%

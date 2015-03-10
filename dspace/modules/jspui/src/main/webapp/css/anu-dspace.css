@@ -661,14 +661,6 @@ div.scroll {
 	padding: 4px 25px;
 	margin-bottom: 5px;
 }
-.navbar-form div {
-	display: inline-block;
-	width: 73%;
-}
-.navbar-form button {
-	margin-left: 5px;
-	width: 20%;
-}
 .modal-open {
   overflow: hidden;
 }

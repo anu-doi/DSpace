@@ -96,9 +96,10 @@
 		<p><label for="tequery"><fmt:message key="jsp.layout.navbar-default.search"/></label></p>
 		<form method="get" action="<%= request.getContextPath() %>/simple-search" class="navbar-form navbar-right" scope="search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="<fmt:message key="jsp.layout.navbar-default.search"/>" name="query" id="tequery" size="25"/>
+				<input type="text" class="form-control search-query" placeholder="<fmt:message key="jsp.layout.navbar-default.search"/>" name="query" id="tequery" size="25"/>
+				<input type="submit" value="Go" class="search-button" />
 			</div>
-			<button type="submit" class="btn"><span>GO</span></button>
+			<%--<button type="submit" class="btn"><span>GO</span></button>--%>
 			<%--
 			Disabled. advanced search is not decoding search query properly.
 			<br/><a href="<%= request.getContextPath() %>/advanced-search"><fmt:message key="jsp.layout.navbar-default.advanced"/></a>

@@ -18,6 +18,19 @@
  <!-- for handle "default".                                                -->
  <submission-map>
    <name-map collection-handle="default" submission-name="traditional" />
+   <name-map collection-handle="1885/26" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9490" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9056" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9192" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/11141" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/12541" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/12555" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/12556" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9491" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9187" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9281" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/3" submission-name="ANU_Research" />
+   <name-map collection-handle="1885/9050" submission-name="ANU_Research" />
  </submission-map>
 
 
@@ -270,6 +283,7 @@
       -->
 
       <!--Step 7 will be to Sign off on the License-->
+      <!-- 
       <step>
         <heading>submit.progressbar.license</heading>
         <processing-class>org.dspace.submit.step.LicenseStep</processing-class>
@@ -277,9 +291,44 @@
 		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.LicenseStep</xmlui-binding>
 		<workflow-editable>false</workflow-editable>
       </step>
+       -->
 
 
      
+   </submission-process>
+   
+   <submission-process name="ANU_Research">
+	  <step>
+		<processing-class>org.dspace.submit.step.SkipInitialQuestionsStep</processing-class>
+	  </step>
+      <step>
+        <heading>submit.progressbar.describe</heading>
+        <processing-class>org.dspace.submit.step.DescribeStep</processing-class>
+        <jspui-binding>org.dspace.app.webui.submit.step.JSPDescribeStep</jspui-binding>
+		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.DescribeStep</xmlui-binding>
+        <workflow-editable>true</workflow-editable>
+      </step>
+      <step>
+        <heading>submit.progressbar.upload</heading>
+        <processing-class>org.dspace.submit.step.UploadStep</processing-class>
+        <jspui-binding>org.dspace.app.webui.submit.step.JSPUploadStep</jspui-binding>
+		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.UploadStep</xmlui-binding>
+        <workflow-editable>true</workflow-editable>
+      </step>
+ 	  <step>
+        <heading>submit.progressbar.verify</heading>
+        <processing-class>org.dspace.submit.step.VerifyStep</processing-class>
+ 	    <jspui-binding>org.dspace.app.webui.submit.step.JSPVerifyStep</jspui-binding>
+		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.ReviewStep</xmlui-binding>
+		<workflow-editable>true</workflow-editable>
+      </step>
+      <step>
+        <heading>submit.progressbar.license</heading>
+        <processing-class>org.dspace.submit.step.LicenseStep</processing-class>
+        <jspui-binding>org.dspace.app.webui.submit.step.JSPLicenseStep</jspui-binding>
+		<xmlui-binding>org.dspace.app.xmlui.aspect.submission.submit.LicenseStep</xmlui-binding>
+		<workflow-editable>false</workflow-editable>
+      </step>
    </submission-process>
 
  </submission-definitions>
