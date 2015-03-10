@@ -93,7 +93,7 @@
          <dc-element>contributor</dc-element>
          <dc-qualifier>affiliation</dc-qualifier>
          <repeatable>false</repeatable>
-         <label>College/School/Centre/Department</label>
+         <label>College/ School/ Centre/ Department</label>
          <input-type>onebox</input-type>
          <hint></hint>
          <required></required>
@@ -1201,7 +1201,12 @@
    </value-pairs>
    
    <value-pairs value-pairs-name="deewr_types" dc-term="type">
+
         <pair> <!--the most common option selected -->
+        <displayed-value>Journal article</displayed-value>
+        <stored-value>Journal article</stored-value>
+        </pair>
+        <pair>
         <displayed-value>Image</displayed-value>
         <stored-value>Image</stored-value>
         </pair>
@@ -1233,11 +1238,6 @@
         <pair>
         <displayed-value>Exhibition or event</displayed-value>
         <stored-value>Exhibition or event</stored-value>
-        </pair>
-
-        <pair>
-        <displayed-value>Journal article</displayed-value>
-        <stored-value>Journal article</stored-value>
         </pair>
         <pair>
         <displayed-value>Legal submission</displayed-value>

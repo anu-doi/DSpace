@@ -195,6 +195,7 @@
 			    <ref bean="fieldMergeModifier"/>
 			    <ref bean="valueConcatenationModifier"/>
 			    <ref bean="languageCodeModifier"/>
+			    <ref bean="lowercaseModifier"/>
 			</list>
 		</property>
 	</bean>
@@ -219,12 +220,18 @@
 	
 	<bean name="valueConcatenationModifier" class="org.dspace.submit.lookup.ValueConcatenationModifier">
 	    <!-- <property name="field" value="allkeywords"/> -->
-	    <property name="separator" value=";" />
+	    <!-- <property name="separator" value=";" />-->
+	    <property name="field" value="abstract" />
+	    <property name="separator" value="" />
 	    <property name="whitespaceAfter" value="true" />
 	</bean>
 
-        <bean name="languageCodeModifier" class="org.dspace.submit.lookup.LanguageCodeModifier"/>
-
+	<bean name="languageCodeModifier" class="org.dspace.submit.lookup.LanguageCodeModifier"/>
+	
+	<bean name="lowercaseModifier" class="org.dspace.submit.lookup.LowercaseModifier">
+		<property name="field" value="allkeywords" />
+	</bean>
+	
 	<bean name="org.dspace.submit.lookup.DSpaceWorkspaceItemOutputGenerator" class="org.dspace.submit.lookup.DSpaceWorkspaceItemOutputGenerator">
 	    <property name="outputMap" ref="outputMap"/>
 

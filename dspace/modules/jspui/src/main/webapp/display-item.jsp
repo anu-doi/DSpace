@@ -139,14 +139,14 @@
 
                 <%-- <strong>Please use this identifier to cite or link to this item:
                 <code><%= HandleManager.getCanonicalForm(handle) %></code></strong>--%>
-				<anu:message type="info">
+				<anu:message type="info" extraClass="marginbottom">
                 <div class="well"><fmt:message key="jsp.display-item.identifier"/>
                 <code><%= HandleManager.getCanonicalForm(handle) %></code></div>
 				</anu:message>
 <%
         if (admin_button)  // admin edit button
         { %>
-            <div class="panel panel-warning">
+            <div class="panel panel-warning marginbottom">
             	<div class="panel-heading"><fmt:message key="jsp.admintools"/></div>
             	<div class="panel-body">
                 <form method="get" action="<%= request.getContextPath() %>/tools/edit-item">
