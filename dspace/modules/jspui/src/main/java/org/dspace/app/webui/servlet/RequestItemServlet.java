@@ -171,6 +171,26 @@ public class RequestItemServlet extends DSpaceServlet
 		{
 			title = I18nUtil.getMessage("jsp.general.untitled", context);
 		}
+        
+        String authors = null;
+        DCValue[] authorDC = item.getDC("contributor", "author", Item.ANY);
+        if (authorDC != null || authorDC.length > 0)
+        {
+        	StringBuilder authsBuilder = new StringBuilder();
+        	for (int i = 0; i < authorDC.length; i++)
+        	{
+        		if (i > 0)
+        		{
+        			authsBuilder.append(", ");
+        		}
+        		authsBuilder.append(authorDC[i].value);
+        	}
+        	authors = authsBuilder.toString();
+        }
+        else
+        {
+        	authors = "Unknown";
+        }
           
         // User email from context
         String requesterEmail = request.getParameter("email");
@@ -257,6 +277,7 @@ public class RequestItemServlet extends DSpaceServlet
 						.getProperty("dspace.name"));
 				email.addArgument(ConfigurationManager
 						.getProperty("mail.helpdesk"));
+				email.addArgument(authors);
 				email.setReplyTo(requesterEmail);
 				email.send();
 
