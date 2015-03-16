@@ -60,6 +60,11 @@
                                 <include>WEB-INF/web.xml</include>
                             </includes>
                         </resource>
+                        <resource>
+                        	<filtering>true</filtering>
+                        	<targetPath>/</targetPath>
+                        	<directory>${basedir}/src/main/resources/webapps</directory>
+                        </resource>
                     </webResources>
                     <overlays>
                         <overlay />
