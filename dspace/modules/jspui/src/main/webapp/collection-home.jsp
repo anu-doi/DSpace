@@ -98,6 +98,12 @@
         feedData = "coll:" + ConfigurationManager.getProperty("webui.feed.formats");
     }
     
+    boolean galleryEnabled = false;
+    String colls = ConfigurationManager.getProperty("gallery.show.collections");
+    if (colls != null && colls.length() > 0 && colls.contains(collection.getHandle())) {
+    	galleryEnabled = true;
+    }
+    
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
 
     Boolean showItems = (Boolean)request.getAttribute("show.items");
@@ -409,6 +415,15 @@
     	} %>
     	</anu:box><%
     }
+%>
+
+<%
+	if (galleryEnabled)
+	{
+%>
+	<p class="center"><a class="btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/browse/gallery"><fmt:message key="jsp.collection-home.view-as-gallery"/></a></p>
+<%
+	}
 %>
 <p class="center"><a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a></p>
       
