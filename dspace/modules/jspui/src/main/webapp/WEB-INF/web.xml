@@ -450,6 +450,11 @@
       <servlet-name>SearchResultLogServlet</servlet-name>
       <servlet-class>org.dspace.app.webui.servlet.SearchResultLogServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+      <servlet-name>gallery</servlet-name>
+      <servlet-class>org.dspace.app.webui.servlet.PopulateGalleryServlet</servlet-class>
+  </servlet>
 
   <!-- shibbolized dspace -->
   <servlet>
@@ -812,6 +817,11 @@
   <servlet-mapping>
       <servlet-name>contacts-page</servlet-name>
       <url-pattern>/contacts</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+      <servlet-name>gallery</servlet-name>
+      <url-pattern>/browse/gallery</url-pattern>
   </servlet-mapping>
   
   <!-- Icon MIME type -->
