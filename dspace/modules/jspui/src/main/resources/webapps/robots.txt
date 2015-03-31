@@ -2,9 +2,9 @@ Sitemap: ${dspace.baseUrl}/sitemap
 Sitemap: ${dspace.baseUrl}/htmlmap
 
 # Funnelback crawler at 225.168.15.103.squiz.net (103.15.168.225) 
-User-agent: Mozilla/5.0 RPT-HTTPClient/0.3-3E
+User-agent: RPT-HTTPClient
 Disallow: /
 
 # All other search crawlers
 User-agent: *
-Allow: /
+Disallow: /*/statistics
