@@ -293,7 +293,7 @@ public class PopulateGalleryServlet extends DSpaceServlet
 			
 			 //String urlFragment = "browse/gallery";
 			 String sharedLink = linkBase + "browse/gallery?";
-			 String backLink = linkBase +"browse?";
+			 String backLink = linkBase;
 			 
 			 String queryParam = "type=" + type + "&amp;sort_by=" + sortBy + "&amp;order=" + order + "&amp;rpp=" + resultsperpage
 				      + "&amp;etal=" + etAl;
@@ -302,7 +302,6 @@ public class PopulateGalleryServlet extends DSpaceServlet
 	
 				
 				sharedLink += queryParam;
-				backLink += queryParam;
 				
 				String next = sharedLink;
 				String prev = sharedLink;
