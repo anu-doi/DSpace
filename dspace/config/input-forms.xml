@@ -35,8 +35,11 @@
    <name-map collection-handle="1885/12541" form-name="ANU_Research" />
    <name-map collection-handle="1885/12555" form-name="ANU_Research" />
    <name-map collection-handle="1885/12556" form-name="ANU_Research" />
+   <name-map collection-handle="1885/13130" form-name="ANU_Research" />
 
    <name-map collection-handle="1885/12544" form-name="ANU_Oral_Histories" />
+   
+   <name-map collection-handle="1885/13120" form-name="ANU_Symposium" />
  </form-map>
 
 
@@ -735,6 +738,144 @@
 
      </page>
    </form>
+   
+   <form name="ANU_Symposium">
+     <page number="1">
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>author</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Authors</label>
+         <input-type>name</input-type>
+         <hint>Enter the names of the authors of this item below.</hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>authoremail</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Author's email</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the email address of the authors of this item below.</hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>affiliation</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Author's Affiliation</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the author's name and affiliation</hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Associated Rights (eg link to Sherpa/Romeo entry)</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the associated rights</hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>title</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Title</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the title of this item below</hint>
+         <required></required>
+       </field>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>source</dc-element>
+         <dc-qualifier>uri</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Electronic access or address of the source document (usually a hyperlink)</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the source URI of this item below</hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>type</dc-element>
+         <dc-qualifier>status</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Publication Version</label>
+         <input-type value-pairs-name="version_types">dropdown</input-type>
+         <hint>The document's publication Version.</hint>
+         <required />
+       </field>
+
+        <!-- note that if this field is removed, then dc.publisher and dc.identifier.citation are also removed -->
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>date</dc-element>
+         <dc-qualifier>issued</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Publication date</label>
+         <input-type>date</input-type>
+         <hint>Please give the date of publication, or public distribution, below. You can leave out the day and/or month if they aren't applicable.</hint>
+         <required />
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>source</dc-element>
+         <dc-qualifier />
+         <repeatable>false</repeatable>
+         <label>Source</label>
+         <input-type>onebox</input-type>
+         <hint>If known.</hint>
+         <required />
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>type</dc-element>
+         <dc-qualifier />
+         <repeatable>false</repeatable>
+         <label>Type of publication</label>
+         <input-type value-pairs-name="deewr_types">dropdown</input-type>
+         <hint />
+         <required />
+       </field>
+     </page>
+     <page number="2">
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <!-- An input-type of twobox MUST be marked as repeatable -->
+         <repeatable>true</repeatable>
+         <label>Subject Keywords</label>
+         <input-type>onebox</input-type>
+         <hint> Enter appropriate subject keywords or phrases below. </hint>
+         <required></required>
+       </field>
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>description</dc-element>
+         <dc-qualifier>abstract</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Abstract</label>
+         <input-type>textarea</input-type>
+         <hint> Enter the abstract of the item below. </hint>
+         <required></required>
+       </field>
+     </page>
+   </form>
+   
    
     <form name="traditional">
      <page number="1">
