@@ -164,6 +164,9 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			else if ("statsTopDownloads".equals(section)) {
 				exportBean = getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges);
 			}
+			else if ("statsReferralSources".equals(section)) {
+				exportBean = getReferralSources(context, dso, startDate, endDate, ipRanges);
+			}
 			else {
 				return;
 			}
