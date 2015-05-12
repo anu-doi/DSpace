@@ -382,7 +382,7 @@
 	<%
     }
 %>
-<p class="center"><a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><fmt:message key="jsp.community-home.display-statistics"/></a></p>
+<p class="center"><a class="statisticsLink btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><span class="large"><fmt:message key="jsp.community-home.display-statistics"/></span></a></p>
 		
 </anu:content>
 </dspace:layout>

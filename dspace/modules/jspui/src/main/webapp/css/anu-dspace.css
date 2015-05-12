@@ -353,6 +353,9 @@ ul.media-list ul a:link, ul.media-list ul a:visited{
 .glyphicon-asterisk:before {
 	content: "\2a";
 }
+.glyphicon-download-alt:before {
+	content: "\e025";
+}
 .table {
 	width: 100%;
 }
