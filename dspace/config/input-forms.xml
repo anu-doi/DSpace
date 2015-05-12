@@ -298,9 +298,21 @@
          <repeatable>false</repeatable>
          <label>Title</label>
          <input-type>onebox</input-type>
-         <hint>Enter the title of this item below</hint>
+         <hint>Enter the title of this item below (i.e. journal article title, book chapter title, report title, etc)</hint>
          <required></required>
        </field>
+	   
+	   <field>
+                 <dc-schema>dc</dc-schema>
+         <dc-element>relation</dc-element>
+         <dc-qualifier>ispartof</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Book Title</label>
+         <input-type>onebox</input-type>
+		 <hint>If the item is a book chapter, enter the title of the book below</hint>
+         <required></required>
+	   </field>
+	   
           <field>
                  <dc-schema>dc</dc-schema>
          <dc-element>source</dc-element>
@@ -711,28 +723,6 @@
          <label>Editors</label>
          <input-type>name</input-type>
          <hint>Enter the names of the editors of this item below.</hint>
-         <required></required>
-       </field>
-	   
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>publisher</dc-element>
-         <dc-qualifier></dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Publisher</label>
-         <input-type>onebox</input-type>
-         <hint></hint>
-         <required></required>
-       </field>
-
-       <field>
-         <dc-schema>dc</dc-schema>
-         <dc-element>identifier</dc-element>
-         <dc-qualifier>citation</dc-qualifier>
-         <repeatable>false</repeatable>
-         <label>Citation</label>
-         <input-type>onebox</input-type>
-         <hint></hint>
          <required></required>
        </field>
 
@@ -1416,6 +1406,11 @@
         <pair>
         <displayed-value>Musical score</displayed-value>
         <stored-value>Musical score</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Newspaper/magazine article</displayed-value>
+        <stored-value>Newspaper/magazine article</stored-value>
         </pair>
 
         <pair>
