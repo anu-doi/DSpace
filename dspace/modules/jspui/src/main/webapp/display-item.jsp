@@ -262,7 +262,8 @@
         }
 %>
     <a class="statisticsLink  btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
-
+	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a>
+	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a>
     <%-- SFX Link --%>
 <%
     if (ConfigurationManager.getProperty("sfx.server.url") != null)

@@ -449,7 +449,7 @@
       {
 %>
 <div class="col-md-4">
-  <div id="sherpaBox" class="panel panel-info">
+  <div id="sherpaBox" class="panel panel-info margintop">
   	  <div class="panel-heading">
   		  <span id="ui-id-1"><fmt:message key="jsp.sherpa.title" /></span>
   	  </div>
