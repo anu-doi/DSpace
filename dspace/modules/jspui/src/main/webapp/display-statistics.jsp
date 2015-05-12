@@ -257,7 +257,7 @@ IP Ranges
 	<c:param name="eMonth" value="${param.eMonth}" />
 	<c:param name="eYear" value="${param.eYear}" />
 	<c:param name="format" value="csv" />
-	<c:param name="section" value="statsCountryVisits" />
+	<c:param name="section" value="statsReferralSources" />
 </c:url>
 <h2><fmt:message key="jsp.statistics.heading.referralSources"/> <a href="${referralSourceUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
 <table class="statsTable">
