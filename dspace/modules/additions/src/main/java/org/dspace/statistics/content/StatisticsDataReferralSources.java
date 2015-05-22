@@ -70,7 +70,6 @@ public class StatisticsDataReferralSources extends StatisticsData {
 		if (ipRanges == null) {
 			String internalIpAddressList = ConfigurationManager.getProperty("ipaddress.internal");
 			String[] ipAddressArray = internalIpAddressList.split(", ");
-			StringUtils.join(ipAddressArray, " OR ip:");
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < ipAddressArray.length; i++) {
 				if (i > 0) {
@@ -192,11 +191,17 @@ public class StatisticsDataReferralSources extends StatisticsData {
 			String viewTypeFilter = "";
 			String downloadTypeFilter = "";
 			if (currentDso != null) {
-				viewTypeFilter = " AND ((type:"+resourceType+" AND id:"+resourceId+") OR ("+owningType+":"+resourceId+" AND (type:2 OR type:3 OR type:4)))";
+				if (resourceType == Constants.ITEM) {
+					viewTypeFilter = " AND (type:"+resourceType+" AND id:"+resourceId+")";
+				}
+				else {
+					viewTypeFilter = " AND ("+owningType+":"+resourceId+" AND type:2)";
+				}
+				//viewTypeFilter = " AND ((type:"+resourceType+" AND id:"+resourceId+") OR ("+owningType+":"+resourceId+" AND (type:2 OR type:3 OR type:4)))";
 				downloadTypeFilter = owningType+":"+resourceId+" AND type:0";
 			}
 			else {
-				viewTypeFilter = " AND (type:2 OR type:3 OR type:4)";
+				viewTypeFilter = " AND type:2";
 				downloadTypeFilter = " AND owningItem:* AND type:0";
 			}
 			
@@ -217,7 +222,7 @@ public class StatisticsDataReferralSources extends StatisticsData {
 				
 				referrerBuilder.append("(");
 				for (int i = 0; i < sourceReferrers.length; i++, sourceCount++) {
-					if (i > 9) {
+					if (i > 0) {
 						referrerBuilder.append(" OR ");
 					}
 					if (sourceCount > 0) {
