@@ -15,6 +15,7 @@ public class DatasetViewGenerator extends DatasetTypeGenerator {
 	private int orderColumn;
 	private String handle;
 	private IpRange ipRange = IpRange.ALL;
+	private int filterType = -1;
 	
 	public boolean isShowFullView() {
 		return showFullView;
@@ -67,5 +68,13 @@ public class DatasetViewGenerator extends DatasetTypeGenerator {
 		else {
 			this.ipRange = IpRange.ALL;
 		}
+	}
+
+	public int getFilterType() {
+		return filterType;
+	}
+
+	public void setFilterType(int filterType) {
+		this.filterType = filterType;
 	}
 }
