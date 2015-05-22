@@ -20,6 +20,7 @@ import org.dspace.statistics.content.filter.StatisticsSolrDateFilter;
 
 public class StatisticsDataDownloads extends StatisticsData {
     private DSpaceObject currentDso;
+    private String currentAuthor;
     
     private String ipRanges = null;
 	
@@ -27,6 +28,13 @@ public class StatisticsDataDownloads extends StatisticsData {
 	{
 		super();
 		this.currentDso = dso;
+	}
+	
+	public StatisticsDataDownloads(DSpaceObject dso, String author)
+	{
+		super();
+		this.currentDso = dso;
+		this.currentAuthor = author;
 	}
 
 	@Override
@@ -106,6 +114,10 @@ public class StatisticsDataDownloads extends StatisticsData {
 		//Solr doesn't explicitly apply boolean logic, so this query cannot be simplified to an OR query
 		filterQuery += "-(statistics_type:[* TO *] AND -statistics_type:" + SolrLogger.StatisticsType.VIEW.text() + ")";
 		
+		if (currentAuthor != null && !"".equals(currentAuthor)) {
+			filterQuery += " AND author:\""+currentAuthor+"\"";
+		}
+		
 		Dataset dataset = new Dataset(0,0);
 
 		DatasetViewGenerator viewGenerator = null;
@@ -126,28 +138,30 @@ public class StatisticsDataDownloads extends StatisticsData {
 			
 			int nrColumns = 2;
 			
-
-			int resourceType = currentDso.getType();
-			int resourceId = currentDso.getID();
-			
-			String owningType = "";
-			switch (resourceType) {
-			case Constants.ITEM:
-				owningType = "owningItem";
-				break;
-			case Constants.COLLECTION:
-				owningType = "owningColl";
-				break;
-			case Constants.COMMUNITY:
-				owningType = "owningComm";
-				break;
+			String downloadQuery = "type:0 AND owningItem:*";
+			if (currentDso != null) {
+				int resourceType = currentDso.getType();
+				int resourceId = currentDso.getID();
+				
+				String owningType = "";
+				switch (resourceType) {
+				case Constants.ITEM:
+					owningType = "owningItem";
+					break;
+				case Constants.COLLECTION:
+					owningType = "owningColl";
+					break;
+				case Constants.COMMUNITY:
+					owningType = "owningComm";
+					break;
+				}
+	
+	
+				downloadQuery = "type:0 AND "+owningType+":"+resourceId;
 			}
+			String downloadType = viewGenerator.getType() == null ? "id" : viewGenerator.getType();
 
 			ObjectCount[] downloadResults = null;
-
-			String downloadQuery = "type:0 AND "+owningType+":"+resourceId;
-			String downloadType = viewGenerator.getType() == null ? "id" : viewGenerator.getType();
-			
 			if (dateFacet != null) {
 				downloadResults = SolrLogger.queryFacetDate(downloadQuery, filterQuery, viewGenerator.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
 			}
@@ -159,7 +173,6 @@ public class StatisticsDataDownloads extends StatisticsData {
 			dataset.setColLabel(0, "Handle");
 			dataset.setColLabel(1, "Downloads");
 			for (int i = 0; i < downloadResults.length; i++) {
-				//dataset.setRowLabel(n, label);
 				ObjectCount count = downloadResults[i];
 				int dsoId = Integer.parseInt(count.getValue());
 				try {

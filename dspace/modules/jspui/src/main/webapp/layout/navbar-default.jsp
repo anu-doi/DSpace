@@ -157,6 +157,11 @@
 	    %>
 	</anu:submenu>
 	
+	<fmt:message key="jsp.layout.navbar-admin.statistics" var="statistics"/>
+	<anu:submenu title="${statistics}">
+	<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
+	</anu:submenu>
+	
 	<fmt:message key="jsp.layout.navbar-default.submit" var="submit"/>
 	<anu:submenu title="${submit}">
 	    <li><a href="<%= request.getContextPath() %>/submit"><fmt:message key="jsp.layout.navbar-default.submit-research"/></a></li>
