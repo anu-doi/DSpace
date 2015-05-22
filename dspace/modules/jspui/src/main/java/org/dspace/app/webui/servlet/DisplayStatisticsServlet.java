@@ -222,15 +222,12 @@ public class DisplayStatisticsServlet extends DSpaceServlet
         
         request.setAttribute("handle", handle);
         if (dso != null) {
-        	log.info("Setting title to dso name");
         	request.setAttribute("title", dso.getName());
         }
         else if (author != null && !"".equals(author)) {
-        	log.info("Setting title to author name");
         	request.setAttribute("title", author);
         }
         else {
-        	log.info("Setting title to whole of repo");
         	request.setAttribute("title", "Whole of Repository");
         }
         request.setAttribute("statsVisits", statsVisits);
