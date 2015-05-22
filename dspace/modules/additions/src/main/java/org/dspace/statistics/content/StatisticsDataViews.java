@@ -34,12 +34,20 @@ public class StatisticsDataViews extends StatisticsData {
     /** Current DSpaceObject for which to generate the statistics. */
     private DSpaceObject currentDso;
     
-    private String ipRanges = null;
+    private static String ipRanges = null;
+    private String currentAuthor;
     
 	public StatisticsDataViews(DSpaceObject dso)
 	{
 		super();
 		this.currentDso = dso;
+	}
+	
+	public StatisticsDataViews(DSpaceObject dso, String author)
+	{
+		super();
+		this.currentDso = dso;
+		this.currentAuthor = author;
 	}
 
 	@Override
@@ -121,6 +129,10 @@ public class StatisticsDataViews extends StatisticsData {
 		//Solr doesn't explicitly apply boolean logic, so this query cannot be simplified to an OR query
 		filterQuery += "-(statistics_type:[* TO *] AND -statistics_type:" + SolrLogger.StatisticsType.VIEW.text() + ")";
 		
+		if (currentAuthor != null && !"".equals(currentAuthor)) {
+			filterQuery += " AND author:\""+currentAuthor+"\"";
+		}
+		
 		Dataset dataset = new Dataset(0,0);
 		
 		DatasetViewGenerator viewGenerator = null;
@@ -139,6 +151,10 @@ public class StatisticsDataViews extends StatisticsData {
 				}
 			}
 			
+			if (viewGenerator.getFilterType() >= 0) {
+				filterQuery += " AND type:"+viewGenerator.getFilterType();
+			}
+			
 			String referrer = "(referrer:*/handle/"+viewGenerator.getHandle()+" OR referrer:*/handle/"+viewGenerator.getHandle()+"?mode=simple)";
 			
 			
@@ -152,8 +168,12 @@ public class StatisticsDataViews extends StatisticsData {
 			Map<Integer, ObjectCount[]> resultsMap = new HashMap<Integer, ObjectCount[]>();
 			int colNum = 0;
 			// View
-			int resourceType = currentDso.getType();
-			int resourceId = currentDso.getID();
+			int resourceType = Constants.ITEM;
+			int resourceId = -1;
+			if (currentDso != null) {
+				resourceType = currentDso.getType();
+				resourceId = currentDso.getID();
+			}
 			
 			String owningType = "";
 			switch (resourceType) {
@@ -171,7 +191,19 @@ public class StatisticsDataViews extends StatisticsData {
 			//String type = viewGenerator.getType() == null ? "id" : viewGenerator.getType();
 			String type = viewGenerator.getType() == null ? "statistics_type" : viewGenerator.getType();
 			//String viewQuery = "type:"+resourceType+" AND id:"+resourceId;
-			String viewQuery = "(type:"+resourceType+" AND id:"+resourceId+") OR ("+owningType+":"+resourceId+" AND (type:2 OR type:3 OR type:4))";
+			String viewQuery = "";
+			if (currentDso != null) {
+				if (resourceType == Constants.ITEM) {
+					viewQuery = "(type:"+resourceType+" AND id:"+resourceId+")";
+				}
+				else {
+					viewQuery = "("+owningType+":"+resourceId+" AND type:2)";
+				}
+				//viewQuery = "(type:"+resourceType+" AND id:"+resourceId+") OR ("+owningType+":"+resourceId+" AND (type:2 OR type:3 OR type:4))";
+			}
+			else {
+				viewQuery = "type:2";
+			}
 			ObjectCount[] viewResults = null;
 			String viewFilterQuery = filterQuery;
 			if (viewGenerator.isShowFullView()) {
@@ -204,7 +236,13 @@ public class StatisticsDataViews extends StatisticsData {
 			// Downloads
 			if (viewGenerator.isShowFileDownloads()) {
 				colNum++;
-				String downloadQuery = "type:0 AND "+owningType+":"+resourceId;
+				String downloadQuery = "";
+				if (currentDso != null) {
+					downloadQuery = "type:0 AND "+owningType+":"+resourceId;
+				}
+				else {
+					downloadQuery = "type:0 AND owningItem:*";
+				}
 				String downloadType = viewGenerator.getType() == null ? "statistics_type" : viewGenerator.getType();
 				
 				if (dateFacet != null) {
@@ -270,7 +308,7 @@ public class StatisticsDataViews extends StatisticsData {
 			
 			for (int i = 0; i < dataset.getRowLabels().size(); i++) {
 				String rowLabel = dataset.getRowLabels().get(i);
-				dataset.setRowLabel(i, getResultName(rowLabel, type, context));
+				dataset.setRowLabel(i, getResultName(rowLabel, type, viewGenerator.getFilterType(), context));
 			}
 		}
 		
@@ -282,7 +320,7 @@ public class StatisticsDataViews extends StatisticsData {
      * Gets the name of the DSO (example for collection: ((Collection) dso).getname();
      * @return the name of the given DSO
      */
-    private String getResultName(String value, String type,
+    private String getResultName(String value, String type, int filterType,
             Context context) throws SQLException
     {
         if("continent".equals(type)){
@@ -292,6 +330,23 @@ public class StatisticsDataViews extends StatisticsData {
         if("countryCode".equals(type)){
             value = LocationUtils.getCountryName(value, context
                     .getCurrentLocale());
+        }
+        else if(filterType >= 0) {
+        	if ("id".equals(type)) {
+        		try {
+	        		int id = Integer.parseInt(value);
+	        		DSpaceObject dso = DSpaceObject.find(context, filterType, id);
+	        		if (dso != null) {
+	        			value = dso.getName();
+	        		}
+	        		else {
+	        			log.info("DSO is null");
+	        		}
+        		}
+        		catch (NumberFormatException e) {
+        			log.error("Unable to determine resource id for"+value);
+        		}
+        	}
         }
         return value;
     }

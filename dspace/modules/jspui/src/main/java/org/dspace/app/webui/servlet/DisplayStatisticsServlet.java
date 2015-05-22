@@ -30,10 +30,15 @@ import org.dspace.core.Context;
 import org.dspace.eperson.Group;
 import org.dspace.handle.HandleManager;
 import org.dspace.statistics.Dataset;
+import org.dspace.statistics.content.DatasetDSpaceObjectGenerator;
 import org.dspace.statistics.content.DatasetTimeGenerator;
 import org.dspace.statistics.content.DatasetViewGenerator;
+import org.dspace.statistics.content.StatisticsDataAccessionedByType;
+import org.dspace.statistics.content.StatisticsDataArchive;
 import org.dspace.statistics.content.StatisticsDataDownloads;
+import org.dspace.statistics.content.StatisticsDataItemCount;
 import org.dspace.statistics.content.StatisticsDataReferralSources;
+import org.dspace.statistics.content.StatisticsDataTopObject;
 import org.dspace.statistics.content.StatisticsDataViews;
 import org.dspace.statistics.content.StatisticsListing;
 import org.dspace.statistics.content.StatisticsTable;
@@ -49,7 +54,9 @@ import org.dspace.statistics.content.filter.StatisticsSolrDateFilter;
  */
 public class DisplayStatisticsServlet extends DSpaceServlet
 {
-    /** log4j logger */
+	private static final long serialVersionUID = 1L;
+
+	/** log4j logger */
     private static Logger log = Logger.getLogger(DisplayStatisticsServlet.class);
 
 	private static String CSV_SEPARATOR = ",";
@@ -97,17 +104,10 @@ public class DisplayStatisticsServlet extends DSpaceServlet
                 dso = HandleManager.resolveToObject(context, handle);
         }
 
-        if(dso == null)
-        {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                JSPManager.showJSP(request, response, "/error/404.jsp");
-                    return;
-        }
-        
         String format = request.getParameter("format");
         
         boolean isItem = false;
-        if (dso.getType() == Constants.ITEM) {
+        if (dso != null && dso.getType() == Constants.ITEM) {
         	isItem = true;
         }
         
@@ -131,14 +131,14 @@ public class DisplayStatisticsServlet extends DSpaceServlet
         }
         
         String limit = request.getParameter("limit");
-        int maxRows = -1;
+        int maxRows = 10;
         try {
         	if (limit != null) {
         		maxRows = Integer.parseInt(limit);
         	}
         }
         catch (Exception e) {
-        	log.info("Error parsing the limit value \""+limit+"\"");
+        	log.debug("Error parsing the limit value \""+limit+"\"");
         }
         
         String orderGeo = request.getParameter("orderGeo");
@@ -151,30 +151,26 @@ public class DisplayStatisticsServlet extends DSpaceServlet
         }
         
         String ipRanges = request.getParameter("ipRanges");
+        String author = request.getParameter("author");
         
         if ("csv".equals(format)) {
             String section = request.getParameter("section");
-			StatisticsBean exportBean = null;
-			if ("statsMonthlyVisits".equals(section)) {
-				exportBean = getMonthlyVisits(context, dso, startDate, endDate, ipRanges);
-			}
-			else if ("statsCountryVisits".equals(section)) {
-				exportBean = getCountryVisits(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
-			}
-			else if ("statsTopDownloads".equals(section)) {
-				exportBean = getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges);
-			}
-			else if ("statsReferralSources".equals(section)) {
-				exportBean = getReferralSources(context, dso, startDate, endDate, ipRanges);
-			}
-			else {
+            StatisticsBean exportBean = getExportBean(context, section, dso, author, startDate, endDate, ipRanges, maxRows, orderColumn);
+			if (exportBean == null) {
 				return;
 			}
-			try {
+            
+            try {
 				String[][] matrix = exportBean.getMatrix();
 
 				response.setContentType("text/csv); charset=UTF-8");
-				String filename = handle.replaceAll("/", "-") + ".csv";
+				String filename = "placeholder";
+				if(handle != null) {
+					filename = handle.replaceAll("/", "-") + "-" + exportBean.getName().toLowerCase().replaceAll(" ", "-") + ".csv";
+				}
+				else {
+					filename = exportBean.getName().toLowerCase().replaceAll(" ", "-") + ".csv";
+				}
 				response.setHeader("Content-Disposition", "attachment; filename=" + filename);
 				PrintWriter out = response.getWriter();
 				for (int i = 0; i < matrix.length; i++) {
@@ -191,32 +187,119 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			JSPManager.showInternalError(request, response);
 			return;
         }
-
-        StatisticsBean statsVisits = getVisits(context, dso, startDate, endDate, ipRanges);
-        StatisticsBean statsMonthlyVisits = getMonthlyVisits(context, dso, startDate, endDate, ipRanges);
-        StatisticsBean statsCountryVisits = getCountryVisits(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
-        StatisticsBean statsTopDownloads = getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges);
-        StatisticsBean statsReferralSources = getReferralSources(context, dso, startDate, endDate, ipRanges);
+        StatisticsBean statsVisits = null;
+        StatisticsBean statsMonthlyVisits = null;
+        StatisticsBean statsCountryVisits =  null;
+        StatisticsBean statsTopAuthors =  null;
+        StatisticsBean statsTopDownloads =   null;
+        StatisticsBean statsTopItems =  null;
+        StatisticsBean statsTopCollections =  null;
+        StatisticsBean statsReferralSources =   null;
+        StatisticsBean statsNewByCollection =   null;
+        StatisticsBean statsNewByType =   null;
+        StatisticsBean statsItemCount = null;
+        
+        statsVisits = getVisits(context, dso, startDate, endDate, ipRanges, author);
+        statsMonthlyVisits = getMonthlyVisits(context, dso, startDate, endDate, ipRanges, author);
+        statsCountryVisits = getCountryVisits(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
+        if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM)) {
+        	statsTopAuthors =  getTopAuthors(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+        }
+        statsTopDownloads =  getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges, author);
+        if (!(dso != null && dso.getType() == Constants.ITEM)) {
+        	statsTopItems =  getTopItemsStatisticsBean(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
+        }
+        
+        if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM) && !(dso != null && dso.getType() == Constants.COLLECTION)) {
+        	statsTopCollections =  getTopCollectionsStatisticsBean(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+        }
+        statsReferralSources =  getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+        if (dso == null || dso.getType() == Constants.COMMUNITY || dso.getType() == Constants.COLLECTION) {
+        	statsNewByCollection = getNewItemsByCollection(context, dso, startDate, endDate);
+        	statsNewByType = getNewItemsByType(context, dso, startDate, endDate);
+        	statsItemCount = getItemCounts(context, dso, endDate);
+        }
         
         request.setAttribute("handle", handle);
-        request.setAttribute("title", dso.getName());
+        if (dso != null) {
+        	log.info("Setting title to dso name");
+        	request.setAttribute("title", dso.getName());
+        }
+        else if (author != null && !"".equals(author)) {
+        	log.info("Setting title to author name");
+        	request.setAttribute("title", author);
+        }
+        else {
+        	log.info("Setting title to whole of repo");
+        	request.setAttribute("title", "Whole of Repository");
+        }
         request.setAttribute("statsVisits", statsVisits);
         request.setAttribute("statsMonthlyVisits", statsMonthlyVisits);
         request.setAttribute("statsCountryVisits",statsCountryVisits);
+        request.setAttribute("statsTopAuthors", statsTopAuthors);
         request.setAttribute("statsTopDownloads", statsTopDownloads);
+        request.setAttribute("statsTopItems", statsTopItems);
+        request.setAttribute("statsTopCollections", statsTopCollections);
         request.setAttribute("statsReferralSources", statsReferralSources);
+        request.setAttribute("statsNewByCollection", statsNewByCollection);
+        request.setAttribute("statsNewByType", statsNewByType);
+        request.setAttribute("statsItemCount", statsItemCount);
         request.setAttribute("isItem", isItem);
 
         JSPManager.showJSP(request, response, "display-statistics.jsp");
         
     }
-
     
-    private StatisticsBean getTopDownloadsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges) {
+    private StatisticsBean getExportBean(Context context, String section, DSpaceObject dso, String author
+    		, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
+    	StatisticsBean exportBean = null;
+		if ("statsMonthlyVisits".equals(section)) {
+			exportBean = getMonthlyVisits(context, dso, startDate, endDate, ipRanges, author);
+		}
+		else if ("statsCountryVisits".equals(section)) {
+			exportBean = getCountryVisits(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
+		}
+		else if ("statsTopDownloads".equals(section)) {
+			exportBean = getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges, author);
+		}
+		else if ("statsReferralSources".equals(section)) {
+			exportBean = getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+		}
+		else if ("statsTopAuthors".equals(section)) {
+			exportBean = getTopAuthors(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+		}
+		else if ("statsTopDownloads".equals(section)) {
+			exportBean = getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges, author);
+		}
+		else if ("statsTopItems".equals(section)) {
+			exportBean = getTopItemsStatisticsBean(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
+		}
+		else if ("statsTopCollections".equals(section)) {
+			exportBean = getTopCollectionsStatisticsBean(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+		}
+		else if ("statsReferralSources".equals(section)) {
+			exportBean = getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+		}
+		else if ("statsNewByCollection".equals(section)) {
+			exportBean = getNewItemsByCollection(context, dso, startDate, endDate);
+		}
+		else if ("statsNewByType".equals(section)) {
+			exportBean = getNewItemsByType(context, dso, startDate, endDate);
+		}
+		else if ("statsItemCount".equals(section)) {
+			exportBean = getItemCounts(context, dso, endDate);
+		}
+    	
+		return exportBean;
+    }
+    
+    private StatisticsBean getTopDownloadsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate
+    		, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
+    	
 		try 
 		{
-			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataDownloads(dso));
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataDownloads(dso, author));
 			
 			statisticsTable.setTitle("File Downloads");
 			statisticsTable.setId("tab1");
@@ -251,6 +334,8 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				statsBean.setMatrix(matrix);
 				statsBean.setColLabels(colLabels);
 				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Top Downloads");
 			}
 		}
 		catch (Exception e)
@@ -263,12 +348,12 @@ public class DisplayStatisticsServlet extends DSpaceServlet
     	return statsBean;
     }
     
-    private StatisticsBean getMonthlyVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges) {
+    private StatisticsBean getMonthlyVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
 
 		try
 		{
-			StatisticsTable statisticsTable = new StatisticsTable(new StatisticsDataViews(dso));
+			StatisticsTable statisticsTable = new StatisticsTable(new StatisticsDataViews(dso, author));
 			
 			statisticsTable.setTitle("Total Visits Per Month");
 			statisticsTable.setId("tab1");
@@ -303,6 +388,8 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				statsBean.setMatrix(matrix);
 				statsBean.setColLabels(colLabels);
 				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Monthly Visits");
 			}
 		} catch (Exception e)
 		{
@@ -314,13 +401,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
     	return statsBean;
     }
     
-    private StatisticsBean getVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges) {
+    private StatisticsBean getVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
 
 		try
 		{
 			StatisticsListing statListing = new StatisticsListing(
-			                                new StatisticsDataViews(dso));
+			                                new StatisticsDataViews(dso, author));
 			
 			statListing.setTitle("Total Visits");
 			statListing.setId("list1");
@@ -357,6 +444,8 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				statsBean.setMatrix(matrix);
 				statsBean.setColLabels(colLabels);
 				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("OVerall Statistics");
 			}
 		} catch (Exception e)
 		{
@@ -368,13 +457,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
     	return statsBean;
     }
     
-    private StatisticsBean getCountryVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
+    private StatisticsBean getCountryVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author, int maxRows, int orderColumn) {
     	StatisticsBean statsBean = new StatisticsBean();
 
 		try
 		{
 		
-		StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataViews(dso));
+		StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataViews(dso, author));
 		
 		statisticsTable.setTitle("Top country views");
 		statisticsTable.setId("tab1");
@@ -412,6 +501,8 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			statsBean.setMatrix(matrix);
 			statsBean.setColLabels(colLabels);
 			statsBean.setRowLabels(rowLabels);
+			
+			statsBean.setName("Geographic Statistics");
 		}
 		}
 		catch (Exception e)
@@ -425,13 +516,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
     }
     
 
-    private StatisticsBean getReferralSources(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges) {
+    private StatisticsBean getReferralSources(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
 		StatisticsBean statsBean = new StatisticsBean();
 		try
 		{
-			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataReferralSources(dso));
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataReferralSources(dso, author));
 
-			statisticsTable.setTitle("Top country views");
+			statisticsTable.setTitle("Referral Sources");
 			statisticsTable.setId("tab1");
 			
 			DatasetViewGenerator typeAxis = new DatasetViewGenerator();
@@ -465,6 +556,8 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				statsBean.setMatrix(matrix);
 				statsBean.setColLabels(colLabels);
 				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Referral Sources");
 			}
 		}
 		catch (Exception e)
@@ -475,6 +568,312 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 					+ " and handle: " + dso.getHandle(), e);
 		}
 		return statsBean;
+    }
+    
+    private StatisticsBean getTopItemsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author, int maxRows, int orderColumn) {
+    	StatisticsBean statsBean = new StatisticsBean();
+    	log.info("Start retrieving top collections");
+
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataTopObject(dso, author));
+			
+			statisticsTable.setTitle("Top country views");
+			statisticsTable.setId("tab1");
+			
+			DatasetViewGenerator typeAxis = new DatasetViewGenerator();
+			typeAxis.setType("id");
+			typeAxis.setShowFileDownloads(Boolean.TRUE);
+			typeAxis.setMax(maxRows);
+			typeAxis.setIpRange(ipRanges);
+			typeAxis.setFilterType(Constants.ITEM);
+			typeAxis.setOrderColumn(orderColumn);
+			statisticsTable.addDatasetGenerator(typeAxis);
+			
+			if (startDate != null) {
+				StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+				dateFilter.setStartDate(startDate);
+				dateFilter.setEndDate(endDate);
+				statisticsTable.addFilter(dateFilter);
+			}
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Top Items");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	log.info("End retrieving top collections");
+    	
+		return statsBean;
+    }
+    
+    private StatisticsBean getTopCollectionsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
+    	StatisticsBean statsBean = new StatisticsBean();
+    	log.info("Start retrieving top collections");
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataTopObject(dso));
+			
+			statisticsTable.setTitle("Top collection views");
+			statisticsTable.setId("tab1");
+			
+			DatasetViewGenerator typeAxis = new DatasetViewGenerator();
+			typeAxis.setType("id");
+			typeAxis.setShowFileDownloads(Boolean.TRUE);
+			typeAxis.setMax(maxRows);
+			typeAxis.setIpRange(ipRanges);
+			typeAxis.setFilterType(Constants.COLLECTION);
+			typeAxis.setOrderColumn(orderColumn);
+			statisticsTable.addDatasetGenerator(typeAxis);
+			
+			if (startDate != null) {
+				StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+				dateFilter.setStartDate(startDate);
+				dateFilter.setEndDate(endDate);
+				statisticsTable.addFilter(dateFilter);
+			}
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Top Collections");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	log.info("End retrieving top collections");
+    	
+		return statsBean;
+    }
+    
+    private StatisticsBean getTopAuthors(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
+    	StatisticsBean statsBean = new StatisticsBean();
+
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataViews(dso));
+			
+			statisticsTable.setTitle("Top country views");
+			statisticsTable.setId("tab1");
+			
+			DatasetViewGenerator typeAxis = new DatasetViewGenerator();
+			typeAxis.setType("author");
+			typeAxis.setShowFileDownloads(Boolean.TRUE);
+			typeAxis.setMax(maxRows);
+			typeAxis.setIpRange(ipRanges);
+			typeAxis.setOrderColumn(orderColumn);
+			statisticsTable.addDatasetGenerator(typeAxis);
+			
+			if (startDate != null) {
+				StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+				dateFilter.setStartDate(startDate);
+				dateFilter.setEndDate(endDate);
+				statisticsTable.addFilter(dateFilter);
+			}
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Top Authors");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	return statsBean;
+    }
+    
+    private StatisticsBean getNewItemsByCollection(Context context, DSpaceObject dso, Date startDate, Date endDate) {
+    	StatisticsBean statsBean = new StatisticsBean();
+
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataArchive(dso));
+
+			DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
+			//dsoAxis.addDsoChild(type, max, separate, nameLength);
+			statisticsTable.addDatasetGenerator(dsoAxis);
+			
+			if (startDate != null) {
+				StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+				dateFilter.setStartDate(startDate);
+				dateFilter.setEndDate(endDate);
+				statisticsTable.addFilter(dateFilter);
+			}
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("New Items By Collection");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	return statsBean;
+    }
+
+    private StatisticsBean getNewItemsByType(Context context, DSpaceObject dso, Date startDate, Date endDate) {
+    	StatisticsBean statsBean = new StatisticsBean();
+
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataAccessionedByType(dso, startDate, endDate));
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("New Items By Type");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	return statsBean;
+    }
+
+    private StatisticsBean getItemCounts(Context context, DSpaceObject dso, Date endDate) {
+    	StatisticsBean statsBean = new StatisticsBean();
+
+		try
+		{
+			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataItemCount(dso, endDate));
+			
+			Dataset dataset = statisticsTable.getDataset(context);
+			
+			dataset = statisticsTable.getDataset();
+			
+			if (dataset == null)
+			{
+				dataset = statisticsTable.getDataset(context);
+			}
+			
+			if (dataset != null)
+			{
+				String[][] matrix = dataset.getMatrix();
+				List<String> colLabels = dataset.getColLabels();
+				List<String> rowLabels = dataset.getRowLabels();
+				
+				statsBean.setMatrix(matrix);
+				statsBean.setColLabels(colLabels);
+				statsBean.setRowLabels(rowLabels);
+				
+				statsBean.setName("Item Counts");
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(
+				"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+		}
+    	return statsBean;
     }
 
 }

@@ -35,25 +35,17 @@ public class StatisticsDataReferralSources extends StatisticsData {
     	Pattern containsPattern = Pattern.compile("source\\.(.*)\\.contains");
 		for (Object key : properties.keySet()) {
 			String source = (String) key;
-			/*if (source.startsWith("source.") && source.endsWith("title")) {
-				//sources.add(source);
-				source = source.replace("^source.", "");
-				source = source.replace(".title$","");
-				add(source);
-			}*/
 			Matcher matcher = containsPattern.matcher(source);
 			if (matcher.matches()) {
-				log.info("Number of matches: " + matcher.groupCount() + ", Group 0: " + matcher.group(0) + ", Group 1: " + matcher.group(1));
 				String matched = matcher.group(1);
 				add(matched);
 			}
-			//if ()
 		}
-    	
     }};
     
 
     private DSpaceObject currentDso;
+    private String currentAuthor;
     
 
     private String ipRanges = null;
@@ -62,6 +54,13 @@ public class StatisticsDataReferralSources extends StatisticsData {
 	{
 		super();
 		this.currentDso = dso;
+	}
+
+	public StatisticsDataReferralSources(DSpaceObject dso, String author)
+	{
+		super();
+		this.currentDso = dso;
+		this.currentAuthor = author;
 	}
 	
 	@Override
@@ -140,6 +139,10 @@ public class StatisticsDataReferralSources extends StatisticsData {
 		//Only use the view type and make sure old data (where no view type is present) is also supported
 		//Solr doesn't explicitly apply boolean logic, so this query cannot be simplified to an OR query
 		filterQuery += "-(statistics_type:[* TO *] AND -statistics_type:" + SolrLogger.StatisticsType.VIEW.text() + ")";
+
+		if (currentAuthor != null && !"".equals(currentAuthor)) {
+			filterQuery += " AND author:\""+currentAuthor+"\"";
+		}
 		
 		Dataset dataset = new Dataset(0,0);
 
@@ -181,7 +184,6 @@ public class StatisticsDataReferralSources extends StatisticsData {
 			}
 			
 			String type = viewGenerator.getType() == null ? "statistics_type" : viewGenerator.getType();
-			//Map<String, Long[]> viewsMap = new HashMap<String, Long[]>();
 			Map<String, Long[]> viewsMap = new TreeMap<String, Long[]>();
 			
 			int sourceCount = 0;
@@ -195,10 +197,8 @@ public class StatisticsDataReferralSources extends StatisticsData {
 			}
 			else {
 				viewTypeFilter = " AND (type:2 OR type:3 OR type:4)";
-				downloadTypeFilter = " AND (type:0)";
+				downloadTypeFilter = " AND owningItem:* AND type:0";
 			}
-			
-			
 			
 			int numCols = 1;
 			if (viewGenerator.isShowFileDownloads()) {
@@ -210,13 +210,7 @@ public class StatisticsDataReferralSources extends StatisticsData {
 				
 				String containsStr = "source."+source+".contains";
 				String sourceFilters = properties.getProperty(containsStr);
-				log.info("Contains String: "+containsStr);
-				//String sourceFilters = properties.getProperty("source."+source+".contains");
-				String titleStr = "source."+source+".title";
-				log.info("Title String: " + titleStr);
 				String sourceTitle = properties.getProperty("source."+source+".title");
-				//String sourceTitle = properties.getProperty("source."+source+".title");
-				log.info("Source filters: "+sourceFilters);
 				
 				String[] sourceReferrers = sourceFilters.split(", ");
 				StringBuilder referrerBuilder = new StringBuilder();
@@ -280,8 +274,6 @@ public class StatisticsDataReferralSources extends StatisticsData {
 				counts[1] = 0L;
 			}
 			viewsMap.put("Other", counts);
-			
-			log.info("Number of rows in map: "+viewsMap.size());
 			
 			dataset = new Dataset(viewsMap.size(), numCols);
 			dataset.setColLabel(0, "Views");

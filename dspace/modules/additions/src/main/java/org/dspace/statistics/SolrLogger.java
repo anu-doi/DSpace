@@ -221,10 +221,21 @@ public class SolrLogger
                 for (Bundle bundle : bundles) {
                     doc1.addField("bundleName", bundle.getName());
                 }
+                Item item = (Item) bit.getParentObject();
+                DCValue[] authors = item.getMetadata("dc", "contributor", "author", Item.ANY);
+                for (DCValue author : authors) {
+                	doc1.addField("author", author.value);
+                }
+            }
+            else if (dspaceObject instanceof Item) {
+            	Item item = (Item) dspaceObject;
+                DCValue[] authors = item.getMetadata("dc", "contributor", "author", Item.ANY);
+                for (DCValue author : authors) {
+                	doc1.addField("author", author.value);
+                }
             }
 
             doc1.addField("statistics_type", StatisticsType.VIEW.text());
-
 
             solr.add(doc1);
             //commits are executed automatically using the solr autocommit
@@ -258,7 +269,19 @@ public class SolrLogger
 				for (Bundle bundle : bundles) {
 					doc1.addField("bundleName", bundle.getName());
 				}
+                Item item = (Item) bit.getParentObject();
+                DCValue[] authors = item.getMetadata("dc", "contributor", "author", Item.ANY);
+                for (DCValue author : authors) {
+                	doc1.addField("author", author.value);
+                }
 			}
+            else if (dspaceObject instanceof Item) {
+            	Item item = (Item) dspaceObject;
+                DCValue[] authors = item.getMetadata("dc", "contributor", "author", Item.ANY);
+                for (DCValue author : authors) {
+                	doc1.addField("author", author.value);
+                }
+            }
 
 			doc1.addField("statistics_type", StatisticsType.VIEW.text());
 
