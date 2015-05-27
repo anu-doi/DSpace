@@ -40,6 +40,13 @@
    <name-map collection-handle="1885/12544" form-name="ANU_Oral_Histories" />
    
    <name-map collection-handle="1885/13120" form-name="ANU_Symposium" />
+   
+   <!-- ANU Research > ANU Open Access Research > ANU 3MT -->
+   <name-map collection-handle="1885/13600" form-name="ANU_Research" />
+   
+   <!-- ANU Research > ANU Open Access Research > Australian National Internships Program - Reports -->
+   <name-map collection-handle="1885/13618" form-name="ANU_Research" />
+   
  </form-map>
 
 
