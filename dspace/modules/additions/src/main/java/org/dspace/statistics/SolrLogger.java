@@ -69,7 +69,7 @@ public class SolrLogger
 {
     private static final Logger log = Logger.getLogger(SolrLogger.class);
 	
-    private static final HttpSolrServer solr;
+    public static final HttpSolrServer solr;
 
     public static final String DATE_FORMAT_8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
