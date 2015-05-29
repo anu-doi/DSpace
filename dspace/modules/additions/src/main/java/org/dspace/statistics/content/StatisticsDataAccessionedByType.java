@@ -156,20 +156,16 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		}
 		query.append(" order by Type");
 		
-		log.info("Query String: "+query.toString());
+		log.debug("Query String: "+query.toString());
 		
 		return query.toString();
 	}
 	
 	private Set<Integer> getCollectionIDs(Community community) throws SQLException {
 		Set<Integer> ids = new HashSet<Integer>();
-		Community[] subCommunities = community.getSubcommunities();
-		for (Community comm : subCommunities) {
-			ids.addAll(getCollectionIDs(comm));
-			Collection[] collections = comm.getCollections();
-			for (Collection coll : collections) {
-				ids.add(coll.getID());
-			}
+		Collection[] allCollections = community.getAllCollections();
+		for (Collection iColl : allCollections) {
+			ids.add(iColl.getID());
 		}
 		return ids;
 	}
