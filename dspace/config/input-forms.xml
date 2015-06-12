@@ -36,6 +36,9 @@
    <name-map collection-handle="1885/12555" form-name="ANU_Research" />
    <name-map collection-handle="1885/12556" form-name="ANU_Research" />
    <name-map collection-handle="1885/13130" form-name="ANU_Research" />
+   
+   <name-map collection-handle="1885/13600" form-name="ANU_Research" />
+   <name-map collection-handle="1885/13618" form-name="ANU_Research" />
 
    <name-map collection-handle="1885/12544" form-name="ANU_Oral_Histories" />
    
@@ -286,7 +289,7 @@
          <dc-qualifier></dc-qualifier>
          <repeatable>true</repeatable>
          <label>Associated Rights (eg link to Sherpa/Romeo entry)</label>
-         <input-type>onebox</input-type>
+         <input-type>textarea</input-type>
          <hint>Enter the associated rights</hint>
          <required></required>
        </field>
@@ -1323,6 +1326,14 @@
        <displayed-value>Thesis (PhD)</displayed-value>
        <stored-value>Thesis (PhD)</stored-value>
      </pair>
+	 <pair>
+	   <displayed-value>Theses (Honours)</displayed-value>
+	   <stored-value>Thesis (Honours)</stored-value>
+	 </pair>
+	 <pair>
+	   <displayed-value>Thesis (Honours non-ANU)</displayed-value>
+	   <stored-value>Thesis (Honours non-ANU)</stored-value>
+	 </pair>
      <pair>
        <displayed-value>Thesis (MPhil)</displayed-value>
        <stored-value>Thesis (MPhil)</stored-value>
@@ -1330,6 +1341,10 @@
      <pair>
        <displayed-value>Thesis (Masters)</displayed-value>
        <stored-value>Thesis (Masters)</stored-value>
+     </pair>
+     <pair>
+     	<displayed-value>Thesis (Masters sub-thesis)</displayed-value>
+     	<stored-value>Thesis (Masters sub-thesis)</stored-value>
      </pair>
      <pair>
        <displayed-value>Thesis (SJD)</displayed-value>
