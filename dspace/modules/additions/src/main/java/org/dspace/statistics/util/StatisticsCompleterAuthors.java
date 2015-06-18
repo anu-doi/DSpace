@@ -164,7 +164,7 @@ public class StatisticsCompleterAuthors {
 						solrEntryAuthors.add((String) iValue);
 					}
 				} else {
-					solrEntryAuthors = new HashSet<String>();
+					solrEntryAuthors = new HashSet<String>(0);
 				}
 
 				boolean requiresUpdate = false;
