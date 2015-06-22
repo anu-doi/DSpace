@@ -210,6 +210,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsCountryVisits" />
 	</c:url>
@@ -242,6 +246,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsTopAuthors" />
 	</c:url>
@@ -277,6 +285,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsTopItems" />
 	</c:url>
@@ -309,6 +321,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsTopCollections" />
 	</c:url>
@@ -341,6 +357,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsTopDownloads" />
 	</c:url>
@@ -369,6 +389,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsReferralSources" />
 	</c:url>
@@ -400,6 +424,10 @@ IP Ranges
 	<c:param name="eDay" value="${param.eDay}" />
 	<c:param name="eMonth" value="${param.eMonth}" />
 	<c:param name="eYear" value="${param.eYear}" />
+	<c:param name="ipRanges" value="${param.ipRanges}" />
+	<c:param name="orderGeo" value="${param.orderGeo}"/>
+	<c:param name="author" value="${param.author}"/>
+	<c:param name="limit" value="${param.limit}"/>
 	<c:param name="format" value="csv" />
 	<c:param name="section" value="statsMonthlyVisits" />
 </c:url>
@@ -432,8 +460,12 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
-		<c:param name="section" value="statsTopDownloads" />
+		<c:param name="section" value="statsNewByCollection" />
 	</c:url>
 	<h2><fmt:message key="jsp.statistics.heading.newbycollection"/> <a href="${newByCollUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
 	<table class="statsTable">
@@ -461,6 +493,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsNewByType" />
 	</c:url>
@@ -492,6 +528,10 @@ IP Ranges
 		<c:param name="eDay" value="${param.eDay}" />
 		<c:param name="eMonth" value="${param.eMonth}" />
 		<c:param name="eYear" value="${param.eYear}" />
+		<c:param name="ipRanges" value="${param.ipRanges}" />
+		<c:param name="orderGeo" value="${param.orderGeo}"/>
+		<c:param name="author" value="${param.author}"/>
+		<c:param name="limit" value="${param.limit}"/>
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsItemCount" />
 	</c:url>

@@ -103,8 +103,6 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		query.append(" from metadataschemaregistry msr");
 		query.append(" , metadatafieldregistry mfr1");
 		query.append(" , metadatavalue mv1");
-		query.append(" , metadatafieldregistry mfr2");
-		query.append(" , metadatavalue mv2");
 		/*if (resourceType == Constants.COLLECTION || resourceType == Constants.COMMUNITY) {
 			query.append(" , item i");
 		}*/
@@ -113,7 +111,11 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		query.append(" and mfr1.element = 'type'");
 		query.append(" and mfr1.qualifier is null");
 		query.append(" and mv1.metadata_field_id = mfr1.metadata_field_id");
-		query.append(" and mfr2.metadata_schema_id = msr.metadata_schema_id");
+		
+		query.append(" and exists (select 1");
+		query.append(" from metadatafieldregistry mfr2");
+		query.append(" , metadatavalue mv2");
+		query.append(" where mfr2.metadata_schema_id = msr.metadata_schema_id");
 		query.append(" and mfr2.element = 'date'");
 		query.append(" and mfr2.qualifier = 'accessioned'");
 		query.append(" and mv2.item_id = mv1.item_id");
@@ -122,6 +124,8 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 			query.append(" and mv2.text_value > ?");
 			query.append(" and mv2.text_value < ?");
 		}
+		query.append(")");
+		
 		if (currentDso != null) {
 			if (currentDso.getType() == Constants.COLLECTION) {
 				//query.append(" and exists (select 1 from collection2item c2i where c2i.collection_id = ? and c2i.item_id = mv1.item_id)");
