@@ -38,7 +38,16 @@ public class StatisticsCompleterBundleNames {
 		try {
 			initContext();
 			iterateAllBitstreams();
+			System.out.print("Committing changes to Solr... ");
+			SolrLogger.solr.commit();
+			System.out.println(" done.");
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SolrServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -71,7 +80,7 @@ public class StatisticsCompleterBundleNames {
 		try {
 			System.out.println("Retrieving list of bitstreams and bundles they belong to...");
 			bitstreams = getBitstreamsAndBundles();
-			System.out.println("Retrieved " + bitstreams.size() + "bitstream IDs");
+			System.out.println("Retrieved " + bitstreams.size() + " bitstream IDs");
 		} catch (SQLException e) {
 			System.out.println();
 			System.out.println("Error retrieving bitstream list.");
