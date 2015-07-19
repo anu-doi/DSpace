@@ -455,6 +455,11 @@
       <servlet-name>gallery</servlet-name>
       <servlet-class>org.dspace.app.webui.servlet.PopulateGalleryServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+      <servlet-name>exportreference</servlet-name>
+      <servlet-class>org.dspace.app.webui.servlet.ReferenceExportServlet</servlet-class>
+  </servlet>
 
   <!-- shibbolized dspace -->
   <servlet>
@@ -725,9 +730,15 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>statistics</servlet-name>
+    <servlet-name>displaystats</servlet-name>
     <url-pattern>/statistics</url-pattern>
   </servlet-mapping>
+  
+
+  <!-- <servlet-mapping>
+    <servlet-name>statistics</servlet-name>
+    <url-pattern>/statistics</url-pattern>
+  </servlet-mapping> -->
 
   <servlet-mapping>
     <servlet-name>submit</servlet-name>
@@ -822,6 +833,11 @@
   <servlet-mapping>
       <servlet-name>gallery</servlet-name>
       <url-pattern>/browse/gallery</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>exportreference</servlet-name>
+  	<url-pattern>/exportreference</url-pattern>
   </servlet-mapping>
   
   <!-- Icon MIME type -->

@@ -425,7 +425,7 @@
 <%
 	}
 %>
-<p class="center"><a class="statisticsLink btn btn-info" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a></p>
+<p class="center"><a class="statisticsLink btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/statistics"><fmt:message key="jsp.collection-home.display-statistics"/></a></p>
       
     <%= sidebar %>
 </anu:content>

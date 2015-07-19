@@ -29,7 +29,7 @@
 		<property name="fullNameMatadata" value="schema.element.qualifier" /> 
 		
 	-->	
-		<property name="emailMetadata" value="local.request.email" />
+		<property name="emailMetadata" value="local.contributor.authoremail" />
 		<property name="fullNameMatadata" value="local.request.name" />
 	</bean>
 

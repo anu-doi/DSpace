@@ -327,7 +327,9 @@
    <field name="actor" type="integer" indexed="true" stored="true" required="false" />
    <field name="workflowItemId" type="integer" indexed="true" stored="true" required="false" />
 
-
+   <!--  GT Added -->
+   <field name="author" type="string" indexed="true" stored="true" required="false" multiValued="true" />
+   <!-- End GT Added -->
  </fields>
 
  <uniqueKey>uid</uniqueKey>
