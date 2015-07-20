@@ -10,6 +10,9 @@
 # static-216-135.grapevine.transact.net.au
 121.127.216.135
 
+# 122.99.95.231.static.transact.net.au
+122.99.95.231
+
 # funnelback-nat1.squiz.net
 103.15.168.226
 
