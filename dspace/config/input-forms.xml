@@ -1334,7 +1334,7 @@
        <stored-value>Thesis (PhD)</stored-value>
      </pair>
 	 <pair>
-	   <displayed-value>Theses (Honours)</displayed-value>
+	   <displayed-value>Thesis (Honours)</displayed-value>
 	   <stored-value>Thesis (Honours)</stored-value>
 	 </pair>
 	 <pair>
@@ -1433,6 +1433,11 @@
         <pair>
         <displayed-value>Newspaper/magazine article</displayed-value>
         <stored-value>Newspaper/magazine article</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Presentation</displayed-value>
+        <stored-value>Presentation</stored-value>
         </pair>
 
         <pair>
