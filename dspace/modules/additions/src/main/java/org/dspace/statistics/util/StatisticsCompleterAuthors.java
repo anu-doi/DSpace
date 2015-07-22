@@ -6,6 +6,7 @@ package org.dspace.statistics.util;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
@@ -16,6 +17,7 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
 import org.dspace.content.DCValue;
 import org.dspace.content.DSpaceObject;
@@ -127,7 +129,7 @@ public class StatisticsCompleterAuthors {
 		try {
 			while (i.hasNext() && nProcessed < max2Process) {
 				Item iItem = i.next();
-				if (iItem.getType() == Constants.ITEM) {
+				if (iItem != null && iItem.getType() == Constants.ITEM) {
 					processItem(iItem);
 				}
 			}
@@ -138,8 +140,7 @@ public class StatisticsCompleterAuthors {
 		}
 	}
 
-	private static void processItem(Item item) throws IOException,
-			SolrServerException {
+	private static void processItem(Item item) throws IOException, SolrServerException {
 		String handle = item.getHandle();
 		DCValue[] values = item.getMetadata("dc.contributor.author");
 		final Set<String> metadataAuthors = new HashSet<String>(values.length);
@@ -190,10 +191,27 @@ public class StatisticsCompleterAuthors {
 				// totalEntries++;
 			}
 
+			@Override
+			public void process(List<SolrDocument> docs) throws IOException, SolrServerException {
+				for (SolrDocument doc : docs) {
+					try {
+						process(doc);
+					} catch (SolrServerException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SolrException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
 		};
 
-		/* query for ip, exclude results previously set as bots. */
-		processor.execute("owningItem:" + item.getID());
+		// process all solr entries for the item and bitstreams belonging to the item
+		processor.execute("(owningItem:" + Integer.toString(item.getID(), 10) + " AND type:"
+				+ Integer.toString(Constants.BITSTREAM, 10) + ") OR (id:" + Integer.toString(item.getID(), 10)
+				+ " AND type:" + Integer.toString(Constants.ITEM, 10) + ")");
 		nProcessed++;
 		print("done.", true);
 	}
