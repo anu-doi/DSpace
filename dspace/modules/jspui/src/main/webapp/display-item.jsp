@@ -264,6 +264,25 @@
     <a class="statisticsLink  btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
 	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a>
 	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a>
+	
+	<!-- Altmetric badge Start -->
+<%
+	String altmetricData = null;	
+	if (item.getMetadata("local.identifier.doi").length > 0) {
+		altmetricData = item.getMetadata("local.identifier.doi")[0].value;
+	}
+
+	if (altmetricData != null && altmetricData.length() > 0 ) {
+%>
+	
+	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+	<div data-badge-details="right" data-badge-type="donut" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed doublewide"></div>
+	
+<%
+	}
+%>
+	<!-- Altmetric badge End -->
+	
     <%-- SFX Link --%>
 <%
     if (ConfigurationManager.getProperty("sfx.server.url") != null)
