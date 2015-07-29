@@ -871,5 +871,8 @@ body.modal-open,
     border-top-right-radius: 4px;
 }
 .lb-data a {
-	color: #FFFFFF
+	color: #FFFFFF;
+}
+div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
+	width: 50%;
 }
