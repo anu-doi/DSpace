@@ -5,6 +5,7 @@ package org.dspace.statistics.util;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,6 +48,8 @@ public class StatisticsCompleterAuthors {
 	private static String identifier;
 
 	private static Context c;
+	
+	private static int curYear = Calendar.getInstance().get(Calendar.YEAR);
 	
 	public static void main(String[] args) throws Exception {
 		CommandLineParser parser = new PosixParser();
@@ -112,12 +115,12 @@ public class StatisticsCompleterAuthors {
 		DSpaceObject dso = HandleManager.resolveToObject(c, identifier);
 
 		if (dso == null) {
-			throw new IllegalArgumentException("Cannot resolve " + identifier + " to a DSpace object");
+			throw new IllegalArgumentException(String.format("Cannot resolve %s to a DSpace object", identifier));
 		}
 
 		if (dso.getType() != Constants.ITEM) {
-			throw new IllegalArgumentException(identifier + " is a " + dso.getTypeText() + ". Only "
-					+ Constants.ITEM + " accepted.");
+			throw new IllegalArgumentException(
+					String.format("%s is a %s. Only Items accepted. ", identifier, dso.getTypeText()));
 		}
 		return (Item) dso;
 	}
@@ -148,8 +151,8 @@ public class StatisticsCompleterAuthors {
 			metadataAuthors.add(iValue.value);
 		}
 
-		print("Processing item " + handle + " (" + item.getID() + ") with " + values.length + " authors "
-				+ metadataAuthors.toString() + "... ", false);
+		print(String.format("Processing item %d [handle=%s;id=%s] %d authors %s... ", nProcessed + 1, handle,
+				item.getID(), values.length, metadataAuthors), false);
 
 		/* Result Process to alter record to be identified as a bot */
 		ResultProcessor processor = new ResultProcessor() {
@@ -208,10 +211,21 @@ public class StatisticsCompleterAuthors {
 
 		};
 
-		// process all solr entries for the item and bitstreams belonging to the item
-		processor.execute("(owningItem:" + Integer.toString(item.getID(), 10) + " AND type:"
-				+ Integer.toString(Constants.BITSTREAM, 10) + ") OR (id:" + Integer.toString(item.getID(), 10)
-				+ " AND type:" + Integer.toString(Constants.ITEM, 10) + ")");
+		// process all solr entries for the item and bitstreams belonging to the
+		// item
+		for (int iYear = curYear; iYear >= 2011; iYear--) {
+			for (int iMonth = 1; iMonth <= 12; iMonth++) {
+				// can use 31 for months with less than 31 days
+				String timeRange = String.format("[%d-%02d-01T00:00:00Z TO %d-%02d-31T23:59:59Z]", iYear, iMonth, iYear,
+						iMonth);
+				processor.execute(String.format("owningItem:%d AND type:%d AND time:%s AND -isBot:true", item.getID(),
+						Constants.BITSTREAM, timeRange));
+				// processor.commit();
+				processor.execute(String.format("id:%d AND type:%d AND time:%s AND -isBot:true", item.getID(),
+						Constants.ITEM, timeRange));
+				processor.commit();
+			}
+		}
 		nProcessed++;
 		print("done.", true);
 	}
