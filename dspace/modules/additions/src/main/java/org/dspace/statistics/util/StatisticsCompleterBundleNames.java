@@ -20,6 +20,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrInputDocument;
+import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.statistics.SolrLogger;
 import org.dspace.statistics.SolrLogger.ResultProcessor;
@@ -30,6 +31,7 @@ import org.dspace.statistics.SolrLogger.ResultProcessor;
  */
 public class StatisticsCompleterBundleNames {
 
+	private static final String BUNDLE_NAME_FIELD = "bundleName";
 	private static Context c;
 	private static boolean abort = false;
 	private static boolean failFast = true;
@@ -42,13 +44,10 @@ public class StatisticsCompleterBundleNames {
 			SolrLogger.solr.commit();
 			System.out.println(" done.");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SolrServerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// shutdown connection to solr instance
@@ -80,7 +79,7 @@ public class StatisticsCompleterBundleNames {
 		try {
 			System.out.println("Retrieving list of bitstreams and bundles they belong to...");
 			bitstreams = getBitstreamsAndBundles();
-			System.out.println("Retrieved " + bitstreams.size() + " bitstream IDs");
+			System.out.println(String.format("Retrieved %d bitstream IDs", bitstreams.size()));
 		} catch (SQLException e) {
 			System.out.println();
 			System.out.println("Error retrieving bitstream list.");
@@ -88,13 +87,15 @@ public class StatisticsCompleterBundleNames {
 		}
 
 		if (bitstreams != null) {
+			int nCompleted = 0;
 			for (Entry<Integer, Set<String>> iBs : bitstreams.entrySet()) {
 				if (abort) {
 					break;
 				}
 
 				try {
-					System.out.print("Processing " + String.valueOf(iBs.getKey()) + " " + iBs.getValue() + "...");
+					System.out.format("Processing #%d/%d %d %s...", nCompleted + 1, bitstreams.size(), iBs.getKey(),
+							iBs.getValue());
 					updateStatsForBitstream(iBs.getKey(), iBs.getValue());
 					System.out.println(" done");
 				} catch (SolrServerException e) {
@@ -109,11 +110,20 @@ public class StatisticsCompleterBundleNames {
 					if (failFast) {
 						break;
 					}
+				} finally {
+					nCompleted++;
 				}
 			}
 		}
 	}
 
+	/**
+	 * Gets all bitstreams and the bundles they belong to
+	 * 
+	 * @return A Map with IDs of all bitstreams with the bundle(s) they belong
+	 *         to as their values
+	 * @throws SQLException
+	 */
 	private static Map<Integer, Set<String>> getBitstreamsAndBundles() throws SQLException {
 		Connection dbConnection = c.getDBConnection();
 		Statement statement = dbConnection.createStatement();
@@ -135,12 +145,23 @@ public class StatisticsCompleterBundleNames {
 		return bitstreams;
 	}
 
+	/**
+	 * Updates all statistics entry for a specified bitstream by adding bundle
+	 * names to the field bundleName, if not already present
+	 * 
+	 * @param bitstreamId
+	 *            Bitstream ID whose statistics entry to update
+	 * @param bundles
+	 *            Set of bundles the bitstream belongs to
+	 * @throws SolrServerException
+	 * @throws IOException
+	 */
 	private static void updateStatsForBitstream(final int bitstreamId, final Set<String> bundles)
 			throws SolrServerException, IOException {
 		ResultProcessor processor = new ResultProcessor() {
 			@Override
 			public void process(SolrDocument doc) throws IOException, SolrServerException {
-				Collection<Object> solrDocFieldValues = doc.getFieldValues("bundleName");
+				Collection<Object> solrDocFieldValues = doc.getFieldValues(BUNDLE_NAME_FIELD);
 				Set<String> solrEntryBundles;
 				// store bundle names in the solr doc in solrEntryBundles
 				if (solrDocFieldValues != null) {
@@ -168,14 +189,14 @@ public class StatisticsCompleterBundleNames {
 
 				// update the solr doc if an update's required
 				if (requiresUpdate) {
-					doc.removeFields("bundleName");
-					doc.addField("bundleName", bundles);
+					doc.removeFields(BUNDLE_NAME_FIELD);
+					doc.addField(BUNDLE_NAME_FIELD, bundles);
 					SolrInputDocument newInput = ClientUtils.toSolrInputDocument(doc);
 					SolrLogger.solr.add(newInput);
 				}
 			}
 		};
 
-		processor.execute("id:" + bitstreamId + " AND type:0");
+		processor.execute(String.format("id:%d AND type:%d AND -isBot:true", bitstreamId, Constants.BITSTREAM));
 	}
 }
