@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -39,15 +40,23 @@ public class StatisticsCompleterBundleNames {
 	public static void main(String[] args) {
 		try {
 			initContext();
-			iterateAllBitstreams();
-			System.out.print("Committing changes to Solr... ");
-			SolrLogger.solr.commit();
-			System.out.println(" done.");
+			Map<Integer, Set<String>> bitstreams = getBitstreamsAndBundles();
+			if (args.length == 0) {
+				// no args provided, update all bitstreams' solr entries
+				updateSolrEntriesWithBundleNames(bitstreams);
+			} else {
+				// update solr entries of bitstream IDs provided on the command line
+				Map<Integer, Set<String>> limitedBitstreams = new LinkedHashMap<Integer, Set<String>>(args.length);
+				for (String arg : args) {
+					int bitstreamId = Integer.parseInt(arg);
+					if (bitstreams.containsKey(bitstreamId)) {
+						limitedBitstreams.put(bitstreamId, bitstreams.get(bitstreamId));
+					}
+				}
+				updateSolrEntriesWithBundleNames(limitedBitstreams);
+			}
+			System.out.println("Finished");
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (SolrServerException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			// shutdown connection to solr instance
@@ -74,18 +83,7 @@ public class StatisticsCompleterBundleNames {
 		c = new Context(Context.READ_ONLY);
 	}
 
-	private static void iterateAllBitstreams() {
-		Map<Integer, Set<String>> bitstreams = null;
-		try {
-			System.out.println("Retrieving list of bitstreams and bundles they belong to...");
-			bitstreams = getBitstreamsAndBundles();
-			System.out.println(String.format("Retrieved %d bitstream IDs", bitstreams.size()));
-		} catch (SQLException e) {
-			System.out.println();
-			System.out.println("Error retrieving bitstream list.");
-			e.printStackTrace();
-		}
-
+	private static void updateSolrEntriesWithBundleNames(Map<Integer, Set<String>> bitstreams) {
 		if (bitstreams != null) {
 			int nCompleted = 0;
 			for (Entry<Integer, Set<String>> iBs : bitstreams.entrySet()) {
@@ -94,7 +92,7 @@ public class StatisticsCompleterBundleNames {
 				}
 
 				try {
-					System.out.format("Processing #%d/%d %d %s...", nCompleted + 1, bitstreams.size(), iBs.getKey(),
+					System.out.format("Processing #%,d/%,d id:%d %s...", nCompleted + 1, bitstreams.size(), iBs.getKey(),
 							iBs.getValue());
 					updateStatsForBitstream(iBs.getKey(), iBs.getValue());
 					System.out.println(" done");
@@ -125,6 +123,7 @@ public class StatisticsCompleterBundleNames {
 	 * @throws SQLException
 	 */
 	private static Map<Integer, Set<String>> getBitstreamsAndBundles() throws SQLException {
+		System.out.println("Retrieving list of bitstreams and bundles they belong to...");
 		Connection dbConnection = c.getDBConnection();
 		Statement statement = dbConnection.createStatement();
 		ResultSet resultSet = statement.executeQuery("SELECT bs.bitstream_id, bndl.name\r\n"
@@ -142,6 +141,7 @@ public class StatisticsCompleterBundleNames {
 				bitstreams.get(bitstreamId).add(bundleName);
 			}
 		}
+		System.out.println(String.format("Retrieved %,d bitstream IDs", bitstreams.size()));
 		return bitstreams;
 	}
 
@@ -198,5 +198,6 @@ public class StatisticsCompleterBundleNames {
 		};
 
 		processor.execute(String.format("id:%d AND type:%d AND -isBot:true", bitstreamId, Constants.BITSTREAM));
+		processor.commit();
 	}
 }
