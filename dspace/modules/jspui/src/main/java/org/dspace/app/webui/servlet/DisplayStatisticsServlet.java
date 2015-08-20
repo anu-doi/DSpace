@@ -754,6 +754,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 
 			DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 			//dsoAxis.addDsoChild(type, max, separate, nameLength);
+			dsoAxis.setIncludeTotal(Boolean.TRUE);
 			statisticsTable.addDatasetGenerator(dsoAxis);
 			
 			if (startDate != null) {
