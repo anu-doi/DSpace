@@ -96,7 +96,8 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 			else {
 				viewQuery = "type:2";
 			}
-			ObjectCount[] viewResults = executeQuery(viewQuery, viewFilter, type, viewGenerator.getMax(), isShowTotal());
+			ObjectCount[] viewResults = executeQuery(viewQuery, viewFilter, type, viewGenerator.getMax(),
+					isShowTotal(), context);
 			resultsMap.put(colNum,  viewResults);
 			
 			if (viewGenerator.isShowFileDownloads()) {
@@ -112,7 +113,8 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 				String downloadType = getOwningType(viewGenerator.getFilterType());
 				//String downloadType = viewGenerator.getType() == null ? "statistics_type" : viewGenerator.getType();
 				
-				ObjectCount[] downloadResults = executeQuery(downloadQuery, downloadFilter, downloadType, viewGenerator.getMax(), isShowTotal());
+				ObjectCount[] downloadResults = executeQuery(downloadQuery, downloadFilter, downloadType,
+						viewGenerator.getMax(), isShowTotal(), context);
 
 				log.info("Number of download query results: "+downloadResults.length);
 				resultsMap.put(colNum, downloadResults);

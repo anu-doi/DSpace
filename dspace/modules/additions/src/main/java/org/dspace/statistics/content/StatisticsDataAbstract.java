@@ -154,9 +154,10 @@ public abstract class StatisticsDataAbstract extends StatisticsData {
 	}
 	
 	protected ObjectCount[] executeQuery(String query, String filterQuery, String facetField, int max
-			, boolean showTotal) throws SolrServerException {
+			, boolean showTotal, Context context) throws SolrServerException {
 		if (dateFacet != null) {
-			return SolrLogger.queryFacetDate(query, filterQuery, max, dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
+			return SolrLogger.queryFacetDate(query, filterQuery, max, dateFacet.getDateType(),
+					dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal, context);
 		}
 		else {
 			return SolrLogger.queryFacetField(query, filterQuery, facetField, max, showTotal, null);

@@ -9,9 +9,9 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.dspace.content.Bitstream;
 import org.dspace.content.Collection;
 import org.dspace.content.Community;
-import org.dspace.content.DCValue;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.statistics.Dataset;
@@ -135,7 +135,7 @@ public class StatisticsDataArchive extends StatisticsData {
 	            case Constants.ITEM:
 	                Item item = (Item) dso;
 	                name = "untitled";
-	                DCValue[] vals = item.getMetadata("dc", "title", null, Item.ANY);
+	                Metadatum[] vals = item.getMetadata("dc", "title", null, Item.ANY);
 	                if(vals != null && 0 < vals.length)
 	                {
 	                    name = vals[0].value;
