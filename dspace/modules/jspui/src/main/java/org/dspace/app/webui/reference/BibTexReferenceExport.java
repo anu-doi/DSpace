@@ -10,10 +10,10 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import org.dspace.content.DCValue;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.ItemIterator;
+import org.dspace.content.Metadatum;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.jbibtex.BibTeXDatabase;
@@ -72,7 +72,7 @@ public class BibTexReferenceExport extends ReferenceExport {
 	public BibTeXEntry getBibTeXEntry(Item item) {
 		Properties properties = ConfigurationManager.getProperties("bibtex-export");
 		String typeField = properties.getProperty("bibtex.type.field");
-		DCValue[] types = item.getMetadata(typeField);
+		Metadatum[] types = item.getMetadataByMetadataString(typeField);
 		if (types == null || types.length == 0) {
 			return null;
 		}
@@ -110,8 +110,8 @@ public class BibTexReferenceExport extends ReferenceExport {
 		StringBuilder bibtexFieldValue = new StringBuilder();
 		boolean firstValue = true;
 		for (String dspaceField : dspaceFieldArray) {
-			DCValue[] values = item.getMetadata(dspaceField);
-			for (DCValue value : values) {
+			Metadatum[] values = item.getMetadataByMetadataString(dspaceField);
+			for (Metadatum value : values) {
 				if (!firstValue) {
 					bibtexFieldValue.append(" and ");
 				}

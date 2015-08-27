@@ -40,7 +40,7 @@ import org.dspace.content.Bitstream;
 import org.dspace.content.Bundle;
 import org.dspace.content.Collection;
 import org.dspace.content.DCDate;
-import org.dspace.content.DCValue;
+import org.dspace.content.Metadatum;
 import org.dspace.content.Item;
 import org.dspace.content.authority.MetadataAuthorityManager;
 import org.dspace.core.ConfigurationManager;
@@ -463,7 +463,7 @@ public class ItemTag extends TagSupport
             }
 
             // FIXME: Still need to fix for metadata language?
-            DCValue[] values = item.getMetadata(schema, element, qualifier, Item.ANY);
+            Metadatum[] values = item.getMetadata(schema, element, qualifier, Item.ANY);
             
             boolean isScrollBar = false;
             if ("description".equals(element) && "abstract".equals(qualifier)) {
@@ -660,7 +660,7 @@ public class ItemTag extends TagSupport
         Context context = UIUtil.obtainContext(request);
 
         // Get all the metadata
-        DCValue[] values = item.getMetadata(Item.ANY, Item.ANY, Item.ANY, Item.ANY);
+        Metadatum[] values = item.getMetadata(Item.ANY, Item.ANY, Item.ANY, Item.ANY);
 
         out.println("<div class=\"panel panel-info\"><div class=\"panel-heading\">"
                 + LocaleSupport.getLocalizedMessage(pageContext,
@@ -996,6 +996,8 @@ public class ItemTag extends TagSupport
 
             						if (tb != null)
             						{
+                                                            if (AuthorizeManager.authorizeActionBoolean(context, tb, Constants.READ))
+                                                            {
             							String myPath = request.getContextPath()
                                             	+ "/retrieve/"
                                             	+ tb.getID()
@@ -1009,6 +1011,7 @@ public class ItemTag extends TagSupport
             							out.print("<img src=\"" + myPath + "\" ");
             							out.print("alt=\"" + tAltText
             									+ "\" /></a><br />");
+                                                            }
             						}
             					}
 
