@@ -210,7 +210,8 @@ public class StatisticsDataViews extends StatisticsData {
 				viewFilterQuery = viewFilterQuery + " AND NOT "+referrer;
 			}
 			if (dateFacet != null) {
-				viewResults = SolrLogger.queryFacetDate(viewQuery, viewFilterQuery, viewGenerator.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
+				viewResults = SolrLogger.queryFacetDate(viewQuery, viewFilterQuery, viewGenerator.getMax(),
+						dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal, context);
 			}
 			else {
 				viewResults = SolrLogger.queryFacetField(viewQuery, viewFilterQuery, type, viewGenerator.getMax(), showTotal, null);
@@ -224,10 +225,13 @@ public class StatisticsDataViews extends StatisticsData {
 				String fullViewFilterQuery = filterQuery + " AND " + referrer;
 				
 				if (dateFacet != null) {
-					fullViewResults = SolrLogger.queryFacetDate(viewQuery, fullViewFilterQuery, viewGenerator.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
+					fullViewResults = SolrLogger.queryFacetDate(viewQuery, fullViewFilterQuery, viewGenerator.getMax(),
+							dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal,
+							context);
 				}
 				else {
-					fullViewResults = SolrLogger.queryFacetField(viewQuery, fullViewFilterQuery, type, viewGenerator.getMax(), showTotal, null);
+					fullViewResults = SolrLogger.queryFacetField(viewQuery, fullViewFilterQuery, type,
+							viewGenerator.getMax(), showTotal, null);
 				}
 				resultsMap.put(colNum, fullViewResults);
 			}
@@ -246,10 +250,13 @@ public class StatisticsDataViews extends StatisticsData {
 				String downloadType = viewGenerator.getType() == null ? "statistics_type" : viewGenerator.getType();
 				
 				if (dateFacet != null) {
-					downloadResults = SolrLogger.queryFacetDate(downloadQuery, filterQuery, viewGenerator.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
+					downloadResults = SolrLogger.queryFacetDate(downloadQuery, filterQuery, viewGenerator.getMax(),
+							dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal,
+							context);
 				}
 				else {
-					downloadResults = SolrLogger.queryFacetField(downloadQuery, filterQuery, downloadType, viewGenerator.getMax(), showTotal, null);
+					downloadResults = SolrLogger.queryFacetField(downloadQuery, filterQuery, downloadType,
+							viewGenerator.getMax(), showTotal, null);
 				}
 				resultsMap.put(colNum, downloadResults);
 			}

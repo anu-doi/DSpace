@@ -20,10 +20,11 @@ import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrInputDocument;
-import org.dspace.content.DCValue;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
 import org.dspace.content.ItemIterator;
+import org.dspace.content.MetadataSchema;
+import org.dspace.content.Metadatum;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.handle.HandleManager;
@@ -145,9 +146,9 @@ public class StatisticsCompleterAuthors {
 
 	private static void processItem(Item item) throws IOException, SolrServerException {
 		String handle = item.getHandle();
-		DCValue[] values = item.getMetadata("dc.contributor.author");
+		Metadatum[] values = item.getMetadata(MetadataSchema.DC_SCHEMA, "contributor", "author", Item.ANY);
 		final Set<String> metadataAuthors = new HashSet<String>(values.length);
-		for (DCValue iValue : values) {
+		for (Metadatum iValue : values) {
 			metadataAuthors.add(iValue.value);
 		}
 

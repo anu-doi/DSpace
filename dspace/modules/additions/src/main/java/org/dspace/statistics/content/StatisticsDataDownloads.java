@@ -163,10 +163,12 @@ public class StatisticsDataDownloads extends StatisticsData {
 
 			ObjectCount[] downloadResults = null;
 			if (dateFacet != null) {
-				downloadResults = SolrLogger.queryFacetDate(downloadQuery, filterQuery, viewGenerator.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal);
+				downloadResults = SolrLogger.queryFacetDate(downloadQuery, filterQuery, viewGenerator.getMax(),
+						dateFacet.getDateType(), dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal, context);
 			}
 			else {
-				downloadResults = SolrLogger.queryFacetField(downloadQuery, filterQuery, downloadType, viewGenerator.getMax(), showTotal, null);
+				downloadResults = SolrLogger.queryFacetField(downloadQuery, filterQuery, downloadType,
+						viewGenerator.getMax(), showTotal, null);
 			}
 			
 			dataset = new Dataset(downloadResults.length, nrColumns);
