@@ -31,7 +31,7 @@
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page import="org.dspace.content.Collection" %>
-<%@ page import="org.dspace.content.DCValue" %>
+<%@ page import="org.dspace.content.Metadatum" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="org.dspace.handle.HandleManager" %>
@@ -46,7 +46,6 @@
 <%@page import="org.dspace.core.Constants"%>
 <%@page import="org.dspace.eperson.EPerson"%>
 <%@page import="org.dspace.versioning.VersionHistory"%>
-<%@page import="org.elasticsearch.common.trove.strategy.HashingStrategy"%>
 <%
     // Attributes
     Boolean displayAllBoolean = (Boolean) request.getAttribute("display.all");
@@ -76,7 +75,7 @@
 	}
 	else 
 	{
-		DCValue[] titleValue = item.getDC("title", null, Item.ANY);
+		Metadatum[] titleValue = item.getDC("title", null, Item.ANY);
 		if (titleValue.length != 0)
 		{
 			title = titleValue[0].value;
@@ -268,8 +267,8 @@
 	<!-- Altmetric badge Start -->
 <%
 	String altmetricData = null;	
-	if (item.getMetadata("local.identifier.doi").length > 0) {
-		altmetricData = item.getMetadata("local.identifier.doi")[0].value;
+	if (item.getMetadataByMetadataString("local.identifier.doi").length > 0) {
+		altmetricData = item.getMetadataByMetadataString("local.identifier.doi")[0].value;
 	}
 
 	if (altmetricData != null && altmetricData.length() > 0 ) {

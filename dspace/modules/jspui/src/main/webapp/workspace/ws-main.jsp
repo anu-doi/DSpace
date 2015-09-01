@@ -22,7 +22,7 @@
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
 <%@ page import="org.dspace.app.webui.servlet.MyDSpaceServlet" %>
-<%@ page import="org.dspace.content.DCValue" %>
+<%@ page import="org.dspace.content.Metadatum" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.content.WorkspaceItem" %>
 <%@ page import="org.dspace.eperson.EPerson" %>
@@ -35,7 +35,7 @@
         (WorkspaceItem) request.getAttribute("wsItem");
 
     // get the title and submitter of the item
-    DCValue[] titleArray =
+    Metadatum[] titleArray =
          workspaceItem.getItem().getDC("title", null, Item.ANY);
 //    String title = (titleArray.length > 0 ? titleArray[0].value : "Untitled");
     EPerson submitter = workspaceItem.getItem().getSubmitter();
