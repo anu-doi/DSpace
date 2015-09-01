@@ -44,7 +44,7 @@
 <%@ page import="org.dspace.content.DCLanguage" %>
 <%@ page import="org.dspace.content.DCPersonName" %>
 <%@ page import="org.dspace.content.DCSeriesNumber" %>
-<%@ page import="org.dspace.content.DCValue" %>
+<%@ page import="org.dspace.content.Metadatum" %>
 <%@ page import="org.dspace.content.Item" %>
 <%@ page import="org.dspace.content.authority.MetadataAuthorityManager" %>
 <%@ page import="org.dspace.content.authority.ChoiceAuthorityManager" %>
@@ -136,7 +136,7 @@
     StringBuffer doAuthority(PageContext pageContext, String fieldName,
             int idx, int fieldCount, String fieldInput, String authorityValue,
             int confidenceValue, boolean isName, boolean repeatable,
-            DCValue[] dcvs, StringBuffer inputBlock, int collectionID)
+            Metadatum[] dcvs, StringBuffer inputBlock, int collectionID)
     {
         MetadataAuthorityManager mam = MetadataAuthorityManager.getManager();
         ChoiceAuthorityManager cam = ChoiceAuthorityManager.getManager();
@@ -217,7 +217,7 @@
                 for (int i = 0; i < cs.values.length; ++i)
                 {
                     boolean selected = false;
-                    for (DCValue dcv : dcvs)
+                    for (Metadatum dcv : dcvs)
                     {
                         if (dcv.value.equals(cs.values[i].value))
                             selected = true;
@@ -262,7 +262,7 @@
     {
    	  String authorityType = getAuthorityType(pageContext, fieldName, collectionID);
     	
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer headers = new StringBuffer();
       StringBuffer sb = new StringBuffer();
@@ -375,7 +375,7 @@
       throws java.io.IOException
     {
 
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
       org.dspace.content.DCDate dateIssued;
@@ -489,7 +489,7 @@
       throws java.io.IOException
     {
 
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
       org.dspace.content.DCSeriesNumber sn;
@@ -572,7 +572,7 @@
       throws java.io.IOException
     {
       String authorityType = getAuthorityType(pageContext, fieldName, collectionID);
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
       String val, auth;
@@ -660,7 +660,7 @@
       throws java.io.IOException
     {
       String authorityType = getAuthorityType(pageContext, fieldName, collectionID);
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
       String val, auth;
@@ -749,7 +749,7 @@
       int fieldCountIncr, String label, PageContext pageContext, String vocabulary, boolean closedVocabulary)
       throws java.io.IOException
     {
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
       StringBuffer headers = new StringBuffer();
@@ -885,9 +885,9 @@
       boolean readonly, int fieldCountIncr, List qualMap, String label, PageContext pageContext)
       throws java.io.IOException
     {
-      DCValue[] unfiltered = item.getMetadata(schema, element, Item.ANY, Item.ANY);
+      Metadatum[] unfiltered = item.getMetadata(schema, element, Item.ANY, Item.ANY);
       // filter out both unqualified and qualified values occurring elsewhere in inputs
-      List<DCValue> filtered = new ArrayList<DCValue>();
+      List<Metadatum> filtered = new ArrayList<Metadatum>();
       for (int i = 0; i < unfiltered.length; i++)
       {
           String unfilteredFieldName = unfiltered[i].element;
@@ -899,7 +899,7 @@
                       filtered.add( unfiltered[i] );
               }
       }
-      DCValue[] defaults = filtered.toArray(new DCValue[0]);
+      Metadatum[] defaults = filtered.toArray(new Metadatum[0]);
 
       int fieldCount = defaults.length + fieldCountIncr;
       StringBuffer sb = new StringBuffer();
@@ -999,7 +999,7 @@
       boolean required, boolean readonly, List valueList, String label)
       throws java.io.IOException
     {
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       StringBuffer sb = new StringBuffer();
       Iterator vals;
       String display, value;
@@ -1048,7 +1048,7 @@
       boolean readonly, List valueList, String label, int collectionID)
       throws java.io.IOException
     {
-      DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+      Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
       StringBuffer sb = new StringBuffer();
 
       sb.append("<div class=\"row\"><label class=\"col-md-2"+ (required?" label-required":"") +"\">")
@@ -1072,7 +1072,7 @@
             boolean required,boolean readonly, List valueList, String label)
             throws java.io.IOException
           {
-                DCValue[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
+                Metadatum[] defaults = item.getMetadata(schema, element, qualifier, Item.ANY);
                 int valueCount = valueList.size();
                 
             StringBuffer sb = new StringBuffer();
@@ -1189,9 +1189,9 @@
 
     // Fetch the document type (dc.type)
     String documentType = "";
-    if( (item.getMetadata("dc.type") != null) && (item.getMetadata("dc.type").length >0) )
+    if( (item.getMetadata("dc.type") != null) && (item.getMetadataByMetadataString("dc.type").length >0) )
     {
-        documentType = item.getMetadata("dc.type")[0].value;
+        documentType = item.getMetadataByMetadataString("dc.type")[0].value;
     }
 %>
 
