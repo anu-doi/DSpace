@@ -38,6 +38,8 @@
     Boolean admin = (Boolean)request.getAttribute("is.admin");
     boolean isAdmin = (admin == null ? false : admin.booleanValue());
 
+    String openResearchURL = ConfigurationManager.getProperty("openresearch.url");
+
     // Get the current page, minus query string
     String currentPage = UIUtil.getOriginalURL(request);
     int c = currentPage.indexOf( '?' );
@@ -94,7 +96,7 @@
 	<%-- Search Box --%>
 	<div class="search-box">
 		<p><label for="tequery"><fmt:message key="jsp.layout.navbar-default.search"/></label></p>
-		<form method="get" action="<%= request.getContextPath() %>/simple-search" class="navbar-form navbar-right" scope="search">
+		<form method="get" action="<%= request.getContextPath() %>/advanced-search" class="navbar-form navbar-right" scope="search">
 			<div class="form-group">
 				<input type="text" class="form-control search-query" placeholder="<fmt:message key="jsp.layout.navbar-default.search"/>" name="query" id="tequery" size="25"/>
 				<input type="submit" value="Go" class="search-button" />
@@ -115,18 +117,24 @@
 	</div>
 	<fmt:message key="jsp.layout.navbar-default.browse" var="browse"/>
 	<anu:submenu title="${browse}">
-		<li><a href="<%= request.getContextPath() %>/"><fmt:message	key="jsp.layout.navbar-default.home" /></a></li>
+		<li><a href="<%= openResearchURL %>/index.php"><fmt:message key="jsp.layout.navbar-default.home" /></a></li>
+		<li><a href="<%= openResearchURL %>/about-open-research/"><fmt:message key="jsp.layout.navbar-default.about-open-research" /></a></li>
+		
 		<li><a href="<%= request.getContextPath() %>/community-list"><fmt:message key="jsp.layout.navbar-default.communities-collections" /></a></li>
-		<%
-			for (int i = 0; i < bis.length; i++)
-			{
-				BrowseIndex bix = bis[i];
-				String key = "browse.menu." + bix.getName();
-			%>
-		      	<li><a href="<%= request.getContextPath() %>/browse?type=<%= bix.getName() %>"><fmt:message key="<%= key %>"/></a></li>
-			<%	
-			}
-		%>
+		<li><a href="<%= openResearchURL %>/contribute-your-research/index.php"><fmt:message key="jsp.layout.navbar-default.contrib-your-research" /></a>
+			<ul>
+				<li><a href="<%= openResearchURL %>/contribute-your-research/anu-digital-theses/index.php"><fmt:message key="jsp.layout.navbar-default.anu-digital-theses" /></a>
+					<ul>
+						<li><a href="<%= openResearchURL %>/contribute-your-research/contribute-your-digital-thesis/index.php"><fmt:message key="jsp.layout.navbar-default.contrib-digital-thesis" /></a>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		
+		<li><a href="<%= openResearchURL %>/publishing-open-access/index.php"><fmt:message key="jsp.layout.navbar-default.pub-open-access" /></a></li>
+		<li><a href="<%= openResearchURL %>/policy/"><fmt:message key="jsp.layout.navbar-default.policy" /></a></li>
+		<li><a href="<%= openResearchURL %>/copyright-considerations/index.php"><fmt:message key="jsp.layout.navbar-default.copyright-consideration" /></a></li>
+		<li><a href="<%= openResearchURL %>/contact-us"><fmt:message key="jsp.layout.navbar-default.contact-us" /></a></li>
 	</anu:submenu>
 
 	<%
@@ -143,30 +151,24 @@
 	<%
 		}
 	%>
-	<anu:submenu title="${signin}">
-	    <li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
-	    <li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 	    <%
 	    	if (user != null)
 	    	{
 	    %>
+	<anu:submenu title="${signin}">
+	    <li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
+	    <li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 	    <li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
 	    <li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
-	    <%
-	    	}
-	    %>
 	</anu:submenu>
 	
 	<fmt:message key="jsp.layout.navbar-admin.statistics" var="statistics"/>
 	<anu:submenu title="${statistics}">
 	<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
 	</anu:submenu>
-	
-	<fmt:message key="jsp.layout.navbar-default.submit" var="submit"/>
-	<anu:submenu title="${submit}">
-	    <li><a href="<%= request.getContextPath() %>/submit"><fmt:message key="jsp.layout.navbar-default.submit-research"/></a></li>
-	    <li><a href="https://research.anu.edu.au/thesis/deposit.php"><fmt:message key="jsp.layout.navbar-default.submit-thesis"/></a></li>
-	</anu:submenu>
+	    <%
+	    	}
+	    %>
 	
 	<%
 		  if (isAdmin)
@@ -181,10 +183,15 @@
 		
 	<fmt:message key="jsp.layout.navbar-default.about" var="about"/>
 	<anu:submenu title="${about}">
-	    <li><a href="<%= request.getContextPath() %>/contacts"><fmt:message key="jsp.layout.navbar-default.contacts"/></a></li>
 	    <li><a href="http://anulib.anu.edu.au/"><fmt:message key="jsp.layout.navbar-default.library"/></a></li>
-		<li><dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") %>"><fmt:message key="jsp.layout.navbar-default.help"/></dspace:popup></li>
+		<li><a href="http://www.anu.edu.au/research"><fmt:message key="jsp.layout.navbar-default.research-innovation"/></a></li>
+		<li><a href="http://archives.anu.edu.au"><fmt:message key="jsp.layout.navbar-default.archives"/></a></li>
+		<li><a href="http://press.anu.edu.au"><fmt:message key="jsp.layout.navbar-default.press"/></a></li>
+		<li><a href="http://copyright.anu.edu.au"><fmt:message key="jsp.layout.navbar-default.copyright"/></a></li>
 	</anu:submenu>
 	
+	<div class="social-icons text-center">
+		<a href="https://twitter.com/ANUOpenAccess"><img src="//style.anu.edu.au/_anu/images/share/twitter.png" alt="ANU Open Access on Twitter"/></a> 
+	</div>
 </anu:menu>
 

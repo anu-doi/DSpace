@@ -166,7 +166,8 @@
 <div class="discovery-search-form panel panel-default">
     <%-- Controls for a repeat search --%>
 	<div class="discovery-query panel-heading">
-    <form action="simple-search" method="get">
+    <!-- <form action="simple-search" method="get"> -->
+    <form action="advanced-search" method="get">
          <label for="tlocation">
          	<fmt:message key="jsp.search.results.searchin"/>
          </label>
@@ -249,14 +250,16 @@
 		%>
 		</div>
 <% } %>
-<a class="btn btn-default" href="<%= request.getContextPath()+"/simple-search" %>"><fmt:message key="jsp.search.general.new-search" /></a>	
+<!-- <a class="btn btn-default" href="<%= request.getContextPath()+"/simple-search" %>"><fmt:message key="jsp.search.general.new-search" /></a>  -->	
+
+<a class="btn btn-default" href="<%= request.getContextPath()+"/advanced-search" %>"><fmt:message key="jsp.search.general.new-search" /></a>	
 		</form>
 		</div>
 <% if (availableFilters.size() > 0) { %>
 		<div class="discovery-search-filters panel-body">
 		<h5><fmt:message key="jsp.search.filter.heading" /></h5>
 		<p class="discovery-search-filters-hint"><fmt:message key="jsp.search.filter.hint" /></p>
-		<form action="simple-search" method="get">
+		<form action="advanced-search" method="get">
 		<input type="hidden" value="<%= Utils.addEntities(searchScope) %>" name="location" />
 		<input type="hidden" value="<%= Utils.addEntities(query) %>" name="query" />
 		<% if (appliedFilterQueries.size() > 0 ) { 
@@ -300,7 +303,7 @@
 <% } %>
         <%-- Include a component for modifying sort by, order, results per page, and et-al limit --%>
    <div class="discovery-pagination-controls panel-footer">
-   <form action="simple-search" method="get">
+   <form action="advanced-search" method="get">
    <input type="hidden" value="<%= Utils.addEntities(searchScope) %>" name="location" />
    <input type="hidden" value="<%= Utils.addEntities(query) %>" name="query" />
 	<% if (appliedFilterQueries.size() > 0 ) { 
@@ -438,7 +441,8 @@ else if( qResults != null)
     // create the URLs accessing the previous and next search result pages
     String baseURL =  request.getContextPath()
                     + (searchScope != "" ? "/handle/" + searchScope : "")
-                    + "/simple-search?query="
+                   // + "/simple-search?query="
+                    + "/advanced-search?query="
                     + URLEncoder.encode(query,"UTF-8")
                     + httpFilters
                     + "&amp;sort_by=" + sortedBy
@@ -475,6 +479,29 @@ else if( qResults != null)
         <fmt:param><%=qResults.getTotalSearchResults()%></fmt:param>
         <fmt:param><%=(float) qResults.getSearchTime() / 1000%></fmt:param>
     </fmt:message></div>
+</div>
+<div class="discovery-result-results">
+<% if (communities.length > 0 ) { %>
+    <div class="panel panel-info">
+    <div class="panel-heading"><fmt:message key="jsp.search.results.comhits"/></div>
+    <dspace:communitylist  communities="<%= communities %>" />
+    </div>
+<% } %>
+
+<% if (collections.length > 0 ) { %>
+    <div class="panel panel-info">
+    <div class="panel-heading"><fmt:message key="jsp.search.results.colhits"/></div>
+    <dspace:collectionlist collections="<%= collections %>" />
+    </div>
+<% } %>
+
+<% if (items.length > 0) { %>
+    <div class="panel panel-info">
+    <dspace:itemlist items="<%= items %>" authorLimit="<%= etAl %>" />
+    </div>
+<% } %>
+</div>
+<div class="discovery-result-pagination row container">
     <ul class="pagination pull-right">
 	<%
 	if (pageFirst != pageCurrent)
@@ -531,28 +558,6 @@ else if( qResults != null)
 	%>
 	</ul>
 <!-- give a content to the div -->
-</div>
-<div class="discovery-result-results">
-<% if (communities.length > 0 ) { %>
-    <div class="panel panel-info">
-    <div class="panel-heading"><fmt:message key="jsp.search.results.comhits"/></div>
-    <dspace:communitylist  communities="<%= communities %>" />
-    </div>
-<% } %>
-
-<% if (collections.length > 0 ) { %>
-    <div class="panel panel-info">
-    <div class="panel-heading"><fmt:message key="jsp.search.results.colhits"/></div>
-    <dspace:collectionlist collections="<%= collections %>" />
-    </div>
-<% } %>
-
-<% if (items.length > 0) { %>
-    <div class="panel panel-info">
-    <div class="panel-heading"><fmt:message key="jsp.search.results.itemhits"/></div>
-    <dspace:itemlist items="<%= items %>" authorLimit="<%= etAl %>" />
-    </div>
-<% } %>
 </div>
 <%-- if the result page is enought long... --%>
 <% if ((communities.length + collections.length + items.length) > 10) {%>
@@ -693,7 +698,8 @@ else
 	        {
 	        %><li class="list-group-item"><span class="badge"><%= fvalue.getCount() %></span> <a href="<%= request.getContextPath()
                 + (searchScope!=""?"/handle/"+searchScope:"")
-                + "/simple-search?query="
+                + "/advanced-search?query="
+                //+ "/simple-search?query="
                 + URLEncoder.encode(query,"UTF-8")
                 + "&amp;sort_by=" + sortedBy
                 + "&amp;order=" + order
@@ -718,7 +724,8 @@ else
 	        <% if (currFp > 0) { %>
 	        <a class="pull-left" href="<%= request.getContextPath()
 	            + (searchScope!=""?"/handle/"+searchScope:"")
-                + "/simple-search?query="
+                //+ "/simple-search?query="
+                + "/advanced-search?query="
                 + URLEncoder.encode(query,"UTF-8")
                 + "&amp;sort_by=" + sortedBy
                 + "&amp;order=" + order
@@ -730,7 +737,8 @@ else
             <% if (idx == limit) { %>
             <a href="<%= request.getContextPath()
 	            + (searchScope!=""?"/handle/"+searchScope:"")
-                + "/simple-search?query="
+                //+ "/simple-search?query="
+                + "/advanced-search?query="
                 + URLEncoder.encode(query,"UTF-8")
                 + "&amp;sort_by=" + sortedBy
                 + "&amp;order=" + order

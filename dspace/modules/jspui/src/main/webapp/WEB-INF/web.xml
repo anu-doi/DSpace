@@ -149,10 +149,10 @@
     <servlet-class>org.dspace.app.webui.servlet.admin.AuthorizeAdminServlet</servlet-class>
   </servlet>
 
-  <servlet>
+  <!-- <servlet>
     <servlet-name>advanced-search</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.AdvancedSearchServlet</servlet-class>
-  </servlet>
+  </servlet> -->
 
   <servlet>
     <servlet-name>itemmap</servlet-name>
@@ -504,10 +504,10 @@
     <url-pattern>/tools/authorize</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
+  <!-- <servlet-mapping>
     <servlet-name>advanced-search</servlet-name>
     <url-pattern>/advanced-search</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 
   <servlet-mapping>
     <servlet-name>bitstream</servlet-name>
@@ -716,7 +716,8 @@
 
   <servlet-mapping>
     <servlet-name>simple-search</servlet-name>
-    <url-pattern>/simple-search</url-pattern>
+    <!-- <url-pattern>/simple-search</url-pattern> -->
+    <url-pattern>/advanced-search</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

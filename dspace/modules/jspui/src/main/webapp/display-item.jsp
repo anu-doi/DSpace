@@ -47,6 +47,8 @@
 <%@page import="org.dspace.eperson.EPerson"%>
 <%@page import="org.dspace.versioning.VersionHistory"%>
 <%@page import="org.elasticsearch.common.trove.strategy.HashingStrategy"%>
+<%@page import="org.dspace.content.Bundle" %>
+<%@page import="org.dspace.content.Bitstream" %>
 <%
     // Attributes
     Boolean displayAllBoolean = (Boolean) request.getAttribute("display.all");
@@ -85,6 +87,60 @@
 		{
 			title = "Item " + handle;
 		}
+	}
+
+	String statement = null;
+	if (item.getBundles("BRANDED_PREVIEW").length > 0)
+	{
+		String s = ConfigurationManager.getProperty("webui.preview.dc");
+		
+		if (s != null)
+		{
+			DCValue[] dcValue;
+			
+			int i = s.indexOf('.');
+			
+			if (i == -1)
+			{
+				dcValue = item.getDC(s, Item.ANY, Item.ANY);
+			}
+			else
+			{
+				dcValue = item.getDC(s.substring(0,1), s.substring(i + 1), Item.ANY);
+			}
+			
+			if (dcValue.length > 0)
+			{
+				statement = dcValue[0].value;
+			}
+		}
+	}
+
+	Bitstream selectedBitstream = null;
+	try {
+		Bundle[] bunds = item.getBundles("ORIGINAL");
+		
+		if (bunds[0] != null)
+		{
+			Bitstream[] bits = bunds[0].getBitstreams();
+
+			for (int i = 0; (i < bits.length) && selectedBitstream == null; i++)
+			{
+				if (bits[i].getID() == bunds[0].getPrimaryBitstreamID())
+				{
+					selectedBitstream = bits[i];
+				}
+			}
+			
+			if (selectedBitstream == null && bits.length > 0)
+			{
+				selectedBitstream = bits[0];
+			}
+		}
+	}
+	catch (Exception e)
+	{
+		
 	}
     
     Boolean versioningEnabledBool = (Boolean)request.getAttribute("versioning.enabled");
@@ -139,10 +195,10 @@
 
                 <%-- <strong>Please use this identifier to cite or link to this item:
                 <code><%= HandleManager.getCanonicalForm(handle) %></code></strong>--%>
-				<anu:message type="info" extraClass="marginbottom">
+				 <%-- <anu:message type="info" extraClass="marginbottom">
                 <div class="well"><fmt:message key="jsp.display-item.identifier"/>
                 <code><%= HandleManager.getCanonicalForm(handle) %></code></div>
-				</anu:message>
+				</anu:message>--%>
 <%
         if (admin_button)  // admin edit button
         { %>
@@ -190,9 +246,53 @@
 
     String displayStyle = (displayAll ? "full" : "");
 %>
+<h2 class="padbottom"><%= title %></h2>
+
+<div class="w-narrow right margintop marginleft marginbottom nopadbottom">
+<anu:box style="bdr2">
+	<% 	
+	if (statement != null) 
+	{
+	%>
+	<p><%= statement %></p>
+	<% 
+	} 
+	if (selectedBitstream != null)
+	{
+		Context context = UIUtil.obtainContext(request);
+		if (AuthorizeManager.authorizeActionBoolean(context, selectedBitstream, Constants.READ))
+		{
+		%>
+		<p>
+		<img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/type-download.png" />
+		<a class="nounderline" href="<%= request.getContextPath() %>/bitstream/<%= handle %>/<%= selectedBitstream.getSequenceID() %>/<%= selectedBitstream.getName() %>"><fmt:message key="jsp.display-item.download" /></a> (<%= UIUtil.formatFileSize(selectedBitstream.getSize()) %>)
+		</p>
+		<%
+		}
+		else
+		{
+		%>
+		<p>
+		<img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" />
+		<a class="nounderline" href="<%= request.getContextPath() %>/request-item?handle=<%= handle %>&bitstream-id=<%= selectedBitstream.getID() %>"><fmt:message key="jsp.display-item.request-copy" /></a>
+		</p>
+		<%
+		}
+	} 
+	%>
+	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="#">link to publisher version</a> (TODO)</p>
+</anu:box>
+<ul class="nounderline small padtop">
+	<li><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a></li>
+	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a></li>
+	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a></li>
+</ul>
+</div>
+<div class="w-doublenarrow">
     <dspace:item-preview item="<%= item %>" />
+   </div>
     <dspace:item item="<%= item %>" collections="<%= collections %>" style="<%= displayStyle %>" />
-<div class="container row">
+<div class="container row padtop">
 <%
     String locationLink = request.getContextPath() + "/handle/" + handle;
 
@@ -212,9 +312,11 @@
         else
         {
 %>
-    <a class="btn btn-default" href="<%=locationLink %>?mode=simple">
+<strong>
+    <a href="<%=locationLink %>?mode=simple">
         <fmt:message key="jsp.display-item.text1"/>
     </a>
+	</strong>
 <%
         }
 %>
@@ -236,9 +338,11 @@
         else
         {
 %>
-    <a class="btn btn-default" href="<%=locationLink %>?mode=full">
+<strong>
+    <a class="" href="<%=locationLink %>?mode=full">
         <fmt:message key="jsp.display-item.text2"/>
     </a>
+	</strong>
 <%
         }
     }
@@ -261,10 +365,7 @@
 <%
         }
 %>
-    <a class="statisticsLink  btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
-	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a>
-	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a>
-	
+
 	<!-- Altmetric badge Start -->
 <%
 	String altmetricData = null;	

@@ -31,6 +31,7 @@
     boolean locbar = ((Boolean) request.getAttribute("dspace.layout.locbar")).booleanValue();
 
     String siteName = ConfigurationManager.getProperty("dspace.name");
+    String bannerName = ConfigurationManager.getProperty("openresearch.name");
     String feedRef = (String)request.getAttribute("dspace.layout.feedref");
     boolean osLink = ConfigurationManager.getBooleanProperty("websvc.opensearch.autolink");
     String osCtx = ConfigurationManager.getProperty("websvc.opensearch.svccontext");
@@ -94,7 +95,7 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 <%
 	}
 %>
-<anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Library" primaryTitleUrl="/" />
+<anu:banner id="1122" ssl="true" primaryTitle="<%= bannerName %>" secondaryTitle ="Library" primaryTitleUrl="/" />
 
     <%--Gooogle Analytics recording.--%>
     <%
