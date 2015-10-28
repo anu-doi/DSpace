@@ -409,4 +409,13 @@
             <class>org.dspace.app.util.Version</class>
         </step>
     </command>
+
+    <command>
+    	<name>archive</name>
+    	<description>Archive the list of ids</description>
+    	<step>
+    		<class>org.dspace.app.util.ArchiveItems</class>
+    	</step>
+    </command>
+
 </commands>
