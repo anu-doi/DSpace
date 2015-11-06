@@ -1387,6 +1387,12 @@
         <displayed-value>Cartographic material</displayed-value>
         <stored-value>Cartographic material</stored-value>
         </pair>
+        
+        <pair>
+        <displayed-value>Computer program</displayed-value>
+        <stored-value>Computer program</stored-value>
+        </pair>
+        
         <pair>
         <displayed-value>Conference item</displayed-value>
         <stored-value>Conference item</stored-value>
@@ -1406,6 +1412,17 @@
         <displayed-value>Exhibition or event</displayed-value>
         <stored-value>Exhibition or event</stored-value>
         </pair>
+        
+        <pair>
+        <displayed-value>Invention</displayed-value>
+        <stored-value>Invention</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Legal case</displayed-value>
+        <stored-value>Legal case</stored-value>
+        </pair>
+        
         <pair>
         <displayed-value>Legal submission</displayed-value>
         <stored-value>Legal submission</stored-value>
@@ -1510,6 +1527,11 @@
         <pair>
         <displayed-value>Text</displayed-value>
         <stored-value>Text</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Translation</displayed-value>
+        <stored-value>Translation</stored-value>
         </pair>
 
         <pair>
