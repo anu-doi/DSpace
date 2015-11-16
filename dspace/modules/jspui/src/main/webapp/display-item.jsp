@@ -260,9 +260,9 @@
 <%
         }
 %>
-    <a class="statisticsLink  btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a>
-	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a>
-	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a>
+    <a class="statisticsLink  btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics" rel="nofollow"><fmt:message key="jsp.display-item.display-statistics"/></a>
+	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex" rel="nofollow">Export BibTeX</a>
+	<a class="btn btn-primary" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote" rel="nofollow">Export EndNote</a>
 	
 	<!-- Altmetric badge Start -->
 <%
