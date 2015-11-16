@@ -8,3 +8,5 @@ Disallow: /
 # All other search crawlers
 User-agent: *
 Disallow: /*/statistics
+Disallow: /statistics
+Disallow: /exportreference
