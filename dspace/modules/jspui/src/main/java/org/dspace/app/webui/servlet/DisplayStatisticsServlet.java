@@ -213,7 +213,9 @@ public class DisplayStatisticsServlet extends DSpaceServlet
         if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM) && !(dso != null && dso.getType() == Constants.COLLECTION)) {
         	statsTopCollections =  getTopCollectionsStatisticsBean(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
         }
-        statsReferralSources =  getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+        if (context.getCurrentUser() != null) {
+        	statsReferralSources =  getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+        }
         if ((author == null || "".equals(author)) && (dso == null || dso.getType() == Constants.COMMUNITY || dso.getType() == Constants.COLLECTION)) {
         	statsNewByCollection = getNewItemsByCollection(context, dso, startDate, endDate);
         	statsNewByType = getNewItemsByType(context, dso, startDate, endDate);
