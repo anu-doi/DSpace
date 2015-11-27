@@ -339,10 +339,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
-				+ dso.getID() + " and type " + dso.getType()
-				+ " and handle: " + dso.getHandle(), e);
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
+					+ dso.getID() + " and type " + dso.getType()
+					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -392,10 +397,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			}
 		} catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -448,10 +458,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			}
 		} catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -506,10 +521,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -561,10 +581,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
 		return statsBean;
     }
@@ -620,10 +645,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	log.info("End retrieving top collections");
     	
@@ -680,10 +710,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	log.info("End retrieving top collections");
     	
@@ -739,10 +774,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -790,10 +830,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -829,10 +874,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }
@@ -868,10 +918,15 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		}
 		catch (Exception e)
 		{
-			log.error(
-				"Error occured while creating statistics for dso with ID: "
+			if (dso != null) {
+				log.error(
+					"Error occured while creating statistics for dso with ID: "
 					+ dso.getID() + " and type " + dso.getType()
 					+ " and handle: " + dso.getHandle(), e);
+			}
+			else {
+				log.error("Error occured while creating statistics for dso with no ID", e);
+			}
 		}
     	return statsBean;
     }

@@ -183,11 +183,16 @@ public class StatisticsDataDownloads extends StatisticsData {
 				}
 				if (dsoId != -1) {
 					DSpaceObject dso = DSpaceObject.find(context, Constants.BITSTREAM, dsoId);
-
-					DSpaceObject parentObject = dso.getParentObject();
-					dataset.setRowLabel(i, dso.getName());
-					if (parentObject != null) {
-						dataset.addValueToMatrix(i, 0, parentObject.getHandle());
+					
+					if (dso != null) {
+						DSpaceObject parentObject = dso.getParentObject();
+						dataset.setRowLabel(i, dso.getName());
+						if (parentObject != null) {
+							dataset.addValueToMatrix(i, 0, parentObject.getHandle());
+						}
+					}
+					else {
+						dataset.setRowLabel(i, Integer.toString(dsoId));
 					}
 					dataset.addValueToMatrix(i, 1, count.getCount());
 					
