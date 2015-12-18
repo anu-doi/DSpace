@@ -300,6 +300,17 @@
          <hint>Enter the associated rights</hint>
          <required></required>
        </field>
+	   
+       <field>
+                 <dc-schema>dcterms</dc-schema>
+         <dc-element>accessRights</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Access Rights</label>
+         <input-type>onebox</input-type>
+         <hint>Indicate if the item is Open Access</hint>
+         <required></required>
+       </field>
 
         <field>
                  <dc-schema>dc</dc-schema>
