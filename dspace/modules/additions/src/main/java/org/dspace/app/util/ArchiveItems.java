@@ -11,21 +11,29 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.log4j.Logger;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.common.SolrInputDocument;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
+import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.eperson.EPerson;
 import org.dspace.handle.HandleManager;
+import org.dspace.statistics.SolrLogger;
 import org.dspace.workflow.WorkflowItem;
 import org.dspace.workflow.WorkflowManager;
 
 public class ArchiveItems {
     private static Logger log = Logger.getLogger(ArchiveItems.class);
     
-	public void ArchiveItems() {
+    private static HttpSolrServer solr;
+    
+	public ArchiveItems() {
 		
 	}
 	
@@ -50,28 +58,40 @@ public class ArchiveItems {
 					Item item = (Item) object;
 					WorkflowItem wfi = WorkflowItem.findByItem(context, item);
 					if (wfi != null) {
-						int i = 0;
-						boolean archived = false;
-//						while (!archived && i < 5) {
-							log.info("Workflow Item state: " + wfi.getState());
-							WorkflowManager.claim(context, wfi, eperson);
-							log.info("Workflow Item state post claim: " + wfi.getState());
-//							archived = WorkflowManager.advance(context, wfi, eperson, true, true);
-				            WorkflowManager.advance(context, wfi, eperson);
-							log.info("Workflow Item state post advance: " + wfi.getState());
-							
-				            String handle = HandleManager.findHandle(context, item);
+						int workflowItemId = wfi.getID();
+						log.info("Workflow Item state: " + wfi.getState());
+						WorkflowManager.claim(context, wfi, eperson);
+						log.info("Workflow Item state post claim: " + wfi.getState());
+//						archived = WorkflowManager.advance(context, wfi, eperson, true, true);
+			            WorkflowManager.advance(context, wfi, eperson);
+						log.info("Workflow Item state post advance: " + wfi.getState());
+						
+			            String handle = HandleManager.findHandle(context, item);
 
-				            if (handle != null) {
-				            	System.out.println("Handle created for item " + item.getID() + " was " + handle);
-				            }
-				            else {
-				            	System.out.println("No handle created for item " + item.getID());
-				            }
-				            context.commit();
-				            
-							i++;
-//						}
+			            if (handle != null) {
+			            	System.out.println("Handle created for item " + item.getID() + " was " + handle);
+			            	
+			            	SolrInputDocument sid = new SolrInputDocument();
+			            	sid.addField("id", item.getID());
+			            	sid.addField("type", item.getType());
+			            	sid.addField("time", DateFormatUtils.format(item.getLastModified(), SolrLogger.DATE_FORMAT_8601));
+			            	sid.addField("submitter", item.getSubmitter().getID());
+			            	sid.addField("actor", eperson.getID());
+			            	sid.addField("statistics_type", "workflow");
+			            	sid.addField("workflowItemId", workflowItemId);
+			            	sid.addField("workflowStep", "ARCHIVE");
+			            	SolrLogger.storeParents(sid, item);
+			            	try {
+			            		solr.add(sid);
+			            	}
+			            	catch (SolrServerException e) {
+			            		log.error("Error adding archive statistics to Solr for item "+item.getID());
+			            	}
+			            }
+			            else {
+			            	System.out.println("No handle created for item " + item.getID());
+			            }
+			            context.commit();
 					}
 					//tODO notify of not run for archive
 				}
@@ -117,6 +137,9 @@ public class ArchiveItems {
 			email = line.getOptionValue('e');
 		}
 		if (filename != null && email != null) {
+	        String sserver = ConfigurationManager.getProperty("solr-statistics", "server");
+			solr = new HttpSolrServer(sserver);
+	        
 			ArchiveItems archiveItems = new ArchiveItems();
 			archiveItems.load(filename, email);
 		}
