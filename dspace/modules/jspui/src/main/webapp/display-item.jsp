@@ -142,6 +142,18 @@
 	{
 		
 	}
+	
+	String doiUrl = null;
+	
+	DCValue[] doiValues = item.getMetadata("local","identifier","doi",Item.ANY);
+	if (doiValues.length > 0)
+	{
+		doiUrl = doiValues[0].value;
+		if (doiUrl.length() > 0 && !doiUrl.startsWith("http")) {
+			doiUrl = "http://dx.doi.org/" + doiUrl;
+		}
+	}
+	
     
     Boolean versioningEnabledBool = (Boolean)request.getAttribute("versioning.enabled");
     boolean versioningEnabled = (versioningEnabledBool!=null && versioningEnabledBool.booleanValue());
@@ -160,6 +172,7 @@
     
     VersionHistory history = (VersionHistory)request.getAttribute("versioning.history");
     List<Version> historyVersions = (List<Version>)request.getAttribute("versioning.historyversions");
+	
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
@@ -249,6 +262,7 @@
 <h2 class="padbottom"><%= title %></h2>
 
 <div class="w-narrow right margintop marginleft marginbottom nopadbottom">
+<% if (statement != null || selectedBitstream != null || (doiUrl != null && doiUrl.length() > 0)) { %>
 <anu:box style="bdr2">
 	<% 	
 	if (statement != null) 
@@ -279,13 +293,40 @@
 		<%
 		}
 	} 
+	if (doiUrl != null && doiUrl.length() > 0) {
 	%>
-	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="#">link to publisher version</a> (TODO)</p>
+	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="<%= doiUrl %>">link to publisher version</a></p>
+	<%
+	}
+	%>
+	
 </anu:box>
+<% } %>
 <ul class="nounderline small padtop">
 	<li><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a></li>
 	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a></li>
 	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a></li>
+</ul>
+<ul class="nobullet">
+<li>
+	<!-- Altmetric badge Start -->
+<%
+	String altmetricData = null;	
+	if (item.getMetadata("local.identifier.doi").length > 0) {
+		altmetricData = item.getMetadata("local.identifier.doi")[0].value;
+	}
+
+	if (altmetricData != null && altmetricData.length() > 0 ) {
+%>
+	
+	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+	<div data-badge-details="right" data-badge-type="1" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed"></div>
+	
+<%
+	}
+%>
+	<!-- Altmetric badge End -->
+</li>
 </ul>
 </div>
 <div class="w-doublenarrow">
@@ -365,25 +406,6 @@
 <%
         }
 %>
-
-	<!-- Altmetric badge Start -->
-<%
-	String altmetricData = null;	
-	if (item.getMetadata("local.identifier.doi").length > 0) {
-		altmetricData = item.getMetadata("local.identifier.doi")[0].value;
-	}
-
-	if (altmetricData != null && altmetricData.length() > 0 ) {
-%>
-	
-	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
-	<div data-badge-details="right" data-badge-type="donut" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed doublewide"></div>
-	
-<%
-	}
-%>
-	<!-- Altmetric badge End -->
-	
     <%-- SFX Link --%>
 <%
     if (ConfigurationManager.getProperty("sfx.server.url") != null)
@@ -400,6 +422,7 @@
     }
 %>
 </div>
+
 <br/>
     <%-- Versioning table --%>
 <%

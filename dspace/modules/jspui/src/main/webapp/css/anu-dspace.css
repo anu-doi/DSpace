@@ -209,6 +209,12 @@ label {
 	font-weight: bold;
 	margin-bottom: 5px;
 }
+label.overrideanuform {
+	width: auto;
+}
+label.normalweight {
+	font-weight: normal;
+}
 .list-group {
 	border-radius: 4px 4px 4px 4px;
 	border: solid .5px #ACC0C6;

@@ -296,17 +296,21 @@ IP Ranges
 	<table class="statsTable">
 	<tr>
 		<th></th>
-	<c:forEach var="colLabel" items="${statsTopItems.colLabels}">
-		<th><c:out value="${colLabel}" /></th>
+	<c:forEach var="colLabel" items="${statsTopItems.colLabels}" varStatus="colCounter">
+		<c:if test="${colCounter.index > 0}">
+			<th>${colCounter.index} - <c:out value="${colLabel}" /></th>
+		</c:if>
 	</c:forEach>
 	</tr>
 	<c:forEach var="row" items="${statsTopItems.matrix}" varStatus="rowCounter">
 		<tr>
 			<th>
-				<c:out value="${statsTopItems.rowLabels[rowCounter.index]}" />
+				<a href="<%= request.getContextPath() %>/handle/${row[0]}"><c:out value="${statsTopItems.rowLabels[rowCounter.index]}" /></a>
 			</th>
 		<c:forEach var="col" items="${row}" varStatus="colCounter">
-			<td><c:out value="${not empty col ? col : 0}" /></td>
+			<c:if test="${colCounter.index > 0}">
+				<td><c:out value="${not empty col ? col : 0}" /></td>
+			</c:if>
 		</c:forEach>
 		</tr>
 	</c:forEach>
@@ -332,17 +336,22 @@ IP Ranges
 	<table class="statsTable">
 	<tr>
 		<th></th>
-	<c:forEach var="colLabel" items="${statsTopCollections.colLabels}">
-		<th><c:out value="${colLabel}" /></th>
+	<c:forEach var="colLabel" items="${statsTopCollections.colLabels}" varStatus="colCounter">
+		<c:if test="${colCounter.index > 0}">
+			<th><c:out value="${colLabel}" /></th>
+		</c:if>
 	</c:forEach>
 	</tr>
 	<c:forEach var="row" items="${statsTopCollections.matrix}" varStatus="rowCounter">
+	
 		<tr>
 			<th>
-				<c:out value="${statsTopCollections.rowLabels[rowCounter.index]}" />
+				<a href="<%= request.getContextPath() %>/handle/${row[0]}"><c:out value="${statsTopCollections.rowLabels[rowCounter.index]}" /></a>
 			</th>
 		<c:forEach var="col" items="${row}" varStatus="colCounter">
-			<td><c:out value="${not empty col ? col : 0}" /></td>
+			<c:if test="${colCounter.index > 0}">
+				<td><c:out value="${not empty col ? col : 0}" /></td>
+			</c:if>
 		</c:forEach>
 		</tr>
 	</c:forEach>

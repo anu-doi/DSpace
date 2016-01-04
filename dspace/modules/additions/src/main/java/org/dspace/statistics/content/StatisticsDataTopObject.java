@@ -57,7 +57,7 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 				viewFilter += " AND type:"+viewGenerator.getFilterType();
 			}*/
 			
-			int nrColumns = 1;
+			int nrColumns = 2;
 			if (viewGenerator.isShowFileDownloads()) {
 				nrColumns++;
 			}
@@ -145,6 +145,8 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 				dataset.setRowLabel(i, rowLabels.get(i));
 			}
 			colNum = 0;
+			dataset.setColLabel(colNum, "Handle");
+			colNum++;
 			if (viewGenerator.isShowFullView()) {
 				dataset.setColLabel(colNum, "Simple Views");
 			}
@@ -160,23 +162,39 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 				dataset.setColLabel(colNum, "Downloads");
 			}
 			
+			
 			for (Entry<Integer, ObjectCount[]> entry : resultsMap.entrySet()) {
 				ObjectCount[] countResults = entry.getValue();
 				for (ObjectCount count : countResults) {
 					int rowNum = dataset.getRowLabels().indexOf(count.getValue());
 					if (rowNum >= 0) {
-						dataset.addValueToMatrix(rowNum, entry.getKey(), count.getCount());
+						dataset.addValueToMatrix(rowNum, entry.getKey() + 1, count.getCount());
 					}
 				}
 			}
 			
 			for (int i = 0; i < dataset.getRowLabels().size(); i++) {
 				String rowLabel = dataset.getRowLabels().get(i);
+				String handle = getHandle(rowLabel, viewGenerator.getFilterType(), context);
+				dataset.addValueToMatrix(i, 0, handle);
 				dataset.setRowLabel(i, getResultName(rowLabel, type, viewGenerator.getFilterType(), context));
 			}
 		}
 		
 		return dataset;
+	}
+
+    private String getHandle(String value, int filterType,
+            Context context) throws SQLException
+    {
+    	if (filterType >= 2) {
+    		int id = Integer.parseInt(value);
+    		DSpaceObject dso = DSpaceObject.find(context, filterType, id);
+    		if (dso != null) {
+    			return dso.getHandle();
+    		}
+    	}
+		return null;
 	}
 	
 }
