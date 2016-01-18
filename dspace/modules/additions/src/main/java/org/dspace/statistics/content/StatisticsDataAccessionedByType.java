@@ -110,6 +110,7 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		query.append(" and mfr1.metadata_schema_id = msr.metadata_schema_id");
 		query.append(" and mfr1.element = 'type'");
 		query.append(" and mfr1.qualifier is null");
+		query.append(" and mv1.resource_type_id = 2");
 		query.append(" and mv1.metadata_field_id = mfr1.metadata_field_id");
 		
 		query.append(" and exists (select 1");
@@ -118,7 +119,8 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		query.append(" where mfr2.metadata_schema_id = msr.metadata_schema_id");
 		query.append(" and mfr2.element = 'date'");
 		query.append(" and mfr2.qualifier = 'accessioned'");
-		query.append(" and mv2.item_id = mv1.item_id");
+		query.append(" and mv2.resource_type_id = 2");
+		query.append(" and mv2.resource_id = mv1.resource_id");
 		query.append(" and mv2.metadata_field_id = mfr2.metadata_field_id");
 		if (startDate != null && endDate != null) {
 			query.append(" and mv2.text_value > ?");
