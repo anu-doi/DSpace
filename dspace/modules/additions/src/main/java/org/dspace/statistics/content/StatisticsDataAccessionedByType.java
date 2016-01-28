@@ -150,7 +150,7 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 						query.append(id);
 					}
 					//query.append(") and c2i.item_id = mv1.item_id)");
-					query.append(") and i.item_id = mv1.item_id)");
+					query.append(") and mv1.resource_type_id = 2 and i.item_id = mv1.resource_id)");
 				}
 				catch (SQLException e) {
 					log.error("Unable to retrieve collection ids for Community '"+community.getName()+"'");
@@ -169,14 +169,13 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 	
 	private Set<Integer> getCollectionIDs(Community community) throws SQLException {
 		Set<Integer> ids = new HashSet<Integer>();
-		Community[] subCommunities = community.getSubcommunities();
-		for (Community comm : subCommunities) {
-			ids.addAll(getCollectionIDs(comm));
-			Collection[] collections = comm.getCollections();
-			for (Collection coll : collections) {
-				ids.add(coll.getID());
-			}
+		
+		Collection[] collections = community.getAllCollections();
+		
+		for (Collection coll : collections) {
+			ids.add(coll.getID());
 		}
+		
 		return ids;
 	}
 	
