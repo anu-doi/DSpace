@@ -295,7 +295,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
     private StatisticsBean getTopDownloadsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate
     		, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
-    	
+    	log.debug("Start retrieving top download statistics");
 		try 
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataDownloads(dso, author));
@@ -349,12 +349,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End tretireving statistics for top downloads");
     	return statsBean;
     }
     
     private StatisticsBean getMonthlyVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving monthly visits statistics");
 		try
 		{
 			StatisticsTable statisticsTable = new StatisticsTable(new StatisticsDataViews(dso, author));
@@ -407,12 +408,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+    	log.debug("End retrieving monthly visits statistics");
     	return statsBean;
     }
     
     private StatisticsBean getVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving visits statistics");
 		try
 		{
 			StatisticsListing statListing = new StatisticsListing(
@@ -468,12 +470,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End retrieving visit statistics");
     	return statsBean;
     }
     
     private StatisticsBean getCountryVisits(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author, int maxRows, int orderColumn) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving country visits");
 		try
 		{
 		
@@ -531,12 +534,14 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End retrieving country visits");
     	return statsBean;
     }
     
 
     private StatisticsBean getReferralSources(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author) {
 		StatisticsBean statsBean = new StatisticsBean();
+		log.debug("Start retrieving referral sources");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataReferralSources(dso, author));
@@ -591,12 +596,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("Start retrieving referral sources");
 		return statsBean;
     }
     
     private StatisticsBean getTopItemsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, String author, int maxRows, int orderColumn) {
     	StatisticsBean statsBean = new StatisticsBean();
-    	log.info("Start retrieving top collections");
+    	log.info("Start retrieving top items");
 
 		try
 		{
@@ -655,14 +661,14 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
-    	log.info("End retrieving top collections");
+    	log.debug("End retrieving statistics for top items");
     	
 		return statsBean;
     }
     
     private StatisticsBean getTopCollectionsStatisticsBean(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
     	StatisticsBean statsBean = new StatisticsBean();
-    	log.info("Start retrieving top collections");
+    	log.debug("Start retrieving statistics for top collections");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataTopObject(dso));
@@ -720,14 +726,14 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
-    	log.info("End retrieving top collections");
+    	log.debug("End retrieving top collections");
     	
 		return statsBean;
     }
     
     private StatisticsBean getTopAuthors(Context context, DSpaceObject dso, Date startDate, Date endDate, String ipRanges, int maxRows, int orderColumn) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving statistics for top authors");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataViews(dso));
@@ -784,12 +790,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End retrieving top authors");
     	return statsBean;
     }
     
     private StatisticsBean getNewItemsByCollection(Context context, DSpaceObject dso, Date startDate, Date endDate) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving statistics for new items by collection");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataArchive(dso));
@@ -839,12 +846,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End retrieving statistics for new items by collection");
     	return statsBean;
     }
 
     private StatisticsBean getNewItemsByType(Context context, DSpaceObject dso, Date startDate, Date endDate) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving statitics for new items by type");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataAccessionedByType(dso, startDate, endDate));
@@ -883,12 +891,13 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
-    	return statsBean;
+		log.debug("End retrieving statitics for new items by type");
+		return statsBean;
     }
 
     private StatisticsBean getItemCounts(Context context, DSpaceObject dso, Date endDate) {
     	StatisticsBean statsBean = new StatisticsBean();
-
+    	log.debug("Start retrieving statistics for item counts");
 		try
 		{
 			StatisticsListing statisticsTable = new StatisticsListing(new StatisticsDataItemCount(dso, endDate));
@@ -927,6 +936,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
+		log.debug("End retrieving statistics for item counts");
     	return statsBean;
     }
 

@@ -131,7 +131,7 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		if (currentDso != null) {
 			if (currentDso.getType() == Constants.COLLECTION) {
 				//query.append(" and exists (select 1 from collection2item c2i where c2i.collection_id = ? and c2i.item_id = mv1.item_id)");
-				query.append(" and exists (select 1 from item i where i.owning_collection = ? and i.item_id = mv1.item_id)");
+				query.append(" and exists (select 1 from item i where i.owning_collection = ? and mv1.resource_type_id = 2 and i.item_id = mv1.resource_id)");
 			}
 			else if (currentDso.getType() == Constants.COMMUNITY) {
 				Community community = (Community) currentDso;
