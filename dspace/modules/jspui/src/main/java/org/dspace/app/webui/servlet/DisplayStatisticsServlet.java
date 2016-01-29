@@ -174,7 +174,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				response.setHeader("Content-Disposition", "attachment; filename=" + filename);
 				PrintWriter out = response.getWriter();
 				for (int i = 0; i < matrix.length; i++) {
-					String row = exportBean.getRowLabels().get(i) + CSV_SEPARATOR + StringUtils.join(matrix[i], CSV_SEPARATOR);
+					String row = "\"" + exportBean.getRowLabels().get(i) + "\"" + CSV_SEPARATOR + StringUtils.join(matrix[i], CSV_SEPARATOR);
 					out.println(row);
 				}
 				out.flush();
