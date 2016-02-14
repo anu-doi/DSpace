@@ -95,7 +95,7 @@
 		        {
 		        %><li class="list-group-item"><span class="badge"><%= fvalue.getCount() %></span> <a href="<%= request.getContextPath()
 		            + searchScope
-	                + "/simple-search?filterquery="+URLEncoder.encode(fvalue.getAsFilterQuery(),"UTF-8")
+	                + "/advanced-search?filterquery="+URLEncoder.encode(fvalue.getAsFilterQuery(),"UTF-8")
 	                + "&amp;filtername="+URLEncoder.encode(f,"UTF-8")
 	                + "&amp;filtertype="+URLEncoder.encode(fvalue.getFilterType(),"UTF-8") %>"
 	                title="<fmt:message key="jsp.search.facet.narrow"><fmt:param><%=fvalue.getDisplayedValue() %></fmt:param></fmt:message>">
