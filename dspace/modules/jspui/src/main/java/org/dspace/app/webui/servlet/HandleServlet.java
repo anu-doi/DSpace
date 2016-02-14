@@ -175,7 +175,7 @@ public class HandleServlet extends DSpaceServlet
             // throwing a NPE when checking community authorization
             // and firing a usage event for the DSO we're reporting for
             return;
-        } else if ("/simple-search".equals(extraPathInfo) || StringUtils.startsWith(extraPathInfo, "simple-search?")) {
+        } else if ("/advanced-search".equals(extraPathInfo) || StringUtils.startsWith(extraPathInfo, "advanced-search?")) {
         	// Add the location if we have a community or collection
         	if (dso instanceof Community)
         	{

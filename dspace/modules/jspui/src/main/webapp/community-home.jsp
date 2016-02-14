@@ -34,7 +34,8 @@
 <%@ page import="org.dspace.content.*" %>
 <%@ page import="org.dspace.core.ConfigurationManager" %>
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
-
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.sql.SQLException" %>
 
 <%
     // Retrieve attributes
@@ -89,7 +90,6 @@
             }
 %>
         </h1>
-		<h3><fmt:message key="jsp.community-home.heading1"/></h3>
 	</div>
 <%  if (logo != null) { %>
      <div class="marginbottom">
@@ -100,38 +100,22 @@
  
 
 <div class="panel panel-primary">
-	<div class="panel-heading">Search <%= community.getName() %></div>
+	<form class="anuform" method="get" action="<%= request.getContextPath() %>/advanced-search">
+	<fieldset>
+	<legend>Search <%= community.getName() %></legend>
 	<div class="panel-body">
-		<form method="get" action="<%= request.getContextPath() %>/simple-search">
-			For:
+			<label for="tlocation" class="overrideanuform"><fmt:message key="jsp.search.results.searchin"/></label>
 			<input type="text"  placeholder="" name="query" id="collectionquery" size="25" />
 			<input type="hidden" name="location" value="<%= community.getHandle() %>" />
-			<button type="submit" class="btn"><span>GO</span></button>
-		</form>
 	</div>
+	</fieldset>
+	<p class="text-right">
+		<a class="nounderline" href="<%= request.getContextPath() %>/advanced-search"><input class="btn-uni-grad btn-medium" type="button" value="Reset" /></a>
+		<input class="btn-uni-grad btn-medium" type="submit" id="main-query-submit" value="Search">
+	</p>
+	</form>
 </div>
 
-<%-- Browse --%>
-<div class="panel panel-primary marginbottom">
-	<div class="panel-heading"><fmt:message key="jsp.general.browse"/></div>
-	<div class="panel-body">
-   				<%-- Insert the dynamic list of browse options --%>
-<%
-	for (int i = 0; i < bis.length; i++)
-	{
-		String key = "browse.menu." + bis[i].getName();
-%>
-	<form method="get" action="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/browse">
-		<input type="hidden" name="type" value="<%= bis[i].getName() %>"/>
-		<%-- <input type="hidden" name="community" value="<%= community.getHandle() %>" /> --%>
-		<input class="btn btn-default col-md-3" type="submit" name="submit_browse" value="<fmt:message key="<%= key %>"/>"/>
-	</form>
-<%	
-	}
-%>
-			
-	</div>
-</div>
 <% if (StringUtils.isNotBlank(intro)) { %>
   <%= intro %>
 <% } %>
@@ -145,6 +129,70 @@
 </div>	
 	<% } %>
 
+<%!
+	public void listCommunities(Community[] communities,  JspWriter out, HttpServletRequest request, boolean topLevel) throws IOException, SQLException
+	{
+		if (communities.length > 0)
+		{
+			if (!topLevel) {
+				out.println("<ul class=\"linklist\">");
+			}
+			for (Community comm : communities) {
+				if (topLevel) {
+						out.println("<h3 class=\"nounderline\">");
+					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
+						out.println("</h3>");
+				
+				}
+				else {
+					out.println("<li>");
+					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
+				}
+				listCommunities(comm.getSubcommunities(), out, request, false);
+				listCollections(comm.getCollections(), out, request);
+				if (!topLevel) {
+					out.println("</li>");
+				}
+			}
+			if (!topLevel) {
+				out.println("</ul>");
+			}
+		}
+	}
+	
+	public void listCollections(Collection[] collections, JspWriter out, HttpServletRequest request) throws IOException, SQLException
+	{
+		if (collections.length > 0)
+		{
+			out.println("<ul class=\"linklist\">");
+			for (Collection coll : collections) {
+				out.println("<li>");
+				out.println("<a href=\""+request.getContextPath()+"/handle/"+coll.getHandle()+"\">"+coll.getName()+"</a>");
+				out.println("</li>");
+			}
+			out.println("</ul>");
+		}
+	}
+%>
+
+<div>
+<h2>Communities & Collections</h2>
+<% 
+    if (subcommunities.length != 0)
+	{
+%>
+
+<%
+	listCommunities(subcommunities, out, request, true);
+%>
+<% } 
+	if (collections.length > 0) {
+		listCollections(collections, out, request);
+	}
+
+%>
+</div>
+
 <div class="row">
 
     <%
@@ -152,121 +200,6 @@
     	int discovery_facet_cols = 4;
     %>
 	<%@ include file="discovery/static-sidebar-facet.jsp" %>
-</div>
-<div class="row">
-<%
-	boolean showLogos = ConfigurationManager.getBooleanProperty("jspui.community-home.logos", true);
-	if (subcommunities.length != 0)
-    {
-%>
-	<div class="col-md-6">
-
-		<h3><fmt:message key="jsp.community-home.heading3"/></h3>
-   
-        <div class="list-group">
-<%
-        for (int j = 0; j < subcommunities.length; j++)
-        {
-%>
-			<div class="list-group-item row">  
-<%  
-		Bitstream logoCom = subcommunities[j].getLogo();
-		if (showLogos && logoCom != null) { %>
-			<div class="col-md-3">
-		        <img alt="Logo" class="img-responsive" src="<%= request.getContextPath() %>/retrieve/<%= logoCom.getID() %>" /> 
-			</div>
-			<div class="col-md-9">
-<% } else { %>
-			<div class="col-md-12">
-<% }  %>		
-
-	      <h4 class="list-group-item-heading"><a href="<%= request.getContextPath() %>/handle/<%= subcommunities[j].getHandle() %>">
-	                <%= subcommunities[j].getMetadata("name") %></a>
-<%
-                if (ConfigurationManager.getBooleanProperty("webui.strengths.show"))
-                {
-%>
-                    [<%= ic.getCount(subcommunities[j]) %>]
-<%
-                }
-%>
-	    		<% if (remove_button) { %>
-	                <form class="btn-group" method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
-			          <input type="hidden" name="parent_community_id" value="<%= community.getID() %>" />
-			          <input type="hidden" name="community_id" value="<%= subcommunities[j].getID() %>" />
-			          <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_DELETE_COMMUNITY%>" />
-	                  <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-	                </form>
-	    		<% } %>
-			    </h4>
-                <p class="collectionDescription"><%= subcommunities[j].getMetadata("short_description") %></p>
-            </div>
-         </div> 
-<%
-        }
-%>
-   </div>
-</div>
-<%
-    }
-%>
-
-<%
-    if (collections.length != 0)
-    {
-%>
-	<div class="col-md-6">
-
-        <%-- <h2>Collections in this community</h2> --%>
-		<h3><fmt:message key="jsp.community-home.heading2"/></h3>
-		<div class="list-group">
-<%
-        for (int i = 0; i < collections.length; i++)
-        {
-%>
-			<div class="list-group-item row">  
-<%  
-		Bitstream logoCol = collections[i].getLogo();
-		if (showLogos && logoCol != null) { %>
-			<div class="col-md-3">
-		        <img alt="Logo" class="img-responsive" src="<%= request.getContextPath() %>/retrieve/<%= logoCol.getID() %>" /> 
-			</div>
-			<div class="col-md-9">
-<% } else { %>
-			<div class="col-md-12">
-<% }  %>		
-
-	      <h4 class="list-group-item-heading"><a href="<%= request.getContextPath() %>/handle/<%= collections[i].getHandle() %>">
-	      <%= collections[i].getMetadata("name") %></a>
-<%
-            if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
-            {
-%>
-                [<%= ic.getCount(collections[i]) %>]
-<%
-            }
-%>
-	    <% if (remove_button) { %>
-	      <form class="btn-group" method="post" action="<%=request.getContextPath()%>/tools/edit-communities">
-	          <input type="hidden" name="parent_community_id" value="<%= community.getID() %>" />
-	          <input type="hidden" name="community_id" value="<%= community.getID() %>" />
-	          <input type="hidden" name="collection_id" value="<%= collections[i].getID() %>" />
-	          <input type="hidden" name="action" value="<%=EditCommunitiesServlet.START_DELETE_COLLECTION%>" />
-	          <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-	      </form>
-	    <% } %>
-		</h4>
-      <p class="collectionDescription"><%= collections[i].getMetadata("short_description") %></p>
-    </div>
-  </div>  
-<%
-        }
-%>
-  </div>
-</div>
-<%
-    }
-%>
 </div>
 </anu:content>
 <anu:content layout="narrow">
@@ -374,7 +307,7 @@
     	       width = 36;
     	    }
 %>
-    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= community.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
+    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= community.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" style="margin: 3px 0 3px" /></a>
 <%
     	}
 	%>

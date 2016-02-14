@@ -51,80 +51,44 @@
 %>
 
 <%!
-    void showCommunity(Community c, JspWriter out, HttpServletRequest request, ItemCounter ic,
-    		Map collectionMap, Map subcommunityMap) throws ItemCountException, IOException, SQLException
-    {
-		boolean showLogos = ConfigurationManager.getBooleanProperty("jspui.community-list.logos", true);
-        out.println( "<li class=\"media well\">" );
-        Bitstream logo = c.getLogo();
-        if (showLogos && logo != null)
-        {
-        	out.println("<a class=\"pull-left col-md-2\" href=\"" + request.getContextPath() + "/handle/" 
-        		+ c.getHandle() + "\"><img class=\"media-object img-responsive\" src=\"" + 
-        		request.getContextPath() + "/retrieve/" + logo.getID() + "\" alt=\"community logo\"></a>");
-        }
-        out.println( "<div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"" + request.getContextPath() + "/handle/" 
-        	+ c.getHandle() + "\">" + c.getMetadata("name") + "</a>");
-        if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
-        {
-            out.println(" <span class=\"badge\">" + ic.getCount(c) + "</span>");
-        }
-		out.println("</h4>");
-		/*if (StringUtils.isNotBlank(c.getMetadata("short_description")))
-		{
-			out.println(c.getMetadata("short_description"));
-		}*/
-		out.println("<br>");
-        // Get the collections in this community
-        Collection[] cols = (Collection[]) collectionMap.get(c.getID());
-        if (cols != null && cols.length > 0)
-        {
-            out.println("<ul class=\"media-list\">");
-            for (int j = 0; j < cols.length; j++)
-            {
-                out.println("<li class=\"media well\">");
-                
-                Bitstream logoCol = cols[j].getLogo();
-                if (showLogos && logoCol != null)
-                {
-                	out.println("<a class=\"pull-left col-md-2\" href=\"" + request.getContextPath() + "/handle/" 
-                		+ cols[j].getHandle() + "\"><img class=\"media-object img-responsive\" src=\"" + 
-                		request.getContextPath() + "/retrieve/" + logoCol.getID() + "\" alt=\"collection logo\"></a>");
-                }
-                out.println("<div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"" + request.getContextPath() + "/handle/" + cols[j].getHandle() + "\">" + cols[j].getMetadata("name") +"</a>");
-				if(ConfigurationManager.getBooleanProperty("webui.strengths.show"))
-                {
-                    out.println(" [" + ic.getCount(cols[j]) + "]");
-                }
-				out.println("</h4>");
-				/*if (StringUtils.isNotBlank(cols[j].getMetadata("short_description")))
-				{
-					out.println(cols[j].getMetadata("short_description"));
-				}*/
-				out.println("</div>");
-                out.println("</li>");
-            }
-            out.println("</ul>");
-        }
 
-        // Get the sub-communities in this community
+	void showCommunity(Community c, JspWriter out, HttpServletRequest request, ItemCounter ic,
+			Map collectionMap, Map subcommunityMap) throws ItemCountException, IOException, SQLException
+	{
+
+        Collection[] cols = (Collection[]) collectionMap.get(c.getID());
         Community[] comms = (Community[]) subcommunityMap.get(c.getID());
-        if (comms != null && comms.length > 0)
-        {
-            out.println("<ul class=\"media-list\">");
-            for (int k = 0; k < comms.length; k++)
-            {
-               showCommunity(comms[k], out, request, ic, collectionMap, subcommunityMap);
-            }
-            out.println("</ul>"); 
-        }
-        out.println("</div>");
-        out.println("</li>");
-    }
+        out.println("<li>");
+		//out.println("<a class=\"right\" href=\""+request.getContextPath()+"/handle/"+c.getHandle()+"\"><img class=\"absmiddle left padright\" src=\"http://style.anu.edu.au/_anu/images/icons/silk/link.png\" /></a>");
+		out.println("<h3 class=\"nounderline\">"+c.getName()+"</h3>");
+		out.println("<div class=\"anutoggle\">");
+		if (cols != null && cols.length > 0)
+		{
+			out.println("<ul class=\"nounderline nopadtop\">");
+			for (int j = 0; j < cols.length; j++)
+			{
+				out.println("<li><a href=\""+request.getContextPath()+"/handle/"+cols[j].getHandle()+"\">"+cols[j].getName()+"</a></li>");
+			}
+			out.println("</ul>");
+		}
+		if (comms != null && comms.length > 0)
+		{
+			out.println("<ul>");
+			{
+			for (int k = 0; k < comms.length; k++)
+			{
+	        	showCommunity(comms[k], out, request, ic, collectionMap, subcommunityMap);
+			}
+			}
+			out.println("</ul>");
+		}
+		out.println("</div>");
+		out.println("</li>");
+	}
 %>
 
 <anu:content layout="doublewide">
-<dspace:layout titlekey="jsp.community-list.title">
+<dspace:layout titlekey="jsp.community-list.title" locbar="off">
 
 <%
     if (admin_button)
@@ -146,20 +110,28 @@
 <%
     }
 %>
-	<h1><fmt:message key="jsp.community-list.title"/></h1>
-	<p><fmt:message key="jsp.community-list.text1"/></p>
+	<h1>
+		<fmt:message key="jsp.community-list.title" />
+	</h1>
+	<p>
+	<fmt:message key="jsp.community-list.text1">
+		<fmt:param value="<%= request.getContextPath() %>" />
+		<fmt:param value="handle/1885/1" />
+		<fmt:param value="handle/1885/2" />
+	</fmt:message>
+	</p>
 
 <% if (communities.length != 0)
 {
-%>
-    <ul class="media-list">
-<%
-        for (int i = 0; i < communities.length; i++)
-        {
-            showCommunity(communities[i], out, request, ic, collectionMap, subcommunityMap);
-        }
-%>
-    </ul>
+	%>
+	<ul class="noindent nobullet">
+	<% 
+	for (int i = 0; i < communities.length; i++)
+	{
+        showCommunity(communities[i], out, request, ic, collectionMap, subcommunityMap);
+	}
+	%>
+	</ul>
  
 <% }
 %>

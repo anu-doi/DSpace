@@ -385,6 +385,117 @@ public class ItemTag extends TagSupport
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         Context context = UIUtil.obtainContext(request);
         Locale sessionLocale = UIUtil.getSessionLocale(request);
+
+        String noTableKey = "webui.itemdisplay." + style + ".notable";
+        String noTableConfigLine = ConfigurationManager.getProperty(noTableKey);
+        
+        if (noTableConfigLine != null && noTableConfigLine.length() > 0)
+        {
+        	out.println("<div class=\"w-doublenarrow\">");
+        	StringTokenizer st = new StringTokenizer(noTableConfigLine, ",");
+        	while (st.hasMoreTokens())
+        	{
+        		String field = st.nextToken().trim();
+        		boolean isNoLabel = false;
+        		if (field.contains("nolabel"))
+        		{
+            		isNoLabel = field.contains("nolabel");
+            		field = field.replaceAll("\\(nolabel\\)", "");
+        		}
+        		
+                String browseIndex;
+                try
+                {
+                    browseIndex = getBrowseField(field);
+                }
+                catch (BrowseException e)
+                {
+                    log.error(e);
+                    browseIndex = null;
+                }
+
+                // Get the separate schema + element + qualifier
+
+                String[] eq = field.split("\\.");
+                String schema = eq[0];
+                String element = eq[1];
+                String qualifier = null;
+                if (eq.length > 2 && eq[2].equals("*"))
+                {
+                    qualifier = Item.ANY;
+                }
+                else if (eq.length > 2)
+                {
+                    qualifier = eq[2];
+                }
+                
+                if (MetadataExposure.isHidden(context, schema, element, qualifier))
+                {
+                    continue;
+                }
+                
+                Metadatum[] values = item.getMetadata(schema, element, qualifier, Item.ANY);
+                
+                if (values.length > 0)
+                {
+                	  if (!isNoLabel)
+	                  {
+	                  	String label = null;
+	                      try
+	                      {
+	                          label = I18nUtil.getMessage("metadata."
+	                                  + ("default".equals(this.style) ? "" : this.style + ".") + field,
+	                                  context);
+	                      }
+	                      catch (MissingResourceException e)
+	                      {
+	                          // if there is not a specific translation for the style we
+	                          // use the default one
+	                          label = LocaleSupport.getLocalizedMessage(pageContext,
+	                                  "metadata." + field);
+	                      }
+	                      out.println("<h3>"+label+"</h3>");
+	                  }
+                	  out.print("<p>");
+                	  for (int i = 0; i < values.length; i++)
+                	  {
+    	                  if (browseIndex != null)
+    	                  {
+    	                	  String argument, value;
+    	                	  if (values[i].authority != null && values[i].confidence >= MetadataAuthorityManager.getManager()
+    	                			  .getMinConfidence(values[i].schema, values[i].element, values[i].qualifier))
+    	                	  {
+    	                		  argument = "authority";
+    	                		  value = values[i].authority;
+    	                	  }
+    	                	  else
+    	                	  {
+    	                		  argument = "value";
+    	                		  value = values[i].value;
+    	                	  }
+  	                    	  out.print("<a class=\"" + ("authority".equals(argument)?"authority ":"") + browseIndex + "\""
+                                    + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
+			        				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
+			        				+ "</a>");
+    	                  }
+    	                  else {
+    	                	  out.print(values[i].value);
+    	                  }
+	                	  if (i < values.length - 1)
+	                	  {
+	                		  out.print("; "); 
+	                	  }
+                	  }
+                	  out.println("</p>");
+                }
+                
+
+//				isDisplay = style.equals("inputform");
+                
+        	}
+        	out.println("</div>");
+        }
+        
         String configLine = styleSelection.getConfigurationForStyle(style);
 
         if (configLine == null)
@@ -392,8 +503,11 @@ public class ItemTag extends TagSupport
             configLine = defaultFields;
         }
 
-        out.println("<table class=\"table itemDisplayTable\">");
+        out.println("<div class=\"divline-bold-uni\"></div>");
+        out.println("<table class=\"tbl-row-bdr fullwidth noborder\">");
 
+        listCollections();
+        
         /*
          * Break down the configuration into fields and display them
          * 
@@ -472,7 +586,7 @@ public class ItemTag extends TagSupport
             
             if (values.length > 0)
             {
-                out.print("<tr><td class=\"metadataFieldLabel\">");
+                out.print("<tr><th class=\"tbl25\">");
 
                 String label = null;
                 try
@@ -490,7 +604,7 @@ public class ItemTag extends TagSupport
                 }
                 
                 out.print(label);
-                out.print(":&nbsp;</td><td class=\"metadataFieldValue\">");
+                out.print(":&nbsp;</th><td class=\"tbl75\">");
                 
                 //If the values are in controlled vocabulary and the display value should be shown
                 if (isDisplay){
@@ -634,9 +748,7 @@ public class ItemTag extends TagSupport
                 out.println("</td></tr>");
             }
         }
-
-        listCollections();
-
+        
         out.println("</table><br/>");
 
         listBitstreams();
@@ -662,29 +774,29 @@ public class ItemTag extends TagSupport
         // Get all the metadata
         Metadatum[] values = item.getMetadata(Item.ANY, Item.ANY, Item.ANY, Item.ANY);
 
-        out.println("<div class=\"panel panel-info\"><div class=\"panel-heading\">"
-                + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.full") + "</div>");
+//        out.println("<div class=\"panel panel-info\"><div class=\"panel-heading\">"
+//                + LocaleSupport.getLocalizedMessage(pageContext,
+//                        "org.dspace.app.webui.jsptag.ItemTag.full") + "</div>");
 
         // Three column table - DC field, value, language
         out.println("<table class=\"panel-body table itemDisplayTable\">");
-        out.println("<tr><th id=\"s1\" class=\"standard\">"
-                + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.dcfield")
-                + "</th><th id=\"s2\" class=\"standard\">"
-                + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.value")
+//        out.println("<tr><th id=\"s1\" class=\"standard\">"
+//                + LocaleSupport.getLocalizedMessage(pageContext,
+//                        "org.dspace.app.webui.jsptag.ItemTag.dcfield")
+//                + "</th><th id=\"s2\" class=\"standard\">"
+//                + LocaleSupport.getLocalizedMessage(pageContext,
+//                        "org.dspace.app.webui.jsptag.ItemTag.value")
                         /*
                 + "</th><th id=\"s3\" class=\"standard\">"
                 + LocaleSupport.getLocalizedMessage(pageContext,
                         "org.dspace.app.webui.jsptag.ItemTag.lang")*/
-                + "</th></tr>");
+//                + "</th></tr>");
 
         for (int i = 0; i < values.length; i++)
         {
             if (!MetadataExposure.isHidden(context, values[i].schema, values[i].element, values[i].qualifier))
             {
-                out.print("<tr><td headers=\"s1\" class=\"metadataFieldLabel\">");
+                out.print("<tr><td headers=\"s1\" class=\"tbh25\">");
                 out.print(values[i].schema);
                 out.print("." + values[i].element);
 
@@ -693,7 +805,7 @@ public class ItemTag extends TagSupport
                     out.print("." + values[i].qualifier);
                 }
 
-                out.print("</td><td headers=\"s2\" class=\"metadataFieldValue\">");
+                out.print("</td><td headers=\"s2\" class=\"tbl75\">");
                 out.print(Utils.addEntities(values[i].value));
                 /*out.print("</td><td headers=\"s3\" class=\"metadataFieldValue\">");
 
@@ -735,7 +847,7 @@ public class ItemTag extends TagSupport
 
         if (collections != null)
         {
-            out.print("<tr><td class=\"metadataFieldLabel\">");
+            out.print("<tr><th class=\"tbl25\">");
             if (item.getHandle()==null)  // assume workspace item
             {
                 out.print(LocaleSupport.getLocalizedMessage(pageContext,
@@ -746,7 +858,7 @@ public class ItemTag extends TagSupport
                 out.print(LocaleSupport.getLocalizedMessage(pageContext,
                           "org.dspace.app.webui.jsptag.ItemTag.appears"));
             }
-            out.print("</td><td class=\"metadataFieldValue\""+
+            out.print("</th><td class=\"tbl75\" "+
             		(style.equals("full")?"colspan=\"2\"":"")
             		+">");
 
@@ -774,11 +886,10 @@ public class ItemTag extends TagSupport
         HttpServletRequest request = (HttpServletRequest) pageContext
                 .getRequest();
 
-        out.print("<div class=\"panel panel-info\">");
-        out.println("<div class=\"panel-heading\">"
-                + LocaleSupport.getLocalizedMessage(pageContext,
-                        "org.dspace.app.webui.jsptag.ItemTag.files")
-                + "</div>");
+        out.println("<div>");
+        //TODO LocaleSupport message
+        out.println("<h3 class=\"padtop nopadbottom\">Download</h3>");
+        out.println("<div class=\"divline-bold-uni\"></div>");
 
         try
         {
@@ -841,7 +952,7 @@ public class ItemTag extends TagSupport
         		}
 
         		out
-                    .println("<table class=\"table panel-body\"><tr><th id=\"t1\" class=\"standard\">"
+                    .println("<table class=\"tbl-row-bdr fullwidth noborder\"><tr><th id=\"t1\">"
                             + LocaleSupport.getLocalizedMessage(pageContext,
                                     "org.dspace.app.webui.jsptag.ItemTag.file")
                             + "</th>");
@@ -850,20 +961,31 @@ public class ItemTag extends TagSupport
         		{
 
         			out
-                        .println("<th id=\"t2\" class=\"standard\">"
+                        .println("<th id=\"t2\">"
                                 + LocaleSupport
                                         .getLocalizedMessage(pageContext,
                                                 "org.dspace.app.webui.jsptag.ItemTag.description")
                                 + "</th>");
         		}
 
-        		out.println("<th id=\"t3\" class=\"standard\">"
+        		out.println("<th id=\"t3\">"
                     + LocaleSupport.getLocalizedMessage(pageContext,
                             "org.dspace.app.webui.jsptag.ItemTag.filesize")
-                    + "</th><th id=\"t4\" class=\"standard\">"
+                    + "</th><th id=\"t4\">"
                     + LocaleSupport.getLocalizedMessage(pageContext,
                             "org.dspace.app.webui.jsptag.ItemTag.fileformat")
-                    + "</th><th>&nbsp;</th></tr>");
+                    + "</th>");
+        		if (thumbs.length > 0 && showThumbs)
+        		{
+        			out.println("<th class=\"text-center\" id=\"t5\">"
+        					+ LocaleSupport.getLocalizedMessage(pageContext
+        							, "org.dspace.app.webui.jsptag.ItemTag.image")
+        					+ "</th>");
+        		}
+        		else {
+        			out.println("<th>&nbsp;</th>");
+        		}
+        		out.println("</tr>");
 
             	// if primary bitstream is html, display a link for only that one to
             	// HTMLServlet
@@ -877,7 +999,7 @@ public class ItemTag extends TagSupport
             			handle = "db-id/" + item.getID();
             		}
 
-            		out.print("<tr><td headers=\"t1\" class=\"standard\">");
+            		out.print("<tr><td headers=\"t1\">");
                     out.print("<a target=\"_blank\" href=\"");
                     out.print(request.getContextPath());
                     out.print("/html/");
@@ -892,18 +1014,18 @@ public class ItemTag extends TagSupport
                     
             		if (multiFile)
             		{
-            			out.print("</td><td headers=\"t2\" class=\"standard\">");
+            			out.print("</td><td headers=\"t2\">");
 
             			String desc = primaryBitstream.getDescription();
             			out.print((desc != null) ? desc : "");
             		}
 
-            		out.print("</td><td headers=\"t3\" class=\"standard\">");
+            		out.print("</td><td headers=\"t3\">");
                     out.print(UIUtil.formatFileSize(primaryBitstream.getSize()));
-                    out.print("</td><td headers=\"t4\" class=\"standard\">");
+                    out.print("</td><td headers=\"t4\">");
             		out.print(primaryBitstream.getFormatDescription());
             		out
-                        .print("</td><td class=\"standard\"><a class=\"btn btn-primary\" target=\"_blank\" href=\"");
+                        .print("</td><td><a class=\"btn btn-primary\" target=\"_blank\" href=\"");
             		out.print(request.getContextPath());
             		out.print("/html/");
             		out.print(handle + "/");
@@ -961,7 +1083,7 @@ public class ItemTag extends TagSupport
                                             Constants.DEFAULT_ENCODING) + "\">";
 
             					out
-                                    .print("<tr><td headers=\"t1\" class=\"standard\">");
+                                    .print("<tr><td headers=\"t1\">");
                                 out.print("<a ");
             					out.print(bsLink);
             					out.print(bitstreams[k].getName());
@@ -971,20 +1093,20 @@ public class ItemTag extends TagSupport
             					if (multiFile)
             					{
             						out
-                                        .print("</td><td headers=\"t2\" class=\"standard\">");
+                                        .print("</td><td headers=\"t2\">");
 
             						String desc = bitstreams[k].getDescription();
             						out.print((desc != null) ? desc : "");
             					}
 
             					out
-                                    .print("</td><td headers=\"t3\" class=\"standard\">");
+                                    .print("</td><td headers=\"t3\">");
                                 out.print(UIUtil.formatFileSize(bitstreams[k].getSize()));
             					out
-                                .print("</td><td headers=\"t4\" class=\"standard\">");
+                                .print("</td><td headers=\"t4\">");
             					out.print(bitstreams[k].getFormatDescription());
             					out
-                                    .print("</td><td class=\"standard\" align=\"center\">");
+                                    .print("</td><td headers=\"t5\" align=\"center\">");
 
             					// is there a thumbnail bundle?
             					if ((thumbs.length > 0) && showThumbs)
@@ -1008,34 +1130,13 @@ public class ItemTag extends TagSupport
 
             							out.print("<a ");
             							out.print(bsLink);
-            							out.print("<img src=\"" + myPath + "\" ");
+            							out.print("<img class=\"bdr-solid bdr-grey\" src=\"" + myPath + "\" ");
             							out.print("alt=\"" + tAltText
             									+ "\" /></a><br />");
                                                             }
             						}
             					}
-
-            					/*out.print("<a class=\"btn btn-primary\" ");
-            					out
-                                    .print(bsLink
-                                            + LocaleSupport
-                                                    .getLocalizedMessage(
-                                                            pageContext,
-                                                            "org.dspace.app.webui.jsptag.ItemTag.view")
-                                            + "</a>");*/
-            					try {
-            						if (AuthorizeManager.authorizeActionBoolean(context,  bitstreams[k], Constants.READ)) {
-                    					out.print("<a class=\"btn btn-primary\" ");
-                    					out
-                                            .print(bsLink
-                                                    + LocaleSupport
-                                                            .getLocalizedMessage(
-                                                                    pageContext,
-                                                                    "org.dspace.app.webui.jsptag.ItemTag.view")
-                                                    + "</a>");
-            						}
-            					} catch (Exception e) {
-            					}
+            					
 								try {
 									if (showRequestCopy && !AuthorizeManager
 											.authorizeActionBoolean(context,
@@ -1139,6 +1240,7 @@ public class ItemTag extends TagSupport
      */
     private String getBrowseField(String field) throws BrowseException
     {
+    	log.info("Field: " + field);
         for (String indexName : linkedMetadata.keySet())
         {            
             StringTokenizer bw_dcf = new StringTokenizer(linkedMetadata.get(indexName), ".");

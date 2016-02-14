@@ -403,32 +403,11 @@
 	</div>
 <div class="panel panel-primary">
 	<%-- give us the top report on what we are looking at --%>
-	<div class="panel-heading text-center">
 		<fmt:message key="browse.full.range">
 			<fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
 			<fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
 			<fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
 		</fmt:message>
-
-	<%--  do the top previous and next page links --%>
-<% 
-	if (bi.hasPrevPage())
-	{
-%>
-	<a class="pull-left" href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>&nbsp;
-<%
-	}
-%>
-
-<%
-	if (bi.hasNextPage())
-	{
-%>
-	&nbsp;<a class="pull-right" href="<%= next %>"><fmt:message key="browse.full.next"/></a>
-<%
-	}
-%>
-	</div>
 	
     <%-- output the results using the browselist tag --%>
     <%
@@ -451,32 +430,74 @@
 	<%
     	}
 	%>
-	<%-- give us the bottom report on what we are looking at --%>
-	<div class="panel-footer text-center">
-		<fmt:message key="browse.full.range">
-			<fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
-			<fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
-			<fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
-		</fmt:message>
-
-	<%--  do the bottom previous and next page links --%>
-<% 
+<div class="discovery-result-pagination row container">
+    <ul class="pagination pull-right">
+	<%
 	if (bi.hasPrevPage())
 	{
-%>
-	<a class="pull-left" href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>&nbsp;
-<%
+	    %><li><a href="<%= prev %>"><fmt:message key="browse.full.prev" /></a></li><%
 	}
-%>
-
-<%
+	else
+	{
+	    %><li class="disabled"><span><fmt:message key="browse.full.prev" /></span></li><%
+	}
+	
+	int resultsPerPage = bi.getResultsPerPage();
+	int currentOffset = bi.getOffset();
+	int currentPage = bi.getOffset() / resultsPerPage;
+	
+	int totalPages = bi.getTotal() / resultsPerPage;
+	if (bi.getTotal() % resultsPerPage > 0)
+	{
+		totalPages++;
+	}
+	
+	if ((currentPage - 3) > 0)
+	{
+		String firstURL = sharedLink + "&amp;offset=0";
+	    %><li><a href="<%= firstURL %>">1</a></li><li class="disabled"><span>...<span></li><%
+	}
+	
+	int startPage = (currentPage - 3 > 0 ? currentPage - 3 : 0);
+	int endPage = (currentPage + 3 < totalPages ? currentPage + 3 : totalPages);
+	
+	for (long q = startPage; q < endPage; q++)
+	{
+		String myLink = "<li><a href=\"" + sharedLink + "&amp;offset=";
+		
+		if (q == currentPage)
+		{
+			myLink = "<li class=\"active\"><span>" + (q + 1) + "</span><li>";
+		}
+		else
+		{
+			myLink = myLink + q * resultsPerPage
+					+ "\">"
+					+ (q + 1)
+					+ "</a></li>";
+		}
+		%>
+		<%= myLink %>
+		
+		<%
+	}
+	
+	if (totalPages > endPage)
+	{
+		int lastOffset = (totalPages - 1) * resultsPerPage;
+		String lastPageLink = sharedLink + "&amp;offset=" + lastOffset;
+		%><li class="disabled"><span>...</span></li><li><a href="<%= lastPageLink %>"><%= totalPages %></a></li><%
+	}
+	
 	if (bi.hasNextPage())
 	{
-%>
-	&nbsp;<a class="pull-right" href="<%= next %>"><fmt:message key="browse.full.next"/></a>
-<%
+	    %><li><a href="<%= next %>"><fmt:message key="browse.full.next" /></a></li><%
+	}
+	else {
+	    %><li class="disabled"><span><fmt:message key="browse.full.next" /></span></li><%
 	}
 %>
+	</ul>
 	</div>
 </div>
 	<%-- dump the results for debug (uncomment to enable) --%>
