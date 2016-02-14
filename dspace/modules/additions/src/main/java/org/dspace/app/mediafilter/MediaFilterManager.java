@@ -781,8 +781,9 @@ public class MediaFilterManager
         AuthorizeManager.removeAllPolicies(c, b);
 
         //- Determine if this is a public-derivative format
-        if(publicFiltersClasses.contains(formatFilter.getClass().getSimpleName())
-        		&& new Date().after(EmbargoManager.getEmbargoTermsAsDate(c, item).toDate())) {
+        DCDate embargoDate = EmbargoManager.getEmbargoTermsAsDate(c, item);
+		if(publicFiltersClasses.contains(formatFilter.getClass().getSimpleName())
+        		&& (embargoDate == null || new Date().after(embargoDate.toDate()))) {
             //- Set derivative bitstream to be publicly accessible
             Group anonymous = Group.find(c, 0);
             AuthorizeManager.addPolicy(c, b, Constants.READ, anonymous);
