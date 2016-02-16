@@ -43,6 +43,7 @@ import org.dspace.statistics.content.StatisticsDataViews;
 import org.dspace.statistics.content.StatisticsListing;
 import org.dspace.statistics.content.StatisticsTable;
 import org.dspace.statistics.content.filter.StatisticsSolrDateFilter;
+import org.dspace.statistics.util.SpiderDetector;
 
 
 
@@ -69,10 +70,12 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 		// is the statistics data publically viewable?
 		boolean privatereport = ConfigurationManager.getBooleanProperty("usage-statistics", "authorization.admin");
 
+		boolean isSpider = SpiderDetector.isSpider(request);
+		
         // is the user a member of the Administrator (1) group?
         boolean admin = Group.isMember(context, 1);
 
-        if (!privatereport || admin)
+        if ((!privatereport && !isSpider) || admin)
         {
             displayStatistics(context, request, response);
         }
