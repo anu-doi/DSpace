@@ -120,7 +120,7 @@
 		<li><a href="<%= openResearchURL %>/index.php"><fmt:message key="jsp.layout.navbar-default.home" /></a></li>
 		<li><a href="<%= openResearchURL %>/about-open-research"><fmt:message key="jsp.layout.navbar-default.about-open-research" /></a></li>
 		<li><a href="<%= request.getContextPath() %>/community-list"><fmt:message key="jsp.layout.navbar-default.communities-collections" /></a></li>
-		<li><a href="<%= request.getContextPath() %>/contribute-your-research/index.php"><fmt:message key="jsp.layout.navbar-default.contrib-your-research" /></a>
+		<li><a href="<%= openResearchURL %>/contribute-your-research/index.php"><fmt:message key="jsp.layout.navbar-default.contrib-your-research" /></a>
 			<ul>
 				<li><a href="<%= openResearchURL %>/contribute-your-research/anu-digital-theses/index.php"><fmt:message key="jsp.layout.navbar-default.anu-digital-theses" /></a>
 					<ul>
