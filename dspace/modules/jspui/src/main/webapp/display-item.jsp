@@ -26,6 +26,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
@@ -273,6 +274,13 @@
 
 	if (altmetricData != null && altmetricData.length() > 0 ) {
 %>
+	<div class="padtop">
+	<c:import url="http://api.elsevier.com:80/content/abstract/citation-count">
+		<c:param value="<%= altmetricData %>" name="doi" />
+		<c:param name="apiKey" value="118b6ce3c3c7f45a9a7925066d849a63" />
+		<c:param name="httpAccept" value="text/html" />
+	</c:import>
+	</div>
 	
 	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 	<div data-badge-details="right" data-badge-type="donut" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed doublewide"></div>
