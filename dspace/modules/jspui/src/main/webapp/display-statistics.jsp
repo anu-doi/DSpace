@@ -296,17 +296,21 @@ IP Ranges
 	<table class="statsTable">
 	<tr>
 		<th></th>
-	<c:forEach var="colLabel" items="${statsTopItems.colLabels}">
-		<th><c:out value="${colLabel}" /></th>
+	<c:forEach var="colLabel" items="${statsTopItems.colLabels}" varStatus="colCounter">
+		<c:if test="${colCounter.index > 0}">
+			<th><c:out value="${colLabel}" /></th>
+		</c:if>
 	</c:forEach>
 	</tr>
 	<c:forEach var="row" items="${statsTopItems.matrix}" varStatus="rowCounter">
 		<tr>
 			<th>
-				<c:out value="${statsTopItems.rowLabels[rowCounter.index]}" />
+				<a href="<%= request.getContextPath() %>/handle/${row[0]}"><c:out value="${statsTopItems.rowLabels[rowCounter.index]}" /></a>
 			</th>
 		<c:forEach var="col" items="${row}" varStatus="colCounter">
-			<td><c:out value="${not empty col ? col : 0}" /></td>
+			<c:if test="${colCounter.index > 0}">
+				<td><c:out value="${not empty col ? col : 0}" /></td>
+			</c:if>
 		</c:forEach>
 		</tr>
 	</c:forEach>
@@ -328,58 +332,103 @@ IP Ranges
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsTopCollections" />
 	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.topcollections"/> <a href="${topCollsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<tr>
-		<th></th>
-	<c:forEach var="colLabel" items="${statsTopCollections.colLabels}">
-		<th><c:out value="${colLabel}" /></th>
-	</c:forEach>
-	</tr>
-	<c:forEach var="row" items="${statsTopCollections.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<c:out value="${statsTopCollections.rowLabels[rowCounter.index]}" />
-			</th>
-		<c:forEach var="col" items="${row}" varStatus="colCounter">
-			<td><c:out value="${not empty col ? col : 0}" /></td>
-		</c:forEach>
-		</tr>
-	</c:forEach>
-	</table>
+	<h2><fmt:message key="jsp.statistics.heading.topcollections"/></h2>
+	<div class="anutoggle">
+		<a href="${topCollsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+		<div id="statsTopCollections" class="stats">
+		Loading statistics please wait...
+		</div>
+	</div>
 </c:if>
 
-<c:if test="${not empty statsTopDownloads}">
-	<c:url var="topDownloadsUrl" value="">
-		<c:param name="sDay" value="${param.sDay}" />
-		<c:param name="sMonth" value="${param.sMonth}" />
-		<c:param name="sYear" value="${param.sYear}" />
-		<c:param name="eDay" value="${param.eDay}" />
-		<c:param name="eMonth" value="${param.eMonth}" />
-		<c:param name="eYear" value="${param.eYear}" />
-		<c:param name="ipRanges" value="${param.ipRanges}" />
-		<c:param name="orderGeo" value="${param.orderGeo}"/>
-		<c:param name="author" value="${param.author}"/>
-		<c:param name="limit" value="${param.limit}"/>
-		<c:param name="format" value="csv" />
-		<c:param name="section" value="statsTopDownloads" />
-	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.filedownloads"/> <a href="${topDownloadsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<tr>
-		<th></th>
-		<th><c:out value="${statsTopDownloads.colLabels[1]}" /></th>
-	</tr>
-	<c:forEach var="row" items="${statsTopDownloads.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<a href="<%= request.getContextPath() %>/handle/${row[0]}"><c:out value="${statsTopDownloads.rowLabels[rowCounter.index]}" /></a>
-			</th>
-			<td><c:out value="${row[1]}" /></td>
-		</tr>
-	</c:forEach>
-	</table>
-</c:if>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('a.toggleLink').click(function(){
+			statsSection = jQuery(this).parent().next('.anutoggle').find('.stats');
+			if (!statsSection.hasClass("loaded")) {
+				queryType = statsSection.attr('id');
+				var params={};
+				window.location.search
+				  .replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+					params[key] = value;
+				  }
+				);
+				params['section'] = queryType;
+				params['format'] = 'json'
+				jQuery.ajax({
+					url: window.location.href
+					, type: "GET"
+					, dataType: "json"
+					, data: params
+					, success: function(data) {
+						statsSection.html('<table class="statsTable"></table>');
+						var table = statsSection.find("table");
+						var headerRow = jQuery("<tr></tr>").appendTo(table);
+						jQuery("<th></th>").appendTo(headerRow);
+						var columns = data.columns
+						for (var i = 0; i < columns.length; i++) {
+							jQuery("<th></th>").text(columns[i].column).appendTo(headerRow);
+						}
+						
+						var values = data.values
+						for (var i = 0; i < values.length; i++) {
+							var row = jQuery("<tr></tr>").appendTo(table);
+							if (values[i].Handle) {
+								var url = data.path + "/handle/" + values[i].Handle;
+								var a = jQuery("<a></a>").attr("href",url).text(values[i].Name);
+								var cell = jQuery("<td></td>").append("<a></a>").appendTo(row);
+								a.appendTo(cell);
+							}
+							else {
+								jQuery("<td></td>").text(values[i].Name).appendTo(row);
+							}
+							
+							for (var j = 0; j < columns.length; j++) {
+								var val = values[i][columns[j].column]
+								if (val) {
+									jQuery("<td></td>").text(val).appendTo(row);
+								}
+								else {
+									jQuery("<td></td>").text("0").appendTo(row);
+								}
+							}
+							
+						}
+						statsSection.html(table);
+						
+						
+						statsSection.addClass("loaded");
+					}
+					, error: function() {
+						console.log('Error retrieving data');
+						statsSection.html('Error retrieving statistics');
+					}
+				})
+			}
+		});
+	});
+</script>
+<c:url var="topDownloadsUrl" value="">
+	<c:param name="sDay" value="${param.sDay}" />
+	<c:param name="sMonth" value="${param.sMonth}" />
+	<c:param name="sYear" value="${param.sYear}" />
+	<c:param name="eDay" value="${param.eDay}" />
+	<c:param name="eMonth" value="${param.eMonth}" />
+	<c:param name="eYear" value="${param.eYear}" />
+	<c:param name="ipRanges" value="${param.ipRanges}" />
+	<c:param name="orderGeo" value="${param.orderGeo}"/>
+	<c:param name="author" value="${param.author}"/>
+	<c:param name="limit" value="${param.limit}"/>
+	<c:param name="format" value="csv" />
+	<c:param name="section" value="statsTopDownloads" />
+</c:url>
+<h2><fmt:message key="jsp.statistics.heading.filedownloads"/></h2>
+<div class="anutoggle">
+	<a href="${topDownloadsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+	<div id="statsTopDownloads" class="stats">
+	Loading statistics please wait...
+	</div>
+</div>
 
 <c:if test="${not empty statsReferralSources}">
 	<c:url var="referralSourceUrl" value="">
@@ -396,25 +445,13 @@ IP Ranges
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsReferralSources" />
 	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.referralSources"/> <a href="${referralSourceUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<tr>
-		<th></th>
-	<c:forEach var="colLabel" items="${statsReferralSources.colLabels}">
-		<th><c:out value="${colLabel}" /></th>
-	</c:forEach>
-	</tr>
-	<c:forEach var="row" items="${statsReferralSources.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<c:out value="${statsReferralSources.rowLabels[rowCounter.index]}" />
-			</th>
-		<c:forEach var="col" items="${row}" varStatus="colCounter">
-			<td><c:out value="${not empty col ? col : 0}" /></td>
-		</c:forEach>
-		</tr>
-	</c:forEach>
-	</table>
+	<h2><fmt:message key="jsp.statistics.heading.referralSources"/></h2>
+	<div class="anutoggle">
+		<a href="${referralSourceUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+		<div id="statsReferralSources" class="stats">
+		Loading statistics please wait...
+		</div>
+	</div>
 </c:if>
 
 <c:url var="monthlyVisitsUrl" value="">
@@ -431,25 +468,13 @@ IP Ranges
 	<c:param name="format" value="csv" />
 	<c:param name="section" value="statsMonthlyVisits" />
 </c:url>
-<h2><fmt:message key="jsp.statistics.heading.monthlyvisits"/> <a href="${monthlyVisitsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-<table class="statsTable">
-<tr>
-	<th></th>
-<c:forEach var="colLabel" items="${statsMonthlyVisits.colLabels}">
-	<th><c:out value="${colLabel}" /></th>
-</c:forEach>
-</tr>
-<c:forEach var="row" items="${statsMonthlyVisits.matrix}" varStatus="rowCounter">
-	<tr>
-		<th>
-			<c:out value="${statsMonthlyVisits.rowLabels[rowCounter.index]}" />
-		</th>
-	<c:forEach var="col" items="${row}" varStatus="colCounter">
-		<td><c:out value="${col}" /></td>
-	</c:forEach>
-	</tr>
-</c:forEach>
-</table>
+<h2><fmt:message key="jsp.statistics.heading.monthlyvisits"/></h2>
+<div class="anutoggle">
+	<a href="${monthlyVisitsUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+	<div id="statsMonthlyVisits" class="stats">
+	Loading statistics please wait...
+	</div>
+</div>
 
 <c:if test="${not empty statsNewByCollection}">
 	
@@ -467,21 +492,14 @@ IP Ranges
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsNewByCollection" />
 	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.newbycollection"/> <a href="${newByCollUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<tr>
-		<th></th>
-		<th><c:out value="${statsNewByCollection.colLabels[0]}" /></th>
-	</tr>
-	<c:forEach var="row" items="${statsNewByCollection.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<c:out value="${statsNewByCollection.rowLabels[rowCounter.index]}" />
-			</th>
-			<td><c:out value="${row[0]}" /></td>
-		</tr>
-	</c:forEach>
-	</table>
+	<h2><fmt:message key="jsp.statistics.heading.newbycollection"/></h2>
+	<div class="anutoggle">
+		<a href="${newByCollUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+		
+		<div id="statsNewByCollection" class="stats">
+		Loading statistics please wait...
+		</div>
+	</div>
 </c:if>
 
 <c:if test="${not empty statsNewByType}">
@@ -500,21 +518,13 @@ IP Ranges
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsNewByType" />
 	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.newbytype"/> <a href="${newByTypeUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<tr>
-		<th></th>
-		<th><c:out value="${statsNewByType.colLabels[0]}" /></th>
-	</tr>
-	<c:forEach var="row" items="${statsNewByType.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<c:out value="${statsNewByType.rowLabels[rowCounter.index]}" />
-			</th>
-			<td><c:out value="${row[0]}" /></td>
-		</tr>
-	</c:forEach>
-	</table>
+	<h2><fmt:message key="jsp.statistics.heading.newbytype"/></h2>
+	<div class="anutoggle">
+		<a href="${newByTypeUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+		<div id="statsNewByType" class="stats">
+		Loading statistics please wait...
+		</div>
+	</div>
 </c:if>
 
 
@@ -535,17 +545,13 @@ IP Ranges
 		<c:param name="format" value="csv" />
 		<c:param name="section" value="statsItemCount" />
 	</c:url>
-	<h2><fmt:message key="jsp.statistics.heading.itemcount"/> <a href="${itemCountUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a></h2>
-	<table class="statsTable">
-	<c:forEach var="row" items="${statsItemCount.matrix}" varStatus="rowCounter">
-		<tr>
-			<th>
-				<c:out value="${statsItemCount.rowLabels[rowCounter.index]}" />
-			</th>
-			<td><c:out value="${row[0]}" /></td>
-		</tr>
-	</c:forEach>
-	</table>
+	<h2><fmt:message key="jsp.statistics.heading.itemcount"/></h2>
+	<div class="anutoggle">
+		<a href="${itemCountUrl}" title="Download statistics as a CSV file"><span class="small small glyphicon glyphicon-download-alt"></span></a>
+		<div id="statsItemCount" class="stats">
+		Loading statistics please wait...
+		</div>
+	</div>
 </c:if>
 </dspace:layout>
 </anu:content>

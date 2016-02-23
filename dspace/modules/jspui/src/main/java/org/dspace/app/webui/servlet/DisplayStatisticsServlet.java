@@ -45,6 +45,10 @@ import org.dspace.statistics.content.StatisticsTable;
 import org.dspace.statistics.content.filter.StatisticsSolrDateFilter;
 import org.dspace.statistics.util.SpiderDetector;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 
 
 /**
@@ -190,6 +194,48 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			JSPManager.showInternalError(request, response);
 			return;
         }
+        else if ("json".equals(format)) {
+        	String section = request.getParameter("section");
+            StatisticsBean exportBean = getExportBean(context, section, dso, author, startDate, endDate, ipRanges, maxRows, orderColumn);
+			if (exportBean == null) {
+				return;
+			}
+			JsonArray columns = new JsonArray();
+			for (String label : exportBean.getColLabels()) {
+				if (!"Handle".equals(label)) {
+					JsonObject value = new JsonObject();
+					value.addProperty("column", label);
+					columns.add(value);
+				}
+			}
+			JsonArray values = new JsonArray();
+			String[][] matrix = exportBean.getMatrix();
+			log.info("Number of records in the matrix" + matrix.length);
+			for (int i = 0; i < matrix.length; i++) {
+				JsonObject value = new JsonObject();
+				value.addProperty("Name", exportBean.getRowLabels().get(i));
+				for (int j = 0; j < matrix[i].length; j++) {
+					value.addProperty(exportBean.getColLabels().get(j), matrix[i][j]);
+				}
+				log.info("JSON Object:" + value.toString());
+				values.add(value);
+			}
+			response.setContentType("application/json");
+			JsonObject obj = new JsonObject();
+//			request.getContextPath();
+			obj.addProperty("path", request.getContextPath());
+			obj.add("columns", columns);
+			obj.add("values", values);
+			PrintWriter out = response.getWriter();
+			out.write(obj.toString());
+			
+//			out.write(array.getAsJsonObject().toString());
+			out.flush();
+			out.close();
+			
+			return;
+			
+        }
         StatisticsBean statsVisits = null;
         StatisticsBean statsMonthlyVisits = null;
         StatisticsBean statsCountryVisits =  null;
@@ -203,27 +249,40 @@ public class DisplayStatisticsServlet extends DSpaceServlet
         StatisticsBean statsItemCount = null;
         
         statsVisits = getVisits(context, dso, startDate, endDate, ipRanges, author);
-        statsMonthlyVisits = getMonthlyVisits(context, dso, startDate, endDate, ipRanges, author);
+//        statsMonthlyVisits = getMonthlyVisits(context, dso, startDate, endDate, ipRanges, author);
         statsCountryVisits = getCountryVisits(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
         if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM)) {
         	statsTopAuthors =  getTopAuthors(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
         }
-        statsTopDownloads =  getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges, author);
+//        statsTopDownloads =  getTopDownloadsStatisticsBean(context, dso, startDate, endDate, ipRanges, author);
         if (!(dso != null && dso.getType() == Constants.ITEM)) {
         	statsTopItems =  getTopItemsStatisticsBean(context, dso, startDate, endDate, ipRanges, author, maxRows, orderColumn);
         }
-        
+
+
         if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM) && !(dso != null && dso.getType() == Constants.COLLECTION)) {
-        	statsTopCollections =  getTopCollectionsStatisticsBean(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+        	statsTopCollections = new StatisticsBean();
         }
         if (context.getCurrentUser() != null) {
-        	statsReferralSources =  getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+        	statsReferralSources =  new StatisticsBean();
         }
         if ((author == null || "".equals(author)) && (dso == null || dso.getType() == Constants.COMMUNITY || dso.getType() == Constants.COLLECTION)) {
-        	statsNewByCollection = getNewItemsByCollection(context, dso, startDate, endDate);
-        	statsNewByType = getNewItemsByType(context, dso, startDate, endDate);
-        	statsItemCount = getItemCounts(context, dso, endDate);
+        	statsNewByCollection = new StatisticsBean();
+        	statsNewByType = new StatisticsBean();
+        	statsItemCount = new StatisticsBean();
         }
+        
+//        if (StringUtils.isEmpty(author) && !(dso != null && dso.getType() == Constants.ITEM) && !(dso != null && dso.getType() == Constants.COLLECTION)) {
+//        	statsTopCollections =  getTopCollectionsStatisticsBean(context, dso, startDate, endDate, ipRanges, maxRows, orderColumn);
+//        }
+//        if (context.getCurrentUser() != null) {
+//        	statsReferralSources =  getReferralSources(context, dso, startDate, endDate, ipRanges, author);
+//        }
+//        if ((author == null || "".equals(author)) && (dso == null || dso.getType() == Constants.COMMUNITY || dso.getType() == Constants.COLLECTION)) {
+//        	statsNewByCollection = getNewItemsByCollection(context, dso, startDate, endDate);
+//        	statsNewByType = getNewItemsByType(context, dso, startDate, endDate);
+//        	statsItemCount = getItemCounts(context, dso, endDate);
+//        }
         
         request.setAttribute("handle", handle);
         if (dso != null) {
@@ -352,7 +411,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				log.error("Error occured while creating statistics for dso with no ID", e);
 			}
 		}
-		log.debug("End tretireving statistics for top downloads");
+		log.debug("End retrieving statistics for top downloads");
     	return statsBean;
     }
     

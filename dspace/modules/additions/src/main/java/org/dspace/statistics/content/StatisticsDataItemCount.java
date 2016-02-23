@@ -100,6 +100,7 @@ public class StatisticsDataItemCount extends StatisticsData {
 			
 			int i = 0;
 			dataset = new Dataset(counts.size(), 1);
+			dataset.setColLabel(0, "Records");
 			for (Entry<String, Long> entry : counts.entrySet()) {
 				dataset.setRowLabel(i, entry.getKey());
 				dataset.addValueToMatrix(i, 0, entry.getValue());
