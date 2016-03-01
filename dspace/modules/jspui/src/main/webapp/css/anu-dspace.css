@@ -223,6 +223,13 @@ label.normalweight {
 	padding-left: 0;
 	width: 100%;
 }
+.list-group-2 {
+	border-radius: 4px 4px 4px 4px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	padding-left: 0;
+	width: 100%;
+}
 .list-group-item {
 	display: block;
 	padding: 10px 15px;
@@ -881,4 +888,7 @@ body.modal-open,
 }
 div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 	width: 50%;
+}
+.hidden {
+	display: none;
 }
