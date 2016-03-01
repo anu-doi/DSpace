@@ -36,6 +36,7 @@
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
 
 <%
     // Retrieve attributes
@@ -99,20 +100,16 @@
  </div>
  
 
-<div class="panel panel-primary">
+<div class="panel panel-primary padbottom">
 	<form class="anuform" method="get" action="<%= request.getContextPath() %>/advanced-search">
 	<fieldset>
 	<legend>Search <%= community.getName() %></legend>
 	<div class="panel-body">
-			<label for="tlocation" class="overrideanuform"><fmt:message key="jsp.search.results.searchin"/></label>
-			<input type="text"  placeholder="" name="query" id="collectionquery" size="25" />
-			<input type="hidden" name="location" value="<%= community.getHandle() %>" />
+		<input type="text" class="margintop marginbottom text tfull"  placeholder="" name="query" id="collectionquery" size="25" />
+		<input type="hidden" name="location" value="<%= community.getHandle() %>" />
+		<input class="btn-uni-grad btn-small" type="submit" id="main-query-submit" value="Search">
 	</div>
 	</fieldset>
-	<p class="text-right">
-		<a class="nounderline" href="<%= request.getContextPath() %>/advanced-search"><input class="btn-uni-grad btn-medium" type="button" value="Reset" /></a>
-		<input class="btn-uni-grad btn-medium" type="submit" id="main-query-submit" value="Search">
-	</p>
 	</form>
 </div>
 

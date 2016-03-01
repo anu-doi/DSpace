@@ -176,6 +176,15 @@
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
 <anu:content layout="doublewide">
 <dspace:layout title="<%= title %>">
+<script type="text/javascript">
+	jQuery(document).ready( function() {
+		$(".moreelipses").on("click",function(){
+			jQuery(this).addClass("hidden");
+			jQuery(this).next(".more").removeClass("hidden");
+			return false;
+		});
+	});
+</script>
 <%
     if (handle != null)
     {

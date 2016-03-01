@@ -397,10 +397,16 @@ public class ItemTag extends TagSupport
         	{
         		String field = st.nextToken().trim();
         		boolean isNoLabel = false;
+        		boolean collapse = false;
         		if (field.contains("nolabel"))
         		{
             		isNoLabel = field.contains("nolabel");
             		field = field.replaceAll("\\(nolabel\\)", "");
+        		}
+        		if (field.contains("collapse"))
+        		{
+        			collapse = field.contains("collapse");
+            		field = field.replaceAll("\\(collapse\\)", "");
         		}
         		
                 String browseIndex;
@@ -479,7 +485,15 @@ public class ItemTag extends TagSupport
 			        				+ "</a>");
     	                  }
     	                  else {
-    	                	  out.print(values[i].value);
+    	                	  if (values[i].value.length() > 500) {
+        	                	  String val = values[i].value;
+    	                		  int limitTo500Index = val.substring(0, 500).lastIndexOf(' ');
+    	                		  val = val.substring(0, limitTo500Index) + "<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">" + val.substring(limitTo500Index) + "</span>";
+    	                		  out.print(val);
+    	                	  }
+    	                	  else {
+    	                		  out.print(values[i].value);
+    	                	  }
     	                  }
 	                	  if (i < values.length - 1)
 	                	  {

@@ -124,7 +124,6 @@
             }
 %>
 	</h1>
-		<h3><fmt:message key="jsp.collection-home.heading1"/></h3>
       </div>
 <%  if (logo != null) { %>
         <div class="marginbottom">
@@ -133,52 +132,20 @@
 <% 	} %>
 	</div>
 	
-<div class="panel panel-primary">
-	<div class="panel-heading">Search <%= collection.getName() %></div>
+
+<div class="panel panel-primary padbottom">
+	<form class="anuform" method="get" action="<%= request.getContextPath() %>/advanced-search">
+	<fieldset>
+	<legend>Search <%= collection.getName() %></legend>
 	<div class="panel-body">
-		<form method="get" action="<%= request.getContextPath() %>/simple-search">
-			For:
-			<input type="text"  placeholder="" name="query" id="collectionquery" size="25" />
-			<input type="hidden" class="" name="location" value="<%= collection.getHandle() %>" />
-			<button type="submit" class="btn"><span>GO</span></button>
-		</form>
+		<input type="text" class="margintop marginbottom text tfull"  placeholder="" name="query" id="collectionquery" size="25" />
+		<input type="hidden" name="location" value="<%= collection.getHandle() %>" />
+		<input class="btn-uni-grad btn-small" type="submit" id="main-query-submit" value="Search">
 	</div>
-</div>
-  <%-- Browse --%>
-  <div class="panel panel-primary marginbottom">
-  	<div class="panel-heading">
-        <fmt:message key="jsp.general.browse"/>
-	</div>
-	<div class="panel-body">
-	<%-- Insert the dynamic list of browse options --%>
-<%
-	for (int i = 0; i < bis.length; i++)
-	{
-		String key = "browse.menu." + bis[i].getName();
-%>
-	<form method="get" class="btn-group" action="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/browse">
-		<input type="hidden" name="type" value="<%= bis[i].getName() %>"/>
-		<%-- <input type="hidden" name="collection" value="<%= collection.getHandle() %>" /> --%>
-		<input type="submit" class="btn btn-default" name="submit_browse" value="<fmt:message key="<%= key %>"/>"/>
+	</fieldset>
 	</form>
-<%	
-	}
-%>	</div>
 </div>
 
-        <form class="well marginbottom" method="get" action="">
-<%  if (loggedIn && subscribed)
-    { %>
-                <small><fmt:message key="jsp.collection-home.subscribed"/> <a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.collection-home.info"/></a></small>
-           		<input class="btn btn-sm btn-warning" type="submit" name="submit_unsubscribe" value="<fmt:message key="jsp.collection-home.unsub"/>" />
-<%  } else { %>
-                <small>
-            		  <fmt:message key="jsp.collection-home.subscribe.msg"/>
-                </small>
-				<input class="btn btn-sm btn-info" type="submit" name="submit_subscribe" value="<fmt:message key="jsp.collection-home.subscribe"/>" />
-<%  } %>
-
-        </form>
 <%
 	if (StringUtils.isNotBlank(intro)) { %>
 	<%= intro %>

@@ -17,6 +17,7 @@
   --%>
 
 <%@page import="org.dspace.discovery.configuration.DiscoverySearchFilterFacet"%>
+<%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Set"%>
 <%@ page import="java.util.Map"%>
@@ -58,6 +59,10 @@
 		    }
 		}
 	}
+%>
+<div>
+
+<%
 	if (brefine) {
 %>
 <div class="col-md-<%= discovery_panel_cols %>">
@@ -78,50 +83,60 @@
  	    }
 	    String fkey = "jsp.search.facet.refine."+f;
 	    int limit = facetConf.getFacetLimit()+1;
-	    %><div id="facet_<%= f %>" class="facet col-md-<%= discovery_facet_cols %> w-narrow">
-	    <span class="facetName"><fmt:message key="<%= fkey %>" /></span>
-	    <ul class="list-group"><%
-	    int idx = 1;
-	    int currFp = UIUtil.getIntParameter(request, f+"_page");
-	    if (currFp < 0)
-	    {
-	        currFp = 0;
-	    }
-	    if (facet != null)
-	    {
-		    for (FacetResult fvalue : facet)
-		    { 
-		        if (idx != limit)
-		        {
-		        %><li class="list-group-item"><span class="badge"><%= fvalue.getCount() %></span> <a href="<%= request.getContextPath()
-		            + searchScope
-	                + "/advanced-search?filterquery="+URLEncoder.encode(fvalue.getAsFilterQuery(),"UTF-8")
-	                + "&amp;filtername="+URLEncoder.encode(f,"UTF-8")
-	                + "&amp;filtertype="+URLEncoder.encode(fvalue.getFilterType(),"UTF-8") %>"
-	                title="<fmt:message key="jsp.search.facet.narrow"><fmt:param><%=fvalue.getDisplayedValue() %></fmt:param></fmt:message>">
-	                <%= StringUtils.abbreviate(fvalue.getDisplayedValue(),36) %></a></li><%
-		        }
-		        idx++;
-		    }
-		    if (currFp > 0 || idx > limit)
-		    {
-		        %><li class="list-group-item"><span style="visibility: hidden;">.</span>
-		        <% if (currFp > 0) { %>
-		        <a class="pull-left" href="<%= request.getContextPath()
-		                + searchScope
-		                + "?"+f+"_page="+(currFp-1) %>"><fmt:message key="jsp.search.facet.refine.previous" /></a>
-	            <% } %>
-	            <% if (idx > limit) { %>
-	            <a href="<%= request.getContextPath()
-		            + searchScope
-	                + "?"+f+"_page="+(currFp+1) %>"><span class="pull-right"><fmt:message key="jsp.search.facet.refine.next" /></span></a>
-	            <%
-	            }
-	            %></li><%
-		    }
-	    }
-	    %></ul></div><%
-	}
-%></div></div><%
+	    %>
+		<div>
+		<fmt:message key="<%= fkey %>" var="facetname" />
+		<anu:boxheader text="${facetname}" />
+		<anu:box style="solid">
+				<ul class="list-group-2"><%
+					int idx = 1;
+					int currFp = UIUtil.getIntParameter(request, f+"_page");
+					if (currFp < 0)
+					{
+						currFp = 0;
+					}
+					if (facet != null)
+					{
+						for (FacetResult fvalue : facet)
+						{ 
+							if (idx != limit)
+							{
+							%><li class="list-group-item"><span class="badge"><%= fvalue.getCount() %></span> <a href="<%= request.getContextPath()
+								+ searchScope
+								+ "/advanced-search?filterquery="+URLEncoder.encode(fvalue.getAsFilterQuery(),"UTF-8")
+								+ "&amp;filtername="+URLEncoder.encode(f,"UTF-8")
+								+ "&amp;filtertype="+URLEncoder.encode(fvalue.getFilterType(),"UTF-8") %>"
+								title="<fmt:message key="jsp.search.facet.narrow"><fmt:param><%=fvalue.getDisplayedValue() %></fmt:param></fmt:message>">
+								<%= StringUtils.abbreviate(fvalue.getDisplayedValue(),36) %></a></li><%
+							}
+							idx++;
+						}
+						if (currFp > 0 || idx > limit)
+						{
+							%><li class="list-group-item"><span style="visibility: hidden;">.</span>
+							<% if (currFp > 0) { %>
+							<a class="pull-left" href="<%= request.getContextPath()
+									+ searchScope
+									+ "?"+f+"_page="+(currFp-1) %>"><fmt:message key="jsp.search.facet.refine.previous" /></a>
+							<% } %>
+							<% if (idx > limit) { %>
+							<a href="<%= request.getContextPath()
+								+ searchScope
+								+ "?"+f+"_page="+(currFp+1) %>"><span class="pull-right"><fmt:message key="jsp.search.facet.refine.next" /></span></a>
+							<%
+							}
+							%></li><%
+						}
+					}
+					%></ul>
+		</anu:box>
+		</div>
+		<%
 	}
 %>
+</div>
+</div>
+<%
+	}
+%>
+</div>
