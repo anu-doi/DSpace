@@ -48,6 +48,8 @@
     Boolean admin_b = (Boolean)request.getAttribute("admin_button");
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
+    
+    //openresearch.url
 %>
 
 <%!
@@ -55,13 +57,21 @@
 	void showCommunity(Community c, JspWriter out, HttpServletRequest request, ItemCounter ic,
 			Map collectionMap, Map subcommunityMap) throws ItemCountException, IOException, SQLException
 	{
-
+		boolean hasParent = true;
+		if (c.getParentCommunity() == null) {
+			hasParent = false;
+		}
         Collection[] cols = (Collection[]) collectionMap.get(c.getID());
         Community[] comms = (Community[]) subcommunityMap.get(c.getID());
         out.println("<li>");
 		//out.println("<a class=\"right\" href=\""+request.getContextPath()+"/handle/"+c.getHandle()+"\"><img class=\"absmiddle left padright\" src=\"http://style.anu.edu.au/_anu/images/icons/silk/link.png\" /></a>");
-		out.println("<h3 class=\"nounderline\">"+c.getName()+"</h3>");
-		out.println("<div class=\"anutoggle\">");
+		if (hasParent) {
+			out.println("<h3 class=\"nounderline\">"+c.getName()+"</h3>");
+			out.println("<div class=\"anutoggle\">");
+		}
+		else {
+			out.println("<h2 class=\"nounderline\"><a href=\""+request.getContextPath()+"/handle/"+c.getHandle()+"\">"+c.getName()+"</a></h2>");
+		}
 		if (cols != null && cols.length > 0)
 		{
 			out.println("<ul class=\"nounderline nopadtop\">");
@@ -82,7 +92,9 @@
 			}
 			out.println("</ul>");
 		}
-		out.println("</div>");
+		if (hasParent) {
+			out.println("</div>");
+		}
 		out.println("</li>");
 	}
 %>
