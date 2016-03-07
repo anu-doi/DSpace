@@ -250,7 +250,20 @@
 <%
 	if(rs != null) {
 %>
-	<anu:boxheader text="Recent Submissions" />
+	<div class="box-header bg-white bdr-white">
+	
+	
+<%
+    if(feedEnabled)
+    {
+	%>
+	<span class="right"><a href="<%= request.getContextPath() %>/feed/atom_1.0/<%= community.getHandle() %>">
+	
+	<img src="//style.anu.edu.au/_anu/images/share/rss.png" class="w16px" alt="RSS feed" /></a></span>
+	<%
+    }
+%><span>RECENT SUBMISSIONS</span>
+	</div>
 	<anu:box style="solid">
 	<%
 		Item[] items = rs.getRecentSubmissions();
@@ -267,52 +280,18 @@
 						displayTitle = dcv[0].value;
 					}
 				}
-			%><p><a href="<%= request.getContextPath() %>/handle/<%= items[i].getHandle() %>"><%= displayTitle %></a></p><%
+			%><p><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= items[i].getHandle() %>"><%= displayTitle %></a></p><%
 			}
 		}
 	%>
 	</anu:box>
+	
 <%
 	}
 %>
-
-<%
-    if(feedEnabled)
-    {
-	%>
-	<anu:boxheader text="RSS feeds" />
-	<anu:box style="solid">
-	<%
-    	String[] fmts = feedData.substring(5).split(",");
-    	String icon = null;
-    	int width = 0;
-    	for (int j = 0; j < fmts.length; j++)
-    	{
-    		if ("rss_1.0".equals(fmts[j]))
-    		{
-    		   icon = "rss1.gif";
-    		   width = 80;
-    		}
-    		else if ("rss_2.0".equals(fmts[j]))
-    		{
-    		   icon = "rss2.gif";
-    		   width = 80;
-    		}
-    		else
-    	    {
-    	       icon = "rss.gif";
-    	       width = 36;
-    	    }
-%>
-    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/<%= community.getHandle() %>"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" style="margin: 3px 0 3px" /></a>
-<%
-    	}
-	%>
-	</anu:box>
-	<%
-    }
-%>
-<p class="center"><a class="statisticsLink btn btn-primary" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><span class="large"><fmt:message key="jsp.community-home.display-statistics"/></span></a></p>
+<anu:box backgroundColour="black">
+	<p class="center nopadbottom nopadtop"><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/statistics"><span class="large"><fmt:message key="jsp.community-home.display-statistics"/></span></a></p>
+</anu:box>
 		
 </anu:content>
 </dspace:layout>
