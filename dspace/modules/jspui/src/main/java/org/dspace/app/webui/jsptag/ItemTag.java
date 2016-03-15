@@ -494,6 +494,7 @@ public class ItemTag extends TagSupport
     	                	  else {
     	                		  out.print(values[i].value);
     	                	  }
+    	                	  out.print(values[i].value);
     	                  }
 	                	  if (i < values.length - 1)
 	                	  {
