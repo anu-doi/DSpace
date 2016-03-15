@@ -494,7 +494,6 @@ public class ItemTag extends TagSupport
     	                	  else {
     	                		  out.print(values[i].value);
     	                	  }
-    	                	  out.print(values[i].value);
     	                  }
 	                	  if (i < values.length - 1)
 	                	  {
@@ -794,7 +793,8 @@ public class ItemTag extends TagSupport
 //                        "org.dspace.app.webui.jsptag.ItemTag.full") + "</div>");
 
         // Three column table - DC field, value, language
-        out.println("<table class=\"panel-body table itemDisplayTable\">");
+        out.println("<div class=\"divline-bold-uni\"></div>");
+        out.println("<table class=\"tbl-row-bdr fullwidth noborder\">");
 //        out.println("<tr><th id=\"s1\" class=\"standard\">"
 //                + LocaleSupport.getLocalizedMessage(pageContext,
 //                        "org.dspace.app.webui.jsptag.ItemTag.dcfield")
@@ -811,7 +811,7 @@ public class ItemTag extends TagSupport
         {
             if (!MetadataExposure.isHidden(context, values[i].schema, values[i].element, values[i].qualifier))
             {
-                out.print("<tr><td headers=\"s1\" class=\"tbh25\">");
+                out.print("<tr><th headers=\"s1\" class=\"tbl25\">");
                 out.print(values[i].schema);
                 out.print("." + values[i].element);
 

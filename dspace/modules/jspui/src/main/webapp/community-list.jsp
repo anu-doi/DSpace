@@ -49,7 +49,7 @@
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
     
-    //openresearch.url
+    String openResearchURL = ConfigurationManager.getProperty("openresearch.url");
 %>
 
 <%!
@@ -127,7 +127,7 @@
 	</h1>
 	<p>
 	<fmt:message key="jsp.community-list.text1">
-		<fmt:param value="<%= request.getContextPath() %>" />
+		<fmt:param value="<%= openResearchURL %>" />
 		<fmt:param value="handle/1885/1" />
 		<fmt:param value="handle/1885/2" />
 	</fmt:message>
