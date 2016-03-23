@@ -46,7 +46,7 @@
     SubmissionInfo subInfo = SubmissionController.getSubmissionInfo(context, request);
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission"
 			   locbar="off"
                navbar="off"

@@ -174,7 +174,7 @@
 <%-- OK, so here we start to develop the various components we will use in the UI --%>
 
 <%@page import="java.util.Set"%>
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="browse.page-title" navbar="<%=layoutNavbar %>">
 
 	<%-- Build the header (careful use of spacing) --%>

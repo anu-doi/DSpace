@@ -39,7 +39,7 @@
     boolean resp = (Boolean) request.getAttribute("response");
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="default" titlekey="jsp.request.item.request-letter.title" >
 
 <% if(resp) { %>

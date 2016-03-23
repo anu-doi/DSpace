@@ -116,7 +116,6 @@ public class StatisticsDataTopObject extends StatisticsDataAbstract {
 				ObjectCount[] downloadResults = executeQuery(downloadQuery, downloadFilter, downloadType,
 						viewGenerator.getMax(), isShowTotal(), context);
 
-				log.info("Number of download query results: "+downloadResults.length);
 				resultsMap.put(colNum, downloadResults);
 			}
 			

@@ -391,7 +391,7 @@ public class ItemTag extends TagSupport
         
         if (noTableConfigLine != null && noTableConfigLine.length() > 0)
         {
-        	out.println("<div class=\"w-doublenarrow\">");
+        	out.println("<div class=\"w-doublewide\">");
         	StringTokenizer st = new StringTokenizer(noTableConfigLine, ",");
         	while (st.hasMoreTokens())
         	{

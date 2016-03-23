@@ -76,7 +76,7 @@
 	<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/submission-lookup.js"></script>
 </c:set>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" locbar="off"
                navbar="off"
                titlekey="jsp.submit.start-lookup-submission.title"

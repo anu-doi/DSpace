@@ -159,7 +159,7 @@
 </script>		
 </c:set>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="jsp.search.title" locbar="off">
 
     <%-- <h1>Search Results</h1> --%>
@@ -614,7 +614,7 @@ else
 	}
 	if (brefine) {
 %>
-
+<div class="full">
 <h3 class="facets"><fmt:message key="jsp.search.facet.refine" /></h3>
 <div id="facets" class="facetsBox">
 
@@ -704,6 +704,7 @@ else
 
 %>
 
+</div>
 </div>
 <% } %>
 </dspace:sidebar>

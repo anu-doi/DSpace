@@ -53,7 +53,7 @@
 	Iterator reviewIterator = reviewJSPs.keySet().iterator();
 %>
           
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="off" titlekey="jsp.submit.review.title" style="submission" nocache="true">
 
     <form action="<%= request.getContextPath() %>/submit" method="post" onkeydown="return disableEnterKey(event);">

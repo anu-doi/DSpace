@@ -117,7 +117,7 @@
 	String typeKey = "browse.type.metadata." + bix.getName();
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="browse.page-title">
 
 	<%-- Build the header (careful use of spacing) --%>

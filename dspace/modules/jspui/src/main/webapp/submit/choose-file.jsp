@@ -294,7 +294,7 @@
 </c:set>
 <%  } %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission"
 			   locbar="off"
                navbar="off"

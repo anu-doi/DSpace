@@ -43,7 +43,7 @@
 
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="default" titlekey="jsp.request.item.request-information.title" >
 <h2><fmt:message key="jsp.request.item.request-information.info1" /></h2>
 <p><fmt:message key="jsp.request.item.request-information.info2">

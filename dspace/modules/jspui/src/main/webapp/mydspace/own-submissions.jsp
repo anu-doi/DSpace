@@ -43,7 +43,7 @@
 	Arrays.sort(items, itemComparator);
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" locbar="link"
                parentlink="/mydspace"
                parenttitlekey="jsp.mydspace"

@@ -55,7 +55,7 @@
 
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="default" titlekey="jsp.request.item.request-form.title" >
 
 <h2><fmt:message key="jsp.request.item.request-form.info2">

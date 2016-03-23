@@ -99,7 +99,7 @@
 	
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" titlekey="jsp.mydspace" nocache="true">
 	<div class="panel panel-primary">
         <div class="panel-heading">
