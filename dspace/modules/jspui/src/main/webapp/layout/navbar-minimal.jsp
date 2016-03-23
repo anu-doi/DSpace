@@ -34,6 +34,8 @@
     // Is anyone logged in?
     EPerson user = (EPerson) request.getAttribute("dspace.current.user");
 
+    String openResearchURL = ConfigurationManager.getProperty("openresearch.url");
+	
     // Is the logged in user an admin
     Boolean admin = (Boolean)request.getAttribute("is.admin");
     boolean isAdmin = (admin == null ? false : admin.booleanValue());
@@ -55,43 +57,54 @@
     }
 %>
 
-<anu:menu showSearch="false" id="1108" shortTitle="CAS" ssl="true">
-<%
+<anu:topmenu>
+<anu:topmenulinks>
+	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
+	<li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
+	<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
+	<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+	<%
 		if (user != null)
 		{
 	%>
-		<fmt:message key="jsp.layout.navbar-default.loggedin" var="signin">
-		      <fmt:param><%= StringUtils.abbreviate(navbarEmail, 20) %></fmt:param>
-		</fmt:message>
-		<%
-    } else {
-		%>
-	<fmt:message key="jsp.layout.navbar-default.sign" var="signin"/>
+	<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
 	<%
 		}
 	%>
-	<anu:submenu title="${signin}">
-	    <li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
-	    <li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
-	    <li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
-	    <%
-	    	if (user != null)
-	    	{
-	    %>
-	    <li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
-	    <%
-	    	}
-	    %>
-	</anu:submenu>
 	
+	<li><a href="<%= request.getContextPath() %>/dspace-admin"><fmt:message key="jsp.administer"/></a></li>
+</anu:topmenulinks>
+<%
+	if (user != null)
+	{
+%>
+<div class="right padright">
+<a class="tabs-logout" href="<%=  request.getContextPath() %>/logout">Logout</a>
+</div>
+<%
+	}
+%>
+</anu:topmenu>
+
+
+<anu:topmobilemenu>
+
+	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
+	<li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
+	<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
+	<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
 	<%
-		  if (isAdmin)
-		  {
+			if (isAdmin)
+			{
 		%>
-			<anu:submenu title="Administer">
-               <li><a href="<%= request.getContextPath() %>/dspace-admin"><fmt:message key="jsp.administer"/></a></li>
-            </anu:submenu>
-		<%
-		  }
-		%>
-</anu:menu>
+	<li><a href="<%= request.getContextPath() %>/dspace-admin"><fmt:message key="jsp.administer"/></a></li>
+<%
+	}
+	if (user != null)
+	{
+%>
+	<li><a href="<%=  request.getContextPath() %>/logout">Logout</a></li>
+<%
+	}
+%>
+</anu:topmobilemenu>

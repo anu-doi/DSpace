@@ -23,7 +23,7 @@
 
 
  
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="browse.page-title">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/lightbox.css" media="screen" type="text/css" />
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/lightbox.min.js"></script>

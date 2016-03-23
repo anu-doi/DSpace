@@ -158,7 +158,7 @@ public class StatisticsDataAccessionedByType extends StatisticsData {
 		}
 		query.append(" order by Type");
 		
-		log.info("Query String: "+query.toString());
+		log.debug("Query String: "+query.toString());
 		
 		return query.toString();
 	}

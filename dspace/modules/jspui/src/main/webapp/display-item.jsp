@@ -174,7 +174,7 @@
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout title="<%= title %>">
 <script type="text/javascript">
 	jQuery(document).ready( function() {

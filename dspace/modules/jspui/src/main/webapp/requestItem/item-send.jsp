@@ -24,7 +24,7 @@
 </style>
 
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="off" title="O seu registo foi enviado com sucesso">
 
     <h1><fmt:message key="jsp.request.item.item-send.info1"/></h1>

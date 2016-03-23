@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout title="Contacts" locbar="off">
 
     <h1>Contacts</h1>

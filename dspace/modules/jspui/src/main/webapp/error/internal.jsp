@@ -23,7 +23,7 @@
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="jsp.error.internal.title">
     <%-- <h1>Internal System Error</h1> --%>
     <h1><fmt:message key="jsp.error.internal.title"/></h1>

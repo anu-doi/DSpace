@@ -77,7 +77,7 @@
 
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" locbar="off" navbar="off" titlekey="jsp.submit.upload-file-list.title">
 
     <form action="<%= request.getContextPath() %>/submit" method="post" onkeydown="return disableEnterKey(event);">

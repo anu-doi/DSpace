@@ -40,7 +40,7 @@
     Collection collection = subInfo.getSubmissionItem().getCollection();
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" locbar="off" navbar="off" titlekey="jsp.submit.complete.title">
 
     <jsp:include page="/submit/progressbar.jsp"/>

@@ -21,7 +21,7 @@
 
 <% request.setAttribute("LanguageSwitch", "hide"); %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission" navbar="off" locbar="off" titlekey="jsp.submit.license-rejected.title">
 
     <%-- <h1>Submit: License Rejected</h1> --%>

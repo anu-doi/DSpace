@@ -22,7 +22,7 @@
 
 <% request.setAttribute("LanguageSwitch", "hide"); %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" titlekey="jsp.submit.cancelled-removed.title">
 
     <%-- <h1>Submission Cancelled</h1> --%>

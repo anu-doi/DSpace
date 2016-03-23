@@ -77,7 +77,7 @@
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
 <dspace:layout locbar="commLink" title="<%= name %>" feedData="<%= feedData %>">
-<anu:content layout="doublenarrow">
+<anu:content layout="doublewide">
 <div class="well">
 <div class="row">
 	<div>

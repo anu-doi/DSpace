@@ -36,7 +36,7 @@
     Item item = workflowItem.getItem();
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout style="submission"
 			   locbar="link"
                parentlink="/mydspace"

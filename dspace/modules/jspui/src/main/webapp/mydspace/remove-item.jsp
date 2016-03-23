@@ -29,7 +29,7 @@
     WorkspaceItem wi = (WorkspaceItem) request.getAttribute("workspace.item");
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="link"
                parentlink="/mydspace"
                parenttitlekey="jsp.mydspace"

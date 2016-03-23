@@ -99,7 +99,7 @@
 	}
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="jsp.community-list.title" locbar="off">
 
 <%

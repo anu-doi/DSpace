@@ -62,7 +62,7 @@
 
 <dspace:layout locbar="off" titlekey="jsp.home.title" feedData="<%= feedData %>">
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <img width="680" height="85" alt="Welcome" src="image/shutterstock.jpg">
 </anu:content>
 <%--<anu:content layout="doublewide">
@@ -159,7 +159,7 @@ if (submissions != null && submissions.count() > 0)
 %>
 </div>
 </anu:content>--%>
-<anu:content layout="doublenarrow" title="Digital Collections">
+<anu:content layout="doublewide" title="Digital Collections">
 <% if (supportedLocales != null && supportedLocales.length > 1)
 {
 %>

@@ -347,7 +347,7 @@ public class StatisticsDataViews extends StatisticsData {
 	        			value = dso.getName();
 	        		}
 	        		else {
-	        			log.info("DSO is null");
+	        			log.info("Unable to set object name for statistics. DSO is null where the resource_type_id is "+filterType+" and resource_id is "+id);
 	        		}
         		}
         		catch (NumberFormatException e) {

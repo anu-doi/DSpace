@@ -24,7 +24,7 @@
 </style>
 
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="default" titlekey="jsp.request.item.response-send.title">
 
     <h1><fmt:message key="jsp.request.item.response-send.info1"/></h1>

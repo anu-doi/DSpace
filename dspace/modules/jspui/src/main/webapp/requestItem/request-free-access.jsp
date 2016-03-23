@@ -38,7 +38,7 @@
         title = "";
 %>
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout locbar="off" navbar="default" titlekey="jsp.request.item.request-free-acess.title" >
 
 <p class="alert alert-success"><fmt:message key="jsp.request.item.request-free-acess.info1"/></p>

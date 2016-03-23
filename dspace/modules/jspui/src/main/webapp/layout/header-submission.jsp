@@ -17,6 +17,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+<%@ page import="org.dspace.eperson.EPerson" %>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Enumeration"%>
 <%@ page import="org.dspace.app.webui.util.JSPManager" %>
@@ -26,6 +27,8 @@
 <%@ page import="javax.servlet.jsp.jstl.fmt.*" %>
 
 <%
+    EPerson user = (EPerson) request.getAttribute("dspace.current.user");
+	
     String title = (String) request.getAttribute("dspace.layout.title");
     String navbar = (String) request.getAttribute("dspace.layout.navbar");
     boolean locbar = ((Boolean) request.getAttribute("dspace.layout.locbar")).booleanValue();
@@ -43,6 +46,12 @@
     String dsVersion = Util.getSourceVersion();
     String generator = dsVersion == null ? "DSpace" : "DSpace "+dsVersion;
     String analyticsKey = ConfigurationManager.getProperty("jspui.google.analytics.key");
+	
+    String navbarEmail = null;
+    if (user != null)
+    {
+        navbarEmail = user.getEmail();
+    }
 %>
 
 <anu:header id="1122" title="<%= siteName + \": \" + title %>" description="Digital Collections" subject="ANU Digital Collections Repository" respOfficer="Director, Information Services" 
@@ -87,7 +96,6 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 
 </anu:header>
 
-<anu:body />
 <%
 	String alertEnvironment = ConfigurationManager.getProperty("alert.environment");
 	if (alertEnvironment != null && !"".equals(alertEnvironment)) 
@@ -98,8 +106,20 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 	}
 %>
 
-<anu:banner id="1122" ssl="true" primaryTitle="<%= bannerName %>" secondaryTitle ="Library" primaryTitleUrl="<%= bannerUrl %>" secondaryTitleUrl="http://anulib.anu.edu.au/" />
-
+<anu:banner id="1122" ssl="true" primaryTitle="<%= siteName %>" secondaryTitle ="Library" primaryTitleUrl="<%= bannerUrl %>" secondaryTitleUrl="http://anulib.anu.edu.au/">
+<%
+	if (user != null)
+	{
+%>
+	<anu:utilitymenu>
+	<fmt:message key="jsp.layout.navbar-default.loggedin">
+		  <fmt:param><%= navbarEmail %></fmt:param>
+	</fmt:message>
+	</anu:utilitymenu>
+<%
+	}
+%>
+</anu:banner>
     <%--Gooogle Analytics recording.--%>
     <%
     if (analyticsKey != null && analyticsKey.length() > 0)
@@ -156,7 +176,8 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 %>
 </header>
 
-<main id="content" role="main">
+<anu:body />
+<main role="main">
                 <%-- Location bar --%>
 <%
     if (locbar)
