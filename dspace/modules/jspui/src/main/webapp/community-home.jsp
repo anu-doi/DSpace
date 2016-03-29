@@ -127,7 +127,7 @@
 	<% } %>
 
 <%!
-	public void listCommunities(Community[] communities,  JspWriter out, HttpServletRequest request, boolean topLevel) throws IOException, SQLException
+	public void listCommunities(Community[] communities,  JspWriter out, HttpServletRequest request, boolean topLevel, boolean removeButton) throws IOException, SQLException
 	{
 		if (communities.length > 0)
 		{
@@ -135,18 +135,36 @@
 				out.println("<ul class=\"linklist\">");
 			}
 			for (Community comm : communities) {
+				
+				
 				if (topLevel) {
 						out.println("<h3 class=\"nounderline\">");
 					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
+					if (removeButton) {
+						out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+						out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+comm.getParentCommunity()+"\" />");
+						out.println("<input type=\"hidden\" name=\"community_id\" value=\""+comm.getID()+"\" />");
+						out.println("<input type=\"hidden\" name=\"action\" value=\""+EditCommunitiesServlet.START_DELETE_COMMUNITY+"\" />");
+						out.println("<button type=\"submit\" class=\"btn btn-xs btn-danger\"><span class=\"glyphicon glyphicon-trash\"></span></button>");
+						out.println("</form>");
+					}
 						out.println("</h3>");
-				
 				}
 				else {
 					out.println("<li>");
 					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
+				
+					if (removeButton) {
+						out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+						out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+comm.getParentCommunity()+"\" />");
+						out.println("<input type=\"hidden\" name=\"community_id\" value=\""+comm.getID()+"\" />");
+						out.println("<input type=\"hidden\" name=\"action\" value=\""+EditCommunitiesServlet.START_DELETE_COMMUNITY+"\" />");
+						out.println("<button type=\"submit\" class=\"btn btn-xs btn-danger\"><span class=\"glyphicon glyphicon-trash\"></span></button>");
+						out.println("</form>");
+					}
 				}
-				listCommunities(comm.getSubcommunities(), out, request, false);
-				listCollections(comm.getCollections(), out, request);
+				listCommunities(comm.getSubcommunities(), out, request, false, removeButton);
+				listCollections(comm, comm.getCollections(), out, request, removeButton);
 				if (!topLevel) {
 					out.println("</li>");
 				}
@@ -157,7 +175,7 @@
 		}
 	}
 	
-	public void listCollections(Collection[] collections, JspWriter out, HttpServletRequest request) throws IOException, SQLException
+	public void listCollections(Community parentCommunity, Collection[] collections, JspWriter out, HttpServletRequest request, boolean removeButton) throws IOException, SQLException
 	{
 		if (collections.length > 0)
 		{
@@ -165,11 +183,21 @@
 			for (Collection coll : collections) {
 				out.println("<li>");
 				out.println("<a href=\""+request.getContextPath()+"/handle/"+coll.getHandle()+"\">"+coll.getName()+"</a>");
+				if (removeButton) {
+					out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+					out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+parentCommunity.getID()+"\" />");
+					out.println("<input type=\"hidden\" name=\"community_id\" value=\""+parentCommunity.getID()+"\" />");
+					out.println("<input type=\"hidden\" name=\"collection_id\" value=\""+coll.getID()+"\" />");
+					out.println("<input type=\"hidden\" name=\"action\" value=\""+EditCommunitiesServlet.START_DELETE_COLLECTION+"\" />");
+					out.println("<button type=\"submit\" class=\"btn btn-xs btn-danger\"><span class=\"glyphicon glyphicon-trash\"></span></button>");
+					out.println("</form>");
+				}
 				out.println("</li>");
 			}
 			out.println("</ul>");
 		}
 	}
+	
 %>
 
 <div>
@@ -180,11 +208,11 @@
 %>
 
 <%
-	listCommunities(subcommunities, out, request, true);
+	listCommunities(subcommunities, out, request, true, remove_button);
 %>
 <% } 
 	if (collections.length > 0) {
-		listCollections(collections, out, request);
+		listCollections(community, collections, out, request, remove_button);
 	}
 
 %>
