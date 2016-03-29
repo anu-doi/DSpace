@@ -331,12 +331,19 @@
 	
 	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 	<div data-badge-details="right" data-badge-type="1" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed"></div>
+	
+	<c:catch var="errormsg">
+		<c:import url="http://api.elsevier.com:80/content/abstract/citation-count" var="scopusimport">
+			<c:param value="<%= altmetricData %>" name="doi" />
+			<c:param name="apiKey" value="118b6ce3c3c7f45a9a7925066d849a63" />
+			<c:param name="httpAccept" value="text/html" />
+		</c:import>
+	</c:catch>
+	
+	<c:if test="${empty errormsg}">
 	<p><h4>Scopus Citation</h4></p>
-	<c:import url="http://api.elsevier.com:80/content/abstract/citation-count">
-		<c:param value="<%= altmetricData %>" name="doi" />
-		<c:param name="apiKey" value="118b6ce3c3c7f45a9a7925066d849a63" />
-		<c:param name="httpAccept" value="text/html" />
-	</c:import>
+	${scopusimport}
+	</c:if>
 	<%
 	}
 %>

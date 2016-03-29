@@ -99,13 +99,13 @@
 	}
 %>
 
-<anu:content layout="full">
 <dspace:layout titlekey="jsp.community-list.title" locbar="off">
-
 <%
     if (admin_button)
     {
-%>     
+%>   
+<anu:content layout="full">
+  
 			<div class="panel panel-warning">
 			<div class="panel-heading">
 				<fmt:message key="jsp.admintools"/>
@@ -119,12 +119,13 @@
 					<input class="btn btn-default" type="submit" name="submit" value="<fmt:message key="jsp.community-list.create.button"/>" />
                 </form>
             </div>
+			</div>
+</anu:content>
 <%
     }
 %>
-	<h1>
-		<fmt:message key="jsp.community-list.title" />
-	</h1>
+<fmt:message key="jsp.community-list.title" var="title" />
+<anu:content layout="two-third" title="${title}">
 	<p>
 	<fmt:message key="jsp.community-list.text1">
 		<fmt:param value="<%= openResearchURL %>" />
@@ -147,5 +148,26 @@
  
 <% }
 %>
-</dspace:layout>
 </anu:content>
+<anu:content layout="one-third">
+	<anu:box backgroundColour="uni" backgroundOpacity="25">
+		<h2>Other links</h2>
+		<ul class="linklist">
+			<li><a href="<%= request.getContextPath() %>/handle/1885/1">ANU Research collections</a></li>
+			<li><a href="<%= request.getContextPath() %>/handle/1885/2">Research Collections</a></li>
+			<li><a href="<%= request.getContextPath() %>/statistics">Statistics</a></li>
+		</ul>
+	</anu:box>
+	<anu:box backgroundColour="uni" backgroundOpacity="25">
+		<h2>Contact</h2>
+		<div class="clear padbottom">
+			<img class="hpad left" alt="Name" src="//style.anu.edu.au/_anu/images/icons/web/person.png">
+			<div>General enquiries</div>
+		</div>
+		<div class="clear padbottom">
+			<img class="hpad left" alt="Email" src="//style.anu.edu.au/_anu/images/icons/web/mail.png"/> 
+			<a href="mailto:repository.admin@anu.edu.au">Send email</a>
+		</div>
+	</anu:box>
+</anu:content>
+</dspace:layout>
