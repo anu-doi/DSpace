@@ -26,6 +26,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
   
 <%@ page import="java.util.List" %>
+<%@ page import="org.dspace.core.ConfigurationManager" %>
+
+<%
+
+    String bannerName = ConfigurationManager.getProperty("openresearch.name");
+    String bannerUrl = ConfigurationManager.getProperty("openresearch.url");
+%>
 
 <anu:breadcrumbs>
 <%
@@ -54,9 +61,17 @@
         }
         else
         {
+			if (i == 0) 
+			{
+%>
+  <anu:crumb title="<%= bannerName %>" href="<%= bannerUrl %>" />
+<%
+			}
+			else{
 %>
   <anu:crumb title="<%= s %>" href="<%= request.getContextPath() + u %>" />
 <%
+			}
         }
 }
 %>

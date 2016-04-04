@@ -385,130 +385,7 @@ public class ItemTag extends TagSupport
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         Context context = UIUtil.obtainContext(request);
         Locale sessionLocale = UIUtil.getSessionLocale(request);
-
-        String noTableKey = "webui.itemdisplay." + style + ".notable";
-        String noTableConfigLine = ConfigurationManager.getProperty(noTableKey);
-        
-        if (noTableConfigLine != null && noTableConfigLine.length() > 0)
-        {
-        	out.println("<div class=\"w-doublewide\">");
-        	StringTokenizer st = new StringTokenizer(noTableConfigLine, ",");
-        	while (st.hasMoreTokens())
-        	{
-        		String field = st.nextToken().trim();
-        		boolean isNoLabel = false;
-        		boolean collapse = false;
-        		if (field.contains("nolabel"))
-        		{
-            		isNoLabel = field.contains("nolabel");
-            		field = field.replaceAll("\\(nolabel\\)", "");
-        		}
-        		if (field.contains("collapse"))
-        		{
-        			collapse = field.contains("collapse");
-            		field = field.replaceAll("\\(collapse\\)", "");
-        		}
-        		
-                String browseIndex;
-                try
-                {
-                    browseIndex = getBrowseField(field);
-                }
-                catch (BrowseException e)
-                {
-                    log.error(e);
-                    browseIndex = null;
-                }
-
-                // Get the separate schema + element + qualifier
-
-                String[] eq = field.split("\\.");
-                String schema = eq[0];
-                String element = eq[1];
-                String qualifier = null;
-                if (eq.length > 2 && eq[2].equals("*"))
-                {
-                    qualifier = Item.ANY;
-                }
-                else if (eq.length > 2)
-                {
-                    qualifier = eq[2];
-                }
-                
-                if (MetadataExposure.isHidden(context, schema, element, qualifier))
-                {
-                    continue;
-                }
-                
-                Metadatum[] values = item.getMetadata(schema, element, qualifier, Item.ANY);
-                
-                if (values.length > 0)
-                {
-                	  if (!isNoLabel)
-	                  {
-	                  	String label = null;
-	                      try
-	                      {
-	                          label = I18nUtil.getMessage("metadata."
-	                                  + ("default".equals(this.style) ? "" : this.style + ".") + field,
-	                                  context);
-	                      }
-	                      catch (MissingResourceException e)
-	                      {
-	                          // if there is not a specific translation for the style we
-	                          // use the default one
-	                          label = LocaleSupport.getLocalizedMessage(pageContext,
-	                                  "metadata." + field);
-	                      }
-	                      out.println("<h3>"+label+"</h3>");
-	                  }
-                	  out.print("<p>");
-                	  for (int i = 0; i < values.length; i++)
-                	  {
-    	                  if (browseIndex != null)
-    	                  {
-    	                	  String argument, value;
-    	                	  if (values[i].authority != null && values[i].confidence >= MetadataAuthorityManager.getManager()
-    	                			  .getMinConfidence(values[i].schema, values[i].element, values[i].qualifier))
-    	                	  {
-    	                		  argument = "authority";
-    	                		  value = values[i].authority;
-    	                	  }
-    	                	  else
-    	                	  {
-    	                		  argument = "value";
-    	                		  value = values[i].value;
-    	                	  }
-  	                    	  out.print("<a class=\"" + ("authority".equals(argument)?"authority ":"") + browseIndex + "\""
-                                    + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
-			        				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
-			        				+ "</a>");
-    	                  }
-    	                  else {
-    	                	  if (values[i].value.length() > 500) {
-        	                	  String val = values[i].value;
-    	                		  int limitTo500Index = val.substring(0, 500).lastIndexOf(' ');
-    	                		  val = val.substring(0, limitTo500Index) + "<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">" + val.substring(limitTo500Index) + "</span>";
-    	                		  out.print(val);
-    	                	  }
-    	                	  else {
-    	                		  out.print(values[i].value);
-    	                	  }
-    	                  }
-	                	  if (i < values.length - 1)
-	                	  {
-	                		  out.print("; "); 
-	                	  }
-                	  }
-                	  out.println("</p>");
-                }
-                
-
-//				isDisplay = style.equals("inputform");
-                
-        	}
-        	out.println("</div>");
-        }
+        renderTextAboveTable(request, context, out);
         
         String configLine = styleSelection.getConfigurationForStyle(style);
 
@@ -785,6 +662,7 @@ public class ItemTag extends TagSupport
         HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
         Context context = UIUtil.obtainContext(request);
 
+        renderTextAboveTable(request, context, out);
         // Get all the metadata
         Metadatum[] values = item.getMetadata(Item.ANY, Item.ANY, Item.ANY, Item.ANY);
 
@@ -839,7 +717,7 @@ public class ItemTag extends TagSupport
 
         listCollections();
 
-        out.println("</table></div><br/>");
+        out.println("</table><br/>");
 
         listBitstreams();
 
@@ -849,6 +727,138 @@ public class ItemTag extends TagSupport
             out.println("<br/><br/>");
             showLicence();
         }
+    }
+    
+    private void renderTextAboveTable(HttpServletRequest request, Context context, JspWriter out) throws IOException, SQLException {
+log.debug("In render text above table");
+
+		String noTableFormat = styleSelection.getStyleForItem(item);
+
+        String noTableKey = "webui.itemdisplay." + noTableFormat + ".notable";
+        log.debug("no table key: " + noTableKey);
+        String noTableConfigLine = ConfigurationManager.getProperty(noTableKey);
+        log.debug("no table value: " + noTableConfigLine);
+        if (noTableConfigLine != null && noTableConfigLine.length() > 0)
+        {
+        	out.println("<div class=\"w-doublewide\">");
+        	StringTokenizer st = new StringTokenizer(noTableConfigLine, ",");
+        	while (st.hasMoreTokens())
+        	{
+        		String field = st.nextToken().trim();
+        		boolean isNoLabel = false;
+        		boolean collapse = false;
+        		if (field.contains("nolabel"))
+        		{
+            		isNoLabel = field.contains("nolabel");
+            		field = field.replaceAll("\\(nolabel\\)", "");
+        		}
+        		if (field.contains("collapse"))
+        		{
+        			collapse = field.contains("collapse");
+            		field = field.replaceAll("\\(collapse\\)", "");
+        		}
+        		
+                String browseIndex;
+                try
+                {
+                    browseIndex = getBrowseField(field);
+                }
+                catch (BrowseException e)
+                {
+                    log.error(e);
+                    browseIndex = null;
+                }
+
+                // Get the separate schema + element + qualifier
+
+                String[] eq = field.split("\\.");
+                String schema = eq[0];
+                String element = eq[1];
+                String qualifier = null;
+                if (eq.length > 2 && eq[2].equals("*"))
+                {
+                    qualifier = Item.ANY;
+                }
+                else if (eq.length > 2)
+                {
+                    qualifier = eq[2];
+                }
+                
+                if (MetadataExposure.isHidden(context, schema, element, qualifier))
+                {
+                    continue;
+                }
+                
+                Metadatum[] values = item.getMetadata(schema, element, qualifier, Item.ANY);
+                
+                if (values.length > 0)
+                {
+                	  if (!isNoLabel)
+	                  {
+	                  	String label = null;
+	                      try
+	                      {
+	                          label = I18nUtil.getMessage("metadata."
+	                                  + ("default".equals(noTableFormat) ? "" : noTableFormat + ".") + field,
+	                                  context);
+	                      }
+	                      catch (MissingResourceException e)
+	                      {
+	                          // if there is not a specific translation for the style we
+	                          // use the default one
+	                          label = LocaleSupport.getLocalizedMessage(pageContext,
+	                                  "metadata." + field);
+	                      }
+	                      out.println("<h3>"+label+"</h3>");
+	                  }
+                	  out.print("<p>");
+                	  for (int i = 0; i < values.length; i++)
+                	  {
+    	                  if (browseIndex != null)
+    	                  {
+    	                	  String argument, value;
+    	                	  if (values[i].authority != null && values[i].confidence >= MetadataAuthorityManager.getManager()
+    	                			  .getMinConfidence(values[i].schema, values[i].element, values[i].qualifier))
+    	                	  {
+    	                		  argument = "authority";
+    	                		  value = values[i].authority;
+    	                	  }
+    	                	  else
+    	                	  {
+    	                		  argument = "value";
+    	                		  value = values[i].value;
+    	                	  }
+  	                    	  out.print("<a class=\"" + ("authority".equals(argument)?"authority ":"") + browseIndex + "\""
+                                    + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
+			        				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
+			        				+ "</a>");
+    	                  }
+    	                  else {
+    	                	  if (values[i].value.length() > 500) {
+        	                	  String val = values[i].value;
+    	                		  int limitTo500Index = val.substring(0, 500).lastIndexOf(' ');
+    	                		  val = val.substring(0, limitTo500Index) + "<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">" + val.substring(limitTo500Index) + "</span>";
+    	                		  out.print(val);
+    	                	  }
+    	                	  else {
+    	                		  out.print(values[i].value);
+    	                	  }
+    	                  }
+	                	  if (i < values.length - 1)
+	                	  {
+	                		  out.print("; "); 
+	                	  }
+                	  }
+                	  out.println("</p>");
+                }
+                
+
+//				isDisplay = style.equals("inputform");
+                
+        	}
+        	out.println("</div>");
+        }
+        
     }
 
     /**

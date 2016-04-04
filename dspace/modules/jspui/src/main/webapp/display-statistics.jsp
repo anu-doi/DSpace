@@ -78,7 +78,7 @@
 %>
 
 
-<anu:content layout="doublewide">
+<anu:content layout="full">
 <dspace:layout titlekey="jsp.statistics.title">
 <h1><fmt:message key="jsp.statistics.title"/> 
 <c:if test="${not empty title}">for</c:if> 
@@ -182,7 +182,7 @@ IP Ranges
 </p>
 <div>
 	<input id="author" name="author" type="hidden" value="${param.author}"/>
-	<input id="updateLimits" name="updateLimits" type="submit" value="Update"/>
+	<input id="updateLimits" class="btn-uni-grad btn-small" name="updateLimits" type="submit" value="Update"/>
 </div>
 </form>
 

@@ -49,6 +49,7 @@
 <%@page import="org.dspace.versioning.VersionHistory"%>
 <%@page import="org.dspace.content.Bundle" %>
 <%@page import="org.dspace.content.Bitstream" %>
+<%@page import="org.dspace.statistics.util.SpiderDetector" %>
 <%
     // Attributes
     Boolean displayAllBoolean = (Boolean) request.getAttribute("display.all");
@@ -331,7 +332,9 @@
 	
 	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 	<div data-badge-details="right" data-badge-type="1" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed"></div>
-	
+	<%
+		if (!SpiderDetector.isSpider(request)) {
+	%>
 	<c:catch var="errormsg">
 		<c:import url="http://api.elsevier.com:80/content/abstract/citation-count" var="scopusimport">
 			<c:param value="<%= altmetricData %>" name="doi" />
@@ -345,6 +348,7 @@
 	${scopusimport}
 	</c:if>
 	<%
+		}
 	}
 %>
 	<!-- Altmetric badge End -->
