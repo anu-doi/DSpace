@@ -55,11 +55,12 @@
 <anu:topmenu>
 <anu:topmenulinks>
 	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
-	<li><a id="gw-mega-tab-2" data-mega-menu-trigger="2" href="<%= request.getContextPath() %>/dspace-admin">Administration</a></li>
-	<li><a id="gw-mega-tab-3" data-mega-menu-trigger="3" href="#"><fmt:message key="jsp.layout.navbar-admin.contents"/></a></li>
-	<li><a id="gw-mega-tab-4" data-mega-menu-trigger="4" href="#"><fmt:message key="jsp.layout.navbar-admin.accesscontrol" /></a></li>
+	<li><a id="gw-mega-tab-2" data-mega-menu-trigger="2" href="#">My Open Research</a></li>
+	<li><a id="gw-mega-tab-3" data-mega-menu-trigger="3" href="<%= request.getContextPath() %>/dspace-admin">Administration</a></li>
+	<li><a id="gw-mega-tab-4" data-mega-menu-trigger="4" href="#"><fmt:message key="jsp.layout.navbar-admin.contents"/></a></li>
+	<li><a id="gw-mega-tab-5" data-mega-menu-trigger="5" href="#"><fmt:message key="jsp.layout.navbar-admin.accesscontrol" /></a></li>
 	<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
-	<li><a id="gw-mega-tab-6" data-mega-menu-trigger="6" href="#"><fmt:message key="jsp.layout.navbar-admin.settings"/></a></li>
+	<li><a id="gw-mega-tab-7" data-mega-menu-trigger="7" href="#"><fmt:message key="jsp.layout.navbar-admin.settings"/></a></li>
 </anu:topmenulinks>
 <%
 	if (user != null)
@@ -78,6 +79,28 @@
 		<div class="gw-mega-t1 narrow nopadtop nopadbottom">
 			<div class="gw-mega-t1">
 				<h1>
+					<a href="<%= request.getContextPath() %>/mydspace">My Open Research</a>
+				</h1>
+				<p>Your list of unfinished submissions or submissions in the workflow.</p>
+			</div>
+		</div>
+		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
+			<ul>
+				<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+			</ul>
+		</div>
+		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
+			<ul>
+				<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+			</ul>
+		</div>
+	</anu:topmenudropdown>
+	<anu:topmenudropdown tabId="3">
+		<div class="gw-mega-t1 narrow nopadtop nopadbottom">
+			<div class="gw-mega-t1">
+				<h1>
 					<a href="<%= request.getContextPath() %>/dspace-admin">Administration</a>
 				</h1>
 				<p>Adminstration home page</p>
@@ -90,7 +113,7 @@
 			</ul>
 		</div>
 	</anu:topmenudropdown>
-	<anu:topmenudropdown tabId="3">
+	<anu:topmenudropdown tabId="4">
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
 				<li><a href="<%= request.getContextPath() %>/dspace-admin/supervise"><fmt:message key="jsp.layout.navbar-admin.supervisors"/></a></li>
@@ -116,7 +139,7 @@
 			</ul>
 		</div>
 	</anu:topmenudropdown>
-	<anu:topmenudropdown tabId="4">
+	<anu:topmenudropdown tabId="5">
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
 				<li><a href="<%= request.getContextPath() %>/dspace-admin/edit-epeople"><fmt:message key="jsp.layout.navbar-admin.epeople"/></a></li>
@@ -125,7 +148,7 @@
 			</ul>
 		</div>
 	</anu:topmenudropdown>
-	<anu:topmenudropdown tabId="6">
+	<anu:topmenudropdown tabId="7">
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
 				<li><a href="<%= request.getContextPath() %>/dspace-admin/metadata-schema-registry"><fmt:message key="jsp.layout.navbar-admin.metadataregistry"/></a></li>

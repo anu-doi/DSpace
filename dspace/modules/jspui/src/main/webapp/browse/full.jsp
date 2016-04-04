@@ -184,7 +184,7 @@
 
 	<%-- Include the main navigation for all the browse pages --%>
 	<%-- This first part is where we render the standard bits required by both possibly navigations --%>
-	<div id="browse_navigation" class="well text-center">
+	<div id="browse_navigation" class="well">
 	<form method="get" action="<%= formaction %>">
 			<input type="hidden" name="type" value="<%= bix.getName() %>"/>
 			<input type="hidden" name="sort_by" value="<%= so.getNumber() %>"/>
@@ -237,10 +237,10 @@
 		}
 %>
         </select>
-        <input type="submit" class="btn btn-default" value="<fmt:message key="browse.nav.go"/>" />
-        <br/>
-        <label for="starts_with"><fmt:message key="browse.nav.type-year"/></label>
+        
+        <span><fmt:message key="browse.nav.type-year"/></span>
         <input type="text" name="starts_with" size="4" maxlength="4"/>
+        <input type="submit" class="btn-uni-grad btn-small" value="<fmt:message key="browse.nav.go"/>" />
 <%
 	}
 	
@@ -248,7 +248,8 @@
 	else
 	{
 %>	
-		<span><fmt:message key="browse.nav.jump"/></span>
+<div>
+		<div class="boxlink">
 	                        <a class="label label-default" href="<%= sharedLink %>&amp;starts_with=0">0-9</a>
 <%
 	    for (char c = 'A'; c <= 'Z'; c++)
@@ -257,9 +258,13 @@
 	                        <a class="label label-default" href="<%= sharedLink %>&amp;starts_with=<%= c %>"><%= c %></a>
 <%
 	    }
-%><br/>
+%>
+</div>
+</div>
+<div class="clear">
 	    					<span><fmt:message key="browse.nav.enter"/></span>
-	    					<input type="text" name="starts_with"/>&nbsp;<input type="submit" class="btn btn-default" value="<fmt:message key="browse.nav.go"/>" />
+	    					<input type="text" name="starts_with"/>&nbsp;<input type="submit" class="btn-uni-grad btn-small" value="<fmt:message key="browse.nav.go"/>" />
+					</div>
 <%
 	}
 %>
@@ -268,7 +273,7 @@
 	<%-- End of Navigation Headers --%>
 
 	<%-- Include a component for modifying sort by, order, results per page, and et-al limit --%>
-	<div id="browse_controls" class="well text-center">
+	<div id="browse_controls" class="well margintop">
 	<form method="get" action="<%= formaction %>">
 		<input type="hidden" name="type" value="<%= bix.getName() %>"/>
 <%
@@ -390,7 +395,7 @@
 %>
 		</select>
 
-		<input type="submit" class="btn btn-default" name="submit_browse" value="<fmt:message key="jsp.general.update"/>"/>
+		<input type="submit" class="btn-uni-grad btn-small" name="submit_browse" value="<fmt:message key="jsp.general.update"/>"/>
 
 <%
     if (admin_button && !withdrawn && !privateitems)

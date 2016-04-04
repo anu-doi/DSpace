@@ -111,6 +111,33 @@
 	</div>
 	</fieldset>
 	</form>
+	<%
+		if (bis.length > 0)
+		{
+	%>
+	<form class="anuform" method="get" action="<%= request.getContextPath() %>/handle/<%= community.getHandle() %>/browse">
+		<fieldset>
+		<legend>Browse <%= community.getName() %></legend>
+		<div class="panel-body margintop marginbottom">
+			<strong>Browse by:</strong>
+			<select name="type">
+				<%
+				for (int i = 0; i < bis.length; i++)
+				{
+					String key = "browse.menu." + bis[i].getName();
+				%>
+					<option value="<%= bis[i].getName() %>"><fmt:message key="<%= key %>" /></option>
+				<%
+				}
+				%>
+			</select>
+			<input type="submit" class="btn-uni-grad btn-small" name="submit_browse" value="Search"/>
+		</div>
+		</fieldset>
+	</form>
+	<%
+		}
+	%>
 </div>
 
 <% if (StringUtils.isNotBlank(intro)) { %>

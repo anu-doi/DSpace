@@ -144,6 +144,33 @@
 	</div>
 	</fieldset>
 	</form>
+	<%
+		if (bis.length > 0)
+		{
+	%>
+	<form class="anuform" method="get" action="<%= request.getContextPath() %>/handle/<%= collection.getHandle() %>/browse">
+		<fieldset>
+		<legend>Browse <%= collection.getName() %></legend>
+		<div class="panel-body margintop marginbottom">
+			<strong>Browse by:</strong>
+			<select name="type">
+				<%
+				for (int i = 0; i < bis.length; i++)
+				{
+					String key = "browse.menu." + bis[i].getName();
+				%>
+					<option value="<%= bis[i].getName() %>"><fmt:message key="<%= key %>" /></option>
+				<%
+				}
+				%>
+			</select>
+			<input type="submit" class="btn-uni-grad btn-small" name="submit_browse" value="Search"/>
+		</div>
+		</fieldset>
+	</form>
+	<%
+		}
+	%>
 </div>
 
 <%
@@ -182,7 +209,7 @@
     <%-- give us the top report on what we are looking at --%>
     <fmt:message var="bi_name" key="<%= bi_name_key %>"/>
     <fmt:message var="so_name" key="<%= so_name_key %>"/>
-    <div align="center" class="browse_range">
+    <div class="browse_range">
         <fmt:message key="jsp.collection-home.content.range">
             <fmt:param value="${bi_name}"/>
             <fmt:param value="${so_name}"/>
@@ -190,25 +217,6 @@
             <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
             <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
         </fmt:message>
-    </div>
-
-    <%--  do the top previous and next page links --%>
-    <div align="center">
-<% 
-      if (bi.hasPrevPage())
-      {
-%>
-      <a href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>&nbsp;
-<%
-      }
-
-      if (bi.hasNextPage())
-      {
-%>
-      &nbsp;<a href="<%= next %>"><fmt:message key="browse.full.next"/></a>
-<%
-      }
-%>
     </div>
 
 <%-- output the results using the browselist tag --%>
@@ -227,34 +235,41 @@
       }
 %>
 
-    <%-- give us the bottom report on what we are looking at --%>
-    <div align="center" class="browse_range">
-        <fmt:message key="jsp.collection-home.content.range">
-            <fmt:param value="${bi_name}"/>
-            <fmt:param value="${so_name}"/>
-            <fmt:param value="<%= Integer.toString(bi.getStart()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getFinish()) %>"/>
-            <fmt:param value="<%= Integer.toString(bi.getTotal()) %>"/>
-        </fmt:message>
-    </div>
-
     <%--  do the bottom previous and next page links --%>
-    <div align="center">
+    <div class="discovery-result-pagination row container">
+	<ul class="pagination pull-right">
 <% 
       if (bi.hasPrevPage())
       {
 %>
-      <a href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>&nbsp;
+	<li>
+      <a href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>
+	  </li>
 <%
       }
+	  else {
+%>
+	<li class="disabled">
+      <a href="<%= prev %>"><fmt:message key="browse.full.prev"/></a>
+	  </li>
+<%
+	  }
 
       if (bi.hasNextPage())
       {
 %>
-      &nbsp;<a href="<%= next %>"><fmt:message key="browse.full.next"/></a>
+<li><a href="<%= next %>"><fmt:message key="browse.full.next"/></a>
+	  </li>
 <%
       }
+	  else {
 %>
+<li class="disabled"><a href="<%= next %>"><fmt:message key="browse.full.next"/></a>
+	  </li>
+<%
+	  }
+%>
+	</ul>
     </div>
 
 <%

@@ -48,6 +48,8 @@
     String generator = dsVersion == null ? "DSpace" : "DSpace "+dsVersion;
     String analyticsKey = ConfigurationManager.getProperty("jspui.google.analytics.key");
 	
+	String alertEnvironment = ConfigurationManager.getProperty("alert.environment");
+	String alertText = "This is the "+alertEnvironment+" environment";
 	
     String navbarEmail = null;
     if (user != null)
@@ -98,11 +100,10 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 </anu:header>
 
 <%
-	String alertEnvironment = ConfigurationManager.getProperty("alert.environment");
 	if (alertEnvironment != null && !"".equals(alertEnvironment)) 
 	{
 %>
-<anu:alertbar text="This is the TEST environment" environment="<%= alertEnvironment %>" />
+<anu:alertbar text="<%= alertText %>" environment="<%= alertEnvironment %>" />
 <%
 	}
 %>
