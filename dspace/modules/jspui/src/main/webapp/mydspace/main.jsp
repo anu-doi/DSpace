@@ -108,10 +108,10 @@
         </div>         
 
 		<div class="panel-body">
-		    <form action="<%= request.getContextPath() %>/mydspace" method="post">
+		    <form action="<%= request.getContextPath() %>/mydspace" class="full nomargintop" method="post">
 		        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
-                <input class="btn btn-success" type="submit" name="submit_new" value="<fmt:message key="jsp.mydspace.main.start.button"/>" />
-                <input class="btn btn-info" type="submit" name="submit_own" value="<fmt:message key="jsp.mydspace.main.view.button"/>" />
+                <input class="btn-uni-grad btn-small right" type="submit" name="submit_new" value="<fmt:message key="jsp.mydspace.main.start.button"/>" />
+                <input class="btn-uni-grad btn-small right" type="submit" name="submit_own" value="<fmt:message key="jsp.mydspace.main.view.button"/>" />
 		    </form>
 		
 		
@@ -170,8 +170,8 @@
                      <form action="<%= request.getContextPath() %>/mydspace" method="post">
                         <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
                         <input type="hidden" name="workflow_id" value="<%= owned[i].getID() %>" />  
-                        <input class="btn btn-primary" type="submit" name="submit_perform" value="<fmt:message key="jsp.mydspace.main.perform.button"/>" />  
-                        <input class="btn btn-default" type="submit" name="submit_return" value="<fmt:message key="jsp.mydspace.main.return.button"/>" />
+                        <input class="btn-uni-grad btn-small" type="submit" name="submit_perform" value="<fmt:message key="jsp.mydspace.main.perform.button"/>" />  
+                        <input class="btn-uni-grad btn-small" type="submit" name="submit_return" value="<fmt:message key="jsp.mydspace.main.return.button"/>" />
                      </form> 
                 </td>
         </tr>
@@ -234,7 +234,7 @@
                         <form action="<%= request.getContextPath() %>/mydspace" method="post">
                             <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
                             <input type="hidden" name="workflow_id" value="<%= pooled[i].getID() %>" />
-                            <input class="btn btn-default" type="submit" name="submit_claim" value="<fmt:message key="jsp.mydspace.main.take.button"/>" />
+                            <input class="btn-uni-grad btn-small" type="submit" name="submit_claim" value="<fmt:message key="jsp.mydspace.main.take.button"/>" />
                         </form> 
                     </td>
         </tr>
@@ -259,11 +259,10 @@
 
     <table class="table" align="center" summary="Table listing unfinished submissions">
         <tr>
-            <th class="oddRowOddCol">&nbsp;</th>
-            <th id="t10" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.subby"/></th>
-            <th id="t11" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem1"/></th>
-            <th id="t12" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem2"/></th>
-            <th id="t13" class="oddRowOddCol">&nbsp;</th>
+            <th id="t10" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subby"/></th>
+            <th id="t11" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem1"/></th>
+            <th id="t12" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem2"/></th>
+            <th id="t13" class="oddRowEvenCol">&nbsp;</th>
         </tr>
 <%
         if (supervisedItems.length > 0 && workspaceItems.length > 0)
@@ -289,12 +288,6 @@
             EPerson submitter = workspaceItems[i].getItem().getSubmitter();
 %>
         <tr>
-            <td class="<%= row %>RowOddCol">
-                <form action="<%= request.getContextPath() %>/workspace" method="post">
-                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>"/>
-                    <input class="btn btn-default" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
-                </form>
-            </td>
             <td headers="t10" class="<%= row %>RowEvenCol">
                 <a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a>
             </td>
@@ -315,11 +308,15 @@
 				<% } %>
 			</td>
             <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems[i].getCollection().getMetadata("name") %></td>
-            <td headers="t13" class="<%= row %>RowOddCol">
+            <td headers="t13" class="<%= row %>RowOddCol right">
+                <form action="<%= request.getContextPath() %>/workspace" method="post">
+                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>"/>
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
+                </form>
                 <form action="<%= request.getContextPath() %>/mydspace" method="post">
                     <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>"/>
-                    <input class="btn btn-danger" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
                 </form> 
             </td>
         </tr>
@@ -354,7 +351,7 @@
             <td class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/workspace" method="post">
                     <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>"/>
-                    <input class="btn btn-default" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
                 </form>
             </td>
             <td class="<%= row %>RowEvenCol">
@@ -366,7 +363,7 @@
                 <form action="<%= request.getContextPath() %>/mydspace" method="post">
                     <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
                     <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>"/>
-                    <input class="btn btn-default" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
                 </form>  
             </td>
         </tr>

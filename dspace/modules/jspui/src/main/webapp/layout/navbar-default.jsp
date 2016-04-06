@@ -47,14 +47,6 @@
     {
         currentPage = currentPage.substring( 0, c );
     }
-
-    // E-mail may have to be truncated
-    String navbarEmail = null;
-
-    if (user != null)
-    {
-        navbarEmail = user.getEmail();
-    }
     
     // get the browse indices
     
@@ -85,33 +77,12 @@
 	<li><a href="<%= openResearchURL %>/policy">Policy</a></li>
 	<li><a href="<%= openResearchURL %>/copyright-considerations">Copyright</a></li>
 	<li><a href="<%= openResearchURL %>/contact">Contact</a></li>
-		<%
-			if (user != null)
-			{
-		%>
 	<li>
-	
-			<fmt:message key="jsp.layout.navbar-default.loggedin" var="signin">
-				  <fmt:param><%= StringUtils.abbreviate(navbarEmail, 25) %></fmt:param>
-			</fmt:message>
-			<a id="gw-mega-tab-9" data-mega-menu-trigger="9" href="#">
+		<a id="gw-mega-tab-9" data-mega-menu-trigger="9" href="#">
 		My Open Research
 		</a>
 	</li>
-			<%
-		}
-			%>
 </anu:topmenulinks>
-<%
-	if (user != null)
-	{
-%>
-<div class="right padright">
-<a class="tabs-logout" href="<%=  request.getContextPath() %>/logout">Logout</a>
-</div>
-<%
-	}
-%>
 </anu:topmenu>
 
 
@@ -127,14 +98,28 @@
 		</div>
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
-				<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
-				<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 			</ul>
 		</div>
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
-				<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
-				<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
+				
+<%
+	if (user != null)
+	{
+%>
+				<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+
+<%
+	}
+	else {
+%>
+				<li><a href="<%= request.getContextPath() %>/mydspace">Login</a></li>
+<%
+	}
+%>
 			</ul>
 		</div>
 		<%

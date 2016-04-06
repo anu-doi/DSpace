@@ -74,16 +74,6 @@
 	
 	<li><a href="<%= request.getContextPath() %>/dspace-admin"><fmt:message key="jsp.administer"/></a></li>
 </anu:topmenulinks>
-<%
-	if (user != null)
-	{
-%>
-<div class="right padright">
-<a class="tabs-logout" href="<%=  request.getContextPath() %>/logout">Logout</a>
-</div>
-<%
-	}
-%>
 </anu:topmenu>
 
 

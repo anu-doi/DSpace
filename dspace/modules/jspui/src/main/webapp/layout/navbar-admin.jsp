@@ -62,16 +62,6 @@
 	<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
 	<li><a id="gw-mega-tab-7" data-mega-menu-trigger="7" href="#"><fmt:message key="jsp.layout.navbar-admin.settings"/></a></li>
 </anu:topmenulinks>
-<%
-	if (user != null)
-	{
-%>
-<div class="right padright">
-<a class="tabs-logout" href="<%=  request.getContextPath() %>/logout">Logout</a>
-</div>
-<%
-	}
-%>
 </anu:topmenu>
 
 <anu:topmenucontents>
@@ -86,14 +76,14 @@
 		</div>
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
-				<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
-				<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 			</ul>
 		</div>
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
-				<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
-				<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/statistics"><fmt:message key="jsp.layout.navbar-admin.statistics"/></a></li>
+				<li><a href="<%= request.getContextPath() %>/logout"><fmt:message key="jsp.layout.navbar-default.logout"/></a></li>
 			</ul>
 		</div>
 	</anu:topmenudropdown>

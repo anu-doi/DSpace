@@ -99,7 +99,7 @@
 	}
 %>
 
-<dspace:layout titlekey="jsp.community-list.title" locbar="off">
+<dspace:layout titlekey="jsp.community-list.title">
 <%
     if (admin_button)
     {
@@ -125,7 +125,7 @@
     }
 %>
 <fmt:message key="jsp.community-list.title" var="title" />
-<anu:content layout="two-third" title="${title}">
+<anu:content layout="full" title="${title}">
 	<p>
 	<fmt:message key="jsp.community-list.text1">
 		<fmt:param value="<%= openResearchURL %>" />
@@ -133,41 +133,57 @@
 		<fmt:param value="handle/1885/2" />
 	</fmt:message>
 	</p>
-
+</anu:content>
+<anu:content layout="full">
+	<anu:divider style="solid" />
+</anu:content>
 <% if (communities.length != 0)
 {
 	%>
-	<ul class="noindent nobullet">
 	<% 
 	for (int i = 0; i < communities.length; i++)
 	{
-        showCommunity(communities[i], out, request, ic, collectionMap, subcommunityMap);
+        //showCommunity(communities[i], out, request, ic, collectionMap, subcommunityMap);
+		
+	%>
+		<anu:content layout="doublenarrow" extraClass="box bg-grey10">
+			<div>
+				<%
+					String imgUrl = null;
+					if ("1885/1".equals(communities[i].getHandle())) {
+						imgUrl = request.getContextPath() + "/image/research-collections.jpg";
+					}
+					else if ("1885/2".equals(communities[i].getHandle())) {
+						imgUrl = request.getContextPath() + "/image/archival-collections.jpg";
+					}
+				
+					if (imgUrl != null) {
+				%>
+				
+					<div class="marginright left w-wide hide-rsp">
+						<a href="#"><img src="<%= imgUrl %>" alt="Community logo"/></a>
+					</div>
+				<%
+					}
+				%>
+			
+				<div>
+				<h2><a href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %>&nbsp;&raquo;</a></h2>
+				<%
+					String shortDesc = communities[i].getMetadata("short_description");
+					if (shortDesc != null) {
+				%>
+					<%= shortDesc %>
+				<%
+					}
+				%>
+				</div>
+			</div>
+		</anu:content>
+	<%
 	}
 	%>
-	</ul>
  
 <% }
 %>
-</anu:content>
-<anu:content layout="one-third">
-	<anu:box backgroundColour="uni" backgroundOpacity="25">
-		<h2>Other links</h2>
-		<ul class="linklist">
-			<li><a href="<%= request.getContextPath() %>/handle/1885/1">ANU Research collections</a></li>
-			<li><a href="<%= request.getContextPath() %>/handle/1885/2">Research Collections</a></li>
-			<li><a href="<%= request.getContextPath() %>/statistics">Statistics</a></li>
-		</ul>
-	</anu:box>
-	<anu:box backgroundColour="uni" backgroundOpacity="25">
-		<h2>Contact</h2>
-		<div class="clear padbottom">
-			<img class="hpad left" alt="Name" src="//style.anu.edu.au/_anu/images/icons/web/person.png">
-			<div>General enquiries</div>
-		</div>
-		<div class="clear padbottom">
-			<img class="hpad left" alt="Email" src="//style.anu.edu.au/_anu/images/icons/web/mail.png"/> 
-			<a href="mailto:repository.admin@anu.edu.au">Send email</a>
-		</div>
-	</anu:box>
-</anu:content>
 </dspace:layout>
