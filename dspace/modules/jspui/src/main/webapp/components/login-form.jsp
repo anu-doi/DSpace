@@ -28,6 +28,7 @@ $a("#tlogin_email").focus();
   
      <form name="loginform" id="loginform" method="post" class="anuform labelwide" action="<%= request.getContextPath() %>/password-login"> 
 		<fieldset>
+		<legend>Login</legend>
 		<p>
         <label for="tlogin_email"><fmt:message key="jsp.components.login-form.email"/></label>
 		<input type="text" name="login_email" id="tlogin_email" tabindex="1" class="tfull text" />
@@ -36,33 +37,18 @@ $a("#tlogin_email").focus();
 		<label for="tlogin_password"><fmt:message key="jsp.components.login-form.password"/></label>
 		<input type="password" name="login_password" id="tlogin_password" tabindex="2" class="tfull text" />
 		</p>
+		<p>
+		<label></label><a href="<%= request.getContextPath() %>/forgot">Forgot your password?</a>
+		</p>
 		</fieldset>
 		<p class="text-right" style="margin-bottom: 10px;">
 		<input type="submit" name="login_submit" class="btn-uni-grad" value="<fmt:message key="jsp.components.login-form.login"/>" />
 		</p>
       </form>
-
-<anu:message type="info">
-        <h2>Items with restrictions</h2>
-        <p>Generally all material in Digital Collections is available open access, with three exceptions:</p>
-   
-        <ol>
-                <li>Embargos - There are a few items which are held under embargo until we can make them available.</li>
-                <li>Restrictions - A very small number of items have restrictions on their availability.</li>
-		<li>High resolution images - see <strong>Research Collections</strong> information at <a href="https://digitalcollections.anu.edu.au/contacts">https://digitalcollections.anu.edu.au/contacts</a>
-		for information on how to purchase these images.</li>
-        </ol>
-
-        <p>If you are having trouble opening an item, please contact us at <a
-        href="mailto:repository.admin@anu.edu.au">repository.admin@anu.edu.au</a>
-        for assistance.</p>
-</anu:message>
-
-<br/>
-<anu:message type="warn">
-	<h2>Login support</h2>
-	<ul>
-   		<li><a href="<%= request.getContextPath() %>/forgot">Forgot your password?</a></li>
-   	</ul>
-
-</anu:message>
+	  <p> Any staff member (including those holding honorary status, such as Emeriti and Visitors) and Higher Degree by 
+	  Research students of the University can submit material to ANU Open Research repository. Undergraduate and Postgraduate by
+	  Coursework students can deposit research outputs (such as journal article, theses).</p>
+	  <p>University staff can deposit work they completed before they began at ANU, but must indicate their former affiliation in the
+	  "Notes" field.</p>
+	  <p>The Open Research staff will check copyright permissions of your uploaded item and contact you should an alternative version
+	  be required to meet publisher policies.</p>

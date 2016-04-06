@@ -20,9 +20,28 @@
 
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
-<anu:content layout="doublenarrow">
 <dspace:layout navbar="default" locbar="off" titlekey="jsp.login.password.title" nocache="true">
+<anu:content layout="full">
     <h1><fmt:message key="jsp.login.password.heading"/></h1>
-    <dspace:include page="/components/login-form.jsp" />
-</dspace:layout>
 </anu:content>
+<anu:content layout="two-third">
+    <dspace:include page="/components/login-form.jsp" />
+</anu:content>
+<anu:content layout="one-third">
+	<anu:box backgroundColour="grey" backgroundOpacity="10">
+		<h2>Related guidance</h2>
+		<a href="https://digitalcollections.anu.edu.au/downloads/submit_an_item.pdf">Submitting an item to the Open Research repository (PDF, 264KB)</a>
+	</anu:box>
+	<anu:box backgroundColour="grey" backgroundOpacity="10">
+		<h2>Contact</h2>
+		<div class="clear padbottom">
+			<img class="hpad left" alt="Name" src="//style.anu.edu.au/_anu/images/icons/web/person.png">
+			<div>General enquiries</div>
+		</div>
+		<div class="clear padbottom">
+			<img class="hpad left" alt="Email" src="//style.anu.edu.au/_anu/images/icons/web/mail.png"/> 
+			<a href="mailto:repository.admin@anu.edu.au">Send email</a>
+		</div>
+	</anu:box>
+</anu:content>
+</dspace:layout>
