@@ -110,7 +110,7 @@
 				%>
 			
 				<div>
-				<h2><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %>&nbsp;&raquo;</a></h2>
+				<h2><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %></a></h2>
 				<%
 					String shortDesc = communities[i].getMetadata("short_description");
 					if (shortDesc != null) {
@@ -133,7 +133,7 @@
 		<div>
 			<a href="<%= request.getContextPath() %>/statistics"><img src="<%= request.getContextPath() %>/image/statistics.jpg" alt="Community logo"/></a>
 		</div>
-		<h2><a class="nounderline" href="<%= request.getContextPath() %>/statistics">Statistics&nbsp;&raquo;</a></h2>
+		<h2><a class="nounderline" href="<%= request.getContextPath() %>/statistics">Statistics</a></h2>
 	</div>
 </anu:content>
 </dspace:layout>
