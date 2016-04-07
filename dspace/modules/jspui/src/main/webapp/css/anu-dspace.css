@@ -897,3 +897,9 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
     padding: 6px 8px !important;
 	font-weight: bold;
 }
+.colbox {
+	min-height: 295px;
+}
+.colbox img {
+	width: 100%;
+}

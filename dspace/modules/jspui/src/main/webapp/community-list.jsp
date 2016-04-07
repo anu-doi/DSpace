@@ -48,55 +48,6 @@
     Boolean admin_b = (Boolean)request.getAttribute("admin_button");
     boolean admin_button = (admin_b == null ? false : admin_b.booleanValue());
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
-    
-    String openResearchURL = ConfigurationManager.getProperty("openresearch.url");
-%>
-
-<%!
-
-	void showCommunity(Community c, JspWriter out, HttpServletRequest request, ItemCounter ic,
-			Map collectionMap, Map subcommunityMap) throws ItemCountException, IOException, SQLException
-	{
-		boolean hasParent = true;
-		if (c.getParentCommunity() == null) {
-			hasParent = false;
-		}
-        Collection[] cols = (Collection[]) collectionMap.get(c.getID());
-        Community[] comms = (Community[]) subcommunityMap.get(c.getID());
-        out.println("<li>");
-		//out.println("<a class=\"right\" href=\""+request.getContextPath()+"/handle/"+c.getHandle()+"\"><img class=\"absmiddle left padright\" src=\"http://style.anu.edu.au/_anu/images/icons/silk/link.png\" /></a>");
-		if (hasParent) {
-			out.println("<h3 class=\"nounderline\">"+c.getName()+"</h3>");
-			out.println("<div class=\"anutoggle\">");
-		}
-		else {
-			out.println("<h2 class=\"nounderline\"><a href=\""+request.getContextPath()+"/handle/"+c.getHandle()+"\">"+c.getName()+"</a></h2>");
-		}
-		if (cols != null && cols.length > 0)
-		{
-			out.println("<ul class=\"nounderline nopadtop\">");
-			for (int j = 0; j < cols.length; j++)
-			{
-				out.println("<li><a href=\""+request.getContextPath()+"/handle/"+cols[j].getHandle()+"\">"+cols[j].getName()+"</a></li>");
-			}
-			out.println("</ul>");
-		}
-		if (comms != null && comms.length > 0)
-		{
-			out.println("<ul>");
-			{
-			for (int k = 0; k < comms.length; k++)
-			{
-	        	showCommunity(comms[k], out, request, ic, collectionMap, subcommunityMap);
-			}
-			}
-			out.println("</ul>");
-		}
-		if (hasParent) {
-			out.println("</div>");
-		}
-		out.println("</li>");
-	}
 %>
 
 <dspace:layout titlekey="jsp.community-list.title">
@@ -127,15 +78,8 @@
 <fmt:message key="jsp.community-list.title" var="title" />
 <anu:content layout="full" title="${title}">
 	<p>
-	<fmt:message key="jsp.community-list.text1">
-		<fmt:param value="<%= openResearchURL %>" />
-		<fmt:param value="handle/1885/1" />
-		<fmt:param value="handle/1885/2" />
-	</fmt:message>
+	<fmt:message key="jsp.community-list.text1" />
 	</p>
-</anu:content>
-<anu:content layout="full">
-	<anu:divider style="solid" />
 </anu:content>
 <% if (communities.length != 0)
 {
@@ -143,32 +87,30 @@
 	<% 
 	for (int i = 0; i < communities.length; i++)
 	{
-        //showCommunity(communities[i], out, request, ic, collectionMap, subcommunityMap);
-		
 	%>
-		<anu:content layout="doublenarrow" extraClass="box bg-grey10">
+		<anu:content layout="one-third" extraClass="box bg-grey10 colbox">
 			<div>
 				<%
 					String imgUrl = null;
 					if ("1885/1".equals(communities[i].getHandle())) {
-						imgUrl = request.getContextPath() + "/image/research-collections.jpg";
+						imgUrl = request.getContextPath() + "/image/anu-research.jpg";
 					}
 					else if ("1885/2".equals(communities[i].getHandle())) {
-						imgUrl = request.getContextPath() + "/image/archival-collections.jpg";
+						imgUrl = request.getContextPath() + "/image/archival-and-rare-collections.jpg";
 					}
 				
 					if (imgUrl != null) {
 				%>
 				
-					<div class="marginright left w-wide hide-rsp">
-						<a href="#"><img src="<%= imgUrl %>" alt="Community logo"/></a>
+					<div>
+						<a href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>"><img src="<%= imgUrl %>" alt="Community logo"/></a>
 					</div>
 				<%
 					}
 				%>
 			
 				<div>
-				<h2><a href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %>&nbsp;&raquo;</a></h2>
+				<h2><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %>&nbsp;&raquo;</a></h2>
 				<%
 					String shortDesc = communities[i].getMetadata("short_description");
 					if (shortDesc != null) {
@@ -186,4 +128,12 @@
  
 <% }
 %>
+<anu:content layout="one-third" extraClass="box bg-grey10 colbox">
+	<div>
+		<div>
+			<a href="<%= request.getContextPath() %>/statistics"><img src="<%= request.getContextPath() %>/image/statistics.jpg" alt="Community logo"/></a>
+		</div>
+		<h2><a class="nounderline" href="<%= request.getContextPath() %>/statistics">Statistics&nbsp;&raquo;</a></h2>
+	</div>
+</anu:content>
 </dspace:layout>

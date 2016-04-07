@@ -72,7 +72,7 @@
 	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
 	<li><a href="<%= openResearchURL %>/about-open-research-anu">About</a></li>
 	<li><a href="<%= request.getContextPath() %>/community-list">Collections</a></li>
-	<li><a href="<%= openResearchURL %>/contribute-your-research/">Contribute</a></li>
+	<li><a href="<%= openResearchURL %>/contribute">Contribute</a></li>
 	<li><a href="<%= openResearchURL %>/publishing">Publishing</a></li>
 	<li><a href="<%= openResearchURL %>/policy">Policy</a></li>
 	<li><a href="<%= openResearchURL %>/copyright-considerations">Copyright</a></li>
@@ -141,7 +141,7 @@
 	<li><a href="<%= openResearchURL %>">Home</a></li>
 	<li><a href="<%= openResearchURL %>/about-open-research-anu">About</a></li>
 	<li><a href="<%= request.getContextPath() %>/community-list">Collections</a></li>
-	<li><a href="<%= openResearchURL %>/contribute-your-research/">Contribute</a></li>
+	<li><a href="<%= openResearchURL %>/contribute">Contribute</a></li>
 	<li><a href="<%= openResearchURL %>/publishing">Publishing</a></li>
 	<li><a href="<%= openResearchURL %>/policy">Policy</a></li>
 	<li><a href="<%= openResearchURL %>/copyright-considerations">Copyright</a></li>
