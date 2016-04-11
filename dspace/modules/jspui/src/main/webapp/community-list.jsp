@@ -126,7 +126,7 @@
 				<%
 					}
 				%>
-				<span class="badge"><%= ic.getCount(communities[i]) %></span>
+				<span class="badge"><%= ic.getCount(communities[i]) %> items</span>
 				</div>
 			</div>
 		</anu:content>
