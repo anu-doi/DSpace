@@ -4,13 +4,13 @@
 # {1}  Name of collection
 # {2}  handle 
 #
-Subject: Digital Collections: Submission Approved and Archived 
+Subject: Open Research: Submission Approved and Archived 
 
 You submitted: {0}
 
 To collection: {1}
 
-Your submission has been accepted and archived in Digital Collections,
+Your submission has been accepted and archived in Open Research,
 and it has been assigned the following identifier:
 {2}
 
@@ -18,4 +18,4 @@ Please use this identifier when citing your submission.
 
 Many thanks!
 
-The Digital Collections Team
+The Open Research Team
