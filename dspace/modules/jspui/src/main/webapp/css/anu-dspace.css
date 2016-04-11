@@ -248,6 +248,7 @@ label.normalweight {
 	text-align: center;
 	vertical-align: baseline;
 	white-space: nowrap;
+	font-weight: normal;
 }
 .modal {
     bottom: 0;
@@ -898,7 +899,7 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 	font-weight: bold;
 }
 .colbox {
-	min-height: 295px;
+	min-height: 240px;
 }
 .colbox img {
 	width: 100%;

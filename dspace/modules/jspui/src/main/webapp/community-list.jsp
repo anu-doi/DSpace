@@ -80,6 +80,13 @@
 	<p>
 	<fmt:message key="jsp.community-list.text1" />
 	</p>
+	<form id="searchform" method="get" action="<%= request.getContextPath() %>/advanced-search" class="anuform">
+		<fieldset>
+			<legend>Search Open Research</legend>
+			<input id="query" name="query" class="margintop marginbottom text tfull" type="text" />
+			<input id="main" type="submit" value="Search" class="btn-uni-grad btn-small" />
+		</fieldset>
+	</form>
 </anu:content>
 <% if (communities.length != 0)
 {
@@ -119,6 +126,7 @@
 				<%
 					}
 				%>
+				<span class="badge"><%= ic.getCount(communities[i]) %></span>
 				</div>
 			</div>
 		</anu:content>

@@ -154,7 +154,7 @@
 	<% } %>
 
 <%!
-	public void listCommunities(Community[] communities,  JspWriter out, HttpServletRequest request, boolean topLevel, boolean removeButton) throws IOException, SQLException
+	public void listCommunities(Community[] communities,  JspWriter out, HttpServletRequest request, ItemCounter ic, boolean topLevel, boolean removeButton) throws IOException, SQLException
 	{
 		if (communities.length > 0)
 		{
@@ -165,8 +165,16 @@
 				
 				
 				if (topLevel) {
-						out.println("<h3 class=\"nounderline\">");
+						out.println("<h3 class=\"nounderline margintop\">");
 					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
+					if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
+						try {
+							out.println("<span class=\"badge\">"+ic.getCount(comm)+"</span>");
+						}
+						catch (Exception e) {
+							System.out.println("Exception getting item count for collection: "+comm.getID());
+						}
+					}
 					if (removeButton) {
 						out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
 						out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+comm.getParentCommunity()+"\" />");
@@ -190,8 +198,8 @@
 						out.println("</form>");
 					}
 				}
-				listCommunities(comm.getSubcommunities(), out, request, false, removeButton);
-				listCollections(comm, comm.getCollections(), out, request, removeButton);
+				listCommunities(comm.getSubcommunities(), out, request, ic, false, removeButton);
+				listCollections(comm, comm.getCollections(), out, request, ic, removeButton);
 				if (!topLevel) {
 					out.println("</li>");
 				}
@@ -202,7 +210,7 @@
 		}
 	}
 	
-	public void listCollections(Community parentCommunity, Collection[] collections, JspWriter out, HttpServletRequest request, boolean removeButton) throws IOException, SQLException
+	public void listCollections(Community parentCommunity, Collection[] collections, JspWriter out, HttpServletRequest request, ItemCounter ic, boolean removeButton) throws IOException, SQLException
 	{
 		if (collections.length > 0)
 		{
@@ -210,6 +218,14 @@
 			for (Collection coll : collections) {
 				out.println("<li>");
 				out.println("<a href=\""+request.getContextPath()+"/handle/"+coll.getHandle()+"\">"+coll.getName()+"</a>");
+				if (ConfigurationManager.getBooleanProperty("webui.strengths.show")) {
+					try {
+						out.println("["+ic.getCount(coll)+"]");
+					}
+					catch (Exception e) {
+						System.out.println("Exception getting item count for collection: "+coll.getID());
+					}
+				}
 				if (removeButton) {
 					out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
 					out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+parentCommunity.getID()+"\" />");
@@ -235,11 +251,11 @@
 %>
 
 <%
-	listCommunities(subcommunities, out, request, true, remove_button);
+	listCommunities(subcommunities, out, request, ic, true, remove_button);
 %>
 <% } 
 	if (collections.length > 0) {
-		listCollections(community, collections, out, request, remove_button);
+		listCollections(community, collections, out, request, ic, remove_button);
 	}
 
 %>
