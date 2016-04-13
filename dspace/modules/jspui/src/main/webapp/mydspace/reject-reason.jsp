@@ -36,7 +36,7 @@
 <dspace:layout style="submission" locbar="link"
                parentlink="/mydspace"
                parenttitlekey="jsp.mydspace"
-               title="reject-reason.title"
+               titlekey="jsp.mydspace.reject-reason.title"
                nocache="true">
 
     <%-- <h1>Enter Reason for Rejection</h1> --%>

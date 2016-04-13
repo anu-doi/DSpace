@@ -64,7 +64,7 @@
 			if (i == 0) 
 			{
 %>
-  <anu:crumb title="<%= bannerName %>" href="<%= bannerUrl %>" />
+  <anu:crumb title="Home" href="<%= bannerUrl %>" />
 <%
 			}
 			else{
@@ -74,5 +74,13 @@
 			}
         }
 }
+%>
+<% 
+	String title = (String)request.getAttribute("dspace.layout.title");
+	if (title != null) {
+%>
+<anu:crumb title="<%= title %>"/>
+<%
+	}
 %>
 </anu:breadcrumbs>

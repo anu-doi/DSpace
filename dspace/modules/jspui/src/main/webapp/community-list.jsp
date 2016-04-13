@@ -80,13 +80,15 @@
 	<p>
 	<fmt:message key="jsp.community-list.text1" />
 	</p>
-	<form id="searchform" method="get" action="<%= request.getContextPath() %>/advanced-search" class="anuform">
-		<fieldset>
-			<legend>Search Open Research</legend>
-			<input id="query" name="query" class="margintop marginbottom text tfull" type="text" />
-			<input id="main" type="submit" value="Search" class="btn-uni-grad btn-small" />
-		</fieldset>
+	<div class="box bg-uni25 bigsearch">
+	<form id="searchform" method="get" action="<%= request.getContextPath() %>/advanced-search">
+		<input id="query" name="query" class="margintop marginbottom text tfull" type="text" placeholder="Search by keyword..." size="24" />
+		<input id="main" type="submit" value="GO" class="btn-uni-grad btn-medium" />
 	</form>
+	<p>
+		<a href="<%= request.getContextPath() %>/advanced-search">advanced search &raquo;</a>
+	</p>
+	</div>
 </anu:content>
 <% if (communities.length != 0)
 {
@@ -95,7 +97,8 @@
 	for (int i = 0; i < communities.length; i++)
 	{
 	%>
-		<anu:content layout="one-third" extraClass="box bg-grey10 colbox">
+		<anu:content layout="one-third">
+			<div class="box bg-grey10 colbox">
 			<div>
 				<%
 					String imgUrl = null;
@@ -128,6 +131,7 @@
 				%>
 				<span class="badge"><%= ic.getCount(communities[i]) %> items</span>
 				</div>
+			</div>
 			</div>
 		</anu:content>
 	<%

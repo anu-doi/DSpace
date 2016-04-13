@@ -899,8 +899,23 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 	font-weight: bold;
 }
 .colbox {
-	min-height: 235px;
+	min-height: 336px;
 }
 .colbox img {
 	width: 100%;
+}
+.bigsearch {
+	margin-bottom: 0;
+}
+.bigsearch input[type="text"] {
+	font-size: 1.25em;
+	height: 46px;
+	margin-right: 4%;
+	padding: 0 10px;
+	width: 65%;
+}
+.bigsearch input[type="submit"] {
+	font-size: 1.5em;
+	height: 50px;
+	min-width: 20%;
 }

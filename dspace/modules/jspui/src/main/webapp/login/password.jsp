@@ -30,7 +30,7 @@
 <anu:content layout="one-third">
 	<anu:box backgroundColour="grey" backgroundOpacity="10">
 		<h2>Related guidance</h2>
-		<a href="https://digitalcollections.anu.edu.au/downloads/submit_an_item.pdf">Submitting an item to the Open Research repository (PDF, 264KB)</a>
+		<a href="http://openresearch.anu.edu.au/files/guidance/Submitting%20an%20item%20to%20the%20Open%20Research%20repository%5B2%5D.pdf">Submitting an item to the Open Research repository (PDF, 397.97KB)</a>
 	</anu:box>
 	<anu:box backgroundColour="grey" backgroundOpacity="10">
 		<h2>Contact</h2>
