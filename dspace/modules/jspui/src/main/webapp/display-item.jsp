@@ -144,14 +144,24 @@
 		
 	}
 	
-	String doiUrl = null;
+	String publisherVersionUrl = null;
 	
 	Metadatum[] doiValues = item.getMetadata("local","identifier","doi",Item.ANY);
 	if (doiValues.length > 0)
 	{
-		doiUrl = doiValues[0].value;
-		if (doiUrl.length() > 0 && !doiUrl.startsWith("http")) {
-			doiUrl = "http://dx.doi.org/" + doiUrl;
+		publisherVersionUrl = doiValues[0].value;
+		if (publisherVersionUrl.length() > 0 && !publisherVersionUrl.startsWith("http")) {
+			publisherVersionUrl = "http://dx.doi.org/" + publisherVersionUrl;
+		}
+	}
+	else {
+		Metadatum[] sourceUriValues = item.getMetadata("dc","source","uri",Item.ANY);
+		if (sourceUriValues.length > 0)
+		{
+			String sourceUrl = sourceUriValues[0].value;
+			if (sourceUrl.toLowerCase().startsWith("http")) {
+				publisherVersionUrl = sourceUrl;
+			}
 		}
 	}
     
@@ -270,7 +280,7 @@
 <h2 class="padbottom"><%= title %></h2>
 
 <div class="w-narrow right margintop marginleft marginbottom nopadbottom">
-<% if (statement != null || selectedBitstream != null || (doiUrl != null && doiUrl.length() > 0)) { %>
+<% if (statement != null || selectedBitstream != null || (publisherVersionUrl != null && publisherVersionUrl.length() > 0)) { %>
 <anu:box style="bdr2">
 	<% 	
 	if (statement != null) 
@@ -301,9 +311,9 @@
 		<%
 		}
 	} 
-	if (doiUrl != null && doiUrl.length() > 0) {
+	if (publisherVersionUrl != null && publisherVersionUrl.length() > 0) {
 	%>
-	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="<%= doiUrl %>">link to publisher version</a></p>
+	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="<%= publisherVersionUrl %>">link to publisher version</a></p>
 	<%
 	}
 	%>
