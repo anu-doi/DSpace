@@ -50,6 +50,8 @@
    <!-- ANU Research > ANU Open Access Research > Australian National Internships Program - Reports -->
    <name-map collection-handle="1885/13618" form-name="ANU_Research" />
    
+   <name-map collection-handle="123456789/44" form-name="ANU_Press" />
+   
  </form-map>
 
 
@@ -1150,6 +1152,43 @@
        </field>
       </page>
     </form>
+    
+   <form name="ANU_Press">
+     <page number="1">
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>title</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Title</label>
+         <input-type>onebox</input-type>
+         <hint></hint>
+         <required>You must enter a main title for this item.</required>
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>publisher</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Publisher</label>
+         <input-type>onebox</input-type>
+         <hint></hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>authoremail</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Email Address</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the email address associated with the item below.</hint>
+         <required></required>
+       </field>
+	 </page>
+	</form>
  </form-definitions>
 
 
