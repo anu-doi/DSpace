@@ -158,9 +158,9 @@
 		Metadatum[] sourceUriValues = item.getMetadata("dc","source","uri",Item.ANY);
 		if (sourceUriValues.length > 0)
 		{
-			String sourceUrl = sourceUriValues[0].value;
-			if (sourceUrl.toLowerCase().startsWith("http")) {
-				publisherVersionUrl = sourceUrl;
+			publisherVersionUrl = sourceUriValues[0].value;
+			if (publisherVersionUrl.length() == 0) {
+				publisherVersionUrl = null;
 			}
 		}
 	}
