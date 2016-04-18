@@ -18,6 +18,7 @@
 
 <%@ taglib uri="http://www.dspace.org/dspace-tags.tld" prefix="dspace" %>
 <%@ taglib uri="http://www.anu.edu.au/taglib" prefix="anu" %>
+<%@ page import="org.dspace.core.ConfigurationManager" %>
 
 <anu:content layout="doublewide">
 <dspace:layout locbar="off" titlekey="jsp.login.logged-out.title">
@@ -27,7 +28,7 @@
     <%-- <p>Thank you for remembering to log out!</p> --%>
     <p><fmt:message key="jsp.login.logged-out.thank"/></p>
     <%-- <p><a href="<%= request.getContextPath() %>/">Go to DSpace Home</a></p> --%>
-    <p><a href="<%= request.getContextPath() %>/"><fmt:message key="jsp.general.gohome"/></a></p>
+    <p><a href="<%= ConfigurationManager.getProperty("openresearch.url") %>"><fmt:message key="jsp.general.gohome"/></a></p>
 
 </dspace:layout>
 </anu:content>
