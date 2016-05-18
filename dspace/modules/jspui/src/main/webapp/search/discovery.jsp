@@ -195,7 +195,7 @@
     }
 %>                                
 				</select>
-				<input id="query" form="searchform" type="text" value="<%= (query==null ? "" : Utils.addEntities(query)) %>" name="query" size="50" placeholder="Search the ANU Digital Collections"  />
+				<input id="query" form="searchform" type="text" value="<%= (query==null ? "" : Utils.addEntities(query)) %>" name="query" size="50" />
 			</p>
 			<% if (appliedFilters.size() > 0) { %>
 			<p>
