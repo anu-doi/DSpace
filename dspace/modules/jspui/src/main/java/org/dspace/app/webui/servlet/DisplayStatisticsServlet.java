@@ -171,6 +171,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				String[][] matrix = exportBean.getMatrix();
 
 				response.setContentType("text/csv); charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
 				String filename = "placeholder";
 				if(handle != null) {
 					filename = handle.replaceAll("/", "-") + "-" + exportBean.getName().toLowerCase().replaceAll(" ", "-") + ".csv";
@@ -221,6 +222,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 				values.add(value);
 			}
 			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 			JsonObject obj = new JsonObject();
 //			request.getContextPath();
 			obj.addProperty("path", request.getContextPath());
