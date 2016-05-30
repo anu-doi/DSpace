@@ -170,8 +170,7 @@ public class DisplayStatisticsServlet extends DSpaceServlet
             try {
 				String[][] matrix = exportBean.getMatrix();
 
-				response.setContentType("text/csv); charset=UTF-8");
-				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/csv; charset=UTF-8");
 				String filename = "placeholder";
 				if(handle != null) {
 					filename = handle.replaceAll("/", "-") + "-" + exportBean.getName().toLowerCase().replaceAll(" ", "-") + ".csv";
