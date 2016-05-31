@@ -523,14 +523,14 @@ public class RequestItemServlet extends DSpaceServlet
 				Item item = Item.find(context,
 						requestItem.getIntColumn("item_id"));
 
-				String emailRequest;
-				EPerson submiter = item.getSubmitter();
-				if (submiter != null) {
-					emailRequest = submiter.getEmail();
-				} else {
-					emailRequest = ConfigurationManager
-							.getProperty("mail.helpdesk");
-				}
+				String emailRequest = null;
+//				EPerson submiter = item.getSubmitter();
+//				if (submiter != null) {
+//					emailRequest = submiter.getEmail();
+//				} else {
+//					emailRequest = ConfigurationManager
+//							.getProperty("mail.helpdesk");
+//				}
 				if (emailRequest == null) {
 					emailRequest = ConfigurationManager
 							.getProperty("mail.admin");

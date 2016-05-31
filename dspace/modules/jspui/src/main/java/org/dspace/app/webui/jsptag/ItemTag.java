@@ -1106,13 +1106,27 @@ log.debug("In render text above table");
                                         + UIUtil.encodeBitstreamName(bitstreams[k]
                                             .getName(),
                                             Constants.DEFAULT_ENCODING) + "\">";
+                                boolean displayRequestACopy = false;
 
+								if (showRequestCopy && !AuthorizeManager
+										.authorizeActionBoolean(context,
+												bitstreams[k],
+												Constants.READ))
+								{
+									displayRequestACopy = true;
+								}
             					out
                                     .print("<tr><td headers=\"t1\">");
-                                out.print("<a ");
-            					out.print(bsLink);
+            					if (!displayRequestACopy)
+            					{
+	                                out.print("<a ");
+	            					out.print(bsLink);
+            					}
             					out.print(bitstreams[k].getName());
-                                out.print("</a>");
+            					if (!displayRequestACopy)
+            					{
+            						out.print("</a>");
+            					}
                                 
 
             					if (multiFile)
@@ -1153,11 +1167,20 @@ log.debug("In render text above table");
                                             			.getName(),
                                             			Constants.DEFAULT_ENCODING);
 
-            							out.print("<a ");
-            							out.print(bsLink);
+                    					if (!displayRequestACopy)
+                    					{
+	            							out.print("<a ");
+	            							out.print(bsLink);
+                    					}
             							out.print("<img class=\"bdr-solid bdr-grey\" src=\"" + myPath + "\" ");
             							out.print("alt=\"" + tAltText
-            									+ "\" /></a><br />");
+            									+ "\" />");
+
+                    					if (!displayRequestACopy)
+                    					{
+                    						out.print("</a>");
+                    					}
+            							out.print("<br />");
                                                             }
             						}
             					}
