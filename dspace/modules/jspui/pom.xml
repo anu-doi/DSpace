@@ -37,52 +37,112 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+        	<id>anu-ui</id>
+        	<activation>
+        		<property>
+        			<name>!stock-ui</name>
+        		</property>
+        	</activation>
+		    <build>
+		        <filters>
+		            <!-- Filter using the properties file defined by dspace-parent POM -->
+		            <filter>${filters.file}</filter>
+		        </filters>
+		        <plugins>
+		            <plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-war-plugin</artifactId>
+		                <configuration>
+		                    <archiveClasses>false</archiveClasses>
+		                    <webResources>
+		                        <resource>
+		                            <filtering>true</filtering>
+		                            <directory>
+		                                ${basedir}/src/main/webapp
+		                            </directory>
+		                            <includes>
+		                                <include>WEB-INF/web.xml</include>
+		                            </includes>
+		                        </resource>
+		                        <resource>
+		                        	<filtering>true</filtering>
+		                        	<targetPath>/</targetPath>
+		                        	<directory>${basedir}/src/main/resources/webapps</directory>
+		                        </resource>
+		                    </webResources>
+		                    <overlays>
+		                        <overlay />
+		                        <overlay>
+		                            <groupId>org.dspace</groupId>
+		                            <artifactId>dspace-jspui</artifactId>
+		                            <type>war</type>
+		                        </overlay>
+		                    </overlays>
+		                </configuration>
+		                <executions>
+		                    <execution>
+		                        <phase>prepare-package</phase>
+		                    </execution>
+		                </executions>
+		            </plugin>
+		        </plugins>
+		    </build>
+        </profile>
+        <profile>
+           	<id>stock-ui</id>
+        	<activation>
+        		<property>
+        			<name>stock-ui</name>
+        		</property>
+        	</activation>
+		    <build>
+		        <filters>
+		            <!-- Filter using the properties file defined by dspace-parent POM -->
+		            <filter>${filters.file}</filter>
+		        </filters>
+		        <plugins>
+		            <plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-war-plugin</artifactId>
+		                <configuration>
+		                    <archiveClasses>false</archiveClasses>
+		                    <webResources>
+		                        <resource>
+		                            <filtering>true</filtering>
+		                            <directory>
+		                                ${basedir}/src/main/webapp
+		                            </directory>
+		                            <includes>
+		                                <include>WEB-INF/web.xml</include>
+		                            </includes>
+		                        </resource>
+		                        <resource>
+		                        	<filtering>true</filtering>
+		                        	<targetPath>/</targetPath>
+		                        	<directory>${basedir}/src/main/resources/webapps</directory>
+		                        </resource>
+		                    </webResources>
+		                    <overlays>
+		                        <overlay>
+		                            <groupId>org.dspace</groupId>
+		                            <artifactId>dspace-jspui</artifactId>
+		                            <type>war</type>
+		                        </overlay>
+		                        <overlay />
+		                    </overlays>
+		                </configuration>
+		                <executions>
+		                    <execution>
+		                        <phase>prepare-package</phase>
+		                    </execution>
+		                </executions>
+		            </plugin>
+		        </plugins>
+		    </build>
+        </profile>
     </profiles>
     
-    <build>
-        <filters>
-            <!-- Filter using the properties file defined by dspace-parent POM -->
-            <filter>${filters.file}</filter>
-        </filters>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <archiveClasses>false</archiveClasses>
-                    <webResources>
-                        <resource>
-                            <filtering>true</filtering>
-                            <directory>
-                                ${basedir}/src/main/webapp
-                            </directory>
-                            <includes>
-                                <include>WEB-INF/web.xml</include>
-                            </includes>
-                        </resource>
-                        <resource>
-                        	<filtering>true</filtering>
-                        	<targetPath>/</targetPath>
-                        	<directory>${basedir}/src/main/resources/webapps</directory>
-                        </resource>
-                    </webResources>
-                    <overlays>
-                        <overlay />
-                        <overlay>
-                            <groupId>org.dspace</groupId>
-                            <artifactId>dspace-jspui</artifactId>
-                            <type>war</type>
-                        </overlay>
-                    </overlays>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencies>
 
