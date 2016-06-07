@@ -528,8 +528,8 @@ public class RequestItemServlet extends DSpaceServlet
 //				if (submiter != null) {
 //					emailRequest = submiter.getEmail();
 //				} else {
-//					emailRequest = ConfigurationManager
-//							.getProperty("mail.helpdesk");
+				emailRequest = ConfigurationManager
+						.getProperty("mail.helpdesk");
 //				}
 				if (emailRequest == null) {
 					emailRequest = ConfigurationManager
