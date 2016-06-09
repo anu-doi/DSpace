@@ -82,6 +82,7 @@ public class ItemPreviewTag extends TagSupport
         // Only shows 1 preview image at the moment (the first encountered) regardless
         // of the number of bundles/bitstreams of this type
         Bundle[] bundles = item.getBundles("BRANDED_PREVIEW");
+        Bundle[] largePreviewBundles = item.getBundles("LARGE_BRANDED_PREVIEW");
         
         if (bundles.length > 0)
         {
@@ -91,14 +92,50 @@ public class ItemPreviewTag extends TagSupport
             Context context = UIUtil.obtainContext(request);
 
         	Bitstream preview = bitstreams[0];
+        	String previewName = preview.getName();
+        	int lastIndex = previewName.lastIndexOf(".");
+        	// We want to provide an option for having a higher resolution image for zooming
+        	String largePreviewName = preview.getName().substring(0, lastIndex) + ".large" + preview.getName().substring(lastIndex);
+        	String largePreviewSource = null;
+        	if (largePreviewBundles.length > 0) {
+        		Bitstream largePreview = largePreviewBundles[0].getBitstreamByName(largePreviewName);
+        		if (largePreview != null && AuthorizeManager.authorizeActionBoolean(context, largePreview, Constants.READ)) {
+    				largePreviewSource = request.getContextPath() + "/retrieve/" 
+    						+ largePreview.getID() + "/" + UIUtil.encodeBitstreamName(largePreview.getName());
+        		}
+        	}
         	if (AuthorizeManager.authorizeActionBoolean(context, preview, Constants.READ)) {
+        		out.println("<link href=\""+request.getContextPath()+"/css/viewer.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />");
+        		out.println("<script type=\"text/javascript\" src=\""+request.getContextPath()+"/js/viewer.min.js\"></script>");
 	            out.println("<br/><p align=\"center\">");
-	            out.println("<img src=\""
+	            out.print("<div><img id=\"preview\" src=\""
 	            		    + request.getContextPath() + "/retrieve/"
 	            		    + bitstreams[0].getID() + "/"
 	            		    + UIUtil.encodeBitstreamName(bitstreams[0].getName(),
-	            		    		  Constants.DEFAULT_ENCODING)
-	            		    + "\"/>");
+	            		    		  Constants.DEFAULT_ENCODING));
+	            if (largePreviewSource != null) {
+	            	out.print("\" data-original=\""
+	            			+ largePreviewSource);
+	            	out.print("\" alt=\""+bitstreams[0].getName());
+	            }
+	            out.print("\"/></div>\n");
+	            out.println("<script type=\"text/javascript\">");
+	            out.println("window.onload = function () {");
+	            out.println("'use strict';");
+	            out.println("var Viewer = window.Viewer;");
+	            out.println("var pictures = document.getElementById(\"preview\");");
+	            out.println("var options = {");
+	            out.println("url: 'data-original',");
+	            out.println("inline: false,");
+	            out.println("};");
+	            out.println("var viewer;");
+	            out.println("viewer = new Viewer(pictures, options);");
+	            out.println("}");
+	            out.println("</script>");
+	            
+//	            out.println("<script src=\""+request.getContextPath()+"/js/wheelzoom.js\"></script>\n");
+////	            out.println("<script src=\"wheelzoom.js\"></script>\n");
+//	            out.println("<script>wheelzoom(document.querySelector(\"img.zoom\"));</script>\n");
 	            
 	            // Currently only one metadata item supported. Only the first match is taken
 	//            String s = ConfigurationManager.getProperty("webui.preview.dc");

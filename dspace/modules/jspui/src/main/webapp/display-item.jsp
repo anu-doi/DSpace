@@ -362,6 +362,23 @@
 	}
 %>
 	<!-- Altmetric badge End -->
+	<!-- Web of Science Citation Count Start -->
+	<%
+		String wosCount = null;
+		if (item.getMetadata("local","description","woscitationcount", Item.ANY).length > 0) {
+			Metadatum[] wosMetadata = item.getMetadata("local","description","woscitationcount", Item.ANY);
+			wosCount = wosMetadata[0].value;
+		}
+		
+		if (wosCount != null) {
+	%>
+	<p><h4>Web of Science</h4>
+	Cited <%= wosCount %> times
+	</p>
+	<%
+		}
+	%>
+	<!-- Web of Science Citation Count End -->
 </li>
 </ul>
 </div>
