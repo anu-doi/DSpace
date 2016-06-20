@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.dspace.app.itemmarking.ItemMarkingExtractor;
 import org.dspace.app.itemmarking.ItemMarkingInfo;
 import org.dspace.app.webui.util.UIUtil;
+import org.dspace.authorize.AuthorizeManager;
 import org.dspace.browse.*;
 import org.dspace.content.Bitstream;
 import org.dspace.content.DCDate;
@@ -751,6 +752,9 @@ public class BrowseListTag extends TagSupport
     		{
     			return "";
     		}
+            if (!AuthorizeManager.authorizeActionBoolean(c, thumbnail.getThumb(), Constants.READ)) {
+            	return "";
+            }
         	StringBuffer thumbFrag = new StringBuffer();
 
         	if (linkToBitstream)

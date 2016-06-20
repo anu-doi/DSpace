@@ -52,6 +52,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.jstl.fmt.LocaleSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 import org.dspace.content.authority.MetadataAuthorityManager;
+import org.dspace.authorize.AuthorizeManager;
 
 /**
  * Tag for display a list of items
@@ -743,6 +744,9 @@ public class ItemListTag extends TagSupport
             if (thumbnail == null)
             {
                 return "";
+            }
+            if (!AuthorizeManager.authorizeActionBoolean(c, thumbnail.getThumb(), Constants.READ)) {
+            	return "";
             }
             StringBuffer thumbFrag = new StringBuffer();
 
