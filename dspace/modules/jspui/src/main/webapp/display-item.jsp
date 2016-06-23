@@ -365,15 +365,35 @@
 	<!-- Web of Science Citation Count Start -->
 	<%
 		String wosCount = null;
-		if (item.getMetadata("local","description","woscitationcount", Item.ANY).length > 0) {
-			Metadatum[] wosMetadata = item.getMetadata("local","description","woscitationcount", Item.ANY);
+		Metadatum[] wosMetadata = item.getMetadata("local","description","woscitationcount", Item.ANY);
+		if (wosMetadata.length > 0) {
 			wosCount = wosMetadata[0].value;
+		}
+		String wosArticleCountUrl = null;
+		Metadatum[] wosArticleMetadata = item.getMetadata("local","description","wosarticlecounturl", Item.ANY);
+		if (wosArticleMetadata.length > 0) {
+			wosArticleCountUrl = wosArticleMetadata[0].value;
 		}
 		
 		if (wosCount != null) {
 	%>
-	<p><h4>Web of Science</h4>
-	Cited <%= wosCount %> times
+	<p><h4>Web of Science &trade; Core Collection</h4>
+	Times Cited:
+	<%
+		if (wosArticleCountUrl != null) {
+	%>
+		<a href="<%= wosArticleCountUrl %>">
+	<%
+		}
+	%>
+	<%= wosCount %>
+	<%
+		if (wosArticleCountUrl != null) {
+	%>
+		</a>
+	<%
+		}
+	%>
 	</p>
 	<%
 		}
