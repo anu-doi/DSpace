@@ -296,7 +296,7 @@
 		{
 		%>
 		<p>
-		<img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/type-download.png" />
+		<img class="absmiddle left padright" src="//style.anu.edu.au/_anu/images/icons/web/type-download.png" />
 		<a class="nounderline" href="<%= request.getContextPath() %>/bitstream/<%= handle %>/<%= selectedBitstream.getSequenceID() %>/<%= selectedBitstream.getName() %>"><fmt:message key="jsp.display-item.download" /></a> (<%= UIUtil.formatFileSize(selectedBitstream.getSize()) %>)
 		</p>
 		<%
@@ -305,7 +305,7 @@
 		{
 		%>
 		<p>
-		<img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" />
+		<img class="absmiddle left padright" src="//style.anu.edu.au/_anu/images/icons/web/link.png" />
 		<a class="nounderline" href="<%= request.getContextPath() %>/request-item?handle=<%= handle %>&bitstream-id=<%= selectedBitstream.getID() %>"><fmt:message key="jsp.display-item.request-copy" /></a>
 		</p>
 		<%
@@ -313,7 +313,7 @@
 	} 
 	if (publisherVersionUrl != null && publisherVersionUrl.length() > 0) {
 	%>
-	<p><img class="absmiddle left padright" src="http://style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="<%= publisherVersionUrl %>">link to publisher version</a></p>
+	<p><img class="absmiddle left padright" src="//style.anu.edu.au/_anu/images/icons/web/link.png" /><a class="nounderline" href="<%= publisherVersionUrl %>">link to publisher version</a></p>
 	<%
 	}
 	%>
@@ -346,7 +346,7 @@
 		if (!SpiderDetector.isSpider(request)) {
 	%>
 	<c:catch var="errormsg">
-		<c:import url="http://api.elsevier.com:80/content/abstract/citation-count" var="scopusimport">
+		<c:import url="https://api.elsevier.com:80/content/abstract/citation-count" var="scopusimport" >
 			<c:param value="<%= altmetricData %>" name="doi" />
 			<c:param name="apiKey" value="118b6ce3c3c7f45a9a7925066d849a63" />
 			<c:param name="httpAccept" value="text/html" />

@@ -837,8 +837,16 @@ log.debug("In render text above table");
     	                	  if (values[i].value.length() > 500) {
         	                	  String val = values[i].value;
     	                		  int limitTo500Index = val.substring(0, 500).lastIndexOf(' ');
-    	                		  val = val.substring(0, limitTo500Index) + "<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">" + val.substring(limitTo500Index) + "</span>";
-    	                		  out.print(val);
+    	                		  if (limitTo500Index < 1) {
+    	                			  limitTo500Index = 500;
+    	                		  }
+    	                		  out.print(Utils.addEntities(val.substring(0, limitTo500Index)));
+    	                		  out.print("<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">");
+    	                		  out.print(Utils.addEntities(val.substring(limitTo500Index)));
+    	                		  out.print("</span>");
+//    	                		  + val.substring(limitTo500Index) + "</span>";
+//    	                		  val = val.substring(0, limitTo500Index) + "<span class=\"moreelipses\">...<a href=\"\">[Show more]</a></span><span class=\"more hidden\">" + val.substring(limitTo500Index) + "</span>";
+//    	                		  out.print(val);
     	                	  }
     	                	  else {
     	                		  out.print(values[i].value);
