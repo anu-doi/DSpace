@@ -1468,6 +1468,11 @@
         </pair>
         
         <pair>
+        <displayed-value>Poster</displayed-value>
+        <stored-value>Poster</stored-value>
+        </pair>
+        
+        <pair>
         <displayed-value>Presentation</displayed-value>
         <stored-value>Presentation</stored-value>
         </pair>
