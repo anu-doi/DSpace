@@ -176,7 +176,7 @@
 						}
 					}
 					if (removeButton) {
-						out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+						out.println("<form class=\"btn-group btn-inline\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
 						out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+comm.getParentCommunity()+"\" />");
 						out.println("<input type=\"hidden\" name=\"community_id\" value=\""+comm.getID()+"\" />");
 						out.println("<input type=\"hidden\" name=\"action\" value=\""+EditCommunitiesServlet.START_DELETE_COMMUNITY+"\" />");
@@ -190,7 +190,7 @@
 					out.println("<a href=\""+request.getContextPath()+"/handle/"+comm.getHandle()+"\">"+comm.getName()+"</a>");
 				
 					if (removeButton) {
-						out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+						out.println("<form class=\"btn-group btn-inline\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
 						out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+comm.getParentCommunity()+"\" />");
 						out.println("<input type=\"hidden\" name=\"community_id\" value=\""+comm.getID()+"\" />");
 						out.println("<input type=\"hidden\" name=\"action\" value=\""+EditCommunitiesServlet.START_DELETE_COMMUNITY+"\" />");
@@ -227,7 +227,7 @@
 					}
 				}
 				if (removeButton) {
-					out.println("<form class=\"btn-group\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
+					out.println("<form class=\"btn-group btn-inline\" method=\"post\" action=\""+request.getContextPath()+"/tools/edit-communities\">");
 					out.println("<input type=\"hidden\" name=\"parent_community_id\" value=\""+parentCommunity.getID()+"\" />");
 					out.println("<input type=\"hidden\" name=\"community_id\" value=\""+parentCommunity.getID()+"\" />");
 					out.println("<input type=\"hidden\" name=\"collection_id\" value=\""+coll.getID()+"\" />");

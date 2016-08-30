@@ -919,3 +919,6 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 	height: 50px;
 	min-width: 20%;
 }
+.btn-inline {
+	display: inline;
+}
