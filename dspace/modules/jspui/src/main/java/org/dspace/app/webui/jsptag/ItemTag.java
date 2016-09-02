@@ -1296,7 +1296,6 @@ log.debug("In render text above table");
      */
     private String getBrowseField(String field) throws BrowseException
     {
-    	log.info("Field: " + field);
         for (String indexName : linkedMetadata.keySet())
         {            
             StringTokenizer bw_dcf = new StringTokenizer(linkedMetadata.get(indexName), ".");
