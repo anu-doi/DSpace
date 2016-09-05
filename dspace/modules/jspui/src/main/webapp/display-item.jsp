@@ -346,7 +346,7 @@
 		if (!SpiderDetector.isSpider(request)) {
 	%>
 	<c:catch var="errormsg">
-		<c:import url="https://api.elsevier.com:80/content/abstract/citation-count" var="scopusimport" >
+		<c:import url="https://api.elsevier.com/content/abstract/citation-count" var="scopusimport" >
 			<c:param value="<%= altmetricData %>" name="doi" />
 			<c:param name="apiKey" value="118b6ce3c3c7f45a9a7925066d849a63" />
 			<c:param name="httpAccept" value="text/html" />
