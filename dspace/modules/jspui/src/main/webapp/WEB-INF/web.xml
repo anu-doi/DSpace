@@ -504,6 +504,11 @@
     <servlet-name>request-item</servlet-name>
     <servlet-class>org.dspace.app.webui.servlet.RequestItemServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+  	<servlet-name>impact</servlet-name>
+  	<servlet-class>org.dspace.app.webui.servlet.ImpactServlet</servlet-class>
+  </servlet>
     	
   <servlet-mapping>
     <servlet-name>shibboleth-login</servlet-name>
@@ -851,6 +856,11 @@
   <servlet-mapping>
   	<servlet-name>exportreference</servlet-name>
   	<url-pattern>/exportreference</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>impact</servlet-name>
+  	<url-pattern>/impact</url-pattern>
   </servlet-mapping>
   
   <!-- Icon MIME type -->

@@ -188,12 +188,40 @@
 <anu:content layout="full">
 <dspace:layout title="<%= title %>">
 <script type="text/javascript">
+	var contextPath = '<%= request.getContextPath() %>';
+
+	function addImpactServiceCitationCount(service) {
+		var idSelector = "#" + service;
+		var doi = jQuery(idSelector).data("doi");
+		if (doi != null) {
+			jQuery.getJSON(contextPath + "/impact" + "?doi=" + doi + "&service=" + service)
+				.done(function(data) {
+				var citations = data["citationCount"];
+				var linkBack = data["linkBack"];
+				if (citations && linkBack) {
+					jQuery(idSelector + " a").attr("href", linkBack);
+					jQuery(idSelector + " .citation-count").text(citations);
+					jQuery(idSelector).removeClass("hidden");
+				}
+				})
+				.fail (function(jqxhr, textStatus, error) {
+					console.log("Error retrieving " + service + " citation count: " + error);
+				});
+		}
+	}
+	
+	function addCitationCounts() {
+		addImpactServiceCitationCount("wos");
+	}
+	
 	jQuery(document).ready( function() {
 		$(".moreelipses").on("click",function(){
 			jQuery(this).addClass("hidden");
 			jQuery(this).next(".more").removeClass("hidden");
 			return false;
 		});
+		
+		addCitationCounts();
 	});
 </script>
 <%
@@ -357,6 +385,11 @@
 	<p><h4>Scopus Citation</h4></p>
 	${scopusimport}
 	</c:if>
+	<div id="wos" class="hidden" data-doi="<%= altmetricData %>">
+		<br/>
+		<h4>Web of Science &trade; Core Collection</h4>
+		Times Cited: <a class="citation-count" href="#">0</a>
+	</div>
 	<%
 		}
 	}
