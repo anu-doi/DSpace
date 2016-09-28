@@ -378,14 +378,31 @@ public class RequestItemServlet extends DSpaceServlet
 					.getMessage("jsp.general.untitled", context);
 			
 
-			EPerson submiter = item.getSubmitter();
-
-			Object[] args = new String[]{
+//			EPerson submiter = item.getSubmitter();
+//
+//			Object[] args = new String[]{
+//						requestItem.getStringColumn("request_name"),
+//						HandleManager.getCanonicalForm(item.getHandle()), // User
+//						title, // request item title
+//						submiter.getFullName(), // # submmiter name
+//						submiter.getEmail() // # submmiter email
+//					};
+			
+			RequestItemAuthor author = new DSpace().getServiceManager()
+					.getServiceByName(RequestItemAuthorExtractor.class.getName(), RequestItemAuthorExtractor.class)
+					.getRequestItemAuthor(context, item);
+			
+			String approverEmail = author.getEmail();
+			if (approverEmail == null) {
+				approverEmail = ConfigurationManager.getProperty("mail.helpdesk");
+			}
+			
+			Object[] args = new String[] {
 						requestItem.getStringColumn("request_name"),
-						HandleManager.getCanonicalForm(item.getHandle()), // User
-						title, // request item title
-						submiter.getFullName(), // # submmiter name
-						submiter.getEmail() // # submmiter email
+						HandleManager.getCanonicalForm(item.getHandle()),
+						title,
+						null,
+						approverEmail
 					};
 			
 			String subject = I18nUtil.getMessage("itemRequest.response.subject."
