@@ -42,6 +42,7 @@ import org.dspace.content.Collection;
 import org.dspace.content.DCDate;
 import org.dspace.content.Metadatum;
 import org.dspace.content.Item;
+import org.dspace.content.authority.Choices;
 import org.dspace.content.authority.MetadataAuthorityManager;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
@@ -624,6 +625,44 @@ public class ItemTag extends TagSupport
 	                                                + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
 	                    				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[j].value)
 	                    				+ "</a>");
+	                    	
+	                    	String confidenceIcon;
+	                    	switch(values[j].confidence) {
+	                    	case Choices.CF_ACCEPTED:
+	                    		confidenceIcon = "6-thumb2.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_UNCERTAIN:
+	                    		confidenceIcon = "5-pinion.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_AMBIGUOUS:
+	                    		confidenceIcon = "4-question.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_NOTFOUND:
+	                    		confidenceIcon = "3-thumb2.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_FAILED:
+	                    	case Choices.CF_REJECTED:
+	                    		confidenceIcon = "2-errortriangle.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_NOVALUE:
+	                    		confidenceIcon = "3-circleslash.gif";
+	                    		break;
+	                    		
+	                    	case Choices.CF_UNSET:
+	                    	default:
+	                    		confidenceIcon = "invisible.gif";
+	                    		break;
+	                    	}
+	                    	
+	                    	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
+	                    				+ I18nUtil.getMessage("jsp.authority.confidence.description."
+	                    				+ Choices.getConfidenceText(values[j].confidence).toLowerCase()) + "\" />");
+	                    	
 	                    }
                         else
                         {
