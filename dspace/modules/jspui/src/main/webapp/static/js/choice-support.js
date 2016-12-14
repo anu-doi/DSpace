@@ -165,7 +165,7 @@ function DSpaceChoiceLookup(url, field, formID, valueInput, authInput,
     if (top < 0) top = 0;
     var pw = window.open(url, 'ignoreme',
          'width='+width+',height='+height+',left='+left+',top='+top+
-         ',toolbar=no,menubar=no,location=no,status=no,resizable');
+         ',toolbar=no,menubar=no,location=no,status=no,resizable,scrollbars=yes');
     if (window.focus) pw.focus();
     return false;
 }
@@ -270,7 +270,12 @@ function DSpaceChoicesLoad(form)
           var lastTotal = ul.getAttributeNode('total').value;
           var resultMore = ul.getAttributeNode('more');
           form.elements['more'].disabled = !(resultMore != null && resultMore.value == 'true');
-          form.elements['paramStart'].value = nextStart;
+          // form.elements['paramStart'].value = nextStart;
+          console.log(form.elements['paramLimit'].value);
+          if (form.elements['paramLimit'].value == 24) {
+        	  form.elements['more'].disabled = true;
+          } 
+          form.elements['paramLimit'].value = 24;
 
           // clear select first
           var select = form.elements['chooser'];
@@ -293,6 +298,9 @@ function DSpaceChoicesLoad(form)
             var ovalue = opt.getAttributeNode('value').value;
             var option = new Option(olabel, ovalue);
             option.authority = opt.getAttributeNode('authority').value;
+            if (option.authority.includes("::orcid::")) {
+            	option.setAttribute("style", "font-style: italic;color: green");
+            }
             select.add(option, null);
             if (value == ovalue)
                 selectedByValue = select.options.length - 1;
@@ -321,6 +329,7 @@ function DSpaceChoicesLoad(form)
             {
                 form.elements['text1'].value = lastNameOf(so.value);
                 form.elements['text2'].value = firstNameOf(so.value);
+                
             }
             else
                 form.elements['text1'].value = so.value;
@@ -353,6 +362,14 @@ function DSpaceChoicesSelectOnChange ()
     {
         form.elements['text1'].value = lastNameOf(so.value);
         form.elements['text2'].value = firstNameOf(so.value);
+        // authority attribute will be of the form "1fef7541-5a4d-417f-a887-d6ed2da09b83" or "will be generated::orcid::0000-0002-2075-0744"
+        if (so.authority.includes("::orcid::")) {
+        	document.getElementById("extUrl").href = "http://orcid.org/" + so.authority.substr(26);
+        	document.getElementById("extUrl").text = so.authority.substr(26); 
+        } else {
+        	document.getElementById("extUrl").href = "";
+        	document.getElementById("extUrl").text = ""; 
+        }
     }
     else
         form.elements['text1'].value = so.value;

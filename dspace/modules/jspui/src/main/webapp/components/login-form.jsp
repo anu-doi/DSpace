@@ -18,20 +18,12 @@
 
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
-<script type="text/javascript">
-var $a = jQuery.noConflict();
-
-$a(document).ready(function() {
-$a("#tlogin_email").focus();
-});
-</script> 
-  
      <form name="loginform" id="loginform" method="post" class="anuform labelwide" action="<%= request.getContextPath() %>/password-login"> 
 		<fieldset>
 		<legend>Login</legend>
 		<p>
         <label for="tlogin_email"><fmt:message key="jsp.components.login-form.email"/></label>
-		<input type="text" name="login_email" id="tlogin_email" tabindex="1" class="tfull text" />
+		<input type="text" name="login_email" id="tlogin_email" tabindex="1" class="tfull text" autofocus="autofocus" />
 		</p>
 		<p>
 		<label for="tlogin_password"><fmt:message key="jsp.components.login-form.password"/></label>

@@ -338,6 +338,12 @@
              sb.append("</div>");
     	 }
          
+         if ("authorLookup".equalsIgnoreCase(authorityType))
+    	 {
+             sb.append(doAuthority(pageContext, fieldName, i, fieldCount, fieldName,
+                     auth, conf, true, repeatable, defaults, null, collectionID));
+             sb.append("</div>");
+    	 }
 
          if (repeatable && !readonly && i < defaults.length)
          {
