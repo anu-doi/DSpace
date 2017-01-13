@@ -113,7 +113,11 @@
             </div>
             <div>
             	<label class="ds-composite-component">ORCID:</label>
-            	<a href="" id="extUrl" = target="_blank"></a>
+            	<a href="" id="extUrl" target="_blank"></a>
+            </div>
+            <div>
+            	<label class="ds-composite-component">Authority ID:</label>
+            	<a href="" id="searchAuthorityUrl" target="_blank"></a>
             </div>
           <% } else { %>
           <%-- XXX get this from dspace config if available..?? --%>

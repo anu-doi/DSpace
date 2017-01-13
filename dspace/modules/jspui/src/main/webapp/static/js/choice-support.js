@@ -152,7 +152,7 @@ function DSpaceChoiceLookup(url, field, formID, valueInput, authInput,
     if (inputField != null)
         cOffset = $(inputField).cumulativeOffset();
     var width = 600;  // XXX guesses! these should be params, or configured..
-    var height = 470;
+    var height = 600;
     var left; var top;
     if (window.screenX == null) {
         left = window.screenLeft + cOffset.left - (width/2);
@@ -271,7 +271,6 @@ function DSpaceChoicesLoad(form)
           var resultMore = ul.getAttributeNode('more');
           form.elements['more'].disabled = !(resultMore != null && resultMore.value == 'true');
           // form.elements['paramStart'].value = nextStart;
-          console.log(form.elements['paramLimit'].value);
           if (form.elements['paramLimit'].value == 24) {
         	  form.elements['more'].disabled = true;
           } 
@@ -300,6 +299,10 @@ function DSpaceChoicesLoad(form)
             option.authority = opt.getAttributeNode('authority').value;
             if (option.authority.includes("::orcid::")) {
             	option.setAttribute("style", "font-style: italic;color: green");
+            }
+            if (opt.getAttributeNode('orcid') != null) {
+            	option.orcid = opt.getAttributeNode('orcid').value;
+            	option.text = option.text + " (" + option.orcid + ")";
             }
             select.add(option, null);
             if (value == ovalue)
@@ -363,12 +366,20 @@ function DSpaceChoicesSelectOnChange ()
         form.elements['text1'].value = lastNameOf(so.value);
         form.elements['text2'].value = firstNameOf(so.value);
         // authority attribute will be of the form "1fef7541-5a4d-417f-a887-d6ed2da09b83" or "will be generated::orcid::0000-0002-2075-0744"
-        if (so.authority.includes("::orcid::")) {
-        	document.getElementById("extUrl").href = "http://orcid.org/" + so.authority.substr(26);
-        	document.getElementById("extUrl").text = so.authority.substr(26); 
+        if (so.authority != null && so.authority != "") {
+        	document.getElementById("searchAuthorityUrl").href = "../browse?type=author&authority=" + so.authority;
+        	document.getElementById("searchAuthorityUrl").text = so.authority;
         } else {
-        	document.getElementById("extUrl").href = "";
-        	document.getElementById("extUrl").text = ""; 
+        	document.getElementById("searchAuthorityUrl").href = "";
+        	document.getElementById("searchAuthorityUrl").text = "";
+        }
+        
+        if (so.orcid != null && so.orcid != "") {
+    		document.getElementById("extUrl").href = "http://orcid.org/" + so.orcid;
+    		document.getElementById("extUrl").text = so.orcid;
+        } else {
+    		document.getElementById("extUrl").href = "";
+    		document.getElementById("extUrl").text = "";
         }
     }
     else
