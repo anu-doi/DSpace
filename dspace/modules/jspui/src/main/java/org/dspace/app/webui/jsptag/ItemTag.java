@@ -29,11 +29,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.log4j.Logger;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.dspace.app.util.DCInputsReaderException;
 import org.dspace.app.util.MetadataExposure;
 import org.dspace.app.util.Util;
 import org.dspace.app.webui.util.StyleSelection;
 import org.dspace.app.webui.util.UIUtil;
+import org.dspace.authority.orcid.Orcid;
+import org.dspace.authority.orcid.model.Bio;
 import org.dspace.authorize.AuthorizeManager;
 import org.dspace.browse.BrowseException;
 import org.dspace.content.Bitstream;
@@ -44,6 +51,7 @@ import org.dspace.content.Metadatum;
 import org.dspace.content.Item;
 import org.dspace.content.authority.Choices;
 import org.dspace.content.authority.MetadataAuthorityManager;
+import org.dspace.content.authority.SolrAuthority;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
@@ -663,6 +671,20 @@ public class ItemTag extends TagSupport
 	                    				+ I18nUtil.getMessage("jsp.authority.confidence.description."
 	                    				+ Choices.getConfidenceText(values[j].confidence).toLowerCase()) + "\" />");
 	                    	
+	                    	SolrQuery query = new SolrQuery("id:\"" + values[j].authority + "\"");
+							try {
+								QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+								SolrDocumentList results = solrAuthoritySearchResp.getResults();
+								for (SolrDocument result : results) {
+									String orcid = (String) result.getFieldValue("orcid_id");
+									if (orcid != null && orcid.length() > 0) {
+										out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+									}
+								}
+							} catch (SolrServerException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 	                    }
                         else
                         {
