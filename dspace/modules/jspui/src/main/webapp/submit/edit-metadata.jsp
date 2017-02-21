@@ -335,14 +335,12 @@
     	 {
              sb.append(doAuthority(pageContext, fieldName, i, fieldCount, fieldName,
                      auth, conf, true, repeatable, defaults, null, collectionID));
-             sb.append("</div>");
     	 }
          
          if ("authorLookup".equalsIgnoreCase(authorityType))
     	 {
              sb.append(doAuthority(pageContext, fieldName, i, fieldCount, fieldName,
                      auth, conf, true, repeatable, defaults, null, collectionID));
-             sb.append("</div>");
     	 }
 
          if (repeatable && !readonly && i < defaults.length)
@@ -1339,10 +1337,10 @@
        if (repeatable && !readonly)
        {
          fieldCountIncr = 1;
-         if (si.getMoreBoxesFor() != null && si.getMoreBoxesFor().equals(fieldName))
-             {
-           fieldCountIncr = 2;
-         }
+//         if (si.getMoreBoxesFor() != null && si.getMoreBoxesFor().equals(fieldName))
+//              {
+//           fieldCountIncr = 2;
+//         }
        }
 
        String inputType = inputs[z].getInputType();
