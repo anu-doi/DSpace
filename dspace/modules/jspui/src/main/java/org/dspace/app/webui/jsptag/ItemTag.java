@@ -746,8 +746,21 @@ public class ItemTag extends TagSupport
                         "org.dspace.app.webui.jsptag.ItemTag.lang")*/
 //                + "</th></tr>");
 
+
+        
         for (int i = 0; i < values.length; i++)
         {
+        	String browseIndex;
+        	try
+        	{
+        		browseIndex = getBrowseField(values[i].getField());
+        	}
+        	catch (BrowseException e)
+        	{
+        		log.error(e);
+        		browseIndex = null;
+        	}
+        	
             if (!MetadataExposure.isHidden(context, values[i].schema, values[i].element, values[i].qualifier))
             {
                 out.print("<tr><th headers=\"s1\" class=\"tbl25\">");
@@ -760,7 +773,6 @@ public class ItemTag extends TagSupport
                 }
 
                 out.print("</td><td headers=\"s2\" class=\"tbl75\">");
-                out.print(Utils.addEntities(values[i].value));
                 /*out.print("</td><td headers=\"s3\" class=\"metadataFieldValue\">");
 
                 if (values[i].language == null)
@@ -771,6 +783,81 @@ public class ItemTag extends TagSupport
                 {
                     out.print(values[i].language);
                 }*/
+                
+                if (browseIndex != null)
+                {
+                    String argument, value;
+                    if ( values[i].authority != null &&
+                                        values[i].confidence >= MetadataAuthorityManager.getManager()
+                                            .getMinConfidence( values[i].schema,  values[i].element,  values[i].qualifier))
+                    {
+                        argument = "authority";
+                        value = values[i].authority;
+                    }
+                    else
+                    {
+                        argument = "value";
+                        value = values[i].value;
+                    }
+                	out.print("<a class=\"" + ("authority".equals(argument)?"authority ":"") + browseIndex + "\""
+                                            + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
+                				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
+                				+ "</a>");
+                	
+                	String confidenceIcon;
+                	switch(values[i].confidence) {
+                	case Choices.CF_ACCEPTED:
+                		confidenceIcon = "6-thumb2.gif";
+                		break;
+                		
+                	case Choices.CF_UNCERTAIN:
+                		confidenceIcon = "5-pinion.gif";
+                		break;
+                		
+                	case Choices.CF_AMBIGUOUS:
+                		confidenceIcon = "4-question.gif";
+                		break;
+                		
+                	case Choices.CF_NOTFOUND:
+                		confidenceIcon = "3-thumb2.gif";
+                		break;
+                		
+                	case Choices.CF_FAILED:
+                	case Choices.CF_REJECTED:
+                		confidenceIcon = "2-errortriangle.gif";
+                		break;
+                		
+                	case Choices.CF_NOVALUE:
+                		confidenceIcon = "3-circleslash.gif";
+                		break;
+                		
+                	case Choices.CF_UNSET:
+                	default:
+                		confidenceIcon = "invisible.gif";
+                		break;
+                	}
+                	
+                	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
+                				+ I18nUtil.getMessage("jsp.authority.confidence.description."
+                				+ Choices.getConfidenceText(values[i].confidence).toLowerCase()) + "\" />");
+                	
+                	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
+					try {
+						QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+						SolrDocumentList results = solrAuthoritySearchResp.getResults();
+						for (SolrDocument result : results) {
+							String orcid = (String) result.getFieldValue("orcid_id");
+							if (orcid != null && orcid.length() > 0) {
+								out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+							}
+						}
+					} catch (SolrServerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                } else {
+                    out.print(Utils.addEntities(values[i].value));
+                }
 
                 out.println("</td></tr>");
             }
