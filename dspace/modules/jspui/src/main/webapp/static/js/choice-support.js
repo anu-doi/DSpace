@@ -149,8 +149,17 @@ function DSpaceChoiceLookup(url, field, formID, valueInput, authInput,
     var inputField = document.getElementById(formID).elements[inputFieldName];
     // scriptactulous magic to figure out true offset:
     var cOffset = 0;
-    if (inputField != null)
-        cOffset = $(inputField).cumulativeOffset();
+    if (inputField != null) {
+    	try {
+    		cOffset = $(inputField).cumulativeOffset();
+    	} catch (err) {
+    		try {
+    			cOffset = $(inputField).offset();
+    		} catch (err) {
+    			// no op - popup window will open at 0,0
+    		}
+    	}
+    }
     var width = 600;  // XXX guesses! these should be params, or configured..
     var height = 600;
     var left; var top;
