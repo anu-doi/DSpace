@@ -980,6 +980,19 @@ log.debug("In render text above table");
                                     + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
 			        				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
 			        				+ "</a>");
+	  	                    	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
+								try {
+									QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+									SolrDocumentList results = solrAuthoritySearchResp.getResults();
+									for (SolrDocument result : results) {
+										String orcid = (String) result.getFieldValue("orcid_id");
+										if (orcid != null && orcid.length() > 0) {
+											out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"marginright\" src=\"../../../orcid/orcid.png\" /></a>");
+										}
+									}
+								} catch (SolrServerException e) {
+									// no op - orcid icon won't be displayed
+								}
     	                  }
     	                  else {
     	                	  if (values[i].value.length() > 500) {

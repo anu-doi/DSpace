@@ -10,6 +10,11 @@ package org.dspace.app.webui.jsptag;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.dspace.app.itemmarking.ItemMarkingExtractor;
 import org.dspace.app.itemmarking.ItemMarkingInfo;
 import org.dspace.app.webui.util.UIUtil;
@@ -43,6 +48,7 @@ import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 import org.dspace.content.authority.MetadataAuthorityManager;
+import org.dspace.content.authority.SolrAuthority;
 
 /**
  * Tag for display a list of items
@@ -488,6 +494,22 @@ public class BrowseListTag extends TagSupport
 	            					sb.append(startLink);
 	            					sb.append(Utils.addEntities(metadataArray[j].value));
 	            					sb.append(endLink);
+	            					// ========= Orcid icon begin =========
+	            					SolrQuery query = new SolrQuery("id:\"" + metadataArray[j].authority + "\"");
+	            					try {
+	            						QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+	            						SolrDocumentList results = solrAuthoritySearchResp.getResults();
+	            						for (SolrDocument result : results) {
+	            							String orcid = (String) result.getFieldValue("orcid_id");
+	            							if (orcid != null && orcid.length() > 0) {
+	            								sb.append("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padright\" src=\"../../../orcid/orcid.png\" /></a>");
+	            							}
+	            						}
+	            					} catch (SolrServerException e) {
+	            						// TODO Auto-generated catch block
+	            						e.printStackTrace();
+	            					}
+	            					// ========= Orcid icon end =========
 	            					if (j < (loopLimit - 1))
 	            					{
 	            						sb.append("; ");
