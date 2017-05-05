@@ -667,9 +667,9 @@ public class ItemTag extends TagSupport
 	                    		break;
 	                    	}
 	                    	
-	                    	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
-	                    				+ I18nUtil.getMessage("jsp.authority.confidence.description."
-	                    				+ Choices.getConfidenceText(values[j].confidence).toLowerCase()) + "\" />");
+//	                    	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
+//	                    				+ I18nUtil.getMessage("jsp.authority.confidence.description."
+//	                    				+ Choices.getConfidenceText(values[j].confidence).toLowerCase()) + "\" />");
 	                    	
 	                    	SolrQuery query = new SolrQuery("id:\"" + values[j].authority + "\"");
 							try {
@@ -837,9 +837,9 @@ public class ItemTag extends TagSupport
                 		break;
                 	}
                 	
-                	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
-                				+ I18nUtil.getMessage("jsp.authority.confidence.description."
-                				+ Choices.getConfidenceText(values[i].confidence).toLowerCase()) + "\" />");
+//                	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
+//                				+ I18nUtil.getMessage("jsp.authority.confidence.description."
+//                				+ Choices.getConfidenceText(values[i].confidence).toLowerCase()) + "\" />");
                 	
                 	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
 					try {
