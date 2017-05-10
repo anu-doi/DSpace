@@ -495,19 +495,22 @@ public class BrowseListTag extends TagSupport
 	            					sb.append(Utils.addEntities(metadataArray[j].value));
 	            					sb.append(endLink);
 	            					// ========= Orcid icon begin =========
-	            					SolrQuery query = new SolrQuery("id:\"" + metadataArray[j].authority + "\"");
-	            					try {
-	            						QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
-	            						SolrDocumentList results = solrAuthoritySearchResp.getResults();
-	            						for (SolrDocument result : results) {
-	            							String orcid = (String) result.getFieldValue("orcid_id");
-	            							if (orcid != null && orcid.length() > 0) {
-	            								sb.append("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padright\" src=\"../../../orcid/orcid.png\" /></a>");
-	            							}
-	            						}
-	            					} catch (SolrServerException e) {
-	            						// TODO Auto-generated catch block
-	            						e.printStackTrace();
+	            					if (metadataArray[j].authority != null && metadataArray[j].confidence == 600) {
+		            					SolrQuery query = new SolrQuery("id:\"" + metadataArray[j].authority + "\"");
+		            					try {
+		            						QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+		            						SolrDocumentList results = solrAuthoritySearchResp.getResults();
+		            						for (SolrDocument result : results) {
+		            							String orcid = (String) result.getFieldValue("orcid_id");
+		            							if (orcid != null && orcid.length() > 0) {
+		            								sb.append("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padright\" src=\"../../../orcid/orcid.png\" /></a>");
+		            							}
+		            						}
+		            					} catch (SolrServerException e) {
+		            						// TODO Auto-generated catch block
+		            						log.error("Exception retreving authority value", e);
+//		            						e.printStackTrace();
+		            					}
 	            					}
 	            					// ========= Orcid icon end =========
 	            					if (j < (loopLimit - 1))

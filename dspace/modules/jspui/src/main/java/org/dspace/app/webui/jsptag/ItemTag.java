@@ -670,21 +670,24 @@ public class ItemTag extends TagSupport
 //	                    	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
 //	                    				+ I18nUtil.getMessage("jsp.authority.confidence.description."
 //	                    				+ Choices.getConfidenceText(values[j].confidence).toLowerCase()) + "\" />");
-	                    	
-	                    	SolrQuery query = new SolrQuery("id:\"" + values[j].authority + "\"");
-							try {
-								QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
-								SolrDocumentList results = solrAuthoritySearchResp.getResults();
-								for (SolrDocument result : results) {
-									String orcid = (String) result.getFieldValue("orcid_id");
-									if (orcid != null && orcid.length() > 0) {
-										out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+
+        					if (values[j].authority != null && values[j].confidence == 600) {
+		                    	SolrQuery query = new SolrQuery("id:\"" + values[j].authority + "\"");
+								try {
+									QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+									SolrDocumentList results = solrAuthoritySearchResp.getResults();
+									for (SolrDocument result : results) {
+										String orcid = (String) result.getFieldValue("orcid_id");
+										if (orcid != null && orcid.length() > 0) {
+											out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+										}
 									}
+								} catch (SolrServerException e) {
+									// TODO Auto-generated catch block
+            						log.error("Exception retreving authority value", e);
+//									e.printStackTrace();
 								}
-							} catch (SolrServerException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+        					}
 	                    }
                         else
                         {
@@ -840,20 +843,23 @@ public class ItemTag extends TagSupport
 //                	out.print("<img class=\"padleft\" src=\"../../../image/confidence/" + confidenceIcon + "\" title=\""
 //                				+ I18nUtil.getMessage("jsp.authority.confidence.description."
 //                				+ Choices.getConfidenceText(values[i].confidence).toLowerCase()) + "\" />");
-                	
-                	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
-					try {
-						QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
-						SolrDocumentList results = solrAuthoritySearchResp.getResults();
-						for (SolrDocument result : results) {
-							String orcid = (String) result.getFieldValue("orcid_id");
-							if (orcid != null && orcid.length() > 0) {
-								out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+
+					if (values[i].authority != null && values[i].confidence == 600) {
+	                	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
+						try {
+							QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+							SolrDocumentList results = solrAuthoritySearchResp.getResults();
+							for (SolrDocument result : results) {
+								String orcid = (String) result.getFieldValue("orcid_id");
+								if (orcid != null && orcid.length() > 0) {
+									out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+								}
 							}
+						} catch (SolrServerException e) {
+							// TODO Auto-generated catch block
+    						log.error("Exception retreving authority value", e);
+//							e.printStackTrace();
 						}
-					} catch (SolrServerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
                 } else {
                     out.print(Utils.addEntities(values[i].value));
@@ -980,18 +986,21 @@ log.debug("In render text above table");
                                     + "href=\"" + request.getContextPath() + "/browse?type=" + browseIndex + "&amp;" + argument + "="
 			        				+ URLEncoder.encode(value, "UTF-8") + "\">" + Utils.addEntities(values[i].value)
 			        				+ "</a>");
-	  	                    	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
-								try {
-									QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
-									SolrDocumentList results = solrAuthoritySearchResp.getResults();
-									for (SolrDocument result : results) {
-										String orcid = (String) result.getFieldValue("orcid_id");
-										if (orcid != null && orcid.length() > 0) {
-											out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"marginright\" src=\"../../../orcid/orcid.png\" /></a>");
+								if (values[i].authority != null && values[i].confidence == 600) {
+									SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
+									try {
+										QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+										SolrDocumentList results = solrAuthoritySearchResp.getResults();
+										for (SolrDocument result : results) {
+											String orcid = (String) result.getFieldValue("orcid_id");
+											if (orcid != null && orcid.length() > 0) {
+												out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"marginright\" src=\"../../../orcid/orcid.png\" /></a>");
+											}
 										}
+									} catch (SolrServerException e) {
+										// no op - orcid icon won't be displayed
+	            						log.error("Exception retreving authority value", e);
 									}
-								} catch (SolrServerException e) {
-									// no op - orcid icon won't be displayed
 								}
     	                  }
     	                  else {
