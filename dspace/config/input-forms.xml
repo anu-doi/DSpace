@@ -1625,6 +1625,11 @@
         <displayed-value>Working/Technical Paper</displayed-value>
         <stored-value>Working/Technical Paper</stored-value>
     </pair>
+    
+    <pair>
+        <displayed-value>Metadata only</displayed-value>
+        <stored-value>Metadata only</stored-value>
+    </pair>
 
     <pair>
         <displayed-value>Other</displayed-value>
