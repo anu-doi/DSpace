@@ -80,11 +80,11 @@
 		@Override
 		public int compare(WorkflowItem workflowItem1, WorkflowItem workflowItem2) {
 			int i = 0;
-			i = workflowItem1.getCollection().getName().compareTo(workflowItem2.getCollection().getName());
+			/*i = workflowItem1.getCollection().getName().compareTo(workflowItem2.getCollection().getName());
 			if(i != 0) {
 				return i;
-			}
-			i = workflowItem2.getItem().getLastModified().compareTo(workflowItem1.getItem().getLastModified());
+			}*/
+			i = workflowItem1.getItem().getLastModified().compareTo(workflowItem2.getItem().getLastModified());
 			if(i != 0) {
 				return i;
 			}
@@ -103,15 +103,15 @@
 <dspace:layout style="submission" titlekey="jsp.mydspace" nocache="true">
 	<div class="panel panel-primary">
         <div class="panel-heading">
-                    <fmt:message key="jsp.mydspace"/>: <%= Utils.addEntities(user.getFullName()) %>
-	                <span class="pull-right"><dspace:popup page="<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") + \"#mydspace\"%>"><fmt:message key="jsp.help"/></dspace:popup></span>
+                    <fmt:message key="jsp.mydspace" />: <%= Utils.addEntities(user.getFullName()) %>
+	                <span class="pull-right"><dspace:popup page='<%= LocaleSupport.getLocalizedMessage(pageContext, \"help.index\") + \"#mydspace\"%>'><fmt:message key="jsp.help" /></dspace:popup></span>
         </div>         
 
 		<div class="panel-body">
 		    <form action="<%= request.getContextPath() %>/mydspace" class="full nomargintop" method="post">
-		        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
-                <input class="btn-uni-grad btn-small right" type="submit" name="submit_new" value="<fmt:message key="jsp.mydspace.main.start.button"/>" />
-                <input class="btn-uni-grad btn-small right" type="submit" name="submit_own" value="<fmt:message key="jsp.mydspace.main.view.button"/>" />
+		        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                <input class="btn-uni-grad btn-small right" type="submit" name="submit_new" value='<fmt:message key="jsp.mydspace.main.start.button"/>'>
+                <input class="btn-uni-grad btn-small right" type="submit" name="submit_own" value='<fmt:message key="jsp.mydspace.main.view.button"/>'>
 		    </form>
 		
 		
@@ -120,19 +120,19 @@
     if (owned.length > 0)
     {
 %>
-    <h3><fmt:message key="jsp.mydspace.main.heading2"/></h3>
+    <h3><fmt:message key="jsp.mydspace.main.heading2" /></h3>
 
     <p class="submitFormHelp">
         <%-- Below are the current tasks that you have chosen to do. --%>
-        <fmt:message key="jsp.mydspace.main.text1"/>
+        <fmt:message key="jsp.mydspace.main.text1" />
     </p>
 
     <table class="table" align="center" summary="Table listing owned tasks">
         <tr>
-            <th id="t1" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.task"/></th>
-            <th id="t2" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.item"/></th>
-            <th id="t3" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subto"/></th>
-            <th id="t4" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.subby"/></th>
+            <th id="t1" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.task" /></th>
+            <th id="t2" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.item" /></th>
+            <th id="t3" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subto" /></th>
+            <th id="t4" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.subby" /></th>
             <th id="t5" class="oddRowEvenCol">&nbsp;</th>
         </tr>
 <%
@@ -156,9 +156,9 @@
             {
 
             //There was once some code...
-            case WorkflowManager.WFSTATE_STEP1: %><fmt:message key="jsp.mydspace.main.sub1"/><% break;
-            case WorkflowManager.WFSTATE_STEP2: %><fmt:message key="jsp.mydspace.main.sub2"/><% break;
-            case WorkflowManager.WFSTATE_STEP3: %><fmt:message key="jsp.mydspace.main.sub3"/><% break;
+            case WorkflowManager.WFSTATE_STEP1: %><fmt:message key="jsp.mydspace.main.sub1" /><% break;
+            case WorkflowManager.WFSTATE_STEP2: %><fmt:message key="jsp.mydspace.main.sub2" /><% break;
+            case WorkflowManager.WFSTATE_STEP3: %><fmt:message key="jsp.mydspace.main.sub3" /><% break;
             }
 %>
                 </td>
@@ -168,10 +168,10 @@
                 <!-- <td headers="t5" class="<%= row %>RowOddCol"></td> -->
                 <td headers="t5" class="<%= row %>RowEvenCol">
                      <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
-                        <input type="hidden" name="workflow_id" value="<%= owned[i].getID() %>" />  
-                        <input class="btn-uni-grad btn-small" type="submit" name="submit_perform" value="<fmt:message key="jsp.mydspace.main.perform.button"/>" />  
-                        <input class="btn-uni-grad btn-small" type="submit" name="submit_return" value="<fmt:message key="jsp.mydspace.main.return.button"/>" />
+                        <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                        <input type="hidden" name="workflow_id" value="<%= owned[i].getID() %>">  
+                        <input class="btn-uni-grad btn-small" type="submit" name="submit_perform" value='<fmt:message key="jsp.mydspace.main.perform.button"/>'>  
+                        <input class="btn-uni-grad btn-small" type="submit" name="submit_return" value='<fmt:message key="jsp.mydspace.main.return.button"/>'>
                      </form> 
                 </td>
         </tr>
@@ -187,19 +187,19 @@
     if (pooled.length > 0)
     {
 %>
-    <h3><fmt:message key="jsp.mydspace.main.heading3"/></h3>
+    <h3><fmt:message key="jsp.mydspace.main.heading3" /></h3>
 
     <p class="submitFormHelp">
         <%--Below are tasks in the task pool that have been assigned to you. --%>
-        <fmt:message key="jsp.mydspace.main.text2"/>
+        <fmt:message key="jsp.mydspace.main.text2" />
     </p>
 
     <table class="table" align="center" summary="Table listing the tasks in the pool">
         <tr>
-            <th id="t6" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.task"/></th>
-            <th id="t7" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.item"/></th>
-            <th id="t8" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subto"/></th>
-            <th id="t9" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.subby"/></th>
+            <th id="t6" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.task" /></th>
+            <th id="t7" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.item" /></th>
+            <th id="t8" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subto" /></th>
+            <th id="t9" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.subby" /></th>
             <th class="oddRowOddCol"> </th>
         </tr>
 <%
@@ -221,9 +221,9 @@
 <%
             switch (pooled[i].getState())
             {
-            case WorkflowManager.WFSTATE_STEP1POOL: %><fmt:message key="jsp.mydspace.main.sub1"/><% break;
-            case WorkflowManager.WFSTATE_STEP2POOL: %><fmt:message key="jsp.mydspace.main.sub2"/><% break;
-            case WorkflowManager.WFSTATE_STEP3POOL: %><fmt:message key="jsp.mydspace.main.sub3"/><% break;
+            case WorkflowManager.WFSTATE_STEP1POOL: %><fmt:message key="jsp.mydspace.main.sub1" /><% break;
+            case WorkflowManager.WFSTATE_STEP2POOL: %><fmt:message key="jsp.mydspace.main.sub2" /><% break;
+            case WorkflowManager.WFSTATE_STEP3POOL: %><fmt:message key="jsp.mydspace.main.sub3" /><% break;
             }
 %>
                     </td>
@@ -232,9 +232,9 @@
                     <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                     <td class="<%= row %>RowOddCol">
                         <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                            <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
-                            <input type="hidden" name="workflow_id" value="<%= pooled[i].getID() %>" />
-                            <input class="btn-uni-grad btn-small" type="submit" name="submit_claim" value="<fmt:message key="jsp.mydspace.main.take.button"/>" />
+                            <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                            <input type="hidden" name="workflow_id" value="<%= pooled[i].getID() %>">
+                            <input class="btn-uni-grad btn-small" type="submit" name="submit_claim" value='<fmt:message key="jsp.mydspace.main.take.button"/>'>
                         </form> 
                     </td>
         </tr>
@@ -253,15 +253,15 @@
         String row = "even";
 %>
 
-    <h3><fmt:message key="jsp.mydspace.main.heading4"/></h3>
+    <h3><fmt:message key="jsp.mydspace.main.heading4" /></h3>
 
     <p><fmt:message key="jsp.mydspace.main.text4" /></p>
 
     <table class="table" align="center" summary="Table listing unfinished submissions">
         <tr>
-            <th id="t10" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subby"/></th>
-            <th id="t11" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem1"/></th>
-            <th id="t12" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem2"/></th>
+            <th id="t10" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.subby" /></th>
+            <th id="t11" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem1" /></th>
+            <th id="t12" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem2" /></th>
             <th id="t13" class="oddRowEvenCol">&nbsp;</th>
         </tr>
 <%
@@ -294,7 +294,7 @@
             <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %>
 				<% if (provenanceArray.length > 0) { %>
 				<div class="rejected">
-					<img src="//style.anu.edu.au/_anu/images/icons/silk/exclamation.png" alt="exclamation icon" class="padleft"/>
+					<img src="//style.anu.edu.au/_anu/images/icons/silk/exclamation.png" alt="exclamation icon" class="padleft">
 					<div class="rejectedHover">
 						<ul class="">
 						<%
@@ -310,13 +310,13 @@
             <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems[i].getCollection().getMetadata("name") %></td>
             <td headers="t13" class="<%= row %>RowOddCol right">
                 <form action="<%= request.getContextPath() %>/workspace" method="post">
-                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>"/>
-                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
+                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>">
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value='<fmt:message key="jsp.mydspace.general.open" />'>
                 </form>
                 <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
-                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>"/>
-                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
+                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                    <input type="hidden" name="workspace_id" value="<%= workspaceItems[i].getID() %>">
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value='<fmt:message key="jsp.mydspace.general.remove" />'>
                 </form> 
             </td>
         </tr>
@@ -350,8 +350,8 @@
         <tr>
             <td class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/workspace" method="post">
-                    <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>"/>
-                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value="<fmt:message key="jsp.mydspace.general.open" />"/>
+                    <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>">
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_open" value='<fmt:message key="jsp.mydspace.general.open" />'>
                 </form>
             </td>
             <td class="<%= row %>RowEvenCol">
@@ -361,9 +361,9 @@
             <td class="<%= row %>RowEvenCol"><%= supervisedItems[i].getCollection().getMetadata("name") %></td>
             <td class="<%= row %>RowOddCol">
                 <form action="<%= request.getContextPath() %>/mydspace" method="post">
-                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>"/>
-                    <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>"/>
-                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value="<fmt:message key="jsp.mydspace.general.remove" />"/>
+                    <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                    <input type="hidden" name="workspace_id" value="<%= supervisedItems[i].getID() %>">
+                    <input class="btn-uni-grad btn-small" type="submit" name="submit_delete" value='<fmt:message key="jsp.mydspace.general.remove" />'>
                 </form>  
             </td>
         </tr>
@@ -383,12 +383,12 @@
         // even or odd row:  Starts even since header row is odd (1)
         String row = "even";
 %>
-    <h3><fmt:message key="jsp.mydspace.main.heading5"/></h3>
+    <h3><fmt:message key="jsp.mydspace.main.heading5" /></h3>
 
     <table class="table" align="center" summary="Table listing submissions in workflow process">
         <tr>
-            <th id="t14" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem1"/></th>
-            <th id="t15" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem2"/></th>
+            <th id="t14" class="oddRowOddCol"><fmt:message key="jsp.mydspace.main.elem1" /></th>
+            <th id="t15" class="oddRowEvenCol"><fmt:message key="jsp.mydspace.main.elem2" /></th>
         </tr>
 <%
         for (int i = 0; i < workflowItems.length; i++)
@@ -403,8 +403,8 @@
                 <td headers="t15" class="<%= row %>RowEvenCol">
                    <form action="<%= request.getContextPath() %>/mydspace" method="post">
                        <%= workflowItems[i].getCollection().getMetadata("name") %>
-                       <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
-                       <input type="hidden" name="workflow_id" value="<%= workflowItems[i].getID() %>" />
+                       <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>">
+                       <input type="hidden" name="workflow_id" value="<%= workflowItems[i].getID() %>">
                    </form>   
                 </td>
             </tr>
@@ -419,7 +419,7 @@
   if(displayGroupMembership && groupMemberships.length>0)
   {
 %>
-    <h3><fmt:message key="jsp.mydspace.main.heading6"/></h3>
+    <h3><fmt:message key="jsp.mydspace.main.heading6" /></h3>
     <ul>
 <%
     for(int i=0; i<groupMemberships.length; i++)
@@ -435,10 +435,10 @@
 %>
 
 	<%if(exportsAvailable!=null && exportsAvailable.size()>0){ %>
-	<h3><fmt:message key="jsp.mydspace.main.heading7"/></h3>
+	<h3><fmt:message key="jsp.mydspace.main.heading7" /></h3>
 	<ol class="exportArchives">
 		<%for(String fileName:exportsAvailable){%>
-			<li><a href="<%=request.getContextPath()+"/exportdownload/"+fileName%>" title="<fmt:message key="jsp.mydspace.main.export.archive.title"><fmt:param><%= fileName %></fmt:param></fmt:message>"><%=fileName%></a></li> 
+			<li><a href='<%=request.getContextPath()+"/exportdownload/"+fileName%>' title='<fmt:message key="jsp.mydspace.main.export.archive.title"><fmt:param><%= fileName %></fmt:param></fmt:message>'><%=fileName%></a></li> 
 		<% } %>
 	</ol>
 	<%} %>
