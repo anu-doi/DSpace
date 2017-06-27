@@ -350,8 +350,8 @@
 <% } %>
 <ul class="nounderline small padtop">
 	<li><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= handle %>/statistics"><fmt:message key="jsp.display-item.display-statistics"/></a></li>
-	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export BibTeX</a></li>
-	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export EndNote</a></li>
+	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=bibtex">Export Reference to BibTeX</a></li>
+	<li><a class="nounderline" href="<%= request.getContextPath() %>/exportreference?handle=<%= handle %>&format=endnote">Export Reference to EndNote XML</a></li>
 </ul>
 <ul class="nobullet">
 <li>
