@@ -1432,13 +1432,18 @@
         </pair>
         
         <pair>
-        <displayed-value>Conference item</displayed-value>
-        <stored-value>Conference item</stored-value>
+        <displayed-value>Conference poster</displayed-value>
+        <stored-value>Conference poster</stored-value>
         </pair>
 
         <pair>
         <displayed-value>Conference paper</displayed-value>
         <stored-value>Conference paper</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Conference poster</displayed-value>
+        <stored-value>Conference poster</stored-value>
         </pair>
 
         <pair>
