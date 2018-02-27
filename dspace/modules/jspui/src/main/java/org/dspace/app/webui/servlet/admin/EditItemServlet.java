@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.dspace.app.util.AuthorizeUtil;
 import org.dspace.app.util.Util;
@@ -46,11 +47,14 @@ import org.dspace.content.Item;
 import org.dspace.content.MetadataField;
 import org.dspace.content.MetadataSchema;
 import org.dspace.content.authority.Choices;
+import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
 import org.dspace.embargo.EmbargoManager;
 import org.dspace.handle.HandleManager;
+import org.dspace.license.CCLicense;
+import org.dspace.license.CCLookup;
 import org.dspace.license.CreativeCommons;
 
 /**
@@ -94,6 +98,9 @@ public class EditItemServlet extends DSpaceServlet
     /** User confirms withdrawal of item */
     public static final int PUBLICIZE = 11;
 
+    /** User updates Creative Commons License */
+    public static final int UPDATE_CC = 12;
+    
     /** Logger */
     private static Logger log = Logger.getLogger(EditCommunitiesServlet.class);
 
@@ -182,7 +189,7 @@ public class EditItemServlet extends DSpaceServlet
 
             return;
         }
-
+        
         /*
          * Respond to submitted forms. Each form includes an "action" parameter
          * indicating what needs to be done (from the constants above.)
@@ -191,7 +198,14 @@ public class EditItemServlet extends DSpaceServlet
 
         Item item = Item.find(context, UIUtil.getIntParameter(request,
                 "item_id"));
- 
+
+        if (request.getParameter("submit_cancel_cc") != null)
+        {
+            showEditForm(context, request, response, item);
+
+            return;
+        }
+        
         String handle = HandleManager.findHandle(context, item);
 
         // now check to see if person can edit item
@@ -353,7 +367,60 @@ public class EditItemServlet extends DSpaceServlet
             context.complete();
 
             break;
-                
+
+        case UPDATE_CC:
+
+           	Map<String, String> map = new HashMap<String, String>();
+        	String licenseclass = (request.getParameter("licenseclass_chooser") != null) ? request.getParameter("licenseclass_chooser") : "";
+        	String jurisdiction = (ConfigurationManager.getProperty("cc.license.jurisdiction") != null) ? ConfigurationManager.getProperty("cc.license.jurisdiction") : "";
+        	if (licenseclass.equals("standard")) {
+        		map.put("commercial", request.getParameter("commercial_chooser"));
+        		map.put("derivatives", request.getParameter("derivatives_chooser"));
+        	} else if (licenseclass.equals("recombo")) {
+        		map.put("sampling", request.getParameter("sampling_chooser"));
+        	}
+        	map.put("jurisdiction", jurisdiction);
+        	CreativeCommons.MdField uriField = CreativeCommons.getCCField("uri");
+        	CreativeCommons.MdField nameField = CreativeCommons.getCCField("name");
+        	
+         	boolean exit = false;
+         	if (licenseclass.equals("webui.Submission.submit.CCLicenseStep.no_license")) 
+         	{
+			
+        		CreativeCommons.removeLicense(context, uriField, nameField, item);
+        		
+    			item.update();
+    			context.commit();
+    			exit = true;
+        	}
+        	else if (licenseclass.equals("webui.Submission.submit.CCLicenseStep.select_change")) {
+        		//none
+        		exit = true;
+			}
+
+         	if (!exit) {
+				CCLookup ccLookup = new CCLookup();
+				ccLookup.issue(licenseclass, map, ConfigurationManager.getProperty("cc.license.locale"));
+				if (ccLookup.isSuccess()) {
+					CreativeCommons.removeLicense(context, uriField, nameField, item);
+
+					uriField.addItemValue(item, ccLookup.getLicenseUrl());
+					if (ConfigurationManager.getBooleanProperty("cc.submit.addbitstream")) {
+						CreativeCommons.setLicenseRDF(context, item, ccLookup.getRdf());
+					}
+					if (ConfigurationManager.getBooleanProperty("cc.submit.setname")) {
+						nameField.addItemValue(item, ccLookup.getLicenseName());
+					}
+
+					item.update();
+					context.commit();
+				}
+			}
+            showEditForm(context, request, response, item);
+            context.complete();
+
+            break;
+
         default:
 
             // Erm... weird action value received.
@@ -404,20 +471,6 @@ public class EditItemServlet extends DSpaceServlet
             HttpServletResponse response, Item item) throws ServletException,
             IOException, SQLException, AuthorizeException
     {
-        if ( request.getParameter("cc_license_url") != null )
-        {
-            // check authorization
-            AuthorizeUtil.authorizeManageCCLicense(context, item);
-            
-            // turn off auth system to allow replace also to user that can't
-            // remove/add bitstream to the item
-            context.turnOffAuthorisationSystem();
-                // set or replace existing CC license
-                CreativeCommons.setLicense( context, item,
-                   request.getParameter("cc_license_url") );
-                context.restoreAuthSystemState();
-                context.commit();
-        }
   
         // Get the handle, if any
         String handle = HandleManager.findHandle(context, item);
@@ -551,7 +604,10 @@ public class EditItemServlet extends DSpaceServlet
         request.setAttribute("collections", collections);
         request.setAttribute("dc.types", types);
         request.setAttribute("metadataFields", metadataFields);
-
+        
+        if(response.isCommitted()) {
+        	return;
+        }
         JSPManager.showJSP(request, response, "/tools/edit-item-form.jsp");
     }
 
@@ -785,14 +841,26 @@ public class EditItemServlet extends DSpaceServlet
         }
 
         item.update();
-        
-        //Set the embargo date in case it has been added/edited
+      //Set the embargo date in case it has been added/edited
         EmbargoManager.setEmbargo(context, item);
 
         if (button.equals("submit_addcc"))
         {
             // Show cc-edit page
             request.setAttribute("item", item);
+            
+            boolean exists = CreativeCommons.hasLicense(context, item);
+            request.setAttribute("cclicense.exists", Boolean.valueOf(exists));
+
+            String ccLocale = ConfigurationManager.getProperty("cc.license.locale");
+            /** Default locale to 'en' */
+            ccLocale = (StringUtils.isNotBlank(ccLocale)) ? ccLocale : "en";
+            request.setAttribute("cclicense.locale", ccLocale);
+            
+            CCLookup cclookup = new CCLookup();
+            java.util.Collection<CCLicense> collectionLicenses = cclookup.getLicenses(ccLocale);
+            request.setAttribute("cclicense.licenses", collectionLicenses);
+            
             JSPManager
                     .showJSP(request, response, "/tools/creative-commons-edit.jsp");
         }

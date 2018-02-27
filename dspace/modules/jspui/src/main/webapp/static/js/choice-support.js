@@ -386,6 +386,9 @@ function DSpaceChoicesSelectOnChange ()
         if (so.orcid != null && so.orcid != "") {
     		document.getElementById("extUrl").href = "http://orcid.org/" + so.orcid;
     		document.getElementById("extUrl").text = so.orcid;
+			if (form.elements['text1'].value == '' || form.elements['text2'].value == '') {
+				DSpaceChoicesGetOrcidInfoOnChange(so.orcid);
+			}
         } else {
     		document.getElementById("extUrl").href = "";
     		document.getElementById("extUrl").text = "";
@@ -393,6 +396,45 @@ function DSpaceChoicesSelectOnChange ()
     }
     else
         form.elements['text1'].value = so.value;
+}
+
+function DSpaceChoicesGetOrcidInfoOnChange(orcid) {
+    var contextPath = form.elements['contextPath'].value;
+    var select = form.elements['chooser'];
+	var selectedIndex = select.selectedIndex;
+    var so = select.options[select.selectedIndex];
+	
+	new Ajax.Request(contextPath+"/orcid/", {
+		method: "get",
+		parameters: {"orcid": orcid},
+		onSuccess: function(transport) {
+			var ul = transport.responseXML.documentElement;
+			var opt = ul.getElementsByTagName("option")[0];
+			var olabel = "";
+            for (var j = 0; j < opt.childNodes.length; ++j)
+            {
+               var node = opt.childNodes[j];
+               if (node.nodeName == "#text")
+                 olabel += node.data;
+            }
+			var ovalue = opt.getAttributeNode('value').value;
+			var option = new Option(olabel, ovalue);
+			option.authority = opt.getAttributeNode('authority').value;
+			if (option.authority.includes("::orcid::")) {
+            	option.setAttribute("style", "font-style: italic;color: green");
+			}
+			
+            if (opt.getAttributeNode('orcid') != null) {
+            	option.orcid = opt.getAttributeNode('orcid').value;
+            	option.text = option.text + " (" + option.orcid + ")";
+            }
+			so.parentNode.replaceChild(option,so);
+			
+			form.elements['text1'].value = lastNameOf(option.value);
+			form.elements['text2'].value = firstNameOf(option.value);
+		}
+	});
+	
 }
 
 // handler for lookup popup's accept (or add) button

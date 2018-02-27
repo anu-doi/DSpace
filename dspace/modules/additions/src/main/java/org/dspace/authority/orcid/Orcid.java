@@ -7,19 +7,21 @@
  */
 package org.dspace.authority.orcid;
 
-import org.dspace.authority.AuthorityValue;
-import org.dspace.authority.orcid.model.Bio;
-import org.dspace.authority.orcid.model.Work;
-import org.dspace.authority.orcid.xml.XMLtoBio;
-import org.dspace.authority.orcid.xml.XMLtoWork;
-import org.dspace.authority.rest.RestSource;
-import org.apache.log4j.Logger;
-import org.dspace.utils.DSpace;
-import org.w3c.dom.Document;
-
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.dspace.authority.AuthorityValue;
+import org.dspace.authority.orcid.model.Bio;
+import org.dspace.authority.orcid.model.CommonIdentifier;
+import org.dspace.authority.orcid.model.Work;
+import org.dspace.authority.orcid.xml.XMLtoBio;
+import org.dspace.authority.orcid.xml.XMLtoIdentifier;
+import org.dspace.authority.orcid.xml.XMLtoWork;
+import org.dspace.authority.rest.RestSource;
+import org.dspace.utils.DSpace;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -49,7 +51,8 @@ public class Orcid extends RestSource {
     }
 
     public Bio getBio(String id) {
-        Document bioDocument = restConnector.get(id + "/orcid-bio");
+//        Document bioDocument = restConnector.get(id + "/orcid-bio");
+        Document bioDocument = restConnector.get(id + "/record");
         XMLtoBio converter = new XMLtoBio();
         Bio bio = converter.convert(bioDocument).get(0);
         bio.setOrcid(id);
@@ -63,9 +66,21 @@ public class Orcid extends RestSource {
     }
 
     public List<Bio> queryBio(String name, int start, int rows) {
-        Document bioDocument = restConnector.get("search/orcid-bio?q=" + URLEncoder.encode(name) + "&start=" + start + "&rows=" + rows);
-        XMLtoBio converter = new XMLtoBio();
-        return converter.convert(bioDocument);
+//        Document bioDocument = restConnector.get("search/orcid-bio?q=" + URLEncoder.encode(name) + "&start=" + start + "&rows=" + rows);
+        Document identDocument = restConnector.get("search/?q=" + URLEncoder.encode(name) + "&start=" + start + "&rows=" + rows);
+        XMLtoIdentifier identConverter = new XMLtoIdentifier();
+        List<CommonIdentifier> identifiers = identConverter.convert(identDocument);
+        log.info("Number of identifiers found: " + identifiers.size());
+        List<Bio> bios = new ArrayList<Bio>();
+        for (CommonIdentifier identifier : identifiers) {
+        	// Would get a bio record but it takes too long to query them all...
+//        	bios.add(getBio(identifier.getPath()));
+        	Bio bio = new Bio();
+        	bio.setOrcid(identifier.getPath());
+        	bios.add(bio);
+        }
+        
+        return bios;
     }
 
     @Override
