@@ -387,18 +387,26 @@ function DSpaceChoicesSelectOnChange ()
     		document.getElementById("extUrl").href = "http://orcid.org/" + so.orcid;
     		document.getElementById("extUrl").text = so.orcid;
 			if (form.elements['text1'].value == '' || form.elements['text2'].value == '') {
-				DSpaceChoicesGetOrcidInfoOnChange(so.orcid);
+				DSpaceChoicesGetOrcidInfoOnChange(so.orcid, isName);
 			}
         } else {
     		document.getElementById("extUrl").href = "";
     		document.getElementById("extUrl").text = "";
         }
     }
-    else
-        form.elements['text1'].value = so.value;
+    else {
+		if (so.value == '') {
+			var selectedIndex = select.selectedIndex;
+			var textValue = so.text;
+			var orcid = textValue.substring(1, textValue.length-1);
+			DSpaceChoicesGetOrcidInfoOnChange(orcid, isName);
+		}
+		
+		form.elements['text1'].value = so.value;
+	}
 }
 
-function DSpaceChoicesGetOrcidInfoOnChange(orcid) {
+function DSpaceChoicesGetOrcidInfoOnChange(orcid, isName) {
     var contextPath = form.elements['contextPath'].value;
     var select = form.elements['chooser'];
 	var selectedIndex = select.selectedIndex;
@@ -429,9 +437,12 @@ function DSpaceChoicesGetOrcidInfoOnChange(orcid) {
             	option.text = option.text + " (" + option.orcid + ")";
             }
 			so.parentNode.replaceChild(option,so);
-			
-			form.elements['text1'].value = lastNameOf(option.value);
-			form.elements['text2'].value = firstNameOf(option.value);
+			if (isName) {
+				form.elements['text1'].value = lastNameOf(option.value);
+				form.elements['text2'].value = firstNameOf(option.value);
+			} else {
+				form.elements['text1'].value = option.value;
+			}
 		}
 	});
 	
