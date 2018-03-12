@@ -412,7 +412,7 @@ function DSpaceChoicesGetOrcidInfoOnChange(orcid, isName) {
 	var selectedIndex = select.selectedIndex;
     var so = select.options[select.selectedIndex];
 	
-	new Ajax.Request(contextPath+"/orcid/", {
+	new Ajax.Request(contextPath+"/findorcid/", {
 		method: "get",
 		parameters: {"orcid": orcid},
 		onSuccess: function(transport) {

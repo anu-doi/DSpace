@@ -870,7 +870,7 @@
   
   <servlet-mapping>
   	<servlet-name>OrcidServlet</servlet-name>
-  	<url-pattern>/orcid/*</url-pattern>
+  	<url-pattern>/findorcid/*</url-pattern>
   </servlet-mapping>
   
   <!-- Icon MIME type -->
