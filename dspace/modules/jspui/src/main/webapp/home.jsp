@@ -38,6 +38,7 @@
 <%@ page import="org.dspace.browse.ItemCounter" %>
 <%@ page import="org.dspace.content.Metadatum" %>
 <%@ page import="org.dspace.content.Item" %>
+<%@ page import="org.dspace.browse.BrowseIndex" %>
 
 <%
     Community[] communities = (Community[]) request.getAttribute("communities");
@@ -58,227 +59,223 @@
     ItemCounter ic = new ItemCounter(UIUtil.obtainContext(request));
 
     RecentSubmissions submissions = (RecentSubmissions) request.getAttribute("recent.submissions");
+	
+    BrowseIndex[] bis = BrowseIndex.getBrowseIndices();
 %>
 
 <dspace:layout locbar="off" titlekey="jsp.home.title" feedData="<%= feedData %>">
 
-<anu:content layout="full">
-<img width="680" height="85" alt="Welcome" src="image/shutterstock.jpg">
+<anu:content layout="full" title="${title}">
+	<%-- <p>
+	<fmt:message key="jsp.community-list.text1" />
+	</p> --%>
+	<div class="box20 bg-uni25 nomargin nomarginbottom bigsearch">
+	<div class="large padbottom">Search</div>
+	<form id="searchform" method="get" action="<%= request.getContextPath() %>/advanced-search">
+		<input id="query" name="query" class="margintop marginbottom text tfull" type="text" placeholder="Search by keyword..." size="24" />
+		<input id="main" type="submit" value="GO" class="btn-uni-grad btn-medium" />
+	</form>
+	<p>
+		<a href="<%= request.getContextPath() %>/advanced-search">advanced search &raquo;</a>
+	</p>
+	<%
+		if (bis.length > 0)
+		{
+	%>
+	<div class="divline-solid-uni padtop"></div>
+	<div class="large padtop padbottom">
+		Browse by:
+	</div>
+	<div class="full nopadleft noprint nopadtop padbottom tools-uni">
+		<ul class="nopadbottom nopadtop">
+			<%
+				for (int i =0; i < bis.length; i++)
+				{
+				String key = "browse.menu." + bis[i].getName();
+			%>
+				<li>
+					<a class="large acton-tabs-link-processed" href="<%= request.getContextPath() %>/browse?type=<%= bis[i].getName() %>"><fmt:message key="<%= key %>" /></a>
+				</li>
+			<%
+				}
+			%>
+		</ul>
+	</div>
+	<p class="padbottom padtop"></p>
+	<%
+		}
+	%>
+	</div>
 </anu:content>
-<%--<anu:content layout="doublewide">
-<div class="row">
+
+<% if (communities.length != 0)
+{
+	%>
+	<% 
+	for (int i = 0; i < communities.length; i++)
+	{
+	%>
+		<anu:content layout="one-third">
+			<div class="div1 box bg-grey10 colbox">
+			<div>
+				<%
+					String imgUrl = null;
+					if ("1885/1".equals(communities[i].getHandle())) {
+						imgUrl = request.getContextPath() + "/image/anu-research.jpg";
+					}
+					else if ("1885/2".equals(communities[i].getHandle())) {
+						imgUrl = request.getContextPath() + "/image/archival-and-rare-collections.jpg";
+					}
+				
+					if (imgUrl != null) {
+				%>
+				
+					<div>
+						<a href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>"><img src="<%= imgUrl %>" alt="Community logo"/></a>
+					</div>
+				<%
+					}
+				%>
+			
+				<div>
+				<h2><a class="nounderline" href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>">Search <%= communities[i].getName() %></a></h2>
+				<%
+					String shortDesc = communities[i].getMetadata("short_description");
+					if (shortDesc != null) {
+				%>
+					<%= shortDesc %>
+				<%
+					}
+				%>
+				<span><%= ic.getCount(communities[i]) %> items</span>
+				</div>
+			</div>
+			</div>
+		</anu:content>
+	<%
+	}
+	%>
+ 
+<% }
+%>
+<anu:content layout="one-third">
+	<div class="div1 box bg-grey10 colbox">
+		<div>
+			<a href="https://openreearch.anu.edu.au/contribute"><img src="<%= request.getContextPath() %>/image/contribute.jpg" alt="Community logo"/></a>
+		</div>
+		<h2><a class="nounderline" href="https://openreearch.anu.edu.au/contribute">Contribute</a></h2>
+	</div>	
+</anu:content>
+
+<anu:content layout="two-third" extraClass="clear-right">
+	<div class="divline-solid-uni nopad"></div>
+	
 <%
 if (submissions != null && submissions.count() > 0)
 {
 %>
-        <div class="fullwidth">
-        <div class="panel panel-primary">        
-        <div id="recent-submissions-carousel" class="panel-heading carousel slide">
-          <h3><fmt:message key="jsp.collection-home.recentsub"/>
-              <%
-    if(feedEnabled)
-    {
-	    	String[] fmts = feedData.substring(feedData.indexOf(':')+1).split(",");
-	    	String icon = null;
-	    	int width = 0;
-	    	for (int j = 0; j < fmts.length; j++)
-	    	{
-	    		if ("rss_1.0".equals(fmts[j]))
-	    		{
-	    		   icon = "rss1.gif";
-	    		   width = 80;
-	    		}
-	    		else if ("rss_2.0".equals(fmts[j]))
-	    		{
-	    		   icon = "rss2.gif";
-	    		   width = 80;
-	    		}
-	    		else
-	    	    {
-	    	       icon = "rss.gif";
-	    	       width = 36;
-	    	    }
-	%>
-	    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/site"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
-	<%
-	    	}
-	    }
-	%>
-          </h3>
-          
-		  <!-- Wrapper for slides -->
-		  <div class="carousel-inner">
-		    <%
-		    boolean first = true;
-		    for (Item item : submissions.getRecentSubmissions())
-		    {
-		        DCValue[] dcv = item.getMetadata("dc", "title", null, Item.ANY);
-		        String displayTitle = "Untitled";
-		        if (dcv != null & dcv.length > 0)
-		        {
-		            displayTitle = Utils.addEntities(dcv[0].value);
-		        }
-		        dcv = item.getMetadata("dc", "description", "abstract", Item.ANY);
-		        String displayAbstract = "";
-		        if (dcv != null & dcv.length > 0)
-		        {
-		            displayAbstract = Utils.addEntities(dcv[0].value);
-		        }
-		%>
-		    <div style="padding-bottom: 50px; min-height: 200px;" class="item <%= first?"active":""%>">
-		      <div style="padding-left: 80px; padding-right: 80px; display: inline-block;"><%= StringUtils.abbreviate(displayTitle, 400) %> 
-		      	<a href="<%= request.getContextPath() %>/handle/<%=item.getHandle() %>"> 
-		      		<button class="btn btn-success" type="button">See</button>
-		      		</a>
-                        <p><%= StringUtils.abbreviate(displayAbstract, 500) %></p>
-		      </div>
-		    </div>
+	<div>
+	<h3 class="padtop">Recent Submissions</h3>
+	<ul class="linklist extraspace nopadtop padbottom">
 		<%
-				first = false;
-		     }
+			for (Item item : submissions.getRecentSubmissions())
+			{
+				Metadatum[] titleValue = item.getDC("title", null, Item.ANY);
+				String displayTitle = "Untitled";
+				if (titleValue != null & titleValue.length > 0)
+				{
+					displayTitle = Utils.addEntities(titleValue[0].value);
+				}
 		%>
-		  </div>
-
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#recent-submissions-carousel" data-slide="prev">
-		    <span class="icon-prev"></span>
-		  </a>
-		  <a class="right carousel-control" href="#recent-submissions-carousel" data-slide="next">
-		    <span class="icon-next"></span>
-		  </a>
-
-          <ol class="carousel-indicators">
-		    <li data-target="#recent-submissions-carousel" data-slide-to="0" class="active"></li>
-		    <% for (int i = 1; i < submissions.count(); i++){ %>
-		    <li data-target="#recent-submissions-carousel" data-slide-to="<%= i %>"></li>
-		    <% } %>
-	      </ol>
-     </div></div></div>
-<%
-}
-%>
-</div>
-</anu:content>--%>
-<anu:content layout="doublewide" title="Digital Collections">
-<% if (supportedLocales != null && supportedLocales.length > 1)
-{
-%>
-        <form method="get" name="repost" action="">
-          <input type ="hidden" name ="locale"/>
-        </form>
-<%
-for (int i = supportedLocales.length-1; i >= 0; i--)
-{
-%>
-        <a class ="langChangeOn"
-                  onclick="javascript:document.repost.locale.value='<%=supportedLocales[i].toString()%>';
-                  document.repost.submit();">
-                 <%= supportedLocales[i].getDisplayLanguage(supportedLocales[i])%>
-        </a> &nbsp;
-<%
-}
-}
-%>
-	<div class="jumbotron">
-       <%= topNews %>
+			<li>
+				<a href="<%= request.getContextPath() %>/handle/<%=item.getHandle() %>">
+					<%= displayTitle %>
+				</a>
+			</li>
+		<%
+			}
+		%>
+	</ul>
 	</div>
-	
-<div class="container row">
-	<%
-if (communities != null && communities.length != 0)
-{
-%>
-	<%--<div class="col-md-4">--%>
-	<h3><fmt:message key="jsp.home.com1"/></h3>
-	<p><fmt:message key="jsp.home.com2"/></p>
-	<div class="list-group">
-<%
-	boolean showLogos = ConfigurationManager.getBooleanProperty("jspui.home-page.logos", true);
-    for (int i = 0; i < communities.length; i++)
-    {
-%><div class="list-group-item row">
-<%  
-		Bitstream logo = communities[i].getLogo();
-		if (showLogos && logo != null) { %>
-		<div class="col-md-3">
-        <img alt="Logo" class="img-responsive" src="<%= request.getContextPath() %>/retrieve/<%= logo.getID() %>" />
-		</div>
-		<div class="col-md-9">
-<% } else { %>
-<div class="col-md-12">
-<% }  %>		
-		<h4 class="list-group-item-heading"><a href="<%= request.getContextPath() %>/handle/<%= communities[i].getHandle() %>"><%= communities[i].getMetadata("name") %></a>
-<%
-        if (ConfigurationManager.getBooleanProperty("webui.strengths.show"))
-        {
-%>
-		<span class="badge pull-right"><%= ic.getCount(communities[i]) %></span>
-<%
-        }
-
-%>
-		</h4>
-		<%--<p><%= communities[i].getMetadata("short_description") %></p>--%>
-		</div>
-		</div>
-<%
-    }
-%>
-	</div>
-	<%--</div>--%>
 <%
 }
 %>
-
+	<div class="divline-solid-uni nopad"></div>
+	<h3 class="padtop">Top downloads for path month</h3>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			var today = new Date();
+			var lastMonth = today;
+			lastMonth.setDate(lastMonth.getDate() - 30);
+			console.log(today.getDate());
+			console.log(today.getMonth());
+			console.log(today.getFullYear());
+			jQuery.ajax({
+				url: window.location.origin+window.location.pathname+"statistics"
+				, type: "GET"
+				, data: {
+					section: "statsTopItems"
+					, format: "json"
+					, limit: "5"
+					, sDay: lastMonth.getDate()
+					, sMonth: lastMonth.getMonth()+1
+					, sYear: lastMonth.getFullYear()
+					, eDay: today.getDate()
+					, eMonth: today.getMonth()+1
+					, eYear: today.getFullYear()
+				}
+				, success: function(data) {
+					var statsSection = jQuery("#statsTopItems");
+					statsSection.html('<ul></ul>');
+					var ul = statsSection.find("ul");
+					ul.attr("class","linklist extraspace nopadtop");
+					var values = data.values
+					for (var i = 0; i < values.length; i++) {
+						var li = jQuery("<li></li>").attr("class","acton-tabs-link-processed").appendTo(ul);
+						if (values[i].Handle) {
+							var url = data.path + "/handle/" + values[i].Handle;
+							var a = jQuery("<a></a>").attr("href", url).text(values[i].Name);
+							a.appendTo(li);
+						}
+						else {
+							li.text(values[i].Name);
+						}
+					}
+				}
+				, error: function() {
+					jQuery("#statsTopItems").html('Error retreiving top downloads');
+				}
+			});
+		});
+	</script>
+	<div id="statsTopItems">
+		Loading top downloads...
 	</div>
 </anu:content>
-<anu:content layout="narrow">
-<%--<div class="col-md-4">--%>
-    <%= sideNews %>
-<%--</div>--%>
 
-              <%
-    if(feedEnabled)
-    {
-	%>
-	<anu:boxheader text="RSS" />
-	<anu:box style="solid">
-	<%
-	    	String[] fmts = feedData.substring(feedData.indexOf(':')+1).split(",");
-	    	String icon = null;
-	    	int width = 0;
-	    	for (int j = 0; j < fmts.length; j++)
-	    	{
-	    		if ("rss_1.0".equals(fmts[j]))
-	    		{
-	    		   icon = "rss1.gif";
-	    		   width = 80;
-	    		}
-	    		else if ("rss_2.0".equals(fmts[j]))
-	    		{
-	    		   icon = "rss2.gif";
-	    		   width = 80;
-	    		}
-	    		else
-	    	    {
-	    	       icon = "rss.gif";
-	    	       width = 36;
-	    	    }
-	%>
-	    <a href="<%= request.getContextPath() %>/feed/<%= fmts[j] %>/site"><img src="<%= request.getContextPath() %>/image/<%= icon %>" alt="RSS Feed" width="<%= width %>" height="15" vspace="3" border="0" /></a>
-	<%
-	    	}
-	%>
-	</anu:box>
-	<%
-	    }
-	%>
+<anu:content layout="one-third">
+	<div class="box bdr-solid bdr-uni">
+		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/ANUOpenAccess" height="250px" data-widget-id="706691559580774403">Tweets by @ANUOpenAccess</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+ 	</div>
+	<div class="box bdr-solid bdr-uni">
+		<h3 class="nopadtop">Related links</h3>
+		<ul class="linklist single-multiple-list">
+			<li>
+				<a class="acton-tabs-link-processed" href="http://archives.anu.edu.au/">ANU Archives</a>
+			</li>
+			<li>
+				<a class="acton-tabs-link-processed" href="http://anulib.anu.edu.au">ANU Library</a>
+			</li>
+			<li>
+				<a class="acton-tabs-link-processed" href="http://press.anu.edu.au/">ANU Press</a>
+			</li>
+			<li>
+				<a class="acton-tabs-link-processed" href="https://services.anu.edu.au/business-units/research-services-division">Research Services Division</a>
+			</li>
+		</ul>
+	</div>
 </anu:content>
-<anu:content layout="doublewide">
-	<%
-    	int discovery_panel_cols = 12;
-    	int discovery_facet_cols = 4;
-    %>
-	<%@ include file="discovery/static-sidebar-facet.jsp" %>
-</anu:content> 
+
+
 </dspace:layout>
