@@ -1,15 +1,15 @@
-# E-mail sent to DSpace users when they register for an account
+# E-mail sent to ANU Open Research users when they register for an account
 #
 # Parameters: {0} is expanded to a special registration URL
 #
-# See org.dspace.core.Email for information on the format of this file.
+# See org.dspace.core. Email for information on the format of this file. 
 #
-Subject: Open Research Account Registration
-To complete registration for a Open Research account, please click the link
+Subject: ANU Open Research Account Registration. 
+To complete registration for an ANU Open Research account, please click the link
 below:
 
   {0}
 
-If you need assistance with your account, please email repository.admin@anu.edu.au.
+ If you need assistance with your account, please email repository.admin@anu.edu.au. Thank you, 
 
 The Open Research Team

@@ -2,20 +2,16 @@
 #
 # {0}  Title of submission
 # {1}  Name of collection
-# {2}  handle 
+# {2} handle 
 #
-Subject: Open Research: Submission Approved and Archived 
+Subject: ANU Open Research: Submission Approved and Archived 
 
 You submitted: {0}
 
 To collection: {1}
 
-Your submission has been accepted and archived in Open Research,
-and it has been assigned the following identifier:
-{2}
+Your submission has been accepted and archived in ANU Open Research,
+ and it has been assigned the following identifier:
+{2} You can now use this identifier when citing your submitted work.
 
-Please use this identifier when citing your submission.
-
-Many thanks!
-
-The Open Research Team
+ Thank you. The Open Research Team

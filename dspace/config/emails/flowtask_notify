@@ -7,17 +7,17 @@
 # {4}  Task result
 # {5}  Workflow action taken
 #
-Subject: Open Research: Curation Task Report
+Subject: ANU Open Research: Curation Task Report 
 
 Title:         {0}
 Collection:    {1}
 Submitted by:  {2}
 
-Curation task {3} has been performed
+Curation task {3} has been performed 
 with the following result:
 
 {4}
 
-Action taken on the submission: {5}
+Action taken on the submission: {5} 
 
-The Open Research Team
+Regards, The Open Research Team

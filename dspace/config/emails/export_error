@@ -4,16 +4,16 @@
 #             {1} the URL to the feedback page
 #             
 #
-# See org.dspace.core.Email for information on the format of this file.
+# See org.dspace.core. Email for information on the format of this file.
 #
-Subject: Open Research - The item export you requested was not completed.
+Subject: ANU Open Research - The item export you requested was not completed. 
 The item export you requested was not completed, due to the following reason:
  {0}
 
-For more information you may contact your system administrator:
+ For more information you may contact your system administrator:
  {1}
 
 
 
-The Open Research Team
+Regards, The Open Research Team
 

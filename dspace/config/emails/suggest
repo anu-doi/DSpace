@@ -8,9 +8,9 @@
 #             {5} item local URL - may be used in lieu of {4} if not using handle server
 #             {6} collection name
 #             {7} sender message 
-# See org.dspace.core.Email for information on the format of this file.
+# See org.dspace.core. Email for information on the format of this file. 
 #
-Subject: An item of interest from Open Research
+Subject: An item of interest for ANU Open Research 
 
 Hello {0}:
 
@@ -21,6 +21,5 @@ Location: {5}
 In Collection: {6}
 Personal Message: {7}
 
-The Open Research digital repository system captures, stores, indexes, preserves, and distributes digital material.
-For more information, visit openresearch.anu.edu.au
+ The ANU Open Research repository captures, stores, indexes, preserves and promotes the distribution of open access works by the students, staff and affilaites of the Australian National University. For further information visit openresearch.anu.edu.au
 

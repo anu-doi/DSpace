@@ -4,21 +4,22 @@
 # {1}  Name of collection
 # {2}  submitter's name
 # {3}  Description of task
-# {4}  link to 'my DSpace' page 
+# {4}  link to 'My Open Research' page 
 #
-Subject: Open Research: You have a new task
+Subject: ANU Open Research: You have a new task. 
 
 A new item has been submitted:
 
-Title:        {0}
+ Title:        {0}
 Collection:   {1}
 Submitted by: {2}
 
-{3}
+{3} 
 
-To claim this task, please visit your "My Open Research"
-page:  {4}
+To claim this task, please visit your "My Open Research" 
+page:  {4} 
 
-Many thanks!
+Thank you. 
+
 
 The Open Research Team
