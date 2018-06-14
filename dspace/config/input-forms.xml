@@ -16,6 +16,10 @@
  <form-map>
    <name-map collection-handle="1885/3" form-name="ANU_Digital_Theses" />
    <name-map collection-handle="1885/26" form-name="ANU_Research" />
+   
+   <!-- ANU Asia-Pacific Linguistics / Pacific Linguistics Titles -->
+   <name-map collection-handle="1885/132248" form-name="ANU_Research" />
+   
    <name-map collection-handle="default" form-name="traditional" />
 
    <name-map collection-handle="1885/6585" form-name="ANU_Digital_Theses" />
