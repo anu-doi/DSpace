@@ -69,7 +69,7 @@
 
 <anu:topmenu>
 <anu:topmenulinks>
-	<li><a class="tabs-home" href="<%= request.getContextPath() %>">Home</a></li>
+	<li><a class="tabs-home" href="<%= request.getContextPath() %>/">Home</a></li>
 	<li><a href="<%= openResearchURL %>/about-open-research-anu">About</a></li>
 	<%--<li><a href="<%= request.getContextPath() %>/community-list">Collections</a></li>--%>
 	<li><a href="<%= openResearchURL %>/contribute">Contribute</a></li>
