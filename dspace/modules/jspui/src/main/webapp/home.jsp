@@ -161,7 +161,7 @@
 <anu:content layout="one-third">
 	<div class="div1 box bg-grey10 colbox">
 		<div>
-			<a href="https://openreearch.anu.edu.au/contribute"><img src="<%= request.getContextPath() %>/image/contribute.jpg" alt="Community logo"/></a>
+			<a href="https://openreearch.anu.edu.au/contribute"><img src="<%= request.getContextPath() %>/image/contribute.jpg" alt="Contribute logo"/></a>
 		</div>
 		<h2><a class="nounderline" href="https://openreearch.anu.edu.au/contribute">Contribute</a></h2>
 	</div>	
@@ -205,11 +205,14 @@ if (submissions != null && submissions.count() > 0)
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			var today = new Date();
-			var lastMonth = today;
+			var lastMonth = new Date();
 			lastMonth.setDate(lastMonth.getDate() - 30);
+			/*console.log(lastMonth.getDate());
+			console.log(lastMonth.getMonth()+1);
+			console.log(lastMonth.getFullYear());
 			console.log(today.getDate());
-			console.log(today.getMonth());
-			console.log(today.getFullYear());
+			console.log(today.getMonth()+1);
+			console.log(today.getFullYear());*/
 			jQuery.ajax({
 				url: window.location.origin+window.location.pathname+"statistics"
 				, type: "GET"
