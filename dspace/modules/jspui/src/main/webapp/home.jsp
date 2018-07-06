@@ -61,6 +61,8 @@
     RecentSubmissions submissions = (RecentSubmissions) request.getAttribute("recent.submissions");
 	
     BrowseIndex[] bis = BrowseIndex.getBrowseIndices();
+    
+    String openResearchURL = ConfigurationManager.getProperty("openresearch.url");
 %>
 
 <dspace:layout locbar="off" titlekey="jsp.home.title" feedData="<%= feedData %>">
@@ -161,9 +163,9 @@
 <anu:content layout="one-third">
 	<div class="div1 box bg-grey10 colbox">
 		<div>
-			<a href="https://openreearch.anu.edu.au/contribute"><img src="<%= request.getContextPath() %>/image/contribute.jpg" alt="Contribute logo"/></a>
+			<a href="<%= openResearchURL %>/contribute"><img src="<%= request.getContextPath() %>/image/contribute.jpg" alt="Contribute logo"/></a>
 		</div>
-		<h2><a class="nounderline" href="https://openreearch.anu.edu.au/contribute">Contribute</a></h2>
+		<h2><a class="nounderline" href="https://openresearch.anu.edu.au/contribute">Contribute</a></h2>
 	</div>	
 </anu:content>
 
