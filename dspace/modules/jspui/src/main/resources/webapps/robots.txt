@@ -1,5 +1,5 @@
 Sitemap: ${dspace.baseUrl}/sitemap
-Sitemap: ${dspace.baseUrl}/htmlmap
+# Sitemap: ${dspace.baseUrl}/htmlmap
 
 # Funnelback crawler at 225.168.15.103.squiz.net (103.15.168.225) 
 User-agent: RPT-HTTPClient
@@ -10,3 +10,4 @@ User-agent: *
 Disallow: /*/statistics
 Disallow: /statistics
 Disallow: /exportreference
+Crawl-delay: 5

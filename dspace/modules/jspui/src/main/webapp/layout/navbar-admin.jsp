@@ -54,7 +54,7 @@
 
 <anu:topmenu>
 <anu:topmenulinks>
-	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
+	<li><a class="tabs-home" href="<%= request.getContextPath() %>">Home</a></li>
 	<li><a id="gw-mega-tab-2" data-mega-menu-trigger="2" href="#">My Open Research</a></li>
 	<li><a id="gw-mega-tab-3" data-mega-menu-trigger="3" href="<%= request.getContextPath() %>/dspace-admin">Administration</a></li>
 	<li><a id="gw-mega-tab-4" data-mega-menu-trigger="4" href="#"><fmt:message key="jsp.layout.navbar-admin.contents"/></a></li>
@@ -98,7 +98,7 @@
 		</div>
 		<div class="narrow gw-mega-t2 nopadtop nopadbottom">
 			<ul>
-				<li><a href="<%= openResearchURL %>"><fmt:message	key="jsp.layout.navbar-default.home" /></a></li>
+				<li><a href="<%= request.getContextPath() %>"><fmt:message key="jsp.layout.navbar-default.home" /></a></li>
 				<li><a href="<%= request.getContextPath() %>/tools/edit-communities"><fmt:message key="jsp.layout.navbar-admin.communities-collections"/></a></li>
 			</ul>
 		</div>

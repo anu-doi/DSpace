@@ -59,7 +59,7 @@
 
 <anu:topmenu>
 <anu:topmenulinks>
-	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
+	<li><a class="tabs-home" href="<%= request.getContextPath() %>">Home</a></li>
 	<li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
 	<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 	<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>
@@ -79,7 +79,7 @@
 
 <anu:topmobilemenu>
 
-	<li><a class="tabs-home" href="<%= openResearchURL %>">Home</a></li>
+	<li><a class="tabs-home" href="<%= request.getContextPath() %>">Home</a></li>
 	<li><a href="<%= request.getContextPath() %>/mydspace"><fmt:message key="jsp.layout.navbar-default.users"/></a></li>
 	<li><a href="<%= request.getContextPath() %>/subscribe"><fmt:message key="jsp.layout.navbar-default.receive"/></a></li>
 	<li><a href="<%= request.getContextPath() %>/profile"><fmt:message key="jsp.layout.navbar-default.edit"/></a></li>

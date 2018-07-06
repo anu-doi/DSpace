@@ -201,7 +201,7 @@ if (submissions != null && submissions.count() > 0)
 }
 %>
 	<div class="divline-solid-uni nopad"></div>
-	<h3 class="padtop">Top downloads for path month</h3>
+	<h3 class="padtop">Top downloads for past month</h3>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			var today = new Date();
@@ -218,10 +218,10 @@ if (submissions != null && submissions.count() > 0)
 					, format: "json"
 					, limit: "5"
 					, sDay: lastMonth.getDate()
-					, sMonth: lastMonth.getMonth()+1
+					, sMonth: lastMonth.getMonth()
 					, sYear: lastMonth.getFullYear()
 					, eDay: today.getDate()
-					, eMonth: today.getMonth()+1
+					, eMonth: today.getMonth()
 					, eYear: today.getFullYear()
 				}
 				, success: function(data) {
