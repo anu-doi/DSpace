@@ -370,10 +370,6 @@
 	
 	<script type='text/javascript' src='//d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 	<div data-badge-details="right" data-badge-type="1" data-doi="<%= altmetricData %>" data-hide-no-mentions="true" class="altmetric-embed"></div>
-	<div class="padtop">
-	<span class="__dimensions_badge_embed__" data-doi="<%= altmetricData %>" data-hide-zero-citations="true" data-style="large_rectangle"></span>
-	<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
-	</div>
 	<%
 		if (!SpiderDetector.isSpider(request)) {
 	%>
@@ -389,6 +385,11 @@
 	<p><h4>Scopus Citation</h4></p>
 	${scopusimport}
 	</c:if>
+	<div class="padtop">
+	<h4>Dimensions Citation</h4>
+	<span class="__dimensions_badge_embed__" data-doi="<%= altmetricData %>" data-style="small_circle"></span>
+	<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+	</div>
 	<div id="wos" class="hidden" data-doi="<%= altmetricData %>">
 		<br/>
 		<h4>Web of Science &trade; Core Collection</h4>
