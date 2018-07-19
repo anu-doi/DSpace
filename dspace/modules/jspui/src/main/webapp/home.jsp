@@ -71,39 +71,34 @@
 	<%-- <p>
 	<fmt:message key="jsp.community-list.text1" />
 	</p> --%>
-	<div class="box20 bg-uni25 nomargin nomarginbottom bigsearch">
-	<div class="large padbottom">Search</div>
+	<div class="clear box20 bg-uni25 bdr-top-solid bdr-white bdr-medium nomargin nomarginbottom">
+	<!-- <div class="large padbottom">Search</div> -->
+	<div class="bigsearch nopadtop padbottom">
 	<form id="searchform" method="get" action="<%= request.getContextPath() %>/advanced-search">
-		<input id="query" name="query" class="margintop marginbottom text tfull" type="text" placeholder="Search by keyword..." size="24" />
+		<input id="query" name="query" type="text" placeholder="Search all Open Research by keyword..." size="24" />
 		<input id="main" type="submit" value="GO" class="btn-uni-grad btn-medium" />
 	</form>
-	<p>
-		<a href="<%= request.getContextPath() %>/advanced-search">advanced search &raquo;</a>
-	</p>
+	</div>
+	<div>
+		<a class="nounderline padtop acton-tabs-link-processed" href="<%= request.getContextPath() %>/advanced-search">Advanced search &raquo;</a>
+	</div>
 	<%
 		if (bis.length > 0)
 		{
 	%>
 	<div class="divline-solid-uni padtop"></div>
-	<div class="large padtop padbottom">
+	<div class="nopadleft noprint nopadtop padbottom">
 		Browse by:
-	</div>
-	<div class="full nopadleft noprint nopadtop padbottom tools-uni">
-		<ul class="nopadbottom nopadtop">
 			<%
 				for (int i =0; i < bis.length; i++)
 				{
 				String key = "browse.menu." + bis[i].getName();
 			%>
-				<li>
-					<a class="large acton-tabs-link-processed" href="<%= request.getContextPath() %>/browse?type=<%= bis[i].getName() %>"><fmt:message key="<%= key %>" /></a>
-				</li>
+				<a class="nounderline acton-tabs-link-processed" href="<%= request.getContextPath() %>/browse?type=<%= bis[i].getName() %>">&nbsp;<fmt:message key="<%= key %>" />&nbsp;</a>
 			<%
 				}
 			%>
-		</ul>
 	</div>
-	<p class="padbottom padtop"></p>
 	<%
 		}
 	%>
@@ -203,12 +198,13 @@ if (submissions != null && submissions.count() > 0)
 }
 %>
 	<div class="divline-solid-uni nopad"></div>
-	<h3 class="padtop">Top downloads for past month</h3>
+	<h3 class="padtop">Top downloads this year</h3>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			var today = new Date();
-			var lastMonth = new Date();
-			lastMonth.setDate(lastMonth.getDate() - 30);
+			//var lastMonth = new Date();
+			//lastMonth.setDate(lastMonth.getDate() - 30);
+			var year = today.getFullYear();
 			/*console.log(lastMonth.getDate());
 			console.log(lastMonth.getMonth()+1);
 			console.log(lastMonth.getFullYear());
@@ -219,15 +215,15 @@ if (submissions != null && submissions.count() > 0)
 				url: window.location.origin+window.location.pathname+"statistics"
 				, type: "GET"
 				, data: {
-					section: "statsTopItems"
+					section: "statsTopDownloads"
 					, format: "json"
 					, limit: "5"
-					, sDay: lastMonth.getDate()
-					, sMonth: lastMonth.getMonth()
-					, sYear: lastMonth.getFullYear()
-					, eDay: today.getDate()
-					, eMonth: today.getMonth()
-					, eYear: today.getFullYear()
+					, sDay: 1
+					, sMonth: 1
+					, sYear: year
+					, eDay: 31
+					, eMonth: 12
+					, eYear: year
 				}
 				, success: function(data) {
 					var statsSection = jQuery("#statsTopItems");
@@ -239,11 +235,11 @@ if (submissions != null && submissions.count() > 0)
 						var li = jQuery("<li></li>").attr("class","acton-tabs-link-processed").appendTo(ul);
 						if (values[i].Handle) {
 							var url = data.path + "/handle/" + values[i].Handle;
-							var a = jQuery("<a></a>").attr("href", url).text(values[i].Name);
+							var a = jQuery("<a></a>").attr("href", url).text(values[i]["Item Name"]);
 							a.appendTo(li);
 						}
 						else {
-							li.text(values[i].Name);
+							li.text(values[i]["Item Name"]);
 						}
 					}
 				}

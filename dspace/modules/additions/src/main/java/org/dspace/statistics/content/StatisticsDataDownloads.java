@@ -136,7 +136,7 @@ public class StatisticsDataDownloads extends StatisticsData {
 				}
 			}
 			
-			int nrColumns = 2;
+			int nrColumns = 3;
 			
 			String downloadQuery = "type:0 AND owningItem:*";
 			if (currentDso != null) {
@@ -174,6 +174,7 @@ public class StatisticsDataDownloads extends StatisticsData {
 			dataset = new Dataset(downloadResults.length, nrColumns);
 			dataset.setColLabel(0, "Handle");
 			dataset.setColLabel(1, "Downloads");
+			dataset.setColLabel(2, "Item Name");
 			for (int i = 0; i < downloadResults.length; i++) {
 				ObjectCount count = downloadResults[i];
 				int dsoId = Integer.parseInt(count.getValue());
@@ -191,6 +192,7 @@ public class StatisticsDataDownloads extends StatisticsData {
 						dataset.setRowLabel(i, dso.getName());
 						if (parentObject != null) {
 							dataset.addValueToMatrix(i, 0, parentObject.getHandle());
+							dataset.addValueToMatrix(i, 2, parentObject.getName());
 						}
 					}
 					else {
