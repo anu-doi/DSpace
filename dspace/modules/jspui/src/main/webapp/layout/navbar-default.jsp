@@ -77,12 +77,12 @@
 	<li><a href="<%= openResearchURL %>/policy">Policy</a></li>
 	<li><a href="<%= openResearchURL %>/copyright-considerations">Copyright</a></li>
 	<li><a href="<%= openResearchURL %>/contact">Contact</a></li>
+	<li><a href="<%= request.getContextPath() %>/statistics">Statistics</a></li>
 	<li>
 		<a id="gw-mega-tab-9" data-mega-menu-trigger="9" href="#">
 		My Open Research
 		</a>
 	</li>
-	<li><a href="<%= request.getContextPath() %>/statistics">Statistics</a></li>
 </anu:topmenulinks>
 </anu:topmenu>
 
@@ -139,9 +139,8 @@
 </anu:topmenucontents>
 
 <anu:topmobilemenu>
-	<li><a href="<%= openResearchURL %>">Home</a></li>
+	<li><a href="<%= request.getContextPath() %>/">Home</a></li>
 	<li><a href="<%= openResearchURL %>/about-open-research-anu">About</a></li>
-	<li><a href="<%= request.getContextPath() %>/community-list">Collections</a></li>
 	<li><a href="<%= openResearchURL %>/contribute">Contribute</a></li>
 	<li><a href="<%= openResearchURL %>/publishing">Publishing</a></li>
 	<li><a href="<%= openResearchURL %>/policy">Policy</a></li>
