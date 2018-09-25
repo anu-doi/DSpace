@@ -45,7 +45,9 @@ public class AuthorityValueFinder {
     }
 
     public List<AuthorityValue> findByExactValue(Context context, String field, String value) {
-        String queryString = "value:\"" + value + "\" AND field:" + field;
+//        String queryString = "value:\"" + value + "\" AND field:" + field;
+    	// Limit the return results to the type of person.
+        String queryString = "value:\"" + value + "\" AND field:" + field + " AND authority_type:person";
         return find(context, queryString);
     }
 
