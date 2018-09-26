@@ -862,7 +862,29 @@ public class ItemTag extends TagSupport
 						}
 					}
                 } else {
-                    out.print(Utils.addEntities(values[i].value));
+                	if (values[i].authority != null && values[i].confidence == 600) {
+
+                		out.print(Utils.addEntities(values[i].value));
+	                	SolrQuery query = new SolrQuery("id:\"" + values[i].authority + "\"");
+						try {
+							QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+							SolrDocumentList results = solrAuthoritySearchResp.getResults();
+							for (SolrDocument result : results) {
+								String orcid = (String) result.getFieldValue("orcid_id");
+								if (orcid != null && orcid.length() > 0) {
+									out.print("<a target=\"_blank\" href=\"https://orcid.org/" + orcid + "\"><img class=\"padleft\" src=\"../../../orcid/orcid.png\" /></a>");
+								}
+							}
+						} catch (SolrServerException e) {
+							// TODO Auto-generated catch block
+    						log.error("Exception retreving authority value", e);
+//							e.printStackTrace();
+						}
+						
+                	}
+                	else {
+                		out.print(Utils.addEntities(values[i].value));
+                	}
                 }
 
                 out.println("</td></tr>");
