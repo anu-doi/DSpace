@@ -26,6 +26,18 @@
           <!--scope="singleton">-->
         <!--<property name="configurationService" ref="org.dspace.services.ConfigurationService"/>-->
     <!--</bean>-->
+    
+    <!-- ANDS DOI Connector -->
+    <bean id="org.dspace.identifier.doi.ARDCIdentifierProvider" class="org.dspace.identifier.doi.ARDCIdentifierProvider" scope="singleton">
+    	<property name="configurationService" ref="org.dspace.services.ConfigurationService"/>
+        <property name="ARDCConnector" ref="org.dspace.identifier.doi.ARDCConnector" />
+    </bean>
+    
+    <bean id="org.dspace.identifier.doi.ARDCConnector" class="org.dspace.identifier.doi.ARDCConnector" scope="singleton">
+    	<property name="serviceLocation" value="https://researchdata.ands.org.au/api/doi/"/>
+    	<property name="responseType" value="xml"/>
+    	<property name="crosswalkName" value="DataCite"/>
+    </bean>
 
     <!-- provider to mint and register DOIs with DSpace.
          To mint DOIs you need a registration agency. The DOIIdentifierProvider

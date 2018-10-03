@@ -210,14 +210,12 @@ public class DisplayStatisticsServlet extends DSpaceServlet
 			}
 			JsonArray values = new JsonArray();
 			String[][] matrix = exportBean.getMatrix();
-			log.info("Number of records in the matrix" + matrix.length);
 			for (int i = 0; i < matrix.length; i++) {
 				JsonObject value = new JsonObject();
 				value.addProperty("Name", exportBean.getRowLabels().get(i));
 				for (int j = 0; j < matrix[i].length; j++) {
 					value.addProperty(exportBean.getColLabels().get(j), matrix[i][j]);
 				}
-				log.info("JSON Object:" + value.toString());
 				values.add(value);
 			}
 			response.setContentType("application/json");

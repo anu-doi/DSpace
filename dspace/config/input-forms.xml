@@ -105,6 +105,16 @@
     <form name="ANU_Digital_Theses">
      <page number="1">
        <field>
+       	<dc-schema>local</dc-schema>
+       	<dc-element>mintdoi</dc-element>
+       	<dc-qualifier></dc-qualifier>
+       	<repeatable>false</repeatable>
+       	<label>Mint Doi</label>
+       	<input-type value-pairs-name="mintdoi">dropdown</input-type>
+       	<hint></hint>
+       	<required></required>
+       </field>
+       <field>
                  <dc-schema>dc</dc-schema>
          <dc-element>contributor</dc-element>
          <dc-qualifier>author</dc-qualifier>
@@ -1698,6 +1708,17 @@
                 <stored-value>Other</stored-value>
         </pair>
 </value-pairs>
+ <value-pairs value-pairs-name="mintdoi" dc-term="mintdoi">
+ 	<pair>
+ 		<displayed-value>No</displayed-value>
+ 		<stored-value></stored-value>
+ 	</pair>
+ 	<pair>
+ 		<displayed-value>Yes</displayed-value>
+ 		<stored-value>mint</stored-value>
+ 	</pair>
+ </value-pairs>
  </form-value-pairs>
+ 
 
 </input-forms>
