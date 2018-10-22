@@ -76,7 +76,6 @@ public class ARDCDOIOrganiser {
 				+ "for all identifiers queued for metadata update.");
 		options.addOption("d", "deactivate-all", false, "Perform online deactivation for all idnetifiers queued for deactivation");
 		options.addOption("a", "reactivate-all", false, "Perform online re-activation for all idnetifiers queued for re-activation");
-//		options.addOption("d", "delete-all", false, "Perform online deletion for all identifiers queued for deletion.");
 //		options.addOption("q", "quiet", false, "Turn the command line output off.");
 //		
 		Option registerDoi = OptionBuilder.withArgName("ItemID|handle").withLongOpt("register-doi")
@@ -92,14 +91,6 @@ public class ARDCDOIOrganiser {
 			.create();
 		
 		options.addOption(update);
-		
-//		Option delete = OptionBuilder.withArgName("DOI identifier")
-//			.withLongOpt("delete-doi")
-//			.hasArgs(1)
-//			.withDescription("Delete a specified identifier.")
-//			.create();
-//		
-//		options.addOption(delete);
 		
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = null;

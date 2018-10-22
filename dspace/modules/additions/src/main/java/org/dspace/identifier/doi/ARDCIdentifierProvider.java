@@ -249,7 +249,7 @@ public class ARDCIdentifierProvider extends IdentifierProvider {
 		String doi = doiRow.getStringColumn("doi");
 		log.info("Minted doi {} for item {}", doi, dso.getID());
 		if (doiRow.getIntColumn("resource_id") != dso.getID() || doiRow.getIntColumn("resource_type_id") != dso.getType()) {
-			log.error("Refused to udpate metadata of DOI {} with the metadata of an object ({}/{} the DOI is not "
+			log.error("Refused to update metadata of DOI {} with the metadata of an object ({}/{} the DOI is not "
 					+ "dedicated to.", new String[] {doi, dso.getTypeText(), Integer.toString(dso.getID())});
 			throw new DOIIdentifierException("Cannot update DOI metadata: DOI and DSpaceObject does not match!", 
 					DOIIdentifierException.MISMATCH);
