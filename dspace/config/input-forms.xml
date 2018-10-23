@@ -105,16 +105,6 @@
     <form name="ANU_Digital_Theses">
      <page number="1">
        <field>
-       	<dc-schema>local</dc-schema>
-       	<dc-element>mintdoi</dc-element>
-       	<dc-qualifier></dc-qualifier>
-       	<repeatable>false</repeatable>
-       	<label>Mint Doi</label>
-       	<input-type value-pairs-name="mintdoi">dropdown</input-type>
-       	<hint></hint>
-       	<required></required>
-       </field>
-       <field>
                  <dc-schema>dc</dc-schema>
          <dc-element>contributor</dc-element>
          <dc-qualifier>author</dc-qualifier>
@@ -280,6 +270,16 @@
          <input-type>textarea</input-type>
          <hint> Enter any other description or comments in this box. </hint>
          <required></required>
+       </field>
+       <field>
+       	<dc-schema>local</dc-schema>
+       	<dc-element>mintdoi</dc-element>
+       	<dc-qualifier></dc-qualifier>
+       	<repeatable>false</repeatable>
+       	<label>Mint Doi</label>
+       	<input-type value-pairs-name="mintdoi">dropdown</input-type>
+       	<hint></hint>
+       	<required></required>
        </field>
      </page>
    </form>
@@ -682,6 +682,16 @@
          <input-type>textarea</input-type>
          <hint> Enter any other description or comments in this box. </hint>
          <required></required>
+       </field>
+       <field>
+       	<dc-schema>local</dc-schema>
+       	<dc-element>mintdoi</dc-element>
+       	<dc-qualifier></dc-qualifier>
+       	<repeatable>false</repeatable>
+       	<label>Mint Doi</label>
+       	<input-type value-pairs-name="mintdoi">dropdown</input-type>
+       	<hint></hint>
+       	<required></required>
        </field>
      </page>
    </form>
