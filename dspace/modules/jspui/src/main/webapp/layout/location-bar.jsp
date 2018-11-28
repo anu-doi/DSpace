@@ -64,7 +64,7 @@
 			if (i == 0) 
 			{
 %>
-  <anu:crumb title="Home" href="<%= bannerUrl %>" />
+  <anu:crumb title="Home" href="<%= request.getContextPath() %>" />
 <%
 			}
 			else{
