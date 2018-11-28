@@ -26,7 +26,7 @@ import org.dspace.storage.rdbms.TableRowIterator;
 import org.dspace.utils.DSpace;
 
 public class ARDCDOIOrganiser {
-    private static final Logger LOG = Logger.getLogger(DOIOrganiser.class);
+    private static final Logger LOG = Logger.getLogger(ARDCDOIOrganiser.class);
     
 	ARDCIdentifierProvider provider;
 	private Context context;
@@ -158,7 +158,6 @@ public class ARDCDOIOrganiser {
     	if (null == err) {
     		err = System.err;
     	}
-    	LOG.info("Statuses: " + status);
     	
     	TableRowIterator it = this.getDOIsByStatus(status);
     	

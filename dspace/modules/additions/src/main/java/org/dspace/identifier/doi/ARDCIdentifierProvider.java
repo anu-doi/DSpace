@@ -125,7 +125,7 @@ public class ARDCIdentifierProvider extends IdentifierProvider {
 	@Override
 	public String register(Context context, DSpaceObject item) throws IdentifierException {
 		if (!checkForMintValue(context, item)) {
-			log.info("No mint value so returning");
+			log.debug("The item {} does not have mint in local.mintdoi so no need to add a doi row", item.getID());
 			return null;
 		}
 		
@@ -144,7 +144,7 @@ public class ARDCIdentifierProvider extends IdentifierProvider {
 		doiRow = loadDOI(context, dso);
 		
 		if (DEACTIVATED == doiRow.getIntColumn("status") || TO_BE_DEACTIVATED == doiRow.getIntColumn("status")) {
-			log.info("There is no need to update/register a deactivated record");
+			log.debug("There is no need to update/register doi information for a deactivated record");
 			return;
 		}
 		if (IS_REGISTERED == doiRow.getIntColumn("status")) {
