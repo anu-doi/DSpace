@@ -1,11 +1,11 @@
 package org.dspace.identifier.doi;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.jena.atlas.logging.Log;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.DSpaceObject;
-import org.dspace.content.Metadatum;
 import org.dspace.core.Context;
 import org.dspace.identifier.DOI;
 import org.dspace.identifier.Identifier;
@@ -223,9 +223,9 @@ public class ARDCIdentifierProvider extends IdentifierProvider {
 				dso.addMetadata(DOI_SCHEMA, DOI_ELEMENT, DOI_QUALIFIER, null, doi);
 				dso.update();
 			}
-			catch (DOIIdentifierException e) {
+			/*catch (DOIIdentifierException e) {
 				log.error("Exception minting doi", e);
-			}
+			}*/
 			catch (AuthorizeException e) {
 				log.error("Exception updating item {} with the metadata for doi", dso.getID());
 			}

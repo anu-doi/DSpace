@@ -1,7 +1,16 @@
 package org.dspace.identifier.doi;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.StringWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.mail.MessagingException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -11,12 +20,14 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.jena.atlas.logging.Log;
 import org.apache.log4j.Logger;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
+import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
+import org.dspace.core.Email;
 import org.dspace.handle.HandleManager;
 import org.dspace.identifier.DOI;
 import org.dspace.identifier.IdentifierException;
@@ -129,7 +140,12 @@ public class ARDCDOIOrganiser {
 			if (null == identifier) {
 				helpFormatter.printHelp("\nDOI organiser\n", options);
 			}
-			organiser.mint(identifier);
+			try {
+				organiser.mint(identifier);
+			}
+			catch (IdentifierException e) {
+				LOG.error("Exception minting doi", e);
+			}
 		}
 		if (line.hasOption("u")) {
 			organiser.updateAll();
@@ -219,13 +235,23 @@ public class ARDCDOIOrganiser {
     	TableRowIterator it = getDOIsByStatus(ARDCIdentifierProvider.TO_BE_REGISTERED);
     	
     	try {
+    		Map<DSpaceObject, String> errorObjects = new HashMap<DSpaceObject, String>();
     		if (!it.hasNext()) {
     			System.err.println("There are no objects in the database that could be registered.");
     		}
     		while(it.hasNext()) {
     			TableRow doiRow = it.next(context);
     			DSpaceObject dso = DSpaceObject.find(context, doiRow.getIntColumn("resource_type_id"), doiRow.getIntColumn("resource_id"));
-    			mint(doiRow, dso);
+    			try {
+    				mint(doiRow, dso);
+    			}
+    			catch (IdentifierException e) {
+    				errorObjects.put(dso, e.getMessage());
+    				LOG.error("Exception minting doi", e);
+    			}
+    		}
+    		if (errorObjects.size() > 0) {
+    			generateErrorEmail(errorObjects);
     		}
     	}
     	catch (SQLException e) {
@@ -234,7 +260,56 @@ public class ARDCDOIOrganiser {
     	}
     }
     
-    public void mint(String identifier) {
+    private void generateErrorEmail(Map<DSpaceObject, String> errorObjects) {
+    	String quote = "\"";
+		StringWriter writer = new StringWriter();
+		writer.append("id,handle,dc.date.issued,dc.date.created,error_msg\n");
+		for (Entry<DSpaceObject, String> object : errorObjects.entrySet()) {
+			DSpaceObject dso = object.getKey();
+			String errorMessage = object.getValue();
+			writer.append(Integer.toString(dso.getID()));
+			writer.append(",");
+			writer.append(quote);
+			writer.append("http://hdl.handle.net/");
+			writer.append(dso.getHandle());
+			writer.append(quote);
+			writer.append(",");
+			Metadatum[] dateIssued = dso.getMetadata("dc", "date", "issued", null);
+			if (dateIssued != null && dateIssued.length > 0) {
+				writer.append(quote);
+				writer.append(dateIssued[0].value);
+				writer.append(quote);
+			}
+			writer.append(",");
+			Metadatum[] dateCreated = dso.getMetadata("dc", "date", "created", null);
+			if (dateCreated != null && dateCreated.length > 0) {
+				writer.append(quote);
+				writer.append(dateCreated[0].value);
+				writer.append(quote);
+			}
+			writer.append(",");
+			writer.append(quote);
+			writer.append(errorMessage);
+			writer.append(quote);
+			writer.append("\n");
+		}
+		
+		Email email = new Email();
+		email.setSubject("Records where there are issues creating DOI's");
+		email.setContent("Please find attached the items that had errors when minting a doi");
+		
+		email.addRecipient(ConfigurationManager.getProperty("mail.helpdesk"));
+		InputStream is = new ByteArrayInputStream(writer.toString().getBytes());
+		email.addAttachment(is, "doi_exception_report.csv", "text/csv");
+		try {
+			email.send();
+		}
+		catch (IOException | MessagingException e) {
+			LOG.error("Exception sending doi failure email");
+		}
+    }
+    
+    public void mint(String identifier) throws IdentifierException {
 //    	register-doi
     	
 		try {
@@ -242,10 +317,10 @@ public class ARDCDOIOrganiser {
 			DSpaceObject dso = DSpaceObject.find(context, doiRow.getIntColumn("resource_type_id"), doiRow.getIntColumn("resource_id"));
 			mint(doiRow, dso);
 		}
-		catch (IdentifierException e) {
+		/*catch (IdentifierException e) {
 			LOG.error("It wasn't possible to register an identifier for the object with the identifier " + identifier, e);
 			
-		}
+		}*/
 		catch (IllegalArgumentException e) {
 			LOG.error("Database table DOI contains a DOI that is not valid " + identifier);
 		}
@@ -257,7 +332,7 @@ public class ARDCDOIOrganiser {
 		}
     }
     
-    public void mint(TableRow doiRow, DSpaceObject dso) throws SQLException {
+    public void mint(TableRow doiRow, DSpaceObject dso) throws SQLException, IdentifierException {
     	if (Constants.ITEM != dso.getType()) {
     		throw new IllegalArgumentException("Current DSpace supports DOIs for Items only.");
     	}
@@ -265,10 +340,10 @@ public class ARDCDOIOrganiser {
     	try {
     		provider.registerOnline(context, dso);
     	}
-    	catch (IdentifierException e) {
+    	/*catch (IdentifierException e) {
     		LOG.error("It wasn't possible to register an identifier for the object with an id of " + dso.getID(), e);
     		
-    	}
+    	}*/
     	catch (IllegalArgumentException e) {
     		LOG.error("Database table DOI contains a DOI that is not valid: ID" + dso.getID());
     	}
