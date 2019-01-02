@@ -219,10 +219,10 @@ if (submissions != null && submissions.count() > 0)
 					, format: "json"
 					, limit: "5"
 					, sDay: 1
-					, sMonth: 1
+					, sMonth: 0
 					, sYear: year
 					, eDay: 31
-					, eMonth: 12
+					, eMonth: 11
 					, eYear: year
 				}
 				, success: function(data) {
