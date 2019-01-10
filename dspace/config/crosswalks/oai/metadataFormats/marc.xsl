@@ -68,6 +68,11 @@
 				<subfield code="a"><xsl:value-of select="." /></subfield>
 			</datafield>
 			</xsl:for-each>
+			<xsl:for-each select="doc:metadata/doc:element[@name='local']/doc:element[@name='description']/doc:element[@name='embargo']/doc:element/doc:field[@name='value']">
+			<datafield ind2=" " ind1="1" tag="506">
+				<subfield code="a"><xsl:value-of select="." /></subfield>
+			</datafield>
+			</xsl:for-each>
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='date']/doc:element[@name='issued']/doc:element/doc:field[@name='value']">
 			<datafield ind2=" " ind1=" " tag="260">
 				<subfield code="c"><xsl:value-of select="." /></subfield>
