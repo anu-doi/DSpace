@@ -555,7 +555,7 @@
       <field>
         <dc-schema>dc</dc-schema>
         <dc-element>format</dc-element>
-        <dc-qualifier />
+        <dc-qualifier>extent</dc-qualifier>
         <repeatable>true</repeatable>
         <label>Physical format</label>
         <input-type>onebox</input-type>
