@@ -333,12 +333,23 @@
 
        <field>
                  <dc-schema>dc</dc-schema>
-         <dc-element>rights</dc-element>
+         <dc-element>provenance</dc-element>
          <dc-qualifier></dc-qualifier>
          <repeatable>true</repeatable>
-         <label>Associated Rights (eg link to Sherpa/Romeo entry)</label>
+         <label>Provenance (eg link to Sherpa/Romeo entry)</label>
          <input-type>textarea</input-type>
-         <hint>Enter the associated rights</hint>
+         <hint>Enter the associated open access rights</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier>holder</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Copyright</label>
+         <input-type>onebox</input-type>
+         <hint>Add copyright owner below</hint>
          <required></required>
        </field>
 	   
