@@ -345,7 +345,7 @@
        <field>
          <dc-schema>dc</dc-schema>
          <dc-element>rights</dc-element>
-         <dc-qualifier>holder</dc-qualifier>
+         <dc-qualifier></dc-qualifier>
          <repeatable>false</repeatable>
          <label>Copyright</label>
          <input-type>onebox</input-type>
