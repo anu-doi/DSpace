@@ -276,7 +276,7 @@
        	<dc-element>mintdoi</dc-element>
        	<dc-qualifier></dc-qualifier>
        	<repeatable>false</repeatable>
-       	<label>Mint Doi</label>
+       	<label>Mint DOI</label>
        	<input-type value-pairs-name="mintdoi">dropdown</input-type>
        	<hint></hint>
        	<required></required>
@@ -699,7 +699,7 @@
        	<dc-element>mintdoi</dc-element>
        	<dc-qualifier></dc-qualifier>
        	<repeatable>false</repeatable>
-       	<label>Mint Doi</label>
+       	<label>Mint DOI</label>
        	<input-type value-pairs-name="mintdoi">dropdown</input-type>
        	<hint></hint>
        	<required></required>
