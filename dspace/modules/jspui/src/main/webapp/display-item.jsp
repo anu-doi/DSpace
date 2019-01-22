@@ -151,7 +151,7 @@
 	{
 		publisherVersionUrl = doiValues[0].value;
 		if (publisherVersionUrl.length() > 0 && !publisherVersionUrl.startsWith("http")) {
-			publisherVersionUrl = "http://dx.doi.org/" + publisherVersionUrl;
+			publisherVersionUrl = "https://doi.org/" + publisherVersionUrl;
 		}
 	}
 	else {
