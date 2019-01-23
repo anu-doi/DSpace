@@ -194,7 +194,7 @@
             -->
 
             <!-- Add rights. -->
-            <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='rights']" />
+            <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='rights'][0]" />
 
             <!-- Add descriptions. -->
             <xsl:if test="//dspace:field[@mdschema='dc' and @element='description'][not(@qualifier='provenance')]">
