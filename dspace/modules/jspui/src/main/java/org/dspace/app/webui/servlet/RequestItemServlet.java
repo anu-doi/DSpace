@@ -155,6 +155,12 @@ public class RequestItemServlet extends DSpaceServlet
         {   
         	JSPManager.showInvalidIDError(request, response, handle, -1);
         }
+        try {
+        	Integer.parseInt(bitstream_id);
+        }
+        catch (NumberFormatException e) {
+        	JSPManager.showIntegrityError(request, response);
+        }
         RequestItemRedirection requestRedirection = new RequestItemRedirection();
         String redirection = requestRedirection.getRedirectForItem(item);
         if (redirection != null) {
