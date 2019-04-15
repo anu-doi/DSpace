@@ -8,6 +8,7 @@
 package org.dspace.app.webui.servlet;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -28,8 +29,8 @@ import org.dspace.app.webui.util.UIUtil;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Bitstream;
 import org.dspace.content.Bundle;
-import org.dspace.content.Metadatum;
 import org.dspace.content.Item;
+import org.dspace.content.Metadatum;
 import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Context;
 import org.dspace.core.Email;
@@ -37,6 +38,8 @@ import org.dspace.core.I18nUtil;
 import org.dspace.core.LogManager;
 import org.dspace.eperson.EPerson;
 import org.dspace.handle.HandleManager;
+import org.dspace.recaptcha.RecaptchaQuery;
+import org.dspace.recaptcha.RecaptchaResponse;
 import org.dspace.storage.bitstore.BitstreamStorageManager;
 import org.dspace.storage.rdbms.DatabaseManager;
 import org.dspace.storage.rdbms.TableRow;
@@ -211,6 +214,41 @@ public class RequestItemServlet extends DSpaceServlet
         
         if (request.getParameter("submit") != null)
         {
+        	boolean recaptchaEnabled = ConfigurationManager.getBooleanProperty("recaptcha.enabled");
+        	
+        	if (recaptchaEnabled) {
+	    		String gtoken = request.getParameter("g-recaptcha-response");
+	            String remoteip = request.getRemoteAddr();
+	            Boolean useProxies = null;
+	            if (useProxies == null) {
+	                useProxies = ConfigurationManager.getBooleanProperty("useProxies", false);
+	            }
+	            if(useProxies && request.getHeader("X-Forwarded-For") != null)
+	            {
+	                /* This header is a comma delimited list */
+		            for(String xfip : request.getHeader("X-Forwarded-For").split(","))
+	                {
+	                    if(!request.getHeader("X-Forwarded-For").contains(remoteip))
+	                    {
+	                    	remoteip = xfip.trim();
+	                    }
+	                }
+		        }
+	    		
+	    		RecaptchaQuery query = new RecaptchaQuery();
+	    		try {
+	    			RecaptchaResponse captchaResponse = query.query(gtoken, remoteip);
+	    			log.info("Request item captcha response: " + captchaResponse.getSuccess() + ", " + captchaResponse.getChallenge_ts() + ", " + captchaResponse.getHostname() + ", " + captchaResponse.getErrorCodes());
+	    			if ("false".equals(captchaResponse.getSuccess())) {
+	    				log.error("Recaptcha returned a negative response");
+	    				throw new AuthorizeException("You have not been authorised to request an items files");
+	    			}
+	    		}
+	    		catch (IOException | URISyntaxException e) {
+	    			log.error("Exception processing re-captcha response");
+	    			throw new AuthorizeException("Error process processing captcha response and you are not authorised to request an items files");
+	    		}
+        	}
             String reqname = request.getParameter("reqname");
             String coment = request.getParameter("coment");
             if (coment == null || coment.equals(""))

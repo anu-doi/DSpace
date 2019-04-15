@@ -24,6 +24,7 @@
 
 <%@ page import="org.dspace.app.webui.servlet.RequestItemServlet"%>
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
+<%@ page import="org.dspace.core.ConfigurationManager" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -52,6 +53,10 @@
     
     String bitstream_id = (String) request.getAttribute("bitstream-id");
     boolean allfiles = (request.getAttribute("allfiles") != null);
+    
+    boolean recaptchaEnabled = ConfigurationManager.getBooleanProperty("recaptcha.enabled");
+    String recpatchaSiteKey = ConfigurationManager.getProperty("recaptcha.sitekey");
+    
 
 %>
 
@@ -102,7 +107,11 @@
 	         <textarea class="form-control" name="coment" rows="6" cols="46" wrap=soft><%= coment %></textarea>
     	 </div>
         </div>
+        <% if(recaptchaEnabled) { %>
+		   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		  <div class="g-recaptcha" data-sitekey="<%= recpatchaSiteKey %>"></div>
         
+         <% } %>
          <input type="hidden" name="handle" value='<%= handle %>' />
          <input type="hidden" name="bitstream-id" value='<%= bitstream_id %>' />
          <input type="hidden" name="step" value="<%=RequestItemServlet.ENTER_FORM_PAGE %>" />
