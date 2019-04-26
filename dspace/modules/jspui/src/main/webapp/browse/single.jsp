@@ -294,7 +294,7 @@
 			String orcid = (String) authResult.getFieldValue("orcid_id");
 			if (orcid != null && orcid.length() > 0) {
 				%>
-				<a target="_blank" href="https://orcid.org/<%= URLEncoder.encode(orcid) %>"><img class=\"padright\" src=\"../../../orcid/orcid.png\" /></a>
+				<a target="_blank" href="https://orcid.org/<%= URLEncoder.encode(orcid) %>"><img class="padright" src="../../../orcid/orcid.png" /></a>
 				<%
 			}
 		}
