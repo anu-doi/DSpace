@@ -27,6 +27,12 @@
 <%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.app.webui.util.UIUtil" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
+<%@ page import="org.apache.solr.client.solrj.SolrQuery" %>
+<%@ page import="org.apache.solr.common.SolrDocument" %>
+<%@ page import="org.apache.solr.common.SolrDocumentList" %>
+<%@ page import="org.apache.solr.client.solrj.response.QueryResponse" %>
+<%@ page import="org.dspace.content.authority.SolrAuthority" %>
+<%@ page import="org.apache.solr.client.solrj.SolrServerException" %>
 
 <%
     request.setAttribute("LanguageSwitch", "hide");
@@ -279,6 +285,25 @@
 %>
                 <li class="list-group-item">
                     <a href="<%= sharedLink %><% if (results[i][1] != null) { %>&amp;authority=<%= URLEncoder.encode(results[i][1], "UTF-8") %>" class="authority <%= bix.getName() %>"><%= Utils.addEntities(results[i][0]) %></a> <% } else { %>&amp;value=<%= URLEncoder.encode(results[i][0], "UTF-8") %>"><%= Utils.addEntities(results[i][0]) %></a> <% } %>
+					<% if (results[i][1] != null) { 
+	SolrQuery query = new SolrQuery("id:\"" + results[i][1] + "\"");
+	try {
+		QueryResponse solrAuthoritySearchResp = SolrAuthority.getSearchService().search(query);
+		SolrDocumentList authorityResults = solrAuthoritySearchResp.getResults();
+		for (SolrDocument authResult : authorityResults) {
+			String orcid = (String) authResult.getFieldValue("orcid_id");
+			if (orcid != null && orcid.length() > 0) {
+				%>
+				<a target="_blank" href="https://orcid.org/<%= URLEncoder.encode(orcid) %>"><img class=\"padright\" src=\"../../../orcid/orcid.png\" /></a>
+				<%
+			}
+		}
+	}
+	catch (SolrServerException e) {
+		// Do nothing
+	}
+}
+%>
 					<%= StringUtils.isNotBlank(results[i][2])?" <span class=\"badge\">"+results[i][2]+"</span>":""%>
                 </li>
 <%
