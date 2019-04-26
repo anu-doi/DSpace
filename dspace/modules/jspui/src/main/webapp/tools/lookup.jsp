@@ -64,7 +64,7 @@
             <%-- Results @1@ to @2@ of @3@ for "@4@" --%>
     <legend><fmt:message key="jsp.tools.lookup.results"/></legend>
     <ol>
-      <li id="aspect_general_ChoiceLookupTransformer_item_select" class="ds-form-item choices-lookup"> 
+      <li id="aspect_general_ChoiceLookupTransformer_item_select" class="ds-form-item choices-lookup">
         <div class="ds-form-content">
           <div>
             <select onChange="javascript:DSpaceChoicesSelectOnChange();" id="aspect_general_ChoiceLookupTransformer_field_chooser" class="ds-select-field choices-lookup" name="chooser"
@@ -94,7 +94,7 @@
           <input name="contextPath" type="hidden" value="<%= request.getContextPath() %>" />
         </div>
       </li>
-      <li id="aspect_general_ChoiceLookupTransformer_item_textFields" class="ds-form-item choices-lookup"> 
+      <li id="aspect_general_ChoiceLookupTransformer_item_textFields" class="ds-form-item choices-lookup">
         <div class="ds-form-content">
 
           <% if (isName) { %>
@@ -102,14 +102,14 @@
             <% String help1 = LocaleSupport.getLocalizedMessage(pageContext, "jsp.tools.lookup.field."+mdfield+".help.last"); %>
             <% String help2 = LocaleSupport.getLocalizedMessage(pageContext, "jsp.tools.lookup.field."+mdfield+".help.first"); %>
             <div>
-            <label class="ds-composite-component"><%= help1 %></label>
+            <label class="ds-composite-component" style="width: 50%;"><%= help1 %></label>
             <input class="ds-text-field choices-lookup" name="text1" type="text" value=""
-                title="<%= help1 %>" size="35" />
+                title="<%= help1 %>" style="width: 50%;" />
             </div>
             <div>
-            <label class="ds-composite-component last"><%= help2 %></label>
+            <label class="ds-composite-component last" style="width: 50%;"><%= help2 %></label>
               <input class="ds-text-field choices-lookup" name="text2" type="text" value=""
-                  title="<%= help2 %>" size="35" />
+                  title="<%= help2 %>" style="width: 50%;" />
             </div>
             <div>
             	<label class="ds-composite-component">ORCID:</label>
@@ -128,7 +128,6 @@
               <br/><%= help %>
             </label>
           <% } %>
-          <div class="spacer"> </div>
         </div>
       </li>
       <li class="ds-form-item last choices-lookup"> 
