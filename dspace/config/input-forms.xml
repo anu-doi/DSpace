@@ -364,6 +364,28 @@
          <hint>Indicate if the item is Open Access</hint>
          <required></required>
        </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier>license</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>License</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the license for use (i.e. Creative Commons License (Attribution 4.0 International))</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier>uri</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Rights or License URL</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the URL for information about the license (i.e. https://creativecommons.org/licenses/by-nc-nd/4.0/)</hint>
+         <required></required>
+       </field>
 
         <field>
                  <dc-schema>dc</dc-schema>
