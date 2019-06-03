@@ -104,6 +104,12 @@
 				<subfield code="z">View online</subfield>
 			</datafield>
 			</xsl:for-each>
+			<xsl:for-each select="doc:metadata/doc:element[@name='local']/doc:element[@name='identifier']/doc:element[@name='doi']/doc:element/doc:field[@name='value']">
+			<datafield ind2="4" ind1="0" tag="856">
+				<subfield code="u">https://doi.org/<xsl:value-of select="." /></subfield>
+				<subfield code="z">Digital Object Identifier</subfield>
+			</datafield>
+			</xsl:for-each>
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='identifier']/doc:element[@name='other']/doc:element/doc:field[@name='value']">
 				<xsl:if test="starts-with(.,'b') and string-length(.) = 8 and string-length(translate(.,'1234567890','')) = 1">
 				<datafield ind1=" " ind2=" " tag="907">
