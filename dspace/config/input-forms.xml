@@ -1505,10 +1505,20 @@
         </pair>
 
         <pair>
+        <displayed-value>Conference presentation</displayed-value>
+        <stored-value>Conference presentation</stored-value>
+        </pair>
+
+        <pair>
         <displayed-value>Creative work</displayed-value>
         <stored-value>Creative work</stored-value>
         </pair>
 
+        <pair>
+        <displayed-value>Dataset</displayed-value>
+        <stored-value>Dataset</stored-value>
+        </pair>
+        
         <pair>
         <displayed-value>Exhibition or event</displayed-value>
         <stored-value>Exhibition or event</stored-value>
@@ -1517,6 +1527,11 @@
         <pair>
         <displayed-value>Invention</displayed-value>
         <stored-value>Invention</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Journal issue</displayed-value>
+        <stored-value>Journal issue</stored-value>
         </pair>
         
         <pair>
@@ -1533,6 +1548,17 @@
         <displayed-value>Live performance</displayed-value>
         <stored-value>Live performance</stored-value>
         </pair>
+        
+        <pair>
+        <displayed-value>Magazine issue</displayed-value>
+        <stored-value>Magazine issue</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Manuscript</displayed-value>
+        <stored-value>Manuscript</stored-value>
+        </pair>
+        
         <pair>
         <displayed-value>Moving image</displayed-value>
         <stored-value>Moving image</stored-value>
@@ -1554,6 +1580,16 @@
         </pair>
         
         <pair>
+        <displayed-value>Patent</displayed-value>
+        <stored-value>Patent</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Podcast</displayed-value>
+        <stored-value>Podcast</stored-value>
+        </pair>
+        
+        <pair>
         <displayed-value>Poster</displayed-value>
         <stored-value>Poster</stored-value>
         </pair>
@@ -1564,8 +1600,23 @@
         </pair>
 
         <pair>
-        <displayed-value>Report</displayed-value>
-        <stored-value>Report</stored-value>
+        <displayed-value>Public lecture</displayed-value>
+        <stored-value>Public lecture</stored-value>
+        </pair>
+        
+        <pair>
+        <displayed-value>Report (Commissioned)</displayed-value>
+        <stored-value>Report (Commissioned)</stored-value>
+        </pair>
+
+        <pair>
+        <displayed-value>Report (Research)</displayed-value>
+        <stored-value>Report (Research)</stored-value>
+        </pair>
+
+        <pair>
+        <displayed-value>Report (Student work)</displayed-value>
+        <stored-value>Report (Student work)</stored-value>
         </pair>
 
         <pair>
