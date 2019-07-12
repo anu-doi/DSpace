@@ -111,7 +111,7 @@
 			</datafield>
 			</xsl:for-each>
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='identifier']/doc:element[@name='other']/doc:element/doc:field[@name='value']">
-				<xsl:if test="starts-with(.,'b') and string-length(.) = 8 and string-length(translate(.,'1234567890','')) = 1">
+				<xsl:if test="starts-with(.,'b') and (string-length(.) = 8 or string-length(.) = 9) and string-length(translate(.,'1234567890','')) = 1">
 				<datafield ind1=" " ind2=" " tag="907">
 					<subfield code="a">.<xsl:value-of select="." /></subfield>
 				</datafield>
