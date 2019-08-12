@@ -683,15 +683,27 @@ public class Community extends DSpaceObject
                 TableRow row = tri.next(ourContext);
 
                 // First check the cache
-                Collection aCollection = (Collection) ourContext.fromCache(
+                Collection fromCache = (Collection) ourContext.fromCache(
                         Collection.class, row.getIntColumn("collection_id"));
-                
-                if (aCollection == null) {
-                	aCollection = new Collection(ourContext, row);
+
+                if (fromCache != null)
+                {
+                    collections.add(fromCache);
                 }
-                if (AuthorizeManager.authorizeActionBoolean(ourContext, aCollection, Constants.READ)) {
-                	collections.add(aCollection);
+                else
+                {
+                    collections.add(new Collection(ourContext, row));
                 }
+////              Removed due to performance issues. 
+//                Collection aCollection = (Collection) ourContext.fromCache(
+//                        Collection.class, row.getIntColumn("collection_id"));
+//                
+//                if (aCollection == null) {
+//                	aCollection = new Collection(ourContext, row);
+//                }
+//                if (AuthorizeManager.authorizeActionBoolean(ourContext, aCollection, Constants.READ)) {
+//                	collections.add(aCollection);
+//                }
             }
         }
         finally
