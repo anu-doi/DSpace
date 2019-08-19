@@ -222,6 +222,7 @@ public class ARDCIdentifierProvider extends IdentifierProvider {
 				DatabaseManager.update(context, doiRow);
 				dso.addMetadata(DOI_SCHEMA, DOI_ELEMENT, DOI_QUALIFIER, null, doi);
 				dso.update();
+				context.commit();
 			}
 			/*catch (DOIIdentifierException e) {
 				log.error("Exception minting doi", e);

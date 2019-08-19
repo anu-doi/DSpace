@@ -42,6 +42,7 @@ public class ARDCDOIOrganiser {
 	ARDCIdentifierProvider provider;
 	private Context context;
 	private boolean quiet;
+	private int count;
 	
 	public ARDCDOIOrganiser(Context context, ARDCIdentifierProvider provider) {
 		this.context = context;
@@ -87,6 +88,7 @@ public class ARDCDOIOrganiser {
 				+ "for all identifiers queued for metadata update.");
 		options.addOption("d", "deactivate-all", false, "Perform online deactivation for all idnetifiers queued for deactivation");
 		options.addOption("a", "reactivate-all", false, "Perform online re-activation for all idnetifiers queued for re-activation");
+		options.addOption("c", "count", true, "Maximum number of items to process");
 //		options.addOption("q", "quiet", false, "Turn the command line output off.");
 //		
 		Option registerDoi = OptionBuilder.withArgName("ItemID|handle").withLongOpt("register-doi")
@@ -117,11 +119,21 @@ public class ARDCDOIOrganiser {
 		
 		if (line.hasOption("h") || 0 == line.getOptions().length) {
 			helpFormatter.printHelp("\nARDC DOI organiser\n", options);
+			return;
 		}
 		
 		if (line.hasOption("q")) {
 			organiser.setQuiet();
 		}
+		if (line.hasOption("c")) {
+			String countStr = line.getOptionValue("c");
+			organiser.setCount(Integer.parseInt(countStr));
+		}
+		else {
+			helpFormatter.printHelp("\nMissing count option\nARDC DOI organiser\n", options);
+			return;
+		}
+		
 		
 		if (line.hasOption("l")) {
 			organiser.list("registration", null, null, ARDCIdentifierProvider.TO_BE_REGISTERED);
@@ -174,8 +186,8 @@ public class ARDCDOIOrganiser {
     	if (null == err) {
     		err = System.err;
     	}
-    	
-    	TableRowIterator it = this.getDOIsByStatus(status);
+
+    	TableRowIterator it = this.getDOIsByStatus(count, status);
     	
     	try {
     		if (it.hasNext()) {
@@ -207,7 +219,7 @@ public class ARDCDOIOrganiser {
     	}
     }
     
-    public TableRowIterator getDOIsByStatus(Integer ... status) {
+    public TableRowIterator getDOIsByStatus(Integer maxRecords, Integer ... status) {
     	try {
     		String sql = "SELECT * FROM Doi";
     		for (int i = 0; i < status.length; i++) {
@@ -218,6 +230,9 @@ public class ARDCDOIOrganiser {
     				sql += " OR ";
     			}
     			sql += " status = ?";
+    		}
+    		if (maxRecords != null) {
+    			sql += " limit " + maxRecords;
     		}
     		if (status.length < 1) {
     			return DatabaseManager.queryTable(context, "Doi", sql);
@@ -232,7 +247,7 @@ public class ARDCDOIOrganiser {
     }
     
     public void mintAll() {
-    	TableRowIterator it = getDOIsByStatus(ARDCIdentifierProvider.TO_BE_REGISTERED);
+    	TableRowIterator it = getDOIsByStatus(count, ARDCIdentifierProvider.TO_BE_REGISTERED);
     	
     	try {
     		Map<DSpaceObject, String> errorObjects = new HashMap<DSpaceObject, String>();
@@ -357,7 +372,7 @@ public class ARDCDOIOrganiser {
     
 
     public void updateAll() {
-    	TableRowIterator it = getDOIsByStatus(ARDCIdentifierProvider.UPDATE_REGISTERED);
+    	TableRowIterator it = getDOIsByStatus(count, ARDCIdentifierProvider.UPDATE_REGISTERED);
     	
     	try {
     		if (!it.hasNext()) {
@@ -465,7 +480,7 @@ public class ARDCDOIOrganiser {
     }
     
     public void reactivateAll() {
-    	TableRowIterator it = getDOIsByStatus(ARDCIdentifierProvider.TO_BE_ACTIVATED);
+    	TableRowIterator it = getDOIsByStatus(count, ARDCIdentifierProvider.TO_BE_ACTIVATED);
     	
     	try {
     		if (!it.hasNext()) {
@@ -554,5 +569,9 @@ public class ARDCDOIOrganiser {
     
 	private void setQuiet() {
 		this.quiet = true;
+	}
+	
+	private void setCount(Integer count) {
+		this.count = count;
 	}
 }
