@@ -922,3 +922,9 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 .btn-inline {
 	display: inline;
 }
+.open-access {
+	text-align: center;
+}
+.open-access img {
+	max-height: 35px;
+}

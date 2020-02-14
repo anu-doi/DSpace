@@ -182,6 +182,12 @@
     
     VersionHistory history = (VersionHistory)request.getAttribute("versioning.history");
     List<Version> historyVersions = (List<Version>)request.getAttribute("versioning.historyversions");
+
+    boolean openAccess = false;
+    Metadatum[] accessRights = item.getMetadata("dcterms", "accessRights", Item.ANY, Item.ANY);
+	if (accessRights.length > 0 && accessRights[0].value.toLowerCase().equals("open access")){
+		openAccess = true;
+	}
 %>
 
 <%@page import="org.dspace.app.webui.servlet.MyDSpaceServlet"%>
@@ -310,6 +316,11 @@
 <div class="w-narrow right margintop marginleft marginbottom nopadbottom">
 <% if (statement != null || selectedBitstream != null || (publisherVersionUrl != null && publisherVersionUrl.length() > 0)) { %>
 <anu:box style="bdr2">
+	<% if(openAccess) { %>
+		<div class="open-access">
+		<img src="<%= request.getContextPath() %>/image/open_access.svg" alt="Open Access" title="Open Access" />
+		</div>
+	<% } %>
 	<% 	
 	if (statement != null) 
 	{
