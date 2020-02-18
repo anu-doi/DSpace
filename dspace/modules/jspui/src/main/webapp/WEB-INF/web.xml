@@ -670,6 +670,7 @@
   <servlet-mapping>
     <servlet-name>metadataexport</servlet-name>
     <url-pattern>/dspace-admin/metadataexport</url-pattern>
+    <url-pattern>/metadataexport</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
