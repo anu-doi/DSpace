@@ -334,6 +334,17 @@
 
        <field>
                  <dc-schema>dc</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>editor</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Editors</label>
+         <input-type>name</input-type>
+         <hint>Enter the names of the editors of this item below. Then, to look up the author name from a controlled list of authors, with or without an ORCID, click the magnifying glass.</hint>
+         <required></required>
+       </field>
+
+       <field>
+                 <dc-schema>dc</dc-schema>
          <dc-element>provenance</dc-element>
          <dc-qualifier></dc-qualifier>
          <repeatable>true</repeatable>
@@ -462,6 +473,17 @@
          <input-type>onebox</input-type>
          <hint></hint>
          <required></required>
+       </field>
+       
+       <field>
+       	<dc-schema>dc</dc-schema>
+       	<dc-element>relation</dc-element>
+       	<dc-qualifier>ispartofseries </dc-qualifier>
+       	<repeatable>false</repeatable>
+       	<label>Series</label>
+       	<input-type>onebox</input-type>
+       	<hint></hint>
+       	<required></required>
        </field>
 
        <field>
