@@ -1497,6 +1497,11 @@
         </pair>
 
         <pair>
+        <displayed-value>Blog post</displayed-value>
+        <stored-value>Blog post</stored-value>
+        </pair>
+
+        <pair>
         <displayed-value>Book chapter</displayed-value>
         <stored-value>Book chapter</stored-value>
         </pair>
