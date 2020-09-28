@@ -82,6 +82,8 @@
    <name-map collection-handle="1885/116952" form-name="ANU_Research" />
    <name-map collection-handle="1885/138166" form-name="ANU_Research" />
    <name-map collection-handle="1885/155719" form-name="ANU_Research" />
+   <name-map collection-handle="1885/209951" form-name="covid" />
+   <name-map collection-handle="1885/209952" form-name="covid" />
    
  </form-map>
 
@@ -995,6 +997,152 @@
      </page>
    </form>
    
+   <form name="covid">
+     <page number="1">
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>author</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Authors</label>
+         <input-type>name</input-type>
+         <hint>Enter the names of the authors of this item below.</hint>
+         <required>You must enter an author for this item.</required>
+       </field>
+       
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>authoremail</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Author's email</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the email address of the authors of this item below.</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>local</dc-schema>
+         <dc-element>contributor</dc-element>
+         <dc-qualifier>authoruid</dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Author's Uni ID</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the author's Uni ID</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Copyright</label>
+         <input-type>onebox</input-type>
+         <hint>Add copyright owner below</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dcterms</dc-schema>
+         <dc-element>accessRights</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Access Rights</label>
+         <input-type>onebox</input-type>
+         <hint>Indicate if the item is Open Access</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier>license</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>License</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the license for use (i.e. Creative Commons License (Attribution 4.0 International))</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>rights</dc-element>
+         <dc-qualifier>uri</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Rights or License URL</label>
+         <input-type>onebox</input-type>
+         <hint>Enter the URL for information about the license (i.e. https://creativecommons.org/licenses/by-nc-nd/4.0/)</hint>
+         <required></required>
+       </field>
+       
+       <field>
+        <dc-schema>local</dc-schema>
+        <dc-element>identifier</dc-element>
+        <dc-qualifier>uidSubmittedBy</dc-qualifier>
+        <repeatable>false</repeatable>
+        <label>Submitter's Uni ID</label>
+        <input-type>onebox</input-type>
+        <hint>Submitter's employee number: u123456789</hint>
+        <required>We need to know who submitted here.</required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>title</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Title</label>
+         <input-type>onebox</input-type>
+         <hint>Enter a main title for this item.</hint>
+         <required> You must enter a main title for this item.</required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>date</dc-element>
+         <dc-qualifier>created</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Date Created</label>
+         <input-type>onebox</input-type>
+         <hint>Use format dd mmm yyyy (e.g. 22 Sep 2011)</hint>
+         <required></required>
+       </field>
+       
+       <field>
+        <dc-schema>dc</dc-schema>
+        <dc-element>type</dc-element>
+        <dc-qualifier />
+        <repeatable>false</repeatable>
+        <label>Resource Type</label>
+        <input-type value-pairs-name="collection_types">dropdown</input-type>
+        <hint />
+        <required />
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>description</dc-element>
+         <dc-qualifier>abstract</dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Description</label>
+         <input-type>textarea</input-type>
+         <hint>Maximum 255 characters</hint>
+         <required></required>
+       </field>
+       
+       <field>
+         <dc-schema>dc</dc-schema>
+         <dc-element>subject</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>true</repeatable>
+         <label>Subject Keywords</label>
+         <input-type>onebox</input-type>
+         <hint> Enter appropriate subject keywords or phrases below. </hint>
+         <required></required>
+       </field>
+     </page>
+   </form>
    
     <form name="traditional">
      <page number="1">
