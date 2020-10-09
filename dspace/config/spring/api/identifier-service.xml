@@ -28,13 +28,26 @@
     <!--</bean>-->
     
     <!-- ANDS DOI Connector -->
-    <bean id="org.dspace.identifier.doi.ARDCIdentifierProvider" class="org.dspace.identifier.doi.ARDCIdentifierProvider" scope="singleton">
+   <!--  <bean id="org.dspace.identifier.doi.ARDCIdentifierProvider" class="org.dspace.identifier.doi.ARDCIdentifierProvider" scope="singleton">
     	<property name="configurationService" ref="org.dspace.services.ConfigurationService"/>
         <property name="ARDCConnector" ref="org.dspace.identifier.doi.ARDCConnector" />
     </bean>
     
     <bean id="org.dspace.identifier.doi.ARDCConnector" class="org.dspace.identifier.doi.ARDCConnector" scope="singleton">
     	<property name="serviceLocation" value="https://researchdata.ands.org.au/api/doi/"/>
+    	<property name="responseType" value="xml"/>
+    	<property name="crosswalkName" value="DataCite"/>
+    </bean> -->
+    
+    
+    <!-- ANDS DOI Connector -->
+    <bean id="org.dspace.identifier.doi.ANUIdentifierProvider" class="org.dspace.identifier.doi.ANUIdentifierProvider" scope="singleton">
+    	<property name="configurationService" ref="org.dspace.services.ConfigurationService"/>
+        <property name="ANUConnector" ref="org.dspace.identifier.doi.ANUConnector" />
+    </bean>
+    
+    <bean id="org.dspace.identifier.doi.ANUConnector" class="org.dspace.identifier.doi.ANUConnector" scope="singleton">
+    	<property name="serviceLocation" value="https://mds.test.datacite.org/"/>
     	<property name="responseType" value="xml"/>
     	<property name="crosswalkName" value="DataCite"/>
     </bean>
@@ -46,16 +59,16 @@
          agency. Please configure a DOIConnector as well! -->
 
     <!-- In order to mint DOIs with DSpace, get an agreement with a DOI registration
-         agency,  take a look into dspace.cfg, and uncomment this.
-    <bean id="org.dspace.identifier.DOIIdentifierProvider"
+         agency,  take a look into dspace.cfg, and uncomment this.-->
+    <!-- <bean id="org.dspace.identifier.DOIIdentifierProvider"
         class="org.dspace.identifier.DOIIdentifierProvider"
         scope="singleton">
         <property name="configurationService"
             ref="org.dspace.services.ConfigurationService" />
         <property name="DOIConnector"
             ref="org.dspace.identifier.doi.DOIConnector" />
-    </bean>
-    -->
+    </bean> -->
+    
     
     <!-- The DOIConnector will handle the API calls to your DOI registration
          agency for the DOIIdentifierProvider. If your registration agency
@@ -65,8 +78,8 @@
          e.g. EZID is part of DataCite but provides their own APIs. The following
          DataCiteConnector won't work if EZID is your registration agency.
     -->
-    <!-- Uncomment this to use the DataCite API directly as DOIConnector.
-    <bean id="org.dspace.identifier.doi.DOIConnector"
+    <!-- Uncomment this to use the DataCite API directly as DOIConnector.-->
+    <!-- <bean id="org.dspace.identifier.doi.DOIConnector"
         class="org.dspace.identifier.doi.DataCiteConnector"
         scope="singleton">
         <property name='DATACITE_SCHEME' value='https'/>
@@ -74,8 +87,8 @@
         <property name='DATACITE_DOI_PATH' value='/doi/' />
         <property name='DATACITE_METADATA_PATH' value='/metadata/' />
         <property name='disseminationCrosswalkName' value="DataCite" />
-    </bean>
-    -->
+    </bean> -->
+    
 
     <!-- Provider to mint and register DOIs using EZID as the registrar.
     -->

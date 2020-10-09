@@ -65,8 +65,7 @@
                 company as well. We have to ensure to use URIs of our prefix
                 as primary identifiers only.
             -->
-            <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='identifier' and starts-with(., concat('http://dx.doi.org/', $prefix))]" />
-
+            <xsl:apply-templates select="//dspace:field[@mdschema='local' and @element='identifier' and @qualifier='doi']" />
             <!--
                 DataCite (2)
                 Add creator information. 
@@ -319,9 +318,14 @@
         company as well. We have to ensure to use URIs of our prefix
         as primary identifiers only.
     -->
-    <xsl:template match="dspace:field[@mdschema='dc' and @element='identifier' and @qualifier and starts-with(., concat('http://dx.doi.org/', $prefix))]">
+    <!-- <xsl:template match="dspace:field[@mdschema='dc' and @element='identifier' and @qualifier and starts-with(., concat('http://dx.doi.org/', $prefix))]">
         <identifier identifierType="DOI">
             <xsl:value-of select="substring(., 19)"/>
+        </identifier>
+    </xsl:template> -->
+    <xsl:template match="dspace:field[@mdschema='local' and @element='identifier' and @qualifier='doi']">
+        <identifier identifierType="DOI">
+            <xsl:value-of select="."/>
         </identifier>
     </xsl:template>
 
