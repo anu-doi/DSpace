@@ -82,6 +82,7 @@
    <name-map collection-handle="1885/116952" form-name="ANU_Research" />
    <name-map collection-handle="1885/138166" form-name="ANU_Research" />
    <name-map collection-handle="1885/155719" form-name="ANU_Research" />
+   <name-map collection-handle="1885/226340" form-name="ANU_Research" />
    <name-map collection-handle="1885/209951" form-name="covid" />
    <name-map collection-handle="1885/209952" form-name="covid" />
    
@@ -1588,6 +1589,10 @@
      <pair>
        <displayed-value>Turkish</displayed-value>
        <stored-value>tr</stored-value>
+     </pair>
+     <pair>
+       <displayed-value>Vietnamese</displayed-value>
+       <stored-value>vi</stored-value>
      </pair>
      <pair>
        <displayed-value>(Other)</displayed-value>
