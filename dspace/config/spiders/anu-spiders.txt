@@ -25,6 +25,12 @@
 # google-search2.anu.edu.au
 130.56.70.133
 
+# anusearch1-p2.anu.edu.au
+130.56.70.136
+
+# anusearch1-d1.anu.edu.au
+130.56.70.137
+
 # Baidu
 180.76.5
 123.125.71
