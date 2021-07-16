@@ -113,9 +113,11 @@ respOfficerContact="mailto:director.iti@anu.edu.au" ssl="true">
 	{
 %>
 	<anu:utilitymenu>
+	<li>
 	<fmt:message key="jsp.layout.navbar-default.loggedin">
 		  <fmt:param><%= navbarEmail %></fmt:param>
 	</fmt:message>
+	</li>
 	</anu:utilitymenu>
 <%
 	}

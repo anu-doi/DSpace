@@ -36,7 +36,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 public class ANUConnector {
 
-    private static final Logger log = LoggerFactory.getLogger(ARDCConnector.class);
+    private static final Logger log = LoggerFactory.getLogger(ANUConnector.class);
     
     private static final String USER= "identifier.doi.user";
     private static final String PASSWORD = "identifier.doi.password";

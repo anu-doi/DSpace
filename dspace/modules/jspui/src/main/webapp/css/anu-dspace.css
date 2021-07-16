@@ -57,16 +57,16 @@ div.metadataFieldLabel {
 	margin-top: 10px;
 }
 .panel-heading {
-	background-color: #F7F9F9;
+	background-color: #f5edde;
 	border: 1px solid;
-	border-color: #ACC0C6;
+	border-color: #000;
 	padding: 5px;
-	color: #4C6E78;
+	color: #000;
 	font-weight: bold;
 }
 .panel-heading p {
 	font-weight: normal;
-	color: #111111;
+	color: #000;
 }
 .submitFormHelp {
 	font-family: verdana, Arial, Helvetica, sans-serif;
@@ -93,11 +93,11 @@ div.metadataFieldLabel {
 	box-shadow: 0 1px 0 rgbs(255, 255, 255, 0.15) inset, 0 1px 1px rgba (0, 0, 0, 0.075);
 	text-shadow: 0 -1px 0 rgba (0, 0, 0, 0.2);
 }
-.btn-default {
-	background-image: linear-gradient(to bottom, #FFFFFF 0px, #E6E6E6 100%);
-	background-repeat: repeat-x;
-	border-color: #CCCCCC;
-	text-shadow: 0 1px 0 #FFFFFF;
+.btn-default, .btn-success, .btn-warning {
+	border: 2px #be830e solid;
+	background: #fff;
+	color: #000;
+	font-weight: bold;
 }
 th.standard {
 	color: #000000;
@@ -927,4 +927,7 @@ div.row > div.altmetric-embed > div > div.altmetric-normal-legend > a > img {
 }
 .open-access img {
 	max-height: 35px;
+}
+#bnr-low li {
+	color: #000;
 }
