@@ -236,6 +236,19 @@
                     <required></required>
                 </field>
             </row>
+            <row>
+                <field>
+                    <dc-schema>local</dc-schema>
+                    <dc-element>mintdoi</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Mint DOI</label>
+                    <!--<input-type>textarea</input-type>-->
+					<input-type value-pairs-name="mintdoi">dropdown</input-type>
+                    <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </row>
         </form>
 
 
@@ -1985,6 +1998,17 @@
                 <stored-value>FundingOrganization</stored-value>
             </pair>
         </value-pairs>
+		
+		<value-pairs value-pairs-name="mintdoi" dc-term="mintdoi">
+			<pair>
+				<displayed-value>No</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Yes</displayed-value>
+				<stored-value>mint</stored-value>
+			</pair>
+		</value-pairs>
 
     </form-value-pairs>
 
