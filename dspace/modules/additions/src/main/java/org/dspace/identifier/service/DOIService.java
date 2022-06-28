@@ -87,4 +87,6 @@ public interface DOIService {
     public List<DOI> getSimilarDOIsNotInState(Context context, String doiPattern, List<Integer> statuses,
                                               boolean dsoIsNotNull)
         throws SQLException;
+    
+    public String getResolver();
 }
