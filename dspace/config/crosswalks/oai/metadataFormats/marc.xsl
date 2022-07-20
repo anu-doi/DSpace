@@ -23,7 +23,38 @@
 			xmlns:dcterms="http://purl.org/dc/terms/"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
-			<leader>00925njm 22002777a 4500</leader>
+			<xsl:element name="leader">
+				<xsl:variable name="type" select="doc:metadata/doc:element[@name='dc']/doc:element[@name='type']/doc:element/doc:field[@name='value']"/>
+				<xsl:variable name="leader06">
+					<xsl:choose>
+						<xsl:when test="$type='Journal article'">a</xsl:when>
+						<xsl:when test="$type='Image'">k</xsl:when>
+						<xsl:when test="$type='Conference poster'">k</xsl:when>
+						<xsl:when test="$type='Poster'">k</xsl:when>
+						<xsl:when test="$type='Cartographic material'">e</xsl:when>
+						<xsl:when test="$type='Dataset'">m</xsl:when>
+						<xsl:when test="$type='Creative work'">m</xsl:when>
+						<xsl:when test="$type='Conference presentation'">m</xsl:when>
+						<xsl:when test="$type='Presentation'">m</xsl:when>
+						<xsl:when test="$type='Multimedia'">m</xsl:when>
+						<xsl:when test="$type='Computer program'">m</xsl:when>
+						<xsl:when test="$type='Student work'">m</xsl:when>
+						<xsl:when test="$type='Exhibition or event'">p</xsl:when>
+						<xsl:when test="$type='Invention'">p</xsl:when>
+						<xsl:when test="$type='Public lecture'">p</xsl:when>
+						<xsl:when test="$type='Live performance'">g</xsl:when>
+						<xsl:when test="$type='Moving image'">g</xsl:when>
+						<xsl:when test="$type='Podcast'">i</xsl:when>
+						<xsl:when test="$type='Sound'">i</xsl:when>
+						<xsl:when test="$type='Musical score'">c</xsl:when>
+						<xsl:when test="starts-with($type, 'Thesis')">t</xsl:when>
+						<xsl:when test="$type='Manuscript'">t</xsl:when>
+						<xsl:when test="$type='Physical object '">r</xsl:when>
+						<xsl:otherwise>a</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:value-of select="concat('00925n',$leader06,'m 22002777a 4500')"/>
+			</xsl:element>
 			<datafield ind2=" " ind1=" " tag="042">
 				<subfield code="a">dc</subfield>
 			</datafield>
