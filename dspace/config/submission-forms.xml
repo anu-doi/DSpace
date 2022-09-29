@@ -186,18 +186,30 @@
         <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
              often used when depositing normal Items. -->
         <form name="traditionalpagetwo">
-            <row>
+            <!-- <row>
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>subject</dc-element>
-                    <dc-qualifier></dc-qualifier>
+                    <dc-qualifier></dc-qualifier> -->
                     <!-- An input-type of tag MUST be marked as repeatable -->
-                    <repeatable>true</repeatable>
+                    <!-- <repeatable>true</repeatable>
                     <label>Subject Keywords</label>
                     <input-type>tag</input-type>
                     <hint>Enter appropriate subject keywords or phrases.</hint>
                     <required></required>
                     <vocabulary>srsc</vocabulary>
+                </field>
+            </row> -->
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Subject Keywords</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter appropriate subject keywords or phrases.</hint>
+                    <required></required>
                 </field>
             </row>
             <row>
@@ -532,6 +544,7 @@
                     <input-type>onebox</input-type>
                     <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
                     <required></required>
+					<!--<vocabulary>publishers</vocabulary>-->
                 </field>
             </row>
             <row>
@@ -663,9 +676,10 @@
                     <dc-qualifier>absfor</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Field of Research Code (ABS ANZSRC)</label>
-                    <input-type>onebox</input-type>
+                    <input-type>tag</input-type>
                     <hint>If known.</hint>
                     <required></required>
+                    <vocabulary>anzfor</vocabulary>
                 </field>
             </row>
             <row>
@@ -675,9 +689,10 @@
                     <dc-qualifier>absseo</dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Socio-Economic Objective (ABS ANZSRC)</label>
-                    <input-type>onebox</input-type>
+                    <input-type>tag</input-type>
                     <hint>If known.</hint>
                     <required></required>
+                    <vocabulary>anzseo</vocabulary>
                 </field>
             </row>
             <row>
@@ -1374,9 +1389,10 @@
                     <repeatable>false</repeatable>
                     <label>Publisher</label>
                     <style>col-sm-8</style>
-                    <input-type>onebox</input-type>
+                    <input-type>tag</input-type>
                     <hint>Enter the name of the publisher of the previously issued instance of this item.</hint>
                     <required></required>
+					<vocabulary></vocabulary>
                 </field>
             </row>
             <row>

@@ -22,10 +22,9 @@
 		<name-map collection-handle="1885/3" submission-name="Theses" />
 		<name-map collection-handle="1885/6585" submission-name="Theses" />
 		<name-map collection-handle="1885/9050" submission-name="Theses" />
+		
+		<name-map collection-handle="1885/26" submission-name="Publication" />
 
-        <name-map collection-handle="1885/26" submission-name="Publication"/>
-
-		<!-- ANU Asia-Pacific Linguistics / Pacific Linguistics Titles -->
 		<name-map collection-handle="1885/132248" submission-name="Publication" />
 		<name-map collection-handle="1885/463" submission-name="Publication" />
 
@@ -47,13 +46,11 @@
 		<name-map collection-handle="1885/13600" submission-name="Publication" />
 		<name-map collection-handle="1885/13618" submission-name="Publication" />
 
-		<!-- ANU Research > ANU Open Access Research > ANU 3MT -->
 		<name-map collection-handle="1885/13600" submission-name="Publication" />
 
-		<!-- ANU Research > ANU Open Access Research > Australian National Internships Program - Reports -->
 		<name-map collection-handle="1885/13618" submission-name="Publication" />
 
-		<name-map collection-handle="1885/101479" submission-name="Publication" />
+		<!--<name-map collection-handle="1885/101479" submission-name="Publication" />-->
 
 		<name-map collection-handle="1885/104830" submission-name="Publication" />
 		<name-map collection-handle="1885/107181" submission-name="Publication" />
