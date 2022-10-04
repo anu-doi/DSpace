@@ -50,7 +50,7 @@
 
         <!-- Form which defines the first page/section of the "traditional" DSpace submission process,
              often used when depositing normal Items (i.e. Items which are not Entities). -->
-        <form name="traditionalpageone">
+        <!--<form name="traditionalpageone">
             <row>
                 <field>
                     <dc-schema>dc</dc-schema>
@@ -142,9 +142,9 @@
                 <field>
                     <dc-schema>dc</dc-schema>
                     <dc-element>identifier</dc-element>
-                    <dc-qualifier></dc-qualifier>
+                    <dc-qualifier></dc-qualifier>-->
                     <!-- An input-type of qualdrop_value MUST be marked as repeatable -->
-                    <repeatable>true</repeatable>
+            <!--        <repeatable>true</repeatable>
                     <label>Identifiers</label>
                     <input-type value-pairs-name="common_identifiers">qualdrop_value</input-type>
                     <hint>If the item has any identification numbers or codes associated with
@@ -181,7 +181,275 @@
                     <required></required>
                 </field>
             </row>
-        </form>
+        </form>-->
+		
+		<form name="traditionalpageone">
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier/>
+					<repeatable>true</repeatable>
+					<label>Identifier</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required></required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>other</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Other Identifier</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>ispartof</dc-qualifier>
+					<repeatable/>
+					<label>Collection</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>ispartofseries</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Series</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>title</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Title</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required>You must enter a main title for this item.</required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>date</dc-element>
+					<dc-qualifier>created</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Date Created</label>
+					<input-type>onebox</input-type>
+					<hint>Use format dd mmm yyyy (e.g. 22 Sep 2011)</hint>
+					<required></required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>type</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Resource Type</label>
+					<input-type value-pairs-name="collection_types">dropdown</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>subject</dc-element>
+					<dc-qualifier>other</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Subjects</label>
+					<input-type>onebox</input-type>
+					<hint>Maximum 5 from &lt;a href="http://www.picturethesaurus.gov.au" target="_new"&gt;Australian Pictorial Thesaurus&lt;/a&gt;</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>coverage</dc-element>
+					<dc-qualifier>spatial</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Location</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier>medium</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Format - medium</label>
+					<input-type>onebox</input-type>
+					<hint>Click Add More to include Colour</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier>extent</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Format - extent</label>
+					<input-type>onebox</input-type>
+					<hint>hcm x wcm. Click Add More to include Scale.</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>author</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Author(s)</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>language</dc-element>
+					<dc-qualifier>iso</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Language</label>
+					<input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>rights</dc-element>
+					<dc-qualifier>license</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>License conditions</label>
+					<input-type>textarea</input-type>
+					<hint/>
+					<required>This field is mandatory</required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>copyrightholder</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Copyright holder details</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>rights</dc-element>
+					<dc-qualifier/>
+					<repeatable>true</repeatable>
+					<label>Copyright</label>
+					<input-type>textarea</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>date</dc-element>
+					<dc-qualifier>issued</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Date of Issue</label>
+					<input-type>date</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>publisher</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Publisher</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>citation</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Citation</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>abstract</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Description</label>
+					<input-type>textarea</input-type>
+					<hint>Maximum 255 characters</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>notes</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Notes</label>
+					<input-type>textarea</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier>mimetype</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Mimetype</label>
+					<input-type value-pairs-name="mimetype_values">dropdown</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+		</form>
+
 
         <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
              often used when depositing normal Items. -->
@@ -2969,17 +3237,62 @@
 				<displayed-value>Image</displayed-value>
 				<stored-value>Image</stored-value>
 			</pair>
+			<pair>
+				<displayed-value>Book</displayed-value>
+				<stored-value>Book</stored-value>
+			</pair>
 			 <pair>
 				<displayed-value>Text</displayed-value>
 				<stored-value>Text</stored-value>
 			</pair>
 			 <pair>
-				<displayed-value>Sound</displayed-value>
-				<stored-value>Sound</stored-value>
-			 </pair>
+				<displayed-value>Map</displayed-value>
+				<stored-value>Map</stored-value>
+			</pair>
 			<pair>
 				<displayed-value>Physical object</displayed-value>
 				<stored-value>Physical object</stored-value>
+			</pair>
+			 <pair>
+				<displayed-value>Sound recording</displayed-value>
+				<stored-value>Sound recording</stored-value>
+			 </pair>
+			 <pair>
+				<displayed-value>Video recording</displayed-value>
+				<stored-value>Video recording</stored-value>
+			 </pair>
+		</value-pairs>
+		
+		
+		
+		<value-pairs value-pairs-name="mimetype_values" dc-term="type">
+			<pair>
+				<displayed-value>gif</displayed-value>
+				<stored-value>image/gif</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>jpg</displayed-value>
+				<stored-value>image/jpeg</stored-value>
+			</pair>
+			 <pair>
+				<displayed-value>mp3</displayed-value>
+				<stored-value>audio/mpeg</stored-value>
+			 </pair>
+			 <pair>
+				<displayed-value>mp4</displayed-value>
+				<stored-value>video/mp4</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>pdf</displayed-value>
+				<stored-value>application/pdf</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>png</displayed-value>
+				<stored-value>image/png</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>tiff</displayed-value>
+				<stored-value>image/tiff</stored-value>
 			</pair>
 		</value-pairs>
     </form-value-pairs>

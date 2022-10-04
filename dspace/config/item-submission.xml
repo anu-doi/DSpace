@@ -313,7 +313,7 @@
 
             <!--Step will be to Describe the item. -->
             <step id="traditionalpageone"/>
-            <step id="traditionalpagetwo"/>
+            <!-- <step id="traditionalpagetwo"/>-->
 
             <!-- Uncomment this step to allow the user to embargo or access restrict the entire item -->
             <!-- <step id="itemAccessConditions"/> -->
