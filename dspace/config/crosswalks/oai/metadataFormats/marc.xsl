@@ -162,6 +162,11 @@
 				<subfield code="a"><xsl:value-of select="." /></subfield>
 			</datafield>
 			</xsl:for-each>
+			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='relation']/doc:element[@name='ispartof']/doc:element/doc:field[@name='value']">
+			<datafield ind2=" " ind1="0" tag="740">
+				<subfield code="a"><xsl:value-of select="." /></subfield>
+			</datafield>
+			</xsl:for-each>
 		</record>
 	</xsl:template>
 </xsl:stylesheet>
