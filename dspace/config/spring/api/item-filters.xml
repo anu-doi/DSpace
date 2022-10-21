@@ -92,12 +92,27 @@
     -->
     <bean id="dc-identifier-uri-contains-doi_condition"
           class="org.dspace.content.logic.condition.MetadataValueMatchCondition">
-        <property name="parameters">
+        <!-- <property name="parameters">
             <map>
                 <entry key="field" value="dc.identifier.uri" />
                 <entry key="pattern" value="10.12345/" />
             </map>
+        </property> -->
+        <property name="parameters">
+            <map>
+                <entry key="field" value="local.identifier.doi" />
+                <entry key="pattern" value="10.80417/" />
+            </map>
         </property>
+    </bean>
+    
+    <bean id="contains-field-doi-condition" class="org.dspace.content.logic.condition.MetadataValueMatchCondition">
+    	<property name="parameters">
+    		<map>
+    			<entry key="field" value="local.mintdoi" />
+    			<entry key="pattern" value="mint" />
+    		</map>
+    	</property>
     </bean>
 
     <!-- dc.type ends with any of the listed values, as per XOAI "driverDocumentTypeCondition" -->
@@ -201,6 +216,14 @@
                                 <ref bean="dc-identifier-uri-contains-doi_condition"/>
                             </property>
                         </bean>
+                        <bean class="org.dspace.content.logic.operator.Not">
+                            <property name="statements">
+                                <bean class="org.dspace.content.logic.condition.IsWithdrawnCondition">
+                                    <property name="parameters"><map></map></property>
+                                </bean>
+                            </property>
+                        </bean>
+                        <ref bean="contains-field-doi-condition"/>
                         <!-- Create DOIs for items only that do have at least one bitstream. -->
                         <ref bean="has-at-least-one-bitstream_condition"/>
                     </list>

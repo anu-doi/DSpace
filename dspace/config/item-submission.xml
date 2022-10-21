@@ -19,6 +19,73 @@
     <submission-map>
         <!-- Default submission process -->
         <name-map collection-handle="default" submission-name="traditional"/>
+		<name-map collection-handle="1885/3" submission-name="Theses" />
+		<name-map collection-handle="1885/6585" submission-name="Theses" />
+		<name-map collection-handle="1885/9050" submission-name="Theses" />
+		
+		<name-map collection-handle="1885/26" submission-name="Publication" />
+
+		<name-map collection-handle="1885/132248" submission-name="Publication" />
+		<name-map collection-handle="1885/463" submission-name="Publication" />
+
+		<name-map collection-handle="1885/9056" submission-name="Publication" />
+
+		<name-map collection-handle="1885/9192" submission-name="Publication" />
+		<name-map collection-handle="1885/9187" submission-name="Publication" />
+
+		<name-map collection-handle="1885/9281" submission-name="Publication" />
+		<name-map collection-handle="1885/9490" submission-name="Publication" />
+		<name-map collection-handle="1885/9491" submission-name="Publication" />
+
+		<name-map collection-handle="1885/11818" submission-name="Publication" />
+		<name-map collection-handle="1885/12541" submission-name="Publication" />
+		<name-map collection-handle="1885/12555" submission-name="Publication" />
+		<name-map collection-handle="1885/12556" submission-name="Publication" />
+		<name-map collection-handle="1885/13130" submission-name="Publication" />
+
+		<name-map collection-handle="1885/13600" submission-name="Publication" />
+		<name-map collection-handle="1885/13618" submission-name="Publication" />
+
+		<name-map collection-handle="1885/13600" submission-name="Publication" />
+
+		<name-map collection-handle="1885/13618" submission-name="Publication" />
+
+		<!--<name-map collection-handle="1885/101479" submission-name="Publication" />-->
+
+		<name-map collection-handle="1885/104830" submission-name="Publication" />
+		<name-map collection-handle="1885/107181" submission-name="Publication" />
+		<name-map collection-handle="1885/107180" submission-name="Publication" />
+		<name-map collection-handle="1885/109780" submission-name="Publication" />
+
+		<name-map collection-handle="1885/7575" submission-name="Publication" />
+		<name-map collection-handle="1885/112050" submission-name="Publication" />
+		<name-map collection-handle="1885/112501" submission-name="Publication" />
+		<name-map collection-handle="1885/113308" submission-name="Publication" />
+		<name-map collection-handle="1885/113390" submission-name="Publication" />
+		<name-map collection-handle="1885/113892" submission-name="Publication" />
+		<name-map collection-handle="1885/113899" submission-name="Publication" />
+		<name-map collection-handle="1885/113904" submission-name="Publication" />
+		<name-map collection-handle="1885/114085" submission-name="Publication" />
+		<name-map collection-handle="1885/114480" submission-name="Publication" />
+		<name-map collection-handle="1885/114666" submission-name="Publication" />
+		<name-map collection-handle="1885/116192" submission-name="Publication" />
+		<name-map collection-handle="1885/116791" submission-name="Publication" />
+		<name-map collection-handle="1885/116793" submission-name="Publication" />
+		<name-map collection-handle="1885/116794" submission-name="Publication" />
+		<name-map collection-handle="1885/116795" submission-name="Publication" />
+		<name-map collection-handle="1885/116796" submission-name="Publication" />
+		<name-map collection-handle="1885/116840" submission-name="Publication" />
+		<name-map collection-handle="1885/116952" submission-name="Publication" />
+		<name-map collection-handle="1885/138166" submission-name="Publication" />
+		<name-map collection-handle="1885/155719" submission-name="Publication" />
+		<name-map collection-handle="1885/226340" submission-name="Publication" />
+		<name-map collection-handle="1885/227599" submission-name="Publication" />
+		<name-map collection-handle="1885/220382" submission-name="Publication" />
+		<name-map collection-handle="1885/146049" submission-name="Publication" />
+		<name-map collection-handle="1885/207875" submission-name="Publication" />
+		<name-map collection-handle="1885/238435" submission-name="Publication" />
+		<name-map collection-handle="1885/209951" submission-name="Covid" />
+		<name-map collection-handle="1885/209952" submission-name="Covid" />
 
         <!-- Sample Entities Collection configuration based on the demo Entities dataset available at:
              https://github.com/DSpace-Labs/AIP-Files/releases/tag/demo-entities-data
@@ -125,6 +192,16 @@
             <type>submission-form</type>
         </step-definition>
         <step-definition id="journalIssueStep" mandatory="true">
+            <heading>submit.progressbar.describe.stepone</heading>
+            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+            <type>submission-form</type>
+        </step-definition>
+        <step-definition id="thesesStep" mandatory="true">
+            <heading>submit.progressbar.describe.stepone</heading>
+            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+            <type>submission-form</type>
+        </step-definition>
+        <step-definition id="covidStep" mandatory="true">
             <heading>submit.progressbar.describe.stepone</heading>
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
             <type>submission-form</type>
@@ -236,7 +313,7 @@
 
             <!--Step will be to Describe the item. -->
             <step id="traditionalpageone"/>
-            <step id="traditionalpagetwo"/>
+            <!-- <step id="traditionalpagetwo"/>-->
 
             <!-- Uncomment this step to allow the user to embargo or access restrict the entire item -->
             <!-- <step id="itemAccessConditions"/> -->
@@ -363,6 +440,21 @@
         <submission-process name="openAIREOrganizationSubmission">
             <step id="collection"/>
             <step id="openAIREOrganizationForm"/>
+        </submission-process>
+		
+		
+        <submission-process name="Theses">
+            <step id="collection"/>
+            <step id="thesesStep"/>
+            <step id="traditionalpagetwo"/>
+            <step id="upload"/>
+            <step id="license"/>
+        </submission-process>
+        <submission-process name="Covid">
+            <step id="collection"/>
+            <step id="covidStep"/>
+            <step id="upload"/>
+            <step id="license"/>
         </submission-process>
     </submission-definitions>
 
