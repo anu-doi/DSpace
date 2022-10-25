@@ -161,6 +161,11 @@
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
             <type>submission-form</type>
         </step-definition>
+        <step-definition id="thesespagetwo" mandatory="true">
+            <heading>submit.progressbar.describe.steptwo</heading>
+            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+            <type>submission-form</type>
+        </step-definition>
         <step-definition id="publicationStep" mandatory="true">
             <heading>submit.progressbar.describe.stepone</heading>
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
@@ -446,7 +451,7 @@
         <submission-process name="Theses">
             <step id="collection"/>
             <step id="thesesStep"/>
-            <step id="traditionalpagetwo"/>
+            <step id="thesespagetwo"/>
             <step id="upload"/>
             <step id="license"/>
         </submission-process>

@@ -369,9 +369,9 @@
 					<dc-schema>dc</dc-schema>
 					<dc-element>rights</dc-element>
 					<dc-qualifier/>
-					<repeatable>true</repeatable>
+					<repeatable>false</repeatable>
 					<label>Copyright</label>
-					<input-type>textarea</input-type>
+					<input-type>onebox</input-type>
 					<hint/>
 					<required/>
 				</field>
@@ -501,6 +501,61 @@
                     <label>Sponsors</label>
                     <input-type>textarea</input-type>
                     <hint>Enter the names of any sponsors and/or funding codes in the box.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Description</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>local</dc-schema>
+                    <dc-element>mintdoi</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Mint DOI</label>
+                    <!--<input-type>textarea</input-type>-->
+					<input-type value-pairs-name="mintdoi">dropdown</input-type>
+                    <hint>Enter any other description or comments in this box.</hint>
+                    <required></required>
+                </field>
+            </row>
+        </form>
+        
+        
+        <!-- Form which defines the second page/section of the "traditional" DSpace submission process,
+             often used when depositing normal Items. -->
+        <form name="thesespagetwo">
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>subject</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Subject Keywords</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter appropriate subject keywords or phrases.</hint>
+                    <required></required>
+                </field>
+            </row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>description</dc-element>
+                    <dc-qualifier>abstract</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Abstract</label>
+                    <input-type>textarea</input-type>
+                    <hint>Enter the abstract of the item.</hint>
                     <required></required>
                 </field>
             </row>
@@ -906,7 +961,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
                     <label>Type</label>
-                    <input-type value-pairs-name="common_types">dropdown</input-type>
+                    <input-type value-pairs-name="deewr_types">dropdown</input-type>
                     <hint>Select the type(s) of content of the item. To select more than one value in the list, you may
                         have to hold down the "CTRL" or "Shift" key.
                     </hint>
