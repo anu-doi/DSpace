@@ -170,6 +170,7 @@
                 <ref bean="searchFilterIssued" />
                 <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterEntityType"/>
+                <ref bean="searchFilterType"/>
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -190,6 +191,7 @@
                 <ref bean="searchFilterIsOrgUnitOfPublicationRelation"/>
                 <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>
                 <ref bean="searchFilterIsJournalOfPublicationRelation"/>
+                <ref bean="searchFilterType"/>
             </list>
         </property>
         <!--The sort filters for the discovery search-->

@@ -47,8 +47,8 @@
          the DOIIdentifierProvider or the VersionedDOIIdentifierProvider,
          depending on whether you have Item Level Versioning activated or not.
     -->
-    <!--
-    <bean id="org.dspace.identifier.DOIIdentifierProvider"
+    
+    <!-- <bean id="org.dspace.identifier.DOIIdentifierProvider"
         class="org.dspace.identifier.DOIIdentifierProvider"
         scope="singleton">
         <property name="configurationService"
@@ -71,17 +71,28 @@
 
     <!-- An optional logical item filter can be included in provider configuration based
     on the filters defined in item-filters.xml, eg. -->
-    <!--
-    <bean id="org.dspace.identifier.DOIIdentifierProvider"
+    
+    <!-- <bean id="org.dspace.identifier.DOIIdentifierProvider"
         class="org.dspace.identifier.DOIIdentifierProvider"
         scope="singleton">
         <property name="configurationService"
             ref="org.dspace.services.ConfigurationService" />
         <property name="DOIConnector"
-            ref="org.dspace.identifier.doi.DOIConnector" />
-        <property name="filter" ref="doi-filter" />
+            ref="org.dspace.identifier.doi.DOIConnector" /> -->
+        <!-- <property name="filterService" ref="doi-filter" />
+    </bean> -->
+    
+    <bean id="org.dspace.identifier.ANUDOIIdentifierProvider"
+        class="org.dspace.identifier.ANUDOIIdentifierProvider"
+        scope="singleton">
+        <property name="configurationService"
+            ref="org.dspace.services.ConfigurationService" />
+        <property name="ANUConnector"
+            ref="org.dspace.identifier.doi.ANUDOIConnector" />
+        <!-- <property name="filterService" ref="openaire_filter" /> -->
+        <property name="filterService" ref="doi-filter" />
     </bean>
-    -->
+    
 
 
     <!-- The DOIConnector will handle the API calls to your DOI registration
@@ -93,16 +104,19 @@
          DataCiteConnector won't work if EZID is your registration agency.
     -->
     <!-- Uncomment this to use the DataCite API directly as DOIConnector.
-    <bean id="org.dspace.identifier.doi.DOIConnector"
+    -->
+    <!-- <bean id="org.dspace.identifier.doi.DOIConnector"
         class="org.dspace.identifier.doi.DataCiteConnector"
+        scope="singleton">-->
+    <bean id="org.dspace.identifier.doi.ANUDOIConnector"
+        class="org.dspace.identifier.doi.ANUDOIConnector"
         scope="singleton">
         <property name='DATACITE_SCHEME' value='https'/>
-        <property name='DATACITE_HOST' value='mds.test.datacite.org'/>
+        <!-- <property name='DATACITE_HOST' value='mds.test.datacite.org'/> -->
         <property name='DATACITE_DOI_PATH' value='/doi/' />
         <property name='DATACITE_METADATA_PATH' value='/metadata/' />
         <property name='disseminationCrosswalkName' value="DataCite" />
     </bean>
-    -->
 
     <!-- Provider to mint and register DOIs using EZID as the registrar.
     -->
