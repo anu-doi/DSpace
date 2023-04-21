@@ -603,8 +603,11 @@ public class StatisticsDataDownload extends StatisticsData {
 				}
 
 				url += "?sequence=" + bit.getSequenceID();
-				attrs.put("item", owningItem.getName());
+				
 
+				attrs.put("item", owningItem.getName());
+				
+				
 				attrs.put("url", url);
 				break;
 
@@ -703,44 +706,15 @@ public class StatisticsDataDownload extends StatisticsData {
 				// field name is optional
 				if (dso instanceof DSpaceObjectLegacySupport) {
 					query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
-					System.out.println("I am here in if dspacelegacy + "+query);
 				} else {
 					query += "id:" + dso.getID();
-					System.out.println("I am here in else dspacelegacy + "+query);
 				}
-			}
-
-			if (owningDso != null && currentDso != null) {
-				query += (query.equals("") ? "" : " AND ");
-				String owningStr = "";
-				switch (currentDso.getType()) {
-				case Constants.ITEM:
-					owningStr = "owningItem";
-					break;
-				case Constants.COLLECTION:
-					owningStr = "owningColl";
-					break;
-				case Constants.COMMUNITY:
-					owningStr = "owningComm";
-					break;
-				default:
-					break;
-				}
-				System.out.println("The owning string is : "+owningStr);
-				if (currentDso instanceof DSpaceObjectLegacySupport) {
-					owningStr = "(" + owningStr + ":" + currentDso.getID() + " OR " + owningStr + ":"
-							+ ((DSpaceObjectLegacySupport) currentDso).getLegacyId() + ")";
-					System.out.println("The owningStr DSpaceObjectLegacySupport : "+owningStr);
-				} else {
-					owningStr += ":" + currentDso.getID();
-					System.out.println("The owningStr not DSpaceObjectLegacySupport : "+owningStr);
-				}
-
-				query += owningStr;
 			}
 
 			if (query.equals("")) {
 				query = "*:*";
+			} else {
+				query += " AND -(bundleName:[* TO *]-bundleName:ORIGINAL) AND owningItem:*";
 			}
 			return query;
 		}
