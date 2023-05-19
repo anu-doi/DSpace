@@ -90,7 +90,7 @@
         <property name="ANUConnector"
             ref="org.dspace.identifier.doi.ANUDOIConnector" />
         <!-- <property name="filterService" ref="openaire_filter" /> -->
-        <property name="filterService" ref="doi-filter" />
+        <property name="filter" ref="doi-filter" />
     </bean>
     
 
