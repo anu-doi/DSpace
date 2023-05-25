@@ -58,7 +58,7 @@ import org.dspace.statistics.service.SolrLoggerService;
  *
  * @author kevinvandevelde at atmire.com Date: 23-feb-2009 Time: 12:25:20
  */
-public class StatsViewsDownloadsData extends StatisticsData {
+public class StatisticsViewsCountData extends StatisticsData {
 	/**
 	 * Current DSpaceObject for which to generate the statistics.
 	 */
@@ -76,7 +76,7 @@ public class StatsViewsDownloadsData extends StatisticsData {
 	/**
 	 * Construct a completely uninitialized query.
 	 */
-	public StatsViewsDownloadsData() {
+	public StatisticsViewsCountData() {
 		super();
 	}
 
@@ -85,7 +85,7 @@ public class StatsViewsDownloadsData extends StatisticsData {
 	 *
 	 * @param dso the target DSpace object
 	 */
-	public StatsViewsDownloadsData(DSpaceObject dso) {
+	public StatisticsViewsCountData(DSpaceObject dso) {
 		super();
 		this.currentDso = dso;
 	}
@@ -96,7 +96,7 @@ public class StatsViewsDownloadsData extends StatisticsData {
 	 * @param currentDso the target DSpace object
 	 * @param dataset    the target dataset
 	 */
-	public StatsViewsDownloadsData(DSpaceObject currentDso, Dataset dataset) {
+	public StatisticsViewsCountData(DSpaceObject currentDso, Dataset dataset) {
 		super(dataset);
 		this.currentDso = currentDso;
 	}
@@ -106,7 +106,7 @@ public class StatsViewsDownloadsData extends StatisticsData {
 	 *
 	 * @param dataset the target dataset
 	 */
-	public StatsViewsDownloadsData(Dataset dataset) {
+	public StatisticsViewsCountData(Dataset dataset) {
 		super(dataset);
 	}
 

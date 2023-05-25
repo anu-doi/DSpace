@@ -40,7 +40,7 @@ import org.dspace.statistics.content.StatisticsDataDownload;
 import org.dspace.statistics.content.StatisticsDataVisits;
 import org.dspace.statistics.content.StatisticsListing;
 import org.dspace.statistics.content.StatisticsTable;
-import org.dspace.statistics.content.StatsViewsDownloadsData;
+import org.dspace.statistics.content.StatisticsViewsCountData;
 import org.dspace.statistics.content.filter.StatisticsSolrDateFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -196,13 +196,13 @@ public class UsageReportUtils {
 	private UsageReportRest resolveGlobalViewCount(Context context)
 			throws SQLException, IOException, ParseException, SolrServerException {
 		UsageReportRest usageReportRest = new UsageReportRest();
-		StatisticsListing viewListing = new StatisticsListing(new StatsViewsDownloadsData());
+		StatisticsListing viewListing = new StatisticsListing(new StatisticsViewsCountData());
 		
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();		
 		dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1);
 		viewListing.addDatasetGenerator(dsoAxis);		
 		
-		StatisticsListing downloadListing = new StatisticsListing(new StatsViewsDownloadsData());
+		StatisticsListing downloadListing = new StatisticsListing(new StatisticsViewsCountData());
 		DatasetDSpaceObjectGenerator dsoAxis2 = new DatasetDSpaceObjectGenerator();
 		dsoAxis2.addDsoChild(Constants.BITSTREAM, 1, false, -1);
 		downloadListing.addDatasetGenerator(dsoAxis2);
