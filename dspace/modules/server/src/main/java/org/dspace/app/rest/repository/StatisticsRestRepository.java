@@ -7,11 +7,14 @@
  */
 package org.dspace.app.rest.repository;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -41,6 +44,9 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     @Autowired
     private UsageReportUtils usageReportUtils;
 
+    @Autowired
+    private HttpServletResponse response;
+    
     public StatisticsSupportRest getStatisticsSupport() {
         return new StatisticsSupportRest();
     }
@@ -50,6 +56,7 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     public UsageReportRest findOne(Context context, String uuidObjectReportId) {
         UUID uuidObject = UUID.fromString(StringUtils.substringBefore(uuidObjectReportId, "_"));
         String reportId = StringUtils.substringAfter(uuidObjectReportId, "_");
+
         UsageReportRest usageReportRest = null;
         try {
             DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
@@ -57,9 +64,8 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
                 throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
             }
             usageReportRest = usageReportUtils.createUsageReport(context, dso, reportId);
-            
 
-        } catch (ParseException | SolrServerException | IOException | SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
         return converter.toRest(usageReportRest, utils.obtainProjection());
@@ -68,7 +74,7 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     @PreAuthorize("hasPermission(#uri, 'usagereportsearch', 'READ')")
     @SearchRestMethod(name = "object")
     public Page<UsageReportRest> findByObject(@Parameter(value = "uri", required = true) String uri,
-                                              Pageable pageable) {
+                                              Pageable pageable) throws Exception {
         UUID uuid = UUID.fromString(StringUtils.substringAfterLast(uri, "/"));
         List<UsageReportRest> usageReportsOfItem = null;
         try {
@@ -99,8 +105,9 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     public Page<UsageReportRest> filterStatistics(@Parameter(value = "uri", required = true) String uri, 
     		@Parameter(value = "startdate") String sd, 
     		@Parameter(value = "enddate") String ed, 
-    		@Parameter(value = "type") String type, Pageable pageable) throws Exception {
-    	
+    		@Parameter(value = "type") String type,
+    		Pageable pageable) throws Exception {
+
         String startDate = sd;
         String endDate = ed;
         String type1 = type;
@@ -113,10 +120,25 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
             if (dso == null) {
                 throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
             }
-            usageReportsOfItem = usageReportUtils.getUsageReportsOfDSOWithParameter(context,dso,startDate,endDate, type1);
+            usageReportsOfItem = usageReportUtils.getUsageReportsOfDSOWithParameter(context,dso,startDate,endDate, type1,response);
+            
         } catch (SQLException | ParseException | SolrServerException | IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
         return converter.toRestPage(usageReportsOfItem, pageable, usageReportsOfItem.size(), utils.obtainProjection());
+    }
+   
+    public ByteArrayOutputStream exportRestMethod(Context context, DSpaceObject dso, 
+    		String uri, String sd, String ed, String type, HttpServletResponse response, 
+    		UsageReportUtils usageReportUtils) throws Exception {
+        ByteArrayOutputStream usageReportsOfItem = null;
+        
+        try {
+            usageReportsOfItem = usageReportUtils.exportUsageReports(context, dso, sd, ed, type, response);
+            return usageReportsOfItem;
+        } 
+        catch (SQLException | ParseException | SolrServerException | IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 }

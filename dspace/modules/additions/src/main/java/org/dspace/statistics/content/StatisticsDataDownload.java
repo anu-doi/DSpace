@@ -163,7 +163,7 @@ public class StatisticsDataDownload extends StatisticsData {
 						ObjectCount[] results = solrLoggerService.queryFacetDate(query, filterQuery,
 								dataSetQuery.getMax(), dateFacet.getDateType(), dateFacet.getStartDate(),
 								dateFacet.getEndDate(), showTotal, context, facetMinCount);
-						dataset = new Dataset(3, results.length);
+						dataset = new Dataset(2, results.length);
 						// Now that we have our results put em in a matrix
 						for (int j = 0; j < results.length; j++) {
 							ObjectCount count = results[j];
@@ -321,7 +321,7 @@ public class StatisticsDataDownload extends StatisticsData {
 				}
 			} else {
 				// Make sure we have a dataSet
-				dataset = new Dataset(3, topCounts1.length);
+				dataset = new Dataset(2, topCounts1.length);
 				for (int i = 0; i < topCounts1.length; i++) {
 					ObjectCount count = topCounts1[i];
 					String dsoId = count.getValue();
@@ -505,7 +505,7 @@ public class StatisticsDataDownload extends StatisticsData {
 					// Cut it off at the first space
 					int firstSpace = name.indexOf(' ', dsoLength);
 					if (firstSpace != -1) {
-						name = name.substring(0, firstSpace) + " ...";
+						name = name.substring(0, firstSpace) + " ./..";
 					}
 				}
 				return name + legacyNote;
