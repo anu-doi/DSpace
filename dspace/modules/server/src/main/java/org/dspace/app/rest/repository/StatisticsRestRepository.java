@@ -7,7 +7,6 @@
  */
 package org.dspace.app.rest.repository;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -36,109 +35,105 @@ import org.springframework.stereotype.Component;
 @Component(StatisticsSupportRest.CATEGORY + "." + UsageReportRest.NAME)
 public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRest, String> {
 
-    @Autowired
-    private DSpaceObjectUtils dspaceObjectUtil;
+	@Autowired
+	private DSpaceObjectUtils dspaceObjectUtil;
 
-    @Autowired
-    private UsageReportUtils usageReportUtils;
+	@Autowired
+	private UsageReportUtils usageReportUtils;
 
-    @Autowired
-    private HttpServletResponse response;
+	@Autowired
+	private HttpServletResponse response;
 
-    public StatisticsSupportRest getStatisticsSupport() {
-        return new StatisticsSupportRest();
-    }
+	public StatisticsSupportRest getStatisticsSupport() {
+		return new StatisticsSupportRest();
+	}
 
-    @Override
-    @PreAuthorize("hasPermission(#uuidObjectReportId, 'usagereport', 'READ')")
-    public UsageReportRest findOne(Context context, String uuidObjectReportId) {
-        UUID uuidObject = UUID.fromString(StringUtils.substringBefore(uuidObjectReportId, "_"));
-        String reportId = StringUtils.substringAfter(uuidObjectReportId, "_");
+	@Override
+	@PreAuthorize("hasPermission(#uuidObjectReportId, 'usagereport', 'READ')")
+	public UsageReportRest findOne(Context context, String uuidObjectReportId) {
+		UUID uuidObject = UUID.fromString(StringUtils.substringBefore(uuidObjectReportId, "_"));
+		String reportId = StringUtils.substringAfter(uuidObjectReportId, "_");
 
-        UsageReportRest usageReportRest = null;
-        try {
-            DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
-            if (dso == null) {
-                throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
-            }
-            usageReportRest = usageReportUtils.createUsageReport(context, dso, reportId);
+		UsageReportRest usageReportRest = null;
+		try {
+			DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
+			if (dso == null) {
+				throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
+			}
+			usageReportRest = usageReportUtils.createUsageReport(context, dso, reportId);
 
-        } catch (Exception e) {
+		} catch (Exception e) {
 
-            throw new RuntimeException(e.getMessage(), e);
-        }
-        return converter.toRest(usageReportRest, utils.obtainProjection());
-    }
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return converter.toRest(usageReportRest, utils.obtainProjection());
+	}
 
-    @PreAuthorize("hasPermission(#uri, 'usagereportsearch', 'READ')")
-    @SearchRestMethod(name = "object")
-    public Page<UsageReportRest> findByObject(@Parameter(value = "uri", required = true) String uri,
-                                              Pageable pageable) throws Exception {
+	@PreAuthorize("hasPermission(#uri, 'usagereportsearch', 'READ')")
+	@SearchRestMethod(name = "object")
+	public Page<UsageReportRest> findByObject(@Parameter(value = "uri", required = true) String uri,
+			Pageable pageable) {
 
-        UUID uuid = UUID.fromString(StringUtils.substringAfterLast(uri, "/"));
-        List<UsageReportRest> usageReportsOfItem = null;
-        try {
-            Context context = obtainContext();
-            DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuid);
-            if (dso == null) {
-                throw new ResourceNotFoundException("No DSO found with uuid: " + uuid);
-            }
-            usageReportsOfItem = usageReportUtils.getUsageReportsOfDSO(context, dso);
-        } catch (SQLException | ParseException | SolrServerException | IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+		UUID uuid = UUID.fromString(StringUtils.substringAfterLast(uri, "/"));
+		List<UsageReportRest> usageReportsOfItem = null;
+		try {
+			Context context = obtainContext();
+			DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuid);
+			if (dso == null) {
+				throw new ResourceNotFoundException("No DSO found with uuid: " + uuid);
+			}
+			usageReportsOfItem = usageReportUtils.getUsageReportsOfDSO(context, dso);
+		} catch (SQLException | ParseException | SolrServerException | IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 
-        return converter.toRestPage(usageReportsOfItem, pageable, usageReportsOfItem.size(), utils.obtainProjection());
-    }
+		return converter.toRestPage(usageReportsOfItem, pageable, usageReportsOfItem.size(), utils.obtainProjection());
+	}
 
-    @Override
-    public Page<UsageReportRest> findAll(Context context, Pageable pageable) {
-        throw new RepositoryMethodNotImplementedException("No implementation found; Method not allowed!", "findAll");
-    }
+	@Override
+	public Page<UsageReportRest> findAll(Context context, Pageable pageable) {
+		throw new RepositoryMethodNotImplementedException("No implementation found; Method not allowed!", "findAll");
+	}
 
-    @Override
-    public Class<UsageReportRest> getDomainClass() {
-        return UsageReportRest.class;
-    }
-   
-    @SearchRestMethod(name = "filterstatistics")
-    public Page<UsageReportRest> filterStatistics(@Parameter(value = "uri", required = true) String uri, 
-    		@Parameter(value = "startdate") String sd, 
-    		@Parameter(value = "enddate") String ed, 
-    		@Parameter(value = "type") String type,
-    		Pageable pageable) throws Exception {
+	@Override
+	public Class<UsageReportRest> getDomainClass() {
+		return UsageReportRest.class;
+	}
 
-        String startDate = sd;
-        String endDate = ed;
-        String type1 = type;
-        UUID uuidObject = UUID.fromString((StringUtils.substringAfterLast(uri, "/")).split("&")[0]);
+	@SearchRestMethod(name = "filterstatistics")
+	public Page<UsageReportRest> filterStatistics(@Parameter(value = "uri", required = true) String uri,
+			@Parameter(value = "startdate") String startDate, @Parameter(value = "enddate") String endDate,
+			@Parameter(value = "type") String type, Pageable pageable)
+			throws SQLException, ParseException, SolrServerException, IOException {
 
-        List<UsageReportRest> usageReportsOfItem = null;
-        try {
-            Context context = obtainContext();
-            DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
-            if (dso == null) {
-                throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
-            }
-            usageReportsOfItem = usageReportUtils.getUsageReportsOfDSOWithParameter(context,dso,startDate,endDate, type1,response);
-            
-        } catch (SQLException | ParseException | SolrServerException | IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-        return converter.toRestPage(usageReportsOfItem, pageable, usageReportsOfItem.size(), utils.obtainProjection());
-    }
-   
-    public ByteArrayOutputStream exportRestMethod(Context context, DSpaceObject dso, 
-    		String uri, String sd, String ed, String type, HttpServletResponse response, 
-    		UsageReportUtils usageReportUtils) throws Exception {
-        ByteArrayOutputStream usageReportsOfItem = null;
-        
-        try {
-            usageReportsOfItem = usageReportUtils.exportUsageReports(context, dso, sd, ed, type, response);
-            return usageReportsOfItem;
-        } 
-        catch (SQLException | ParseException | SolrServerException | IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
+		UUID uuidObject = UUID.fromString((StringUtils.substringAfterLast(uri, "/")).split("&")[0]);
+
+		List<UsageReportRest> usageReportsOfItem = null;
+		try {
+			Context context = obtainContext();
+			DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
+			if (dso == null) {
+				throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
+			}
+			usageReportsOfItem = usageReportUtils.getUsageReportsOfDSOWithParameter(context, dso, startDate, endDate,
+					type, response);
+
+		} catch (SQLException | ParseException | SolrServerException | IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		return converter.toRestPage(usageReportsOfItem, pageable, usageReportsOfItem.size(), utils.obtainProjection());
+	}
+
+	public ByteArrayOutputStream exportRestMethod(Context context, DSpaceObject dso, String uri, String sd, String ed,
+			String type, HttpServletResponse response, UsageReportUtils usageReportUtils)
+			throws SQLException, ParseException, SolrServerException, IOException {
+		ByteArrayOutputStream usageReportsOfItem = null;
+
+		try {
+			usageReportsOfItem = usageReportUtils.exportUsageReports(context, dso, sd, ed, type, response);
+			return usageReportsOfItem;
+		} catch (SQLException | ParseException | SolrServerException | IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
 }

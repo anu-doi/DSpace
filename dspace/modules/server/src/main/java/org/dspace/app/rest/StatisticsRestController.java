@@ -7,10 +7,11 @@
  */
 package org.dspace.app.rest;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -36,7 +37,6 @@ import org.dspace.core.Context;
 import org.dspace.services.RequestService;
 import org.dspace.services.model.Request;
 import org.dspace.utils.DSpace;
-import org.json.JSONObject;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ControllerUtils;
@@ -55,14 +55,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @RestController
 @RequestMapping("/api/" + RestAddressableModel.STATISTICS)
 public class StatisticsRestController implements InitializingBean {
 
-//	@JsonProperty("id")
-//	String id = null;
+	//	@JsonProperty("id")
+	//	String id = null;
 
 	@Autowired
 	private DiscoverableEndpointsService discoverableEndpointsService;
@@ -85,7 +83,6 @@ public class StatisticsRestController implements InitializingBean {
 	@Autowired
 	private UsageReportUtils usageReportUtils;
 
-	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		discoverableEndpointsService.register(this,
@@ -133,7 +130,8 @@ public class StatisticsRestController implements InitializingBean {
 	@GetMapping("/usagereports/exportstatistics")
 	public ResponseEntity<byte[]> exportStatistics(@RequestParam(name = "uri") String uri,
 			@RequestParam(name = "startdate") String startDate, @RequestParam(name = "enddate") String endDate,
-			@RequestParam(name = "type") String reportType, HttpServletResponse response) throws Exception {
+			@RequestParam(name = "type") String reportType, HttpServletResponse response)
+					throws SQLException, ParseException, SolrServerException, IOException {
 
 		RequestService requestService = new DSpace().getRequestService();
 		Request currentRequest = requestService.getCurrentRequest();
@@ -151,15 +149,13 @@ public class StatisticsRestController implements InitializingBean {
 
 		byte[] output = (srr.exportRestMethod(context, dso, decodedUri, startDate, endDate, reportType, response,
 				usageReportUtils)).toByteArray();
-		
-		String filename = reportType+".csv";
+
+		String filename = reportType + ".csv";
 		response.addHeader("Content-Disposition", "inline; filename=" + filename);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.parseMediaType("text/csv"));
 		headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
-		
-		return ResponseEntity.ok()
-				.headers(headers)
-				.body(output);
+
+		return ResponseEntity.ok().headers(headers).body(output);
 	}
 }

@@ -143,7 +143,7 @@ public class StatisticsDataDownload extends StatisticsData {
 		filterQuery += "-(statistics_type:[* TO *] AND -statistics_type:"
 				+ SolrLoggerServiceImpl.StatisticsType.VIEW.text() + ")";
 
-		//	        System.out.println("FILTERQUERY: " + filterQuery);
+		// System.out.println("FILTERQUERY: " + filterQuery);
 
 		// We determine our values on the queries resolved above
 		Dataset dataset = null;
@@ -607,11 +607,9 @@ public class StatisticsDataDownload extends StatisticsData {
 				}
 
 				url += "?sequence=" + bit.getSequenceID();
-				
 
 				attrs.put("item", itemName);
-				
-				
+
 				attrs.put("url", url);
 				break;
 
