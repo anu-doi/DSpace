@@ -277,7 +277,8 @@ public class ANUDOIOrganiser {
 			throw new IllegalArgumentException("Current DSpace supports DOIs for Items only.");
 		}
 		try {
-			provider.reserveOnline(context, dso, skipFilter);
+//			provider.reserveOnline(context, dso, skipFilter);
+			provider.reserveOnline(context, dso);
 //			provider.registerOnline(context, dso, doiRow.getDoi());
 		} catch (SQLException e) {
 			log.error("Error while trying to get data from database", e);

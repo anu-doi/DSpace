@@ -76,7 +76,9 @@ public class ANUDOIConsumer implements Consumer {
 		} catch (IdentifierNotFoundException ex) {
 			// nothing to do here, next if clause will stop us from processing
 			// items without dois.
-			doi = provider.register(ctx, dso, false);
+//			doi = provider.register(ctx, dso, false);
+			//TODO GT see if this needs to do the filter?
+			doi = provider.register(ctx, dso);
 		} catch (IllegalArgumentException ex) {
 			// should not happen, as we got the DOI from the DOIProvider
 			log.warn("DOIConsumer caught an IdentifierException.", ex);
