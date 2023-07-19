@@ -7,21 +7,14 @@
  */
 package org.dspace.app.rest.repository;
 
-<<<<<<< HEAD
+
 import java.io.ByteArrayOutputStream;
-=======
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
-
-<<<<<<< HEAD
 import javax.servlet.http.HttpServletResponse;
-
-=======
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.dspace.app.rest.Parameter;
@@ -40,10 +33,6 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
 @Component(StatisticsSupportRest.CATEGORY + "." + UsageReportRest.NAME)
 public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRest, String> {
 
@@ -53,12 +42,9 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     @Autowired
     private UsageReportUtils usageReportUtils;
 
-<<<<<<< HEAD
     @Autowired
     private HttpServletResponse response;
-    
-=======
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
+
     public StatisticsSupportRest getStatisticsSupport() {
         return new StatisticsSupportRest();
     }
@@ -77,11 +63,8 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
             }
             usageReportRest = usageReportUtils.createUsageReport(context, dso, reportId);
 
-<<<<<<< HEAD
         } catch (Exception e) {
-=======
-        } catch (ParseException | SolrServerException | IOException | SQLException e) {
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
+
             throw new RuntimeException(e.getMessage(), e);
         }
         return converter.toRest(usageReportRest, utils.obtainProjection());
@@ -90,11 +73,8 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
     @PreAuthorize("hasPermission(#uri, 'usagereportsearch', 'READ')")
     @SearchRestMethod(name = "object")
     public Page<UsageReportRest> findByObject(@Parameter(value = "uri", required = true) String uri,
-<<<<<<< HEAD
                                               Pageable pageable) throws Exception {
-=======
-                                              Pageable pageable) {
->>>>>>> b6299f77cdd12440e20f27de4824a3796102e838
+
         UUID uuid = UUID.fromString(StringUtils.substringAfterLast(uri, "/"));
         List<UsageReportRest> usageReportsOfItem = null;
         try {
