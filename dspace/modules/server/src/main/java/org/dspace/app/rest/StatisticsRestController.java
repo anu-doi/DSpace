@@ -59,9 +59,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/" + RestAddressableModel.STATISTICS)
 public class StatisticsRestController implements InitializingBean {
 
-	//	@JsonProperty("id")
-	//	String id = null;
-
 	@Autowired
 	private DiscoverableEndpointsService discoverableEndpointsService;
 

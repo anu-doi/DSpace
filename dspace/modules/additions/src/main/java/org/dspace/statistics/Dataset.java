@@ -77,7 +77,7 @@ public class Dataset {
 		rowLabels = new ArrayList<>(rows);
 		rowLabelsAttrs = new ArrayList<>();
 		for (int i = 0; i < rows; i++) {
-			rowLabels.add("Rows " + (i + 1));
+			rowLabels.add("Row " + (i + 1));
 			rowLabelsAttrs.add(new HashMap<>());
 		}
 	}

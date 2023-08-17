@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +46,9 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 	@Autowired
 	private HttpServletResponse response;
 
+	private static String initStartDate = "2011-01-01 00:00:00";
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 	public StatisticsSupportRest getStatisticsSupport() {
 		return new StatisticsSupportRest();
 	}
@@ -53,7 +58,6 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 	public UsageReportRest findOne(Context context, String uuidObjectReportId) {
 		UUID uuidObject = UUID.fromString(StringUtils.substringBefore(uuidObjectReportId, "_"));
 		String reportId = StringUtils.substringAfter(uuidObjectReportId, "_");
-
 		UsageReportRest usageReportRest = null;
 		try {
 			DSpaceObject dso = dspaceObjectUtil.findDSpaceObject(context, uuidObject);
@@ -62,7 +66,7 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 			}
 			usageReportRest = usageReportUtils.createUsageReport(context, dso, reportId);
 
-		} catch (Exception e) {
+		} catch (ParseException | SolrServerException | IOException | SQLException e) {
 
 			throw new RuntimeException(e.getMessage(), e);
 		}
@@ -73,7 +77,6 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 	@SearchRestMethod(name = "object")
 	public Page<UsageReportRest> findByObject(@Parameter(value = "uri", required = true) String uri,
 			Pageable pageable) {
-
 		UUID uuid = UUID.fromString(StringUtils.substringAfterLast(uri, "/"));
 		List<UsageReportRest> usageReportsOfItem = null;
 		try {
@@ -82,6 +85,7 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 			if (dso == null) {
 				throw new ResourceNotFoundException("No DSO found with uuid: " + uuid);
 			}
+			usageReportUtils.setItemCount(pageable.getPageSize());
 			usageReportsOfItem = usageReportUtils.getUsageReportsOfDSO(context, dso);
 		} catch (SQLException | ParseException | SolrServerException | IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
@@ -103,10 +107,26 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 	@SearchRestMethod(name = "filterstatistics")
 	public Page<UsageReportRest> filterStatistics(@Parameter(value = "uri", required = true) String uri,
 			@Parameter(value = "startdate") String startDate, @Parameter(value = "enddate") String endDate,
-			@Parameter(value = "type") String type, Pageable pageable)
-			throws SQLException, ParseException, SolrServerException, IOException {
+			@Parameter(value = "type") String type, Pageable pageable) {
+
+		String localStartDate = startDate + " 00:00:00";
+		String localEndDate = endDate + " 00:00:00";
 
 		UUID uuidObject = UUID.fromString((StringUtils.substringAfterLast(uri, "/")).split("&")[0]);
+		try {
+			if (startDate.equals("null") || startDate == "null" || startDate == null) {
+				usageReportUtils.setStartDate(dateFormat.parse(initStartDate));
+			} else {
+				usageReportUtils.setStartDate(dateFormat.parse(localStartDate));
+			}
+			if (endDate.equals("null") || endDate == "null" || endDate == null) {
+				usageReportUtils.setEndDate(dateFormat.parse(dateFormat.format(new Date())));
+			} else {
+				usageReportUtils.setEndDate(dateFormat.parse(localEndDate));
+			}
+		} catch (ParseException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 
 		List<UsageReportRest> usageReportsOfItem = null;
 		try {
@@ -115,6 +135,7 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 			if (dso == null) {
 				throw new ResourceNotFoundException("No DSO found with uuid: " + uuidObject);
 			}
+			usageReportUtils.setItemCount(pageable.getPageSize());
 			usageReportsOfItem = usageReportUtils.getUsageReportsOfDSOWithParameter(context, dso, startDate, endDate,
 					type, response);
 
@@ -126,9 +147,25 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 
 	public ByteArrayOutputStream exportRestMethod(Context context, DSpaceObject dso, String uri, String sd, String ed,
 			String type, HttpServletResponse response, UsageReportUtils usageReportUtils)
-			throws SQLException, ParseException, SolrServerException, IOException {
+					throws SQLException, ParseException, SolrServerException, IOException {
 		ByteArrayOutputStream usageReportsOfItem = null;
+		String localStartDate = sd + " 00:00:00";
+		String localEndDate = ed + " 00:00:00";
 
+		try {
+			if (sd == "null" || sd == null) {
+				usageReportUtils.setStartDate(dateFormat.parse(initStartDate));
+			} else {
+				usageReportUtils.setStartDate(dateFormat.parse(localStartDate));
+			}
+			if (ed == "null" || ed == null) {
+				usageReportUtils.setEndDate(dateFormat.parse(dateFormat.format(new Date())));
+			} else {
+				usageReportUtils.setEndDate(dateFormat.parse(localEndDate));
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
 		try {
 			usageReportsOfItem = usageReportUtils.exportUsageReports(context, dso, sd, ed, type, response);
 			return usageReportsOfItem;

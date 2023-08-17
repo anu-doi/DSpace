@@ -75,6 +75,31 @@ public class UsageReportUtils {
 	public static final String TOP_COUNTRIES_REPORT_ID = "TopCountries";
 	public static final String TOP_CITIES_REPORT_ID = "TopCities";
 
+	public Integer itemCount;
+
+	public Integer getItemCount() {
+		return itemCount;
+	}
+
+	public void setItemCount(Integer itemCount) {
+		this.itemCount = itemCount;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	/**
 	 * Get list of usage reports that are applicable to the DSO (of given UUID)
 	 *
@@ -93,6 +118,7 @@ public class UsageReportUtils {
 			UsageReportRest totalViewsDownloadsStats = this.resolveGlobalViewCount(context);
 			totalViewsDownloadsStats.setId(dso.getID().toString() + "_" + TOTAL_VISITS_DOWNLOAD_ID);
 			usageReports.add(totalViewsDownloadsStats);
+
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_COUNTRIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_CITIES_REPORT_ID));
@@ -173,7 +199,7 @@ public class UsageReportUtils {
 		// Adding a new generator for our top 10 items without a name length delimiter
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		// TODO make max nr of top items (views wise)? Must be set
-		dsoAxis.addDsoChild(Constants.ITEM, 10, false, -1);
+		dsoAxis.addDsoChild(Constants.ITEM, getItemCount(), false, -1);
 		statListing.addDatasetGenerator(dsoAxis);
 
 		Dataset dataset = statListing.getDataset(context, 1);
@@ -245,6 +271,7 @@ public class UsageReportUtils {
 	 */
 	private UsageReportRest resolveTotalVisits(Context context, DSpaceObject dso)
 			throws SQLException, IOException, ParseException, SolrServerException {
+
 		Dataset dataset = this.getDSOStatsDataset(context, dso, 1, dso.getType());
 
 		UsageReportRest usageReportRest = new UsageReportRest();
@@ -331,7 +358,7 @@ public class UsageReportUtils {
 			}
 			return usageReportRest;
 		}
-		throw new IllegalArgumentException("Error in resolveTotalDownloads function. Check.");
+		throw new IllegalArgumentException("TotalDownloads report only available for items and bitstreams");
 	}
 
 	/**
@@ -400,7 +427,7 @@ public class UsageReportUtils {
 			throws SQLException, IOException, ParseException, SolrServerException {
 		StatisticsListing statsList = new StatisticsListing(new StatisticsDataVisits(dso));
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
-		dsoAxis.addDsoChild(dsoType, 10, false, -1);
+		dsoAxis.addDsoChild(dsoType, getItemCount(), false, -1);
 		statsList.addDatasetGenerator(dsoAxis);
 		return statsList.getDataset(context, facetMinCount);
 	}
@@ -427,7 +454,7 @@ public class UsageReportUtils {
 		DatasetTypeGenerator typeAxis = new DatasetTypeGenerator();
 		typeAxis.setType(typeAxisString);
 		// TODO make max nr of top countries/cities a request para? Must be set
-		typeAxis.setMax(100);
+		typeAxis.setMax(getItemCount());
 		statListing.addDatasetGenerator(typeAxis);
 		return statListing.getDataset(context, facetMinCount);
 	}
@@ -483,14 +510,14 @@ public class UsageReportUtils {
 
 	public List<UsageReportRest> getUsageReportsOfDSOWithParameter(Context context, DSpaceObject dso, String startDate,
 			String endDate, String type, HttpServletResponse response)
-			throws SQLException, ParseException, SolrServerException, IOException {
+					throws SQLException, ParseException, SolrServerException, IOException {
 		List<UsageReportRest> usageReports = new ArrayList<>();
 		if (dso instanceof Site) {
 			switch (type) {
 			case ("TotalVisits"):
 				UsageReportRest globalUsageStats = this.resolveTotalVisitsInTimeRange(context, dso, startDate, endDate, false, response);
-				globalUsageStats.setId(dso.getID().toString() + "_" + TOTAL_VISITS_REPORT_ID);
-				usageReports.add(globalUsageStats);
+			globalUsageStats.setId(dso.getID().toString() + "_" + TOTAL_VISITS_REPORT_ID);
+			usageReports.add(globalUsageStats);
 			case ("TopDownloads"):
 				usageReports.add(this.createUsageReportParameters(context, dso, TOP_DOWNLOADS_REPORT_ID, startDate, endDate));
 			case ("TopCities"):
@@ -502,7 +529,7 @@ public class UsageReportUtils {
 			}
 		} else {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_REPORT_ID, startDate, endDate));
-			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID, startDate,endDate));
+			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOP_COUNTRIES_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOP_CITIES_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_DOWNLOADS_REPORT_ID, startDate, endDate));
@@ -559,7 +586,7 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTotalVisitsInTimeRange(Context context, DSpaceObject dso, String startDate,
 			String endDate, Boolean export, HttpServletResponse response)
-			throws SQLException, ParseException, SolrServerException, IOException {
+					throws SQLException, ParseException, SolrServerException, IOException {
 		StatisticsListing statListing = new StatisticsListing(new StatisticsDataVisits());
 		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -568,20 +595,19 @@ public class UsageReportUtils {
 			this.endDate = obj.parse(endDate + " 00:00:00");
 		}
 
-		// Adding a new generator for our top 10 items without a name length delimiter
+		// Adding a new generator for our top n items without a name length delimiter
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 
 		// TODO make max nr of top items (views wise)? Must be set
-		dsoAxis.addDsoChild(Constants.ITEM, 10, false, -1);
+		dsoAxis.addDsoChild(Constants.ITEM, getItemCount(), false, -1);
+		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+		this.startDate = getStartDate();
+		this.endDate = getEndDate();
+		dateFilter.setStartDate(this.startDate);
+		dateFilter.setEndDate(this.endDate);
 
-		if (!startDate.equals("null") && !endDate.equals("null")) {
-			StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
-			dateFilter.setStartDate(this.startDate);
-			dateFilter.setEndDate(this.endDate);
-
-			statListing.addDatasetGenerator(dsoAxis);
-			statListing.addFilter(dateFilter);
-		}
+		statListing.addDatasetGenerator(dsoAxis);
+		statListing.addFilter(dateFilter);
 
 		Dataset dataset = statListing.getDataset(context, 1);
 
@@ -612,7 +638,6 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTotalVisitsForOthers(Context context, DSpaceObject dso, String startDate,
 			String endDate) throws SQLException, IOException, ParseException, SolrServerException {
-
 		Dataset dataset = this.getDSOStatsDatasetTimeRange(context, dso, 1, dso.getType(), startDate, endDate);
 
 		UsageReportRest usageReportRest = new UsageReportRest();
@@ -655,7 +680,7 @@ public class UsageReportUtils {
 			}
 			return usageReportRest;
 		}
-		throw new IllegalArgumentException("Error thrown at resolveTotalDownloadsTimeRange. Check it.");
+		throw new IllegalArgumentException("TotalDownloadsInTimeRange report only available for items and bitstreams");
 	}
 
 	private UsageReportRest resolveTopDownloads(Context context, DSpaceObject dso, String startDate, String endDate)
@@ -664,17 +689,22 @@ public class UsageReportUtils {
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
 		statListing.addDatasetGenerator(dsoAxis);
-		System.out.println("start date: "+startDate+" : end date: "+endDate);
-		if (startDate != null && endDate != null) {
-			SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			this.startDate = obj.parse(startDate + " 00:00:00");
-			this.endDate = obj.parse(endDate + " 00:00:00");
-			dateFilter.setStartDate(this.startDate);
-			dateFilter.setEndDate(this.endDate);
-			statListing.addFilter(dateFilter);
-
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
 		}
-		dsoAxis.addDsoChild(Constants.BITSTREAM, 10, false, -1);
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+
+		this.startDate = getStartDate();
+		this.endDate = getEndDate();
+		dateFilter.setStartDate(this.startDate);
+		dateFilter.setEndDate(this.endDate);
+		statListing.addFilter(dateFilter);
+
+		dsoAxis.addDsoChild(Constants.BITSTREAM, getItemCount(), false, -1);
 
 		Dataset dataset = statListing.getDataset(context, 1);
 
@@ -725,45 +755,41 @@ public class UsageReportUtils {
 			String startDate, String endDate) throws SQLException, IOException, ParseException, SolrServerException {
 		StatisticsListing statsList = new StatisticsListing(new StatisticsDataVisits(dso));
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
-		dsoAxis.addDsoChild(dsoType, 10, false, -1);
+		dsoAxis.addDsoChild(dsoType, getItemCount(), false, -1);
+
 		statsList.addDatasetGenerator(dsoAxis);
 
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
-		if (!startDate.equals("null") && !endDate.equals("null")) {
-			SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			this.startDate = obj.parse(startDate + " 00:00:00");
-			this.endDate = obj.parse(endDate + " 00:00:00");
+		this.startDate = getStartDate();
+		this.endDate = getEndDate();
 
-			dateFilter.setStartDate(this.startDate);
-			dateFilter.setEndDate(this.endDate);
-			statsList.addFilter(dateFilter);
-		}
-
+		dateFilter.setStartDate(this.startDate);
+		dateFilter.setEndDate(this.endDate);
+		statsList.addFilter(dateFilter);
+		//		}
 		return statsList.getDataset(context, facetMinCount);
 	}
 
 	private Dataset getTypeStatsDatasetTimeRange(Context context, DSpaceObject dso, String typeAxisString,
 			int facetMinCount, String startDate, String endDate)
-			throws SQLException, IOException, ParseException, SolrServerException {
+					throws SQLException, IOException, ParseException, SolrServerException {
 		StatisticsListing statListing = new StatisticsListing(new StatisticsDataVisits(dso));
 		DatasetTypeGenerator typeAxis = new DatasetTypeGenerator();
 		typeAxis.setType(typeAxisString);
 		// TODO make max nr of top countries/cities a request para? Must be set
-		typeAxis.setMax(100);
+		typeAxis.setMax(getItemCount());
 		statListing.addDatasetGenerator(typeAxis);
 		/*
 		 * Date filter Parameters: Start Date End Date
 		 */
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
-		if (!startDate.equals("null") && !endDate.equals("null")) {
-			SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			this.startDate = obj.parse(startDate + " 00:00:00");
-			this.endDate = obj.parse(endDate + " 00:00:00");
 
-			dateFilter.setStartDate(this.startDate);
-			dateFilter.setEndDate(this.endDate);
-			statListing.addFilter(dateFilter);
-		}
+		this.startDate = getStartDate();
+		this.endDate = getEndDate();
+		dateFilter.setStartDate(this.startDate);
+		dateFilter.setEndDate(this.endDate);
+		statListing.addFilter(dateFilter);
+
 		return statListing.getDataset(context, facetMinCount);
 	}
 
@@ -773,12 +799,12 @@ public class UsageReportUtils {
 	 * 
 	 * This exports the file in the format of ByteArrayOutputStream
 	 *
-	 * ***************************************************************************** 
+	 * *****************************************************************************
 	 */
 
 	public ByteArrayOutputStream exportUsageReports(Context context, DSpaceObject dso, String startDate, String endDate,
 			String type, HttpServletResponse response)
-			throws SQLException, IOException, ParseException, SolrServerException {
+					throws SQLException, IOException, ParseException, SolrServerException {
 		ByteArrayOutputStream baos = null;
 		Dataset dataset = getExportSiteDataset(context, dso, startDate, endDate, type);
 		baos = exportDataset(dataset, response);
@@ -841,22 +867,18 @@ public class UsageReportUtils {
 		}
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		if (!type.equals(TOP_DOWNLOADS_REPORT_ID)) {
-			dsoAxis.addDsoChild(Constants.ITEM, 10, false, -1);
+			dsoAxis.addDsoChild(Constants.ITEM, getItemCount(), false, -1);
 		} else {
-			dsoAxis.addDsoChild(Constants.BITSTREAM, 10, false, -1);
+			dsoAxis.addDsoChild(Constants.BITSTREAM, getItemCount(), false, -1);
 		}
 
 		statsList.addDatasetGenerator(dsoAxis);
 
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
-		if (!startDate.equals("null") && !endDate.equals("null")) {
-			SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			this.startDate = obj.parse(startDate + " 00:00:00");
-			this.endDate = obj.parse(endDate + " 00:00:00");
-			dateFilter.setStartDate(this.startDate);
-			dateFilter.setEndDate(this.endDate);
-			statsList.addFilter(dateFilter);
-		}
+		dateFilter.setStartDate(getStartDate());
+		dateFilter.setEndDate(getEndDate());
+		statsList.addFilter(dateFilter);
+
 		return statsList.getDataset(context, facetMinCount);
 	}
 }
