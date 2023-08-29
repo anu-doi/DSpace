@@ -153,12 +153,12 @@ public class StatisticsRestRepository extends DSpaceRestRepository<UsageReportRe
 		String localEndDate = ed + " 00:00:00";
 
 		try {
-			if (sd == "null" || sd == null) {
+			if (sd.equals("null") || sd == "null" || sd == null) {
 				usageReportUtils.setStartDate(dateFormat.parse(initStartDate));
 			} else {
 				usageReportUtils.setStartDate(dateFormat.parse(localStartDate));
 			}
-			if (ed == "null" || ed == null) {
+			if (ed.equals("null") || ed == "null" || ed == null) {
 				usageReportUtils.setEndDate(dateFormat.parse(dateFormat.format(new Date())));
 			} else {
 				usageReportUtils.setEndDate(dateFormat.parse(localEndDate));
