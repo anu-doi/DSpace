@@ -526,6 +526,8 @@ public class UsageReportUtils {
 				usageReports.add(this.createUsageReportParameters(context, dso, TOP_COUNTRIES_REPORT_ID, startDate, endDate));
 			case ("TotalVisitsPerMonth"):
 				usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
+			case ("TotalVisitsDownloads"):
+				usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_DOWNLOAD_ID, startDate, endDate));
 			}
 		} else {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_REPORT_ID, startDate, endDate));
@@ -545,6 +547,10 @@ public class UsageReportUtils {
 			case TOTAL_VISITS_REPORT_ID:
 				usageReportRest = resolveTotalVisitsForOthers(context, dso, startDate, endDate);
 				usageReportRest.setReportType(TOTAL_VISITS_REPORT_ID);
+				break;
+			case TOTAL_VISITS_DOWNLOAD_ID:
+				usageReportRest = resolveGlobalTimeRange(context, dso, startDate, endDate);
+				usageReportRest.setReportType(TOTAL_VISITS_DOWNLOAD_ID);
 				break;
 			case TOTAL_VISITS_PER_MONTH_REPORT_ID:
 				usageReportRest = resolveTotalVisitsPerMonth(context, dso);
@@ -583,6 +589,57 @@ public class UsageReportUtils {
 	 * 
 	 * @throws Exception
 	 */
+	
+	private UsageReportRest resolveGlobalTimeRange(Context context, DSpaceObject dso, String startDate,
+			String endDate)
+			throws SQLException, IOException, ParseException, SolrServerException {
+		
+		UsageReportRest usageReportRest = new UsageReportRest();
+		StatisticsListing viewListing = new StatisticsListing(new StatisticsViewsCountData());
+
+		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
+		dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1);
+		
+		// Date filter
+		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
+		this.startDate = getStartDate();
+		this.endDate = getEndDate();
+		
+		dateFilter.setStartDate(this.startDate);
+		dateFilter.setEndDate(this.endDate);
+		
+		
+		viewListing.addDatasetGenerator(dsoAxis);
+		viewListing.addFilter(dateFilter);
+		
+		
+		StatisticsListing downloadListing = new StatisticsListing(new StatisticsViewsCountData());
+		DatasetDSpaceObjectGenerator dsoAxis2 = new DatasetDSpaceObjectGenerator();
+		dsoAxis2.addDsoChild(Constants.BITSTREAM, 1, false, -1);
+		downloadListing.addDatasetGenerator(dsoAxis2);
+		downloadListing.addFilter(dateFilter);
+		
+		Dataset viewDataset = viewListing.getDataset(context, 1);
+
+		for (int i = 0; i < viewDataset.getColLabels().size(); i++) {
+			UsageReportPointDsoTotalVisitsRest totalVisitPoint = new UsageReportPointDsoTotalVisitsRest();
+			totalVisitPoint.setLabel(viewDataset.getColLabels().get(i));
+			totalVisitPoint.addValue("views", Integer.valueOf(viewDataset.getMatrix()[0][i]));
+			usageReportRest.addPoint(totalVisitPoint);
+		}
+
+		Dataset downloadDataset = downloadListing.getDataset(context, 1);
+
+		for (int i = 0; i < downloadDataset.getColLabels().size(); i++) {
+			UsageReportPointDsoTotalVisitsRest totalDownloadPoint = new UsageReportPointDsoTotalVisitsRest();
+			totalDownloadPoint.setLabel(downloadDataset.getColLabels().get(i));
+			totalDownloadPoint.addValue("views", Integer.valueOf(downloadDataset.getMatrix()[0][i]));
+			usageReportRest.addPoint(totalDownloadPoint);
+		}
+
+		usageReportRest.setReportType(TOTAL_VISITS_DOWNLOAD_ID);
+		return usageReportRest;
+	}
 
 	private UsageReportRest resolveTotalVisitsInTimeRange(Context context, DSpaceObject dso, String startDate,
 			String endDate, Boolean export, HttpServletResponse response)
