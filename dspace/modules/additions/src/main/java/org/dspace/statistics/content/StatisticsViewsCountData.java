@@ -159,21 +159,12 @@ public class StatisticsViewsCountData extends StatisticsData {
 		DatasetQuery firsDataset = datasetQueries.get(0);
 
 		// Do the first query
-
 		ObjectCount topCounts1 = solrLoggerService.queryTotal(firsDataset.getQueries().get(0).getQuery(), filterQuery,
 				facetMinCount);
 		long totalCount = topCounts1.getCount();
 
 		// Make sure we have a dataSet
 		dataset = new Dataset(1, 1);
-
-		if (firsDataset.getQueries().get(0).getQuery().equals("type: 0")) {
-			dataset.setColLabel(0, "totalDownloads");
-			dataset.setColLabelAttr(0, "totalDownloads", null);
-		} else {
-			dataset.setColLabel(0, "totalViews");
-			dataset.setColLabelAttr(0, "totalViews", null);
-		}
 
 		dataset.addValueToMatrix(0, 0, totalCount);
 
@@ -263,7 +254,6 @@ public class StatisticsViewsCountData extends StatisticsData {
 				query.setDso(currentDso, currentDso.getType());
 			}
 			datasetQuery.addQuery(query);
-
 			// Then add the rest
 			datasetQuery.setMax(typeAxis.getMax());
 			datasetQuery.setFacetField(typeAxis.getType());
@@ -415,7 +405,6 @@ public class StatisticsViewsCountData extends StatisticsData {
 			if (query.equals("")) {
 				query = "*:*";
 			}
-
 			return query;
 		}
 	}

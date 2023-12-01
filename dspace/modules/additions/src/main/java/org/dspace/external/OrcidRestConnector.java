@@ -12,12 +12,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dspace.services.ConfigurationService;
+import org.dspace.services.factory.DSpaceServicesFactory;
 
 /**
  * @author Antoine Snyers (antoine at atmire.com)
@@ -33,6 +36,8 @@ public class OrcidRestConnector {
     private static final Logger log = LogManager.getLogger(OrcidRestConnector.class);
 
     private final String url;
+    
+    protected ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
 
     public OrcidRestConnector(String url) {
         this.url = url;
@@ -45,12 +50,27 @@ public class OrcidRestConnector {
 
         String fullPath = url + '/' + path;
         HttpGet httpGet = new HttpGet(fullPath);
+        
+        String proxyHost = configurationService.getProperty("http.proxy.host");
+        String proxyPort = configurationService.getProperty("http.proxy.port");
+
+        if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
+            System.setProperty("http.proxyHost", proxyHost);
+            System.setProperty("http.proxyPort", proxyPort);
+            
+        }
+
         if (StringUtils.isNotBlank(accessToken)) {
             httpGet.addHeader("Content-Type", "application/vnd.orcid+xml");
             httpGet.addHeader("Authorization","Bearer " + accessToken);
         }
         try {
-            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+            if(StringUtils.isNotBlank(proxyHost)) {
+            	HttpHost serverProxy = new HttpHost(proxyHost,Integer.parseInt(proxyPort));
+            	httpClientBuilder.setProxy(serverProxy);
+            }
+            HttpClient httpClient = httpClientBuilder.build();
             getResponse = httpClient.execute(httpGet);
             //do not close this httpClient
             result = getResponse.getEntity().getContent();
