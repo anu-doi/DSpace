@@ -131,7 +131,7 @@
         <copyToRight>true</copyToRight>
     </type>
 	<type>
-        <leftType>Archive</leftType>
+        <leftType>ANUArchivesItem</leftType>
         <rightType>OrgUnit</rightType>
         <leftwardType>isOrgUnitOfArchive</leftwardType>
         <rightwardType>isArchiveOfOrgUnit</rightwardType>
@@ -144,7 +144,7 @@
         <copyToRight>true</copyToRight>
     </type>
 	<type>
-        <leftType>Archive</leftType>
+        <leftType>ANUArchivesItem</leftType>
         <rightType>Person</rightType>
         <leftwardType>isPersonOfArchive</leftwardType>
         <rightwardType>isArchiveOfPerson</rightwardType>
