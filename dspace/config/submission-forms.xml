@@ -3296,31 +3296,75 @@
 				<displayed-value>Book</displayed-value>
 				<stored-value>Book</stored-value>
 			</pair>
-			 <pair>
-				<displayed-value>Text</displayed-value>
-				<stored-value>Text</stored-value>
-			</pair>
-			 <pair>
-				<displayed-value>Map</displayed-value>
-				<stored-value>Map</stored-value>
+			<pair>
+				<displayed-value>Book chapter</displayed-value>
+				<stored-value>Book chapter</stored-value>
 			</pair>
 			<pair>
-				<displayed-value>Physical object</displayed-value>
-				<stored-value>Physical object</stored-value>
+				<displayed-value>Cartographic material</displayed-value>
+				<stored-value>Cartographic material</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Interview (recording)</displayed-value>
+				<stored-value>Interview (recording)</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Interview (transcript)</displayed-value>
+				<stored-value>Interview (transcript)</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pamphlet</displayed-value>
+				<stored-value>Pamphlet</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Plan</displayed-value>
+				<stored-value>Plan</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Podcast</displayed-value>
+				<stored-value>Podcast</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Postcard</displayed-value>
+				<stored-value>Postcard</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Poster</displayed-value>
+				<stored-value>Poster</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Public Lecture</displayed-value>
+				<stored-value>Public Lecture</stored-value>
 			</pair>
 			 <pair>
 				<displayed-value>Sound recording</displayed-value>
 				<stored-value>Sound recording</stored-value>
 			 </pair>
 			 <pair>
+				<displayed-value>Text</displayed-value>
+				<stored-value>Text</stored-value>
+			</pair>
+			 <pair>
 				<displayed-value>Video recording</displayed-value>
 				<stored-value>Video recording</stored-value>
 			 </pair>
+			<pair>
+				<displayed-value>Working/Technical Paper</displayed-value>
+				<stored-value>Working/Technical Paper</stored-value>
+			</pair>
 		</value-pairs>
 		
 		
 		
 		<value-pairs value-pairs-name="mimetype_values" dc-term="type">
+			<pair>
+				<displayed-value>advanced audio encoding</displayed-value>
+				<stored-value>audio/aac</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>CSV</displayed-value>
+				<stored-value>text/csv</stored-value>
+			</pair>
 			<pair>
 				<displayed-value>gif</displayed-value>
 				<stored-value>image/gif</stored-value>
@@ -3348,6 +3392,18 @@
 			<pair>
 				<displayed-value>tiff</displayed-value>
 				<stored-value>image/tiff</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>video mpeg</displayed-value>
+				<stored-value>video/mpeg</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>wav</displayed-value>
+				<stored-value>audio/wav</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>zip</displayed-value>
+				<stored-value>application/zip</stored-value>
 			</pair>
 		</value-pairs>
     </form-value-pairs>
