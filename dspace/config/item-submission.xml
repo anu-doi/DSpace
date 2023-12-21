@@ -352,7 +352,6 @@
 
             <!--Step will be to Upload the item -->
             <step id="upload"/>
-			<step id="itemAccessConditions"/>
 
             <!-- <step id="extractionstep"/> -->
 
@@ -375,7 +374,6 @@
             <step id="publicationStep"/>
             <step id="traditionalpagetwo"/>
             <step id="upload"/>
-			<step id="itemAccessConditions"/>
             <step id="license"/>
         </submission-process>
 
@@ -479,7 +477,6 @@
             <step id="thesesStep"/>
             <step id="thesespagetwo"/>
             <step id="upload"/>
-			<step id="itemAccessConditions"/>
             <step id="license"/>
         </submission-process>
         <submission-process name="Covid">
