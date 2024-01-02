@@ -3358,7 +3358,7 @@
 		
 		<value-pairs value-pairs-name="mimetype_values" dc-term="type">
 			<pair>
-				<displayed-value>advanced audio encoding</displayed-value>
+				<displayed-value>aac</displayed-value>
 				<stored-value>audio/aac</stored-value>
 			</pair>
 			<pair>
