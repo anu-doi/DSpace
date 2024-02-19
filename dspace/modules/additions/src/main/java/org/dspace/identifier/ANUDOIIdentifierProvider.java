@@ -92,7 +92,7 @@ public class ANUDOIIdentifierProvider extends FilteredIdentifierProvider {
 	@Autowired(required = true)
 	protected ItemService itemService;
 
-//	protected Filter filterService;
+	protected Filter filter;
 
 	/**
 	 * Empty / default constructor for Spring
@@ -163,12 +163,12 @@ public class ANUDOIIdentifierProvider extends FilteredIdentifierProvider {
 	/**
 	 * Set the Filter to use when testing items to see if a DOI should be registered
 	 * Spring will use this setter to set the filter from the configured property in identifier-services.xml
-	 * @param filterService - an object implementing the org.dspace.content.logic.Filter interface
+	 * @param filter - an object implementing the org.dspace.content.logic.Filter interface
 	 */
-//	@Override
-//	public void setFilterService(Filter filterService) {
-//		this.filterService = filterService;
-//	}
+	@Override
+	public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
 
 	/**
 	 * This identifier provider supports identifiers of type
@@ -1071,22 +1071,22 @@ public class ANUDOIIdentifierProvider extends FilteredIdentifierProvider {
 	public void checkMintable(Context context, Filter filter, DSpaceObject dso) throws DOIIdentifierNotApplicableException {
 		// If the check fails, an exception will be thrown to be caught by the calling method
 		//TODO GT fix and add filter
-//		if (this.filterService != null && contentServiceFactory
-//			.getDSpaceObjectService(dso).getTypeText(dso).equals("ITEM")) {
-//			try {
-//				boolean result = filterService.getResult(context, (Item) dso);
-//				log.debug("Result of filter for " + dso.getHandle() + " is " + result);
-//				if (!result) {
-//					throw new DOIIdentifierNotApplicableException("Item " + dso.getHandle() +
-//						" was evaluated as 'false' by the item filter, not minting");
-//				}
-//			} catch (LogicalStatementException e) {
-//				log.error("Error evaluating item with logical filter: " + e.getLocalizedMessage());
-//				throw new DOIIdentifierNotApplicableException(e);
-//			}
-//		} else {
-//			log.debug("DOI Identifier Provider: filterService is null (ie. don't prevent DOI minting)");
-//		}
+		if (this.filter != null && contentServiceFactory
+			.getDSpaceObjectService(dso).getTypeText(dso).equals("ITEM")) {
+			try {
+				boolean result = filter.getResult(context, (Item) dso);
+				log.debug("Result of filter for " + dso.getHandle() + " is " + result);
+				if (!result) {
+					throw new DOIIdentifierNotApplicableException("Item " + dso.getHandle() +
+						" was evaluated as 'false' by the item filter, not minting");
+				}
+			} catch (LogicalStatementException e) {
+				log.error("Error evaluating item with logical filter: " + e.getLocalizedMessage());
+				throw new DOIIdentifierNotApplicableException(e);
+			}
+		} else {
+			log.debug("DOI Identifier Provider: filter is null (ie. don't prevent DOI minting)");
+		}
 	}
 	
 	public void activate(Context context, DSpaceObject dso) throws SQLException {

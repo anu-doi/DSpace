@@ -198,7 +198,8 @@ public class ANUDOIOrganiser {
 		try {
 			List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(ANUDOIIdentifierProvider.TO_BE_REGISTERED));
 			if (count > 0) {
-				dois = dois.subList(0, count);
+				int listSize = Math.min(dois.size(), count);
+				dois = dois.subList(0, listSize);
 			}
 			if (dois.isEmpty()) {
 				System.err.println("There are no objects in the database to be registered.");
@@ -244,7 +245,8 @@ public class ANUDOIOrganiser {
 		try {
 			List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(ANUDOIIdentifierProvider.TO_BE_RESERVED));
 			if (count > 0) {
-				dois = dois.subList(0, count);
+				int listSize = Math.min(dois.size(), count);
+				dois = dois.subList(0, listSize);
 			}
 			if (dois.isEmpty()) {
 				System.err.println("There are no objects in the database to be registered.");
@@ -294,7 +296,8 @@ public class ANUDOIOrganiser {
 		try {
 			List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(ANUDOIIdentifierProvider.UPDATE_REGISTERED, ANUDOIIdentifierProvider.UPDATE_BEFORE_REGISTRATION, ANUDOIIdentifierProvider.UPDATE_RESERVED));
 			if (count > 0) {
-				dois = dois.subList(0, count);
+				int listSize = Math.min(dois.size(), count);
+				dois = dois.subList(0, listSize);
 			}
 			if (dois.isEmpty()) {
 				System.err.println("There are no objects in the database to be registered.");
@@ -342,7 +345,8 @@ public class ANUDOIOrganiser {
 		try {
 			List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(ANUDOIIdentifierProvider.TO_BE_DELETED));
 			if (count > 0) {
-				dois = dois.subList(0, count);
+				int listSize = Math.min(dois.size(), count);
+				dois = dois.subList(0, listSize);
 			}
 			if (dois.isEmpty()) {
 				System.err.println("There are no objects in the database to be registered.");
@@ -387,7 +391,8 @@ public class ANUDOIOrganiser {
 		try {
 			List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(ANUDOIIdentifierProvider.TO_BE_ACTIVATED));
 			if (count > 0) {
-				dois = dois.subList(0, count);
+				int listSize = Math.min(dois.size(), count);
+				dois = dois.subList(0, listSize);
 			}
 			if (dois.isEmpty()) {
 				System.err.println("There are no objects in the database to be registered.");

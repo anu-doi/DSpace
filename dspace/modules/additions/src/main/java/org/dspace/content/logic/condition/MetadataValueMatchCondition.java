@@ -56,7 +56,7 @@ public class MetadataValueMatchCondition extends AbstractCondition {
         String qualifier = (fieldParts.length > 2 ? fieldParts[2] : null);
 
         if (itemService == null) {
-        	log.error("Unable to evaluate "+ item.getID() +" against "+ field +" as the item servie is null");
+        	log.error("Unable to evaluate "+ item.getID() +" against "+ field +" as the item service is null");
         	return false;
         }
         List<MetadataValue> values = itemService.getMetadata(item, schema, element, qualifier, Item.ANY);
