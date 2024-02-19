@@ -40,12 +40,10 @@
             If you don't configure that or if the requested item doesn't have
             these metadata, the submitter data are used as fail over.
         -->
-        <!--
             <property name="emailMetadata"
-                      value="schema.element.qualifier" />
+                      value="local.contributor.authoremail" />
             <property name="fullNameMetadata"
-                      value="schema.element.qualifier" />
-        -->
+                      value="local.request.name" />
     </bean>
 
     <bean class="org.dspace.app.requestitem.RequestItemHelpdeskStrategy"

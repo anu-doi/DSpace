@@ -79,6 +79,7 @@ public class UsageReportUtils {
 
 	public Integer itemCount;
 
+	public Integer defaultCount = 5;
 	public Integer getItemCount() {
 		return itemCount;
 	}
@@ -153,7 +154,7 @@ public class UsageReportUtils {
 			UsageReportRest usageReportRest;
 			switch (reportId) {
 			case TOTAL_VISITS_REPORT_ID:
-				usageReportRest = resolveTotalVisits(context, dso);
+				usageReportRest = resolveTotalVisitsForOthers(context, dso, null, null);
 				usageReportRest.setReportType(TOTAL_VISITS_REPORT_ID);
 				break;
 			case TOTAL_VISITS_PER_MONTH_REPORT_ID:
@@ -161,20 +162,24 @@ public class UsageReportUtils {
 				usageReportRest.setReportType(TOTAL_VISITS_PER_MONTH_REPORT_ID);
 				break;
 			case TOTAL_DOWNLOADS_REPORT_ID:
-				usageReportRest = resolveTotalDownloads(context, dso);
+				usageReportRest = resolveTotalDownloadsTimeRange(context, dso, null, null);
 				usageReportRest.setReportType(TOTAL_DOWNLOADS_REPORT_ID);
 				break;
 			case TOP_COUNTRIES_REPORT_ID:
-				usageReportRest = resolveTopCountries(context, dso);
+				usageReportRest = resolveTopCountriesTimeRange(context, dso, null, null);
 				usageReportRest.setReportType(TOP_COUNTRIES_REPORT_ID);
 				break;
 			case TOP_CITIES_REPORT_ID:
-				usageReportRest = resolveTopCities(context, dso);
+				usageReportRest = resolveTopCitiesTimeRange(context, dso, null, null);
 				usageReportRest.setReportType(TOP_CITIES_REPORT_ID);
 				break;
 			case TOP_DOWNLOADS_REPORT_ID:
 				usageReportRest = resolveTopDownloads(context, dso, null, null);
 				usageReportRest.setReportType(TOP_DOWNLOADS_REPORT_ID);
+				break;
+			case TOTAL_VISITS_DOWNLOAD_ID:
+				usageReportRest = resolveGlobalTimeRange(context, dso, null, null);
+				usageReportRest.setReportType(TOTAL_VISITS_DOWNLOAD_ID);
 				break;
 			default:
 				throw new ResourceNotFoundException("The given report id can't be resolved: " + reportId + "; "
@@ -600,6 +605,19 @@ public class UsageReportUtils {
 			throws SQLException, IOException, ParseException, SolrServerException {
 		
 		UsageReportRest usageReportRest = new UsageReportRest();
+		
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+		
 		StatisticsListing viewListing = null;
 		StatisticsListing downloadListing = null;
 		if(dso instanceof Site) {
@@ -659,7 +677,20 @@ public class UsageReportUtils {
 			String endDate, Boolean export, HttpServletResponse response)
 					throws SQLException, ParseException, SolrServerException, IOException {
 		StatisticsListing statListing = new StatisticsListing(new StatisticsDataVisits());
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
 		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+		
 		if (!startDate.equals("null") && !endDate.equals("null")) {
 			this.startDate = obj.parse(startDate + " 00:00:00");
 			this.endDate = obj.parse(endDate + " 00:00:00");
@@ -708,6 +739,20 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTotalVisitsForOthers(Context context, DSpaceObject dso, String startDate,
 			String endDate) throws SQLException, IOException, ParseException, SolrServerException {
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+		
 		Dataset dataset = this.getDSOStatsDatasetForVisits(context, dso, 1, Constants.ITEM, startDate, endDate);
 		UsageReportRest usageReportRest = new UsageReportRest();
 		UsageReportPointDsoTotalVisitsRest totalVisitPoint = new UsageReportPointDsoTotalVisitsRest();
@@ -729,6 +774,19 @@ public class UsageReportUtils {
 			String endDate) throws SQLException, SolrServerException, ParseException, IOException {
 		if (dso instanceof org.dspace.content.Bitstream) {
 			return this.resolveTotalVisits(context, dso);
+		}
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
 		}
 
 		if (dso instanceof org.dspace.content.Item || dso instanceof org.dspace.content.Collection
@@ -757,6 +815,11 @@ public class UsageReportUtils {
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
 		statListing.addDatasetGenerator(dsoAxis);
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
 		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if (startDate == null) {
 			String localStartDate = "2011-01-01 00:00:00";
@@ -795,6 +858,20 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTopCountriesTimeRange(Context context, DSpaceObject dso, String startDate,
 			String endDate) throws SQLException, IOException, ParseException, SolrServerException {
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+		
 		Dataset dataset = this.getTypeStatsDatasetTimeRange(context, dso, "countryCode", 1, startDate, endDate);
 		UsageReportRest usageReportRest = new UsageReportRest();
 		for (int i = 0; i < dataset.getColLabels().size(); i++) {
@@ -808,6 +885,20 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTopCitiesTimeRange(Context context, DSpaceObject dso, String startDate,
 			String endDate) throws SQLException, IOException, ParseException, SolrServerException {
+		
+		if(getItemCount() == null) {
+			this.setItemCount(this.defaultCount);
+		}
+		
+		SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (startDate == null) {
+			String localStartDate = "2011-01-01 00:00:00";
+			setStartDate(obj.parse(localStartDate));
+		}
+		if (endDate == null) {
+			setEndDate(obj.parse(obj.format(new Date())));
+		}
+		
 		Dataset dataset = this.getTypeStatsDatasetTimeRange(context, dso, "city", 1, startDate, endDate);
 		UsageReportRest usageReportRest = new UsageReportRest();
 		for (int i = 0; i < dataset.getColLabels().size(); i++) {
