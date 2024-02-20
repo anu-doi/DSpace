@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
@@ -380,17 +381,28 @@ public class ANUDOIConnector {
         
         String proxyHost = configurationService.getProperty("http.proxy.host");
         String proxyPort = configurationService.getProperty("http.proxy.port");
-
-        if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-            System.setProperty("http.proxyHost", proxyHost);
-            System.setProperty("http.proxyPort", proxyPort);
-        }
+		
+//        if (StringUtils.isNotBlank(proxyHost) && proxyPort > 0) {
+//            System.setProperty("http.proxyHost", proxyHost);
+//            System.setProperty("http.proxyPort", proxyPort);
+//            int proxyPortInt = Integer
+//        }
 
 		HttpClientContext httpContext = HttpClientContext.create();
 		httpContext.setCredentialsProvider(credentialsProvider);
+		
 
 		HttpEntity entity = null;
-		try ( CloseableHttpClient httpclient = HttpClientBuilder.create().build(); ) {
+		CloseableHttpClient httpclient = null;
+//		try ( CloseableHttpClient httpclient = HttpClientBuilder.create().build(); ) {
+		try {
+			HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+	        if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
+	    		HttpHost proxy = new HttpHost(proxyHost, Integer.parseInt(proxyPort));
+	        	httpClientBuilder.setProxy(proxy);
+	        }
+//			CloseableHttpClient httpclient = HttpClientBuilder.create().build();
+	        httpclient = httpClientBuilder.build();
 			HttpResponse response = httpclient.execute(req, httpContext);
 
 			StatusLine status = response.getStatusLine();
@@ -482,12 +494,15 @@ public class ANUDOIConnector {
 			throw new RuntimeException(e);
 		} finally {
 			try {
+				if (null != httpclient) {
+					httpclient.close();
+				}
 				// Release any resources used by HTTP-Request.
 				if (null != entity) {
 					EntityUtils.consume(entity);
 				}
 			} catch (IOException e) {
-				log.warn("Can't release HTTP-Entity: " + e.getMessage());
+				log.warn("Either Can't release HTTP-Entity or httpClient: " + e.getMessage());
 			}
 		}
 		
