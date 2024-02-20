@@ -377,6 +377,14 @@ public class ANUDOIConnector {
 		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(new AuthScope(HOST, 443),
 				new UsernamePasswordCredentials(this.getUsername(), this.getPassword()));
+        
+        String proxyHost = configurationService.getProperty("http.proxy.host");
+        String proxyPort = configurationService.getProperty("http.proxy.port");
+
+        if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
+            System.setProperty("http.proxyHost", proxyHost);
+            System.setProperty("http.proxyPort", proxyPort);
+        }
 
 		HttpClientContext httpContext = HttpClientContext.create();
 		httpContext.setCredentialsProvider(credentialsProvider);
