@@ -890,8 +890,17 @@
                     <repeatable>false</repeatable>
                     <label>Source</label>
                     <input-type>onebox</input-type>
-                    <hint>Enter the standard citation for the previously issued instance of this item.</hint>
+                    <hint>Enter the journal title.</hint>
                     <required></required>
+                </field>
+            </row>
+			<row>
+                <field>
+                    <dc-schema>publicationvolume</dc-schema>
+                    <dc-element>volumeNumber</dc-element>
+                    <label>Volume</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the volume of the journal volume.</hint>
                 </field>
             </row>
             <row>
@@ -975,7 +984,7 @@
                     <dc-qualifier></dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>Date accepted for publication</label>
-                    <input-type>onebox</input-type>
+                    <input-type>date</input-type>
                     <hint>If known.</hint>
                     <required></required>
                 </field>
