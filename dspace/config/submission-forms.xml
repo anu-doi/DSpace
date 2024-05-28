@@ -905,7 +905,7 @@
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
+                    <dc-schema>local</dc-schema>
                     <dc-element>bibliographicCitation</dc-element>
                     <dc-qualifier>issue</dc-qualifier>
                     <repeatable>false</repeatable>
@@ -917,7 +917,7 @@
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
+                    <dc-schema>local</dc-schema>
                     <dc-element>bibliographicCitation</dc-element>
                     <dc-qualifier>startpage</dc-qualifier>
                     <repeatable>false</repeatable>
@@ -929,7 +929,7 @@
             </row>
             <row>
                 <field>
-                    <dc-schema>dc</dc-schema>
+                    <dc-schema>local</dc-schema>
                     <dc-element>bibliographicCitation</dc-element>
                     <dc-qualifier>lastpage</dc-qualifier>
                     <repeatable>false</repeatable>
@@ -996,6 +996,18 @@
                     <dc-qualifier>ariespublication</dc-qualifier>
                     <repeatable>false</repeatable>
                     <label>ARIES Document Identifier</label>
+                    <input-type>onebox</input-type>
+                    <hint>If known.</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>relation</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Grant ID</label>
                     <input-type>onebox</input-type>
                     <hint>If known.</hint>
                     <required></required>
