@@ -21,7 +21,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
+import org.dspace.content.Bitstream;
 import org.dspace.content.Item;
+import org.dspace.core.Context;
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 
@@ -156,15 +158,25 @@ public class JPEGFilter extends MediaFilter implements SelfRegisterInputFormats 
         // a little blur before scaling does wonders for keeping moire in check.
         if (blurring) {
             // send the buffered image off to get blurred.
-            buf = getBlurredInstance((BufferedImage) buf);
+        	try {
+        		BufferedImage tmp = getBlurredInstance((BufferedImage) buf);
+        		buf = tmp;
+        	} catch (OutOfMemoryError e) {
+        		System.out.println("Caught OutOfMemoryError. Skipping blurring.");
+        	}
         }
 
         // Use high quality scaling method if selected in config.
         // this has a definite performance penalty.
         if (hqscaling) {
             // send the buffered image off to get an HQ downscale.
-            buf = getScaledInstance((BufferedImage) buf, (int) xsize, (int) ysize,
+        	try {
+        		BufferedImage tmp = getScaledInstance((BufferedImage) buf, (int) xsize, (int) ysize,
                                     (Object) RenderingHints.VALUE_INTERPOLATION_BICUBIC, (boolean) true);
+        		buf = tmp;
+        	} catch (OutOfMemoryError e) {
+        		System.out.println("Caught OutOfMemoryError. Skipping HQ downscale");
+        	}
         }
 
         // now render the image into the thumbnail buffer
@@ -316,5 +328,17 @@ public class JPEGFilter extends MediaFilter implements SelfRegisterInputFormats 
         } while (w != targetWidth || h != targetHeight);
 
         return scalebuf;
+    }
+    
+    @Override
+    public boolean preProcessBitstream(Context c, Item item, Bitstream source, boolean verbose)
+        throws Exception {
+        final ConfigurationService configurationService
+        	= DSpaceServicesFactory.getInstance().getConfigurationService();
+		int maxFileProcessingSize = configurationService.getIntProperty("image.maxprocessingsize");
+		if (maxFileProcessingSize < source.getSizeBytes()) {
+			return false;
+		}
+        return true;  //default to no pre-processing
     }
 }
