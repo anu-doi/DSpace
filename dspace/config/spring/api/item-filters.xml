@@ -240,7 +240,7 @@
                         </bean>
                         <ref bean="contains-field-doi-condition"/>
                         <!-- Create DOIs for items only that do have at least one bitstream. -->
-                        <ref bean="has-at-least-one-bitstream_condition"/>
+                        <!-- <ref bean="has-at-least-one-bitstream_condition"/> -->
                     </list>
                 </property>
             </bean>
