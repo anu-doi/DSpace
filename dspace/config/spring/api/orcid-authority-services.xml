@@ -25,6 +25,11 @@
     </bean>
  -->
  
+	<alias name="OrcidSource" alias="AuthoritySource"/>
+    <bean name="OrcidSource" class="org.dspace.authority.orcid.Orcidv3SolrAuthorityImpl">
+        <property name="orcidRestConnector" ref="orcidRestConnector"/>
+    </bean>
+	
     <bean name="AuthorityTypes" class="org.dspace.authority.AuthorityTypes">
         <property name="types">
             <list>
