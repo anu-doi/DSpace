@@ -8,13 +8,29 @@
         <property name="stores">
             <map>
                 <entry key="0" value-ref="localStore"/>
-                <entry key="1" value-ref="s3Store"/>
+                <!-- <entry key="1" value-ref="s3Store"/> -->
+				<entry key="1" value-ref="localStore2"/>
+				<entry key="2" value-ref="localStore3"/>
+				<entry key="3" value-ref="localStore4"/>
+				<entry key="4" value-ref="localStore5"/>
             </map>
         </property>
     </bean>
 
     <bean name="localStore" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
         <property name="baseDir" value="${assetstore.dir}"/>
+    </bean>
+	<bean name="localStore2" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
+        <property name="baseDir" value="${dspace.dir}/assetstore2"/>
+    </bean>
+	<bean name="localStore3" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
+        <property name="baseDir" value="${dspace.dir}/assetstore3"/>
+    </bean>
+	<bean name="localStore4" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
+        <property name="baseDir" value="${dspace.dir}/assetstore4"/>
+    </bean>
+	<bean name="localStore5" class="org.dspace.storage.bitstore.DSBitStoreService" scope="singleton">
+        <property name="baseDir" value="${dspace.dir}/assetstore5"/>
     </bean>
 
     <bean name="s3Store" class="org.dspace.storage.bitstore.S3BitStoreService" scope="singleton" lazy-init="true">

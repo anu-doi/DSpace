@@ -27,9 +27,9 @@
          Schema, see https://schema.datacite.org. -->
     
     <!-- We need the prefix to determine DOIs that were minted by ourself. -->
-    <xsl:param name="prefix">10.5072/dspace-</xsl:param>
+    <xsl:param name="prefix">10.25911/</xsl:param>
     <!-- The content of the following parameter will be used as element publisher. -->
-    <xsl:param name="publisher">My University</xsl:param>
+    <xsl:param name="publisher">The Australian National University</xsl:param>
     <!-- The content of the following variable will be used as element contributor with contributorType datamanager. -->
     <xsl:param name="datamanager"><xsl:value-of select="$publisher" /></xsl:param>
     <!-- The content of the following variable will be used as element contributor with contributorType hostingInstitution. -->
@@ -69,7 +69,8 @@
                 company as well. We have to ensure to use URIs of our prefix
                 as primary identifiers only.
             -->
-            <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='identifier' and @qualifier and (contains(., $prefix))]" />
+            <!-- <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='identifier' and starts-with(., concat('http://dx.doi.org/', $prefix))]" />-->
+			<xsl:apply-templates select="//dspace:field[@mdschema='local' and @element='identifier' and @qualifier='doi']" />
 
             <!--
                 DataCite (2)
@@ -218,23 +219,28 @@
             -->
             <xsl:apply-templates select="(//dspace:field[@mdschema='dc' and @element='language' and (@qualifier='iso' or @qualifier='rfc3066')])[1]" />
 
+            
             <!--
                 DataCite (10)
                 Template call for ResourceType
                 DataCite allows the ResourceType to ouccre not more than once.
             -->
-            <!--<xsl:apply-templates select="(//dspace:field[@mdschema='dc' and @element='type'])[1]" />-->
-            <xsl:choose>
-                <xsl:when test="(//dspace:field[@mdschema='dc' and @element='type'])[1]">
-                    <xsl:apply-templates select="(//dspace:field[@mdschema='dc' and @element='type'])[1]" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:element name="resourceType">
-                        <xsl:attribute name="resourceTypeGeneral">Other</xsl:attribute>
-                        <xsl:value-of>Other</xsl:value-of>
-                    </xsl:element>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:element name="resourceType">
+                <xsl:attribute name="resourceTypeGeneral">
+                    <xsl:call-template name="getResourceType">
+                        <xsl:with-param name="type" select="//dspace:field[@mdschema='dc' and @element='type' and not(@qualifier)]/text()"/>
+                    </xsl:call-template>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="//dspace:field[@mdschema='dc' and @element='type' and not(@qualifier)]">
+                        <xsl:value-of select="//dspace:field[@mdschema='dc' and @element='type' and not(@qualifier)]"/>
+                    </xsl:when>
+                    <xsl:otherwise>(:unav) unavailable</xsl:otherwise>
+                </xsl:choose>
+            </xsl:element>
+            
+            <!-- For some reason this apply template doesn't work all the time -->
+            <!-- <xsl:apply-templates select="(//dspace:field[@mdschema='dc' and @element='type'])[1]" /> -->
 
             <!-- 
                 DataCite (11)
@@ -308,6 +314,15 @@
                 </xsl:element>
             </xsl:if>
             
+            <!-- 
+                 Add funding references.
+            -->
+            <xsl:if test="//dspace:field[@mdschema='dc' and @element='description' and @qualifier='sponsorship']">
+                <fundingReferences>
+                    <xsl:apply-templates select="//dspace:field[@mdschema='dc' and @element='description' and @qualifier='sponsorship']"/>
+                </fundingReferences>
+            </xsl:if>
+            
             <!--
                 DataCite (18)
                 GeoLocation
@@ -333,8 +348,9 @@
         company as well. We have to ensure to use URIs of our prefix
         as primary identifiers only.
     -->
-    <xsl:template match="dspace:field[@mdschema='dc' and @element='identifier' and @qualifier and (contains(., $prefix))]">
-        <identifier identifierType="DOI">
+	
+   <!-- <xsl:template match="dspace:field[@mdschema='dc' and @element='identifier' and @qualifier and starts-with(., concat('http://dx.doi.org/', $prefix))]">
+       <identifier identifierType="DOI">
             <xsl:if test="starts-with(string(text()), 'https://doi.org/')">
                 <xsl:value-of select="substring(., 17)"/>
             </xsl:if>
@@ -342,7 +358,13 @@
                 <xsl:value-of select="substring(., 19)"/>
             </xsl:if>
         </identifier>
+    </xsl:template> -->
+    <xsl:template match="dspace:field[@mdschema='local' and @element='identifier' and @qualifier='doi']">
+        <identifier identifierType="DOI">
+            <xsl:value-of select="."/>
+        </identifier>
     </xsl:template>
+    
 
     <!-- DataCite (2) :: Creator -->
     <xsl:template match="//dspace:field[@mdschema='dc' and @element='contributor' and @qualifier='author']">
@@ -511,12 +533,43 @@
             </xsl:choose>
         </xsl:element>
     </xsl:template>
-
+    
     <!--
         DataCite (10), DataCite (10.1)
         Adds resourceType and resourceTypeGeneral information
     -->
-    <xsl:template match="//dspace:field[@mdschema='dc' and @element='type'][1]">
+    
+    <xsl:template name="getResourceType">
+        <xsl:param name="type"/>
+        <!-- Transforming the language flags according to ISO 639-2/B & ISO 639-3 -->
+        <xsl:choose>
+            <xsl:when test="$type='Animation'">Audiovisual</xsl:when>
+            <xsl:when test="$type='Article'">Text</xsl:when>
+            <xsl:when test="$type='Book'">Text</xsl:when>
+            <xsl:when test="$type='Book chapter'">Text</xsl:when>
+            <xsl:when test="$type='Dataset'">Dataset</xsl:when>
+            <xsl:when test="$type='Learning Object'">InteractiveResource</xsl:when>
+            <xsl:when test="$type='Image'">Image</xsl:when>
+            <xsl:when test="$type='Image, 3-D'">Image</xsl:when>
+            <xsl:when test="$type='Map'">Model</xsl:when>
+            <xsl:when test="$type='Musical Score'">Other</xsl:when>
+            <xsl:when test="$type='Plan or blueprint'">Model</xsl:when>
+            <xsl:when test="$type='Preprint'">Text</xsl:when>
+            <xsl:when test="$type='Presentation'">Text</xsl:when>
+            <xsl:when test="$type='Recording, acoustical'">Sound</xsl:when>
+            <xsl:when test="$type='Recording, musical'">Sound</xsl:when>
+            <xsl:when test="$type='Recording, oral'">Sound</xsl:when>
+            <xsl:when test="$type='Software'">Software</xsl:when>
+            <xsl:when test="$type='Technical Report'">Text</xsl:when>
+            <xsl:when test="$type='Thesis'">Text</xsl:when>
+            <xsl:when test="$type='Video'">Audiovisual</xsl:when>
+            <xsl:when test="$type='Working Paper'">Text</xsl:when>
+            <xsl:when test="$type='Other'">Other</xsl:when>
+            <xsl:otherwise>Other</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- <xsl:template match="//dspace:field[@mdschema='dc' and @element='type'][1]">
         <xsl:element name="resourceType">
             <xsl:attribute name="resourceTypeGeneral">
                 <xsl:choose>
@@ -547,7 +600,7 @@
             </xsl:attribute>
             <xsl:value-of select="." />
         </xsl:element>
-    </xsl:template>
+    </xsl:template> -->
 
     <!--
         DataCite (11), DataCite (11.1)
@@ -629,6 +682,14 @@
                 </xsl:choose>
             </xsl:attribute>
             <xsl:value-of select="." />
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="//dspace:field[@mdschema='dc' and @element='description' and @qualifier='sponsorship']">
+        <xsl:element name="fundingReference">
+            <xsl:element name="funderName">
+                <xsl:value-of select="."/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
