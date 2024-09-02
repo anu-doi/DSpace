@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,7 @@ import org.dspace.statistics.content.DatasetTimeGenerator;
 import org.dspace.statistics.content.DatasetTypeGenerator;
 import org.dspace.statistics.content.StatisticsDataCityCountryVisits;
 import org.dspace.statistics.content.StatisticsDataDownload;
+import org.dspace.statistics.content.StatisticsDataItemCount;
 import org.dspace.statistics.content.StatisticsDataMonthlyVisits;
 import org.dspace.statistics.content.StatisticsDataVisits;
 import org.dspace.statistics.content.StatisticsListing;
@@ -66,6 +68,7 @@ public class UsageReportUtils {
 	private Date endDate;
 
 	protected final BitstreamService bitstreamService = ContentServiceFactory.getInstance().getBitstreamService();
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	protected SolrClient solr;
 
@@ -76,6 +79,7 @@ public class UsageReportUtils {
 	public static final String TOTAL_DOWNLOADS_REPORT_ID = "TotalDownloads";
 	public static final String TOP_COUNTRIES_REPORT_ID = "TopCountries";
 	public static final String TOP_CITIES_REPORT_ID = "TopCities";
+	public static final String TOTAL_ITEMS_COUNT_ID = "TotalItemsCount";
 
 	public Integer itemCount;
 
@@ -126,15 +130,19 @@ public class UsageReportUtils {
 			usageReports.add(this.createUsageReport(context, dso, TOP_COUNTRIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_CITIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_DOWNLOADS_REPORT_ID));
+			usageReports.add(this.createUsageReport(context, dso, TOTAL_ITEMS_COUNT_ID));
 		} else {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_COUNTRIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_CITIES_REPORT_ID));
+			usageReports.add(this.createUsageReport(context, dso, TOTAL_ITEMS_COUNT_ID));
+
 		}
 		if (dso instanceof Item || dso instanceof Bitstream) {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
 		}
+		
 		return usageReports;
 	}
 
@@ -156,6 +164,10 @@ public class UsageReportUtils {
 			case TOTAL_VISITS_REPORT_ID:
 				usageReportRest = resolveTotalVisitsForOthers(context, dso, null, null);
 				usageReportRest.setReportType(TOTAL_VISITS_REPORT_ID);
+				break;
+			case TOTAL_ITEMS_COUNT_ID:
+				usageReportRest = resolveItemCount(context, dso, null);
+				usageReportRest.setReportType(TOTAL_ITEMS_COUNT_ID);
 				break;
 			case TOTAL_VISITS_PER_MONTH_REPORT_ID:
 				usageReportRest = resolveTotalVisitsPerMonth(context, dso);
@@ -265,6 +277,37 @@ public class UsageReportUtils {
 		return usageReportRest;
 	}
 
+
+	private UsageReportRest resolveItemCount(Context context, DSpaceObject dso, String endDate)
+			throws SQLException, SolrServerException, IOException, ParseException {
+		StatisticsListing statListing = null;
+		String manipulate_date = endDate + " 23:59:59";
+
+		if (endDate == null) {
+			setEndDate(dateFormat.parse(dateFormat.format(new Date())));
+		} else {
+			setEndDate(dateFormat.parse(manipulate_date));
+		}
+
+		statListing = new StatisticsListing(new StatisticsDataItemCount(dso, getEndDate()));
+
+		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
+		// TODO make max nr of top items (views wise)? Must be set
+		dsoAxis.addDsoChild(Constants.ITEM, getItemCount(), false, -1);
+		statListing.addDatasetGenerator(dsoAxis);
+
+		Dataset dataset = statListing.getDataset(context, 1);
+		UsageReportRest usageReportRest = new UsageReportRest();
+
+		for (int i = 0; i < dataset.getColLabels().size(); i++) {
+			UsageReportPointDsoTotalVisitsRest totalVisitPoint = new UsageReportPointDsoTotalVisitsRest();
+			totalVisitPoint.setLabel(dataset.getColLabels().get(i));
+			totalVisitPoint.addValue("Number of Items", Integer.valueOf(dataset.getMatrix()[0][i]));
+			usageReportRest.addPoint(totalVisitPoint);
+		}
+		return usageReportRest;
+	}
+	
 	/**
 	 * Create a stat usage report for the amount of TotalVisit on a DSO, containing
 	 * one point with the amount of views on the DSO in. If there are no views on
@@ -537,6 +580,8 @@ public class UsageReportUtils {
 				usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
 			case ("TotalVisitsDownloads"):
 				usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_DOWNLOAD_ID, startDate, endDate));
+			case ("TotalItemsCount"):
+				usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_ITEMS_COUNT_ID, startDate, endDate));
 			}
 		} else {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_VISITS_DOWNLOAD_ID, startDate, endDate));
@@ -545,6 +590,7 @@ public class UsageReportUtils {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOP_COUNTRIES_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOP_CITIES_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_DOWNLOADS_REPORT_ID, startDate, endDate));
+			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_ITEMS_COUNT_ID, startDate, endDate));
 		}
 		return usageReports;
 	}
@@ -557,6 +603,10 @@ public class UsageReportUtils {
 			case TOTAL_VISITS_REPORT_ID:
 				usageReportRest = resolveTotalVisitsForOthers(context, dso, startDate, endDate);
 				usageReportRest.setReportType(TOTAL_VISITS_REPORT_ID);
+				break;
+			case TOTAL_ITEMS_COUNT_ID:
+				usageReportRest = resolveItemCount(context, dso, endDate);
+				usageReportRest.setReportType(TOTAL_ITEMS_COUNT_ID);
 				break;
 			case TOTAL_VISITS_DOWNLOAD_ID:
 				usageReportRest = resolveGlobalTimeRange(context, dso, startDate, endDate);
@@ -1039,6 +1089,9 @@ public class UsageReportUtils {
 				break;
 			}
 			throw new IllegalArgumentException("Error in resolveTotalDownloads function while exporting.");
+		case TOTAL_ITEMS_COUNT_ID:
+			statsList = new StatisticsListing(new StatisticsDataItemCount(dso, getEndDate()));
+			break;
 		default:
 			throw new ResourceNotFoundException("The given type " + type + " can't be resolved: "
 					+ "Only available reports: TotalVisits, TotalVisitsPerMonth, "
