@@ -358,7 +358,7 @@
                     <dc-element>provenance</dc-element>
                     <dc-qualifier></dc-qualifier>
                     <repeatable>true</repeatable>
-                    <label>Provenance (eg link to Sherpa/Romeo entry)</label>
+                    <label>Provenance</label>
                     <input-type>onebox</input-type>
                     <hint>Enter the associated open access rights.</hint>
                     <required></required>
