@@ -330,6 +330,42 @@
 			</row>
 			<row>
 				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>authoremail</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Author/Archives Email</label>
+					<input-type>onebox</input-type>
+                    <hint>Enter the email address of the authors of this item.</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+                <field>
+                    <dc-schema>local</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>uidSubmittedBy</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Submitter’s Uni ID</label>
+                    <input-type>onebox</input-type>
+                    <hint>Submitter's employee number: u123456789</hint>
+                    <required>We need to know who submitted here.</required>
+                </field>
+            </row>
+			<row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>provenance</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Provenance (eg link to Sherpa/Romeo entry)</label>
+                    <input-type>onebox</input-type>
+                    <hint>Enter the associated open access rights.</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+				<field>
 					<dc-schema>dc</dc-schema>
 					<dc-element>language</dc-element>
 					<dc-qualifier>iso</dc-qualifier>
