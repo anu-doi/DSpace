@@ -163,12 +163,16 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
         }
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
-
+        
         //String email = getAttributeAsString(userInfo, getEmailAttribute());
+        
+        for(Map.Entry<String, Object> info : userInfo.entrySet()) {
+        	System.out.println(info.getKey() + ":" + info.getValue().toString());
+        }
         
         String netId = getAttributeAsString(userInfo, getNetIdAttribute());
         if (StringUtils.isBlank(netId)) {
-            LOGGER.warn("No netId found in the user info attributes");
+            LOGGER.warn("No netId found in the user info attributes : "+netId);
             return NO_SUCH_USER;
         }
         
@@ -337,7 +341,7 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
     
     //New function to accommodate the new logic of using Uid as NetID
     private String getNetIdAttribute() {
-    	return configurationService.getProperty("authentication-oidc.user-info.id-field", "uid");
+    	return configurationService.getProperty("authentication-oidc.user-info.id-field", "userprincipalname");
 	}
 
     private boolean canSelfRegister() {
