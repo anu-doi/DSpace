@@ -40,6 +40,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.xml.bind.DatatypeConverter;
+
 import static java.time.LocalDateTime.now;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
@@ -166,10 +168,13 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
-        System.out.println("Access ID token : "+ accessToken.getIdToken());
-        System.out.println("Access token get : "+  accessToken.getAccessToken());
-        System.out.println("Scope : "+ accessToken.getScope());
-        System.out.println("Try string access token : "+ accessToken.toString());
+        byte[] decodedAccessToken = DatatypeConverter.parseBase64Binary(accessToken.getAccessToken());
+        
+        System.out.println("The decoded access token : " + Arrays.toString(decodedAccessToken));
+//        System.out.println("Access ID token : "+ accessToken.getIdToken());
+//        System.out.println("Access token get : "+  accessToken.getAccessToken());
+//        System.out.println("Scope : "+ accessToken.getScope());
+//        System.out.println("Try string access token : "+ accessToken.toString());
         //String email = getAttributeAsString(userInfo, getEmailAttribute());
         
         for(Map.Entry<String, Object> info : userInfo.entrySet()) {
