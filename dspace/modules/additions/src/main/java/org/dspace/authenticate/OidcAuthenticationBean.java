@@ -169,11 +169,18 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
+        System.out.println("Access token get : "+  accessToken.getAccessToken());
         //String[] decodedAccessToken = DatatypeConverter.pars(accessToken.getAccessToken());
+        try {
         String decodedId = new String(Base64.getDecoder().decode(accessToken.getAccessToken()));
         System.out.println("The decoded access token : " + decodedId);
+        }
+        catch(Exception e) {
+        	LOGGER.error("Access token get : "+ accessToken.getAccessToken());
+        	LOGGER.error("The exception e : "+ e.getMessage());
+        }
+        
 //        System.out.println("Access ID token : "+ accessToken.getIdToken());
-//        System.out.println("Access token get : "+  accessToken.getAccessToken());
 //        System.out.println("Scope : "+ accessToken.getScope());
 //        System.out.println("Try string access token : "+ accessToken.toString());
         //String email = getAttributeAsString(userInfo, getEmailAttribute());
