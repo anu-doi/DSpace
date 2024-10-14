@@ -157,8 +157,8 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
     private int authenticateWithOidc(Context context, String code, HttpServletRequest request) throws SQLException {
 
         OidcTokenResponseDTO accessToken = getOidcAccessToken(code);
-        System.out.println("Code : "+code);
-        System.out.println("Access Token : "+ accessToken);
+        //System.out.println("Code : "+code);
+
         if (accessToken == null) {
             LOGGER.warn("No access token retrieved by code");
             return NO_SUCH_USER;
@@ -166,6 +166,10 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
+        System.out.println("Access ID token : "+ accessToken.getIdToken());
+        System.out.println("Access token get : "+  accessToken.getAccessToken());
+        System.out.println("Scope : "+ accessToken.getScope());
+        System.out.println("Try string access token : "+ accessToken.toString());
         //String email = getAttributeAsString(userInfo, getEmailAttribute());
         
         for(Map.Entry<String, Object> info : userInfo.entrySet()) {
