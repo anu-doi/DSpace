@@ -17,6 +17,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -168,9 +169,9 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
-        byte[] decodedAccessToken = DatatypeConverter.parseBase64Binary(accessToken.getAccessToken());
-        
-        System.out.println("The decoded access token : " + Arrays.toString(decodedAccessToken));
+        //String[] decodedAccessToken = DatatypeConverter.pars(accessToken.getAccessToken());
+        String decodedId = new String(Base64.getDecoder().decode(accessToken.getAccessToken()));
+        System.out.println("The decoded access token : " + decodedId);
 //        System.out.println("Access ID token : "+ accessToken.getIdToken());
 //        System.out.println("Access token get : "+  accessToken.getAccessToken());
 //        System.out.println("Scope : "+ accessToken.getScope());
