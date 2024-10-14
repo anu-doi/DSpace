@@ -157,6 +157,8 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
     private int authenticateWithOidc(Context context, String code, HttpServletRequest request) throws SQLException {
 
         OidcTokenResponseDTO accessToken = getOidcAccessToken(code);
+        System.out.println("Code : "+code);
+        System.out.println("Access Token : "+ accessToken);
         if (accessToken == null) {
             LOGGER.warn("No access token retrieved by code");
             return NO_SUCH_USER;
