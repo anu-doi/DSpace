@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.dspace.authenticate.oidc.OidcClient;
@@ -40,8 +41,6 @@ import org.dspace.services.ConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.xml.bind.DatatypeConverter;
 
 import static java.time.LocalDateTime.now;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -169,27 +168,12 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
 
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
-        System.out.println("Access token get : "+  accessToken.getAccessToken());
-        //String[] decodedAccessToken = DatatypeConverter.pars(accessToken.getAccessToken());
-        try {
-        String decodedId = new String(Base64.getDecoder().decode(accessToken.getAccessToken()));
-        System.out.println("The decoded access token : " + decodedId);
-        }
-        catch(Exception e) {
-        	LOGGER.error("Access token get : "+ accessToken.getAccessToken());
-        	LOGGER.error("The exception e : "+ e.getMessage());
-        }
+        String netId = getNetIdInfo(accessToken.getAccessToken());
         
-//        System.out.println("Access ID token : "+ accessToken.getIdToken());
-//        System.out.println("Scope : "+ accessToken.getScope());
-//        System.out.println("Try string access token : "+ accessToken.toString());
-        //String email = getAttributeAsString(userInfo, getEmailAttribute());
+        System.out.println("Net Id in authenticate : "+  netId);
+
+        String email = getAttributeAsString(userInfo, getEmailAttribute());
         
-        for(Map.Entry<String, Object> info : userInfo.entrySet()) {
-        	System.out.println(info.getKey() + ":" + info.getValue().toString());
-        }
-        
-        String netId = getAttributeAsString(userInfo, getNetIdAttribute());
         if (StringUtils.isBlank(netId)) {
             LOGGER.warn("No netId found in the user info attributes : "+netId);
             return NO_SUCH_USER;
@@ -212,10 +196,11 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
                 netId);
         }
 
-        return canSelfRegister() ? registerNewEPerson(context, userInfo, netId) : NO_SUCH_USER;
+        return canSelfRegister() ? registerNewEPerson(context, userInfo, netId, email) : NO_SUCH_USER;
     }
 
-    @Override
+
+	@Override
     public String loginPageURL(Context context, HttpServletRequest request, HttpServletResponse response) {
 
         String authorizeUrl = configurationService.getProperty("authentication-oidc.authorize-endpoint");
@@ -263,7 +248,7 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
         return SUCCESS;
     }
 
-    private int registerNewEPerson(Context context, Map<String, Object> userInfo, String email) throws SQLException {
+    private int registerNewEPerson(Context context, Map<String, Object> userInfo, String netId, String email) throws SQLException {
         try {
 
             context.turnOffAuthorisationSystem();
@@ -271,15 +256,12 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
             EPerson eperson = ePersonService.create(context);
 
             //New logic to use Uni ID uid as the netID - Starts here
-            String netId = getAttributeAsString(userInfo, getNetIdAttribute());
+            //String netId = getAttributeAsString(userInfo, getNetIdAttribute());
             if (netId != null) {
                 eperson.setNetid(netId);
                 LOGGER.info("Self registering new person using OIDC-based on netID : "+netId);
             }
-            else {
-            	eperson.setNetid(email);
-            	LOGGER.info("Self registering new person using OIDC-based on email : "+email);
-            }
+
             //New logic to use Uni ID uid as the netID - Ends here
             
             eperson.setEmail(email);
@@ -338,6 +320,38 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
             return Map.of();
         }
     }
+    
+    private String getNetIdInfo(String accessToken) {
+		// TODO Auto-generated method stub
+    	
+    	String netId = null;
+    	
+    	try {
+        String[] splitString = accessToken.split("\\.");
+        
+        String tokenPayload = splitString[1];
+        
+        String decodedPayload = new String(Base64.getDecoder().decode(tokenPayload));
+        
+        System.out.println("The decoded access token : " + decodedPayload);
+		
+        JSONObject jsonObject = new JSONObject(decodedPayload);
+        
+        String getUpn = jsonObject.getString("upn");
+        
+        String[] splitUpn = getUpn.split("@");
+        
+        netId = splitUpn[0];
+        
+        System.out.println("The net ID : " + netId);
+		
+        }
+        catch(Exception e) {
+        	LOGGER.error("The exception e : "+ e.getMessage());
+        }
+        
+    	return netId;
+ }
 
     private String getAttributeAsString(Map<String, Object> userInfo, String attribute) {
         if (isBlank(attribute)) {
