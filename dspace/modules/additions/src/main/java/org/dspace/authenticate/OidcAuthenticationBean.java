@@ -159,7 +159,6 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
     private int authenticateWithOidc(Context context, String code, HttpServletRequest request) throws SQLException {
 
         OidcTokenResponseDTO accessToken = getOidcAccessToken(code);
-        //System.out.println("Code : "+code);
 
         if (accessToken == null) {
             LOGGER.warn("No access token retrieved by code");
@@ -169,9 +168,6 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
         Map<String, Object> userInfo = getOidcUserInfo(accessToken.getAccessToken());
         
         String netId = getNetIdInfo(accessToken.getAccessToken());
-        
-        System.out.println("Net Id in authenticate : "+  netId);
-
         String email = getAttributeAsString(userInfo, getEmailAttribute());
         
         if (StringUtils.isBlank(netId)) {
@@ -181,9 +177,7 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
         
         String currentDate = ISO_LOCAL_DATE_TIME.format(now());
         System.out.println(currentDate + ": netId: "+netId);
-        
-        //EPerson ePerson = ePersonService.findByEmail(context, email);
-        
+                
         EPerson ePerson = ePersonService.findByNetid(context, netId);
         if (ePerson != null) {
             request.setAttribute(OIDC_AUTHENTICATED, true);
@@ -256,7 +250,6 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
             EPerson eperson = ePersonService.create(context);
 
             //New logic to use Uni ID uid as the netID - Starts here
-            //String netId = getAttributeAsString(userInfo, getNetIdAttribute());
             if (netId != null) {
                 eperson.setNetid(netId);
                 LOGGER.info("Self registering new person using OIDC-based on netID : "+netId);
@@ -322,35 +315,22 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
     }
     
     private String getNetIdInfo(String accessToken) {
-		// TODO Auto-generated method stub
-    	
+
     	String netId = null;
     	
     	try {
-        String[] splitString = accessToken.split("\\.");
-        
-        String tokenPayload = splitString[1];
-        
-        String decodedPayload = new String(Base64.getDecoder().decode(tokenPayload));
-        
-        System.out.println("The decoded access token : " + decodedPayload);
-		
-        JSONObject jsonObject = new JSONObject(decodedPayload);
-        
-        String getUpn = jsonObject.getString("upn");
-        
-        String[] splitUpn = getUpn.split("@");
-        
-        netId = splitUpn[0];
-        
-        System.out.println("The net ID : " + netId);
-		
+    		String[] splitString = accessToken.split("\\.");
+    		String tokenPayload = splitString[1];
+    		String decodedPayload = new String(Base64.getDecoder().decode(tokenPayload));
+        		
+    		JSONObject jsonObject = new JSONObject(decodedPayload);
+    		String getUpn = jsonObject.getString("upn");
+    		String[] splitUpn = getUpn.split("@");
+    		netId = splitUpn[0];		
+        } catch (Exception e) {
+        	LOGGER.error("Exception in getNetIdInfo : "+ e.getMessage());
         }
-        catch(Exception e) {
-        	LOGGER.error("The exception e : "+ e.getMessage());
-        }
-        
-    	return netId;
+        return netId;
  }
 
     private String getAttributeAsString(Map<String, Object> userInfo, String attribute) {
@@ -372,11 +352,6 @@ public class OidcAuthenticationBean implements AuthenticationMethod {
         return configurationService.getProperty("authentication-oidc.user-info.last-name", "family_name");
     }
     
-    //New function to accommodate the new logic of using Uid as NetID
-    private String getNetIdAttribute() {
-    	return configurationService.getProperty("authentication-oidc.user-info.id-field", "userprincipalname");
-	}
-
     private boolean canSelfRegister() {
         String canSelfRegister = configurationService.getProperty("authentication-oidc.can-self-register", "true");
         if (isBlank(canSelfRegister)) {
