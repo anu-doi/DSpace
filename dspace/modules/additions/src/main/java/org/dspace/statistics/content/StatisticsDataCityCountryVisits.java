@@ -815,21 +815,19 @@ public class StatisticsDataCityCountryVisits extends StatisticsData {
             }
 
             //Check (& add if needed) the dsoId
-//            if (dso != null) {
-//                query += (query.equals("") ? "" : " AND ");
-//
-//                //DS-3602: For clarity, adding "id:" to the right hand side of the search
-//                //In the solr schema, "id" has been declared as the defaultSearchField so the field name is optional
-//                if (dso instanceof DSpaceObjectLegacySupport) {
-//                	System.out.println("instance of dsolegacy");
-//                    query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
-//                } else {
-//                	System.out.println("not an instance of dsolegacy");
-//                    query += "id:" + dso.getID();
-//                }
-//            }
-            if (currentDso != null) {
-//            if (owningDso != null && currentDso != null) {
+            if (dso != null) {
+                query += (query.equals("") ? "" : " AND ");
+
+                //DS-3602: For clarity, adding "id:" to the right hand side of the search
+                //In the solr schema, "id" has been declared as the defaultSearchField so the field name is optional
+                if (dso instanceof DSpaceObjectLegacySupport) {
+                    query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
+                } else {
+                    query += "id:" + dso.getID();
+                }
+            }
+//            if (currentDso != null) {
+            if (owningDso != null && currentDso != null) {
                 query += (query.equals("") ? "" : " AND ");
 
                 String owningStr = "";
