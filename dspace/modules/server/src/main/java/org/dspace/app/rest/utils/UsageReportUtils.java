@@ -282,8 +282,8 @@ public class UsageReportUtils {
 			throws SQLException, SolrServerException, IOException, ParseException {
 		StatisticsListing statListing = null;
 		String manipulate_date = endDate + " 23:59:59";
-
-		if (endDate == null) {
+		
+		if (endDate == null || endDate.length() == 0 || endDate.equals("null")) {
 			setEndDate(dateFormat.parse(dateFormat.format(new Date())));
 		} else {
 			setEndDate(dateFormat.parse(manipulate_date));
@@ -358,7 +358,8 @@ public class UsageReportUtils {
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		
 		if(dso instanceof Site) {
-			dsoAxis.addDsoChild(dso.getType(), 1, false, -1);
+//			dsoAxis.addDsoChild(dso.getType(), 1, false, -1);
+			dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1);
 		} else {
 		dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1); //monthly statistics of items belonging to the 
 		// dsoAxis.addDsoChild(Constants.ITEM, 10, false, -1);

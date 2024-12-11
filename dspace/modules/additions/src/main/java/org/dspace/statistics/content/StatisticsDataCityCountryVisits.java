@@ -811,29 +811,29 @@ public class StatisticsDataCityCountryVisits extends StatisticsData {
             String query = "";
             //Check (& add if needed) the dsoType
             if (dsoType != -1) {
-                query += "type: " + dsoType;
+                query += "type:" + dsoType;
             }
 
             //Check (& add if needed) the dsoId
-            if (dso != null) {
-                query += (query.equals("") ? "" : " AND ");
-
-                //DS-3602: For clarity, adding "id:" to the right hand side of the search
-                //In the solr schema, "id" has been declared as the defaultSearchField so the field name is optional
-                if (dso instanceof DSpaceObjectLegacySupport) {
-                    query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
-                } else {
-                    query += "id:" + dso.getID();
-                }
-            }
-//            if (currentDso != null) {
-            if (owningDso != null && currentDso != null) {
+//            if (dso != null && dso.getType() != Constants.SITE) {
+//                query += (query.equals("") ? "" : " AND ");
+//
+//                //DS-3602: For clarity, adding "id:" to the right hand side of the search
+//                //In the solr schema, "id" has been declared as the defaultSearchField so the field name is optional
+//                if (dso instanceof DSpaceObjectLegacySupport && ((DSpaceObjectLegacySupport) currentDso).getLegacyId() != null) {
+//                    query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
+//                } else {
+//                    query += "id:" + dso.getID();
+//                }
+//            }
+            
+            if (currentDso != null && currentDso.getType() != Constants.SITE && currentDso.getType() != dsoType) {
                 query += (query.equals("") ? "" : " AND ");
 
                 String owningStr = "";
                 switch (currentDso.getType()) {
                     case Constants.ITEM:
-                        owningStr = "owningItem";
+                		owningStr = "owningItem";
                         break;
                     case Constants.COLLECTION:
                         owningStr = "owningColl";
@@ -844,14 +844,27 @@ public class StatisticsDataCityCountryVisits extends StatisticsData {
                     default:
                         break;
                 }
-                if (currentDso instanceof DSpaceObjectLegacySupport) {
+                if (owningStr != null) {
+                if (currentDso instanceof DSpaceObjectLegacySupport && ((DSpaceObjectLegacySupport) currentDso).getLegacyId() != null) {
                     owningStr = "(" + owningStr + ":" + currentDso.getID() + " OR "
                         + owningStr + ":" + ((DSpaceObjectLegacySupport) currentDso).getLegacyId() + ")";
                 } else {
                     owningStr += ":" + currentDso.getID();
                 }
+                }
 
                 query += owningStr;
+            } 
+            else if (currentDso != null && currentDso.getType() != Constants.SITE) {
+                query += (query.equals("") ? "" : " AND ");
+            	String idStr = "";
+                if (currentDso instanceof DSpaceObjectLegacySupport && ((DSpaceObjectLegacySupport) currentDso).getLegacyId() != null) {
+                	idStr = "(id:" + currentDso.getID() + " OR "
+                        + "id:" + ((DSpaceObjectLegacySupport) currentDso).getLegacyId() + ")";
+                } else {
+                    idStr += "id:" + currentDso.getID();
+                }
+                query += idStr;
             }
 
             if (query.equals("")) {

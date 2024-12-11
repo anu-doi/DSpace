@@ -67,7 +67,7 @@ import org.dspace.statistics.util.LocationUtils;
  * Date: 23-feb-2009
  * Time: 12:25:20
  */
-public class StatisticsDataMonthlyVisits extends StatisticsData {
+public class StatisticsDataVisits extends StatisticsData {
     /**
      * Current DSpaceObject for which to generate the statistics.
      */
@@ -85,7 +85,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
     /**
      * Construct a completely uninitialized query.
      */
-    public StatisticsDataMonthlyVisits() {
+    public StatisticsDataVisits() {
         super();
     }
 
@@ -94,7 +94,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
      *
      * @param dso the target DSpace object
      */
-    public StatisticsDataMonthlyVisits(DSpaceObject dso) {
+    public StatisticsDataVisits(DSpaceObject dso) {
         super();
         this.currentDso = dso;
     }
@@ -105,7 +105,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
      * @param currentDso the target DSpace object
      * @param dataset    the target dataset
      */
-    public StatisticsDataMonthlyVisits(DSpaceObject currentDso, Dataset dataset) {
+    public StatisticsDataVisits(DSpaceObject currentDso, Dataset dataset) {
         super(dataset);
         this.currentDso = currentDso;
     }
@@ -115,7 +115,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
      *
      * @param dataset the target dataset
      */
-    public StatisticsDataMonthlyVisits(Dataset dataset) {
+    public StatisticsDataVisits(Dataset dataset) {
         super(dataset);
     }
 
@@ -219,7 +219,6 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
                             .queryFacetDate(query, filterQuery, dataSetQuery.getMax(), dateFacet.getDateType(),
                                             dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal, context,
                                             facetMinCount);
-                        
                         dataset = new Dataset(1, results.length);
                         // Now that we have our results put em in a matrix
                         for (int j = 0; j < results.length; j++) {
@@ -240,10 +239,8 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
                             ObjectCount firstCount = maxObjectCounts[j];
                             String newQuery = dataSetQuery.getFacetField() + ": " + ClientUtils
                                 .escapeQueryChars(firstCount.getValue()) + " AND " + query;
-
                             ObjectCount[] maxDateFacetCounts = solrLoggerService
-//                                .queryFacetDate(newQuery, filterQuery, dataSetQuery.getMax(), dateFacet.getDateType(),
-                            		.queryFacetDate(query, filterQuery, dataSetQuery.getMax(), dateFacet.getDateType(),
+                                .queryFacetDate(newQuery, filterQuery, dataSetQuery.getMax(), dateFacet.getDateType(),
                                                 dateFacet.getStartDate(), dateFacet.getEndDate(), showTotal, context,
                                                 facetMinCount);
 
@@ -306,6 +303,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
                                                                                    .getDsoType() != -1) {
                         facetQuery += " AND type:" + secondDataSet.getQueries().get(0).getDsoType();
                     }
+
                     facetQueries.add(facetQuery);
                 }
                 for (int i = 0; i < topCounts1.length; i++) {
@@ -422,7 +420,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
                     Query query = new Query();
                     query.setDso(currentDso, currentDso.getType(), dsoLength);
                     datasetQuery.addQuery(query);
-                	} else {
+                } else {
                     // TODO: only do this for bitstreams from an item
                     Query query = new Query();
                     if (currentDso != null && separate && dsoType == Constants.BITSTREAM) {
@@ -814,12 +812,15 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
             //Time to construct our query
             String query = "";
             //Check (& add if needed) the dsoType
-            if (dsoType != -1) {
+            if (Constants.SITE == dsoType) {
+                query += "type:" + Constants.ITEM;
+            }
+            else if (dsoType != -1) {
                 query += "type:" + dsoType;
             }
 
             //Check (& add if needed) the dsoId
-//            if (dso != null) {
+//            if (dso != null && Constants.SITE != dsoType) {
 //                query += (query.equals("") ? "" : " AND ");
 //
 //                //DS-3602: For clarity, adding "id:" to the right hand side of the search
@@ -873,6 +874,7 @@ public class StatisticsDataMonthlyVisits extends StatisticsData {
             if (query.equals("")) {
                 query = "*:*";
             }
+
             return query;
         }
     }
