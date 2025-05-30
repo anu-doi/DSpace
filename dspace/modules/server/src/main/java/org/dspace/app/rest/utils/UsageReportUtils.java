@@ -129,7 +129,6 @@ public class UsageReportUtils {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_COUNTRIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_CITIES_REPORT_ID));
-			usageReports.add(this.createUsageReport(context, dso, TOP_DOWNLOADS_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_ITEMS_COUNT_ID));
 		} else {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_REPORT_ID));
@@ -141,6 +140,8 @@ public class UsageReportUtils {
 		}
 		if (dso instanceof Item || dso instanceof Bitstream) {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
+		} else {
+			usageReports.add(this.createUsageReport(context, dso, TOP_DOWNLOADS_REPORT_ID));
 		}
 		
 		return usageReports;
@@ -593,6 +594,12 @@ public class UsageReportUtils {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_DOWNLOADS_REPORT_ID, startDate, endDate));
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_ITEMS_COUNT_ID, startDate, endDate));
 		}
+		
+		if (dso instanceof Item || dso instanceof Bitstream) {
+			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
+		} else {
+			usageReports.add(this.createUsageReportParameters(context, dso, TOP_DOWNLOADS_REPORT_ID, startDate, endDate));
+		}
 		return usageReports;
 	}
 
@@ -782,7 +789,7 @@ public class UsageReportUtils {
 		usageReportRest.setReportType(TOTAL_VISITS_REPORT_ID);
 
 		if (export) {
-			exportDataset(dataset, response);
+			exportDataset(dataset, dso, TOTAL_VISITS_REPORT_ID, response);
 		}
 		return usageReportRest;
 
@@ -852,7 +859,7 @@ public class UsageReportUtils {
 				totalDownloadsPoint.setId(dataset.getColLabelsAttrs().get(i).get("id"));
 				totalDownloadsPoint.setLabel(dataset.getColLabels().get(i));
 
-				totalDownloadsPoint.addValue("views", Integer.valueOf(dataset.getMatrix()[0][i]));
+				totalDownloadsPoint.addValue("downloads", Integer.valueOf(dataset.getMatrix()[0][i]));
 				usageReportRest.addPoint(totalDownloadsPoint);
 			}
 			return usageReportRest;
@@ -862,7 +869,7 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTopDownloads(Context context, DSpaceObject dso, String startDate, String endDate)
 			throws SQLException, SolrServerException, ParseException, IOException {
-		StatisticsListing statListing = new StatisticsListing(new StatisticsDataDownload());
+		StatisticsListing statListing = ((dso instanceof Site) ? new StatisticsListing(new StatisticsDataDownload()) : new StatisticsListing(new StatisticsDataDownload(dso)));
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
 		statListing.addDatasetGenerator(dsoAxis);
@@ -887,7 +894,6 @@ public class UsageReportUtils {
 		statListing.addFilter(dateFilter);
 
 		dsoAxis.addDsoChild(Constants.BITSTREAM, getItemCount(), false, -1);
-
 		Dataset dataset = statListing.getDataset(context, 1);
 
 		UsageReportRest usageReportRest = new UsageReportRest();
@@ -898,7 +904,7 @@ public class UsageReportUtils {
 			if (urlOfItem != null) {
 				topVisitPoint.setId(dataset.getColLabelsAttrs().get(i).get("id"));
 				topVisitPoint.setLabel(dataset.getColLabels().get(i));
-				topVisitPoint.addValue("views", Integer.valueOf(dataset.getMatrix()[0][i]));
+				topVisitPoint.addValue("downloads", Integer.valueOf(dataset.getMatrix()[0][i]));
 				topVisitPoint.addItemValue("Item name", dataset.getMatrix()[1][i]);
 				usageReportRest.addPoint(topVisitPoint);
 			}
@@ -906,7 +912,7 @@ public class UsageReportUtils {
 		usageReportRest.setReportType(TOP_DOWNLOADS_REPORT_ID);
 		return usageReportRest;
 	}
-
+	
 	private UsageReportRest resolveTopCountriesTimeRange(Context context, DSpaceObject dso, String startDate,
 			String endDate) throws SQLException, IOException, ParseException, SolrServerException {
 		
@@ -995,7 +1001,6 @@ public class UsageReportUtils {
 		dateFilter.setStartDate(this.startDate);
 		dateFilter.setEndDate(this.endDate);
 		statsList.addFilter(dateFilter);
-		//		}
 		return statsList.getDataset(context, facetMinCount);
 	}
 
@@ -1037,11 +1042,11 @@ public class UsageReportUtils {
 					throws SQLException, IOException, ParseException, SolrServerException {
 		ByteArrayOutputStream baos = null;
 		Dataset dataset = getExportSiteDataset(context, dso, startDate, endDate, type);
-		baos = exportDataset(dataset, response);
+		baos = exportDataset(dataset, dso, type, response);
 		return baos;
 	}
 
-	public ByteArrayOutputStream exportDataset(Dataset dataset, HttpServletResponse response) throws IOException {
+	public ByteArrayOutputStream exportDataset(Dataset dataset, DSpaceObject dso, String type, HttpServletResponse response) throws IOException {
 		ByteArrayOutputStream baos = null;
 		OutputStream os;
 		dataset.flipRowCols();
@@ -1063,7 +1068,7 @@ public class UsageReportUtils {
 				statsList = new StatisticsListing(new StatisticsDataVisits());
 				break;
 			} else {
-				dataset = this.getDSOStatsDatasetTimeRange(context, dso, 1, dso.getType(), startDate, endDate);
+				dataset = this.getDSOStatsDatasetForVisits(context, dso, 1, Constants.ITEM, startDate, endDate);
 				return dataset;
 			}
 		case TOTAL_VISITS_PER_MONTH_REPORT_ID:
@@ -1085,11 +1090,8 @@ public class UsageReportUtils {
 			dataset = this.getTypeStatsDatasetTimeRange(context, dso, "city", 1, startDate, endDate);
 			return dataset;
 		case TOP_DOWNLOADS_REPORT_ID:
-			if (dso instanceof Site) {
-				statsList = new StatisticsListing(new StatisticsDataDownload());
+				statsList = ((dso instanceof Site) ? new StatisticsListing(new StatisticsDataDownload()) : new StatisticsListing(new StatisticsDataDownload(dso)));
 				break;
-			}
-			throw new IllegalArgumentException("Error in resolveTotalDownloads function while exporting.");
 		case TOTAL_ITEMS_COUNT_ID:
 			statsList = new StatisticsListing(new StatisticsDataItemCount(dso, getEndDate()));
 			break;

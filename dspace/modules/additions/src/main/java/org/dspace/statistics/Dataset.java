@@ -25,6 +25,7 @@ import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.dspace.content.DSpaceObject;
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 
@@ -249,9 +250,10 @@ public class Dataset {
 
 		// Generate the item row
 		List<String> colLabels = new ArrayList<>();
-		if (getNbCols() == 2) {
+		if (getNbCols() == 3) {
 			colLabels = Arrays.asList(config.getProperty("export.columns.first"),
-					config.getProperty("export.columns.second"), config.getProperty("export.columns.third"));
+					config.getProperty("export.columns.secondDownloads"), config.getProperty("export.columns.third"),
+					config.getProperty("export.columns.fourth"));
 		} else {
 			colLabels = Arrays.asList(config.getProperty("export.columns.first"),
 					config.getProperty("export.columns.second"));
@@ -259,9 +261,18 @@ public class Dataset {
 		ecsvp.writeNext(colLabels.toArray(new String[colLabels.size()]));
 		List<String> rowLabels = getRowLabels();
 		String[][] matrix = getMatrix();
-		for (int i = 0; i < rowLabels.size(); i++) {
-			String rowLabel = rowLabels.get(i);
-			ecsvp.writeNext((String[]) ArrayUtils.addAll(new String[] { rowLabel }, matrix[i]));
+		
+		boolean hasValidData = rowLabels != null && !rowLabels.isEmpty() && matrix != null && matrix.length > 0;
+		if (hasValidData) {
+			for (int i = 0; i < rowLabels.size(); i++) {
+				String rowLabel = rowLabels.get(i);
+				if (rowLabel == null || rowLabel.toLowerCase().matches("^row\\s*\\d+$")) {
+					continue;
+				} else if (rowLabel.toLowerCase().matches("^column\\s*\\d+$")) {
+					rowLabel = "Total Visits";
+				}
+				ecsvp.writeNext((String[]) ArrayUtils.addAll(new String[] { rowLabel }, matrix[i]));
+			}
 		}
 		ecsvp.flush();
 		ecsvp.close();

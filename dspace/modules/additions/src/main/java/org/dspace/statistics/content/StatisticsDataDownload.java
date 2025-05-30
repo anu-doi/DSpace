@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -321,7 +322,7 @@ public class StatisticsDataDownload extends StatisticsData {
 				}
 			} else {
 				// Make sure we have a dataSet
-				dataset = new Dataset(2, topCounts1.length);
+				dataset = new Dataset(3, topCounts1.length);
 				for (int i = 0; i < topCounts1.length; i++) {
 					ObjectCount count = topCounts1[i];
 					String dsoId = count.getValue();
@@ -337,6 +338,7 @@ public class StatisticsDataDownload extends StatisticsData {
 						}
 						if (owningItem != null) {
 							dataset.addValueToMatrix(1, i, owningItem.getName());
+							dataset.addValueToMatrix(2, i, owningItem.getHandle());
 						}
 					}
 				}
@@ -696,27 +698,42 @@ public class StatisticsDataDownload extends StatisticsData {
 		public String getQuery() {
 			// Time to construct our query
 			String query = "";
+			String owningStr = "";
+						
 			// Check (& add if needed) the dsoType
 			if (dsoType != -1) {
 				query += "type: " + dsoType;
 			}
-			// Check (& add if needed) the dsoId
-			if (dso != null) {
+			
+			if (owningDso != null && currentDso != null && currentDso.getType() != Constants.SITE) {
 				query += (query.equals("") ? "" : " AND ");
+				
+				
+                switch (currentDso.getType()) {
+                    case Constants.ITEM:
+                        owningStr = "owningItem";
+                        break;
+                    case Constants.COLLECTION:
+                        owningStr = "owningColl";
+                        break;
+                    case Constants.COMMUNITY:
+                        owningStr = "owningComm";
+                        break;
+                    default:
+                        break;
+                }
 				// DS-3602: For clarity, adding "id:" to the right hand side of the search
 				// In the solr schema, "id" has been declared as the defaultSearchField so the
 				// field name is optional
-				if (dso instanceof DSpaceObjectLegacySupport) {
-					query += " (id:" + dso.getID() + " OR id:" + ((DSpaceObjectLegacySupport) dso).getLegacyId() + ")";
+				if (currentDso instanceof DSpaceObjectLegacySupport) {
+					query += "("+owningStr + ":" + currentDso.getID() + " OR "+owningStr + ":" + ((DSpaceObjectLegacySupport) currentDso).getLegacyId() + ")";
 				} else {
-					query += "id:" + dso.getID();
+					query += owningStr + ":" + currentDso.getID();
 				}
 			}
 
 			if (query.equals("")) {
 				query = "*:*";
-			} else {
-				query += " AND -(bundleName:[* TO *]-bundleName:ORIGINAL) AND owningItem:*";
 			}
 			return query;
 		}
