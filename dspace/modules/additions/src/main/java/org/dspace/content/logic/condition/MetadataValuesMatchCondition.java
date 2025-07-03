@@ -15,24 +15,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dspace.content.Item;
 import org.dspace.content.MetadataValue;
+import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.logic.LogicalStatementException;
 import org.dspace.core.Context;
-import org.dspace.content.factory.ContentServiceFactory;
-import org.dspace.content.service.ItemService;
 
 /**
- * A condition that returns true if a pattern (regex) matches any value
+ * A condition that returns true if any pattern in a list of patterns matches any value
  * in a given metadata field
  *
  * @author Kim Shepherd
- * @version $Revision$
  */
-public class MetadataValueMatchCondition extends AbstractCondition {
+public class MetadataValuesMatchCondition extends AbstractCondition {
 
     private final static Logger log = LogManager.getLogger();
 
     /**
-     * Return true if any value for a specified field in the item matches a specified regex pattern
+     * Return true if any value for a specified field in the item matches any of the specified regex patterns
      * Return false if not
      * @param context   DSpace context
      * @param item      Item to evaluate
@@ -41,7 +39,6 @@ public class MetadataValueMatchCondition extends AbstractCondition {
      */
     @Override
     public boolean getResult(Context context, Item item) throws LogicalStatementException {
-    	//TODO make this a parameteriseed thing in the abstract class
     	itemService = ContentServiceFactory.getInstance().getItemService();
     	
         String field = (String)getParameters().get("field");
@@ -61,14 +58,21 @@ public class MetadataValueMatchCondition extends AbstractCondition {
         }
         List<MetadataValue> values = itemService.getMetadata(item, schema, element, qualifier, Item.ANY);
         for (MetadataValue value : values) {
-            if (getParameters().get("pattern") instanceof String) {
-                String pattern = (String)getParameters().get("pattern");
-                log.debug("logic for " + item.getHandle() + ": pattern passed is " + pattern
-                    + ", checking value " + value.getValue());
-                Pattern p = Pattern.compile(pattern);
-                Matcher m = p.matcher(value.getValue());
-                if (m.find()) {
+            if (getParameters().get("patterns") instanceof List) {
+                List<String> patternList = (List<String>)getParameters().get("patterns");
+                // If the list is empty, just return true and log error?
+                log.error("No patterns were passed for metadata value matching, defaulting to 'true'");
+                if (patternList == null) {
                     return true;
+                }
+                for (String pattern : patternList) {
+                    log.debug("logic for " + item.getHandle() + ": pattern passed is " + pattern
+                        + ", checking value " + value.getValue());
+                    Pattern p = Pattern.compile(pattern);
+                    Matcher m = p.matcher(value.getValue());
+                    if (m.find()) {
+                        return true;
+                    }
                 }
             }
         }

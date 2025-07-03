@@ -106,15 +106,22 @@
         </property>
     </bean>
     
-    <bean id="contains-field-doi-condition" class="org.dspace.content.logic.condition.MetadataValueMatchCondition">
+    <bean id="contains-field-doi-condition" class="org.dspace.content.logic.condition.MetadataValuesMatchCondition">
     	<property name="parameters">
     		<map>
     			<entry key="field" value="local.mintdoi" />
-    			<entry key="pattern" value="mint" />
+    			<!-- <entry key="pattern" value="mint" /> -->
+                <entry key="patterns">
+                    <list>
+                        <value>mint</value>
+                        <value>Yes</value>
+                        <value>yes</value>
+                    </list>
+                </entry>
     		</map>
     	</property>
     </bean>
-
+    
     <!-- dc.type ends with any of the listed values, as per XOAI "driverDocumentTypeCondition" -->
     <bean id="driver-document-type_condition"
           class="org.dspace.content.logic.condition.MetadataValuesMatchCondition">
