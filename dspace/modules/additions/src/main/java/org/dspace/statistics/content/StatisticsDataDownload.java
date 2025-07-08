@@ -705,10 +705,8 @@ public class StatisticsDataDownload extends StatisticsData {
 				query += "type: " + dsoType;
 			}
 			
-			if (owningDso != null && currentDso != null && currentDso.getType() != Constants.SITE) {
+			if (currentDso.getType() != Constants.SITE) {
 				query += (query.equals("") ? "" : " AND ");
-				
-				
                 switch (currentDso.getType()) {
                     case Constants.ITEM:
                         owningStr = "owningItem";
@@ -730,7 +728,11 @@ public class StatisticsDataDownload extends StatisticsData {
 				} else {
 					query += owningStr + ":" + currentDso.getID();
 				}
-			}
+			} else if (currentDso.getType() == Constants.SITE) {
+				query += (query.equals("") ? "" : " AND ");
+            	owningStr = " owningItem";
+            	query += owningStr + ":*";
+		    }
 
 			if (query.equals("")) {
 				query = "*:*";

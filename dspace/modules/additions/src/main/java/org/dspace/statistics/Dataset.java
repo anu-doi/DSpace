@@ -236,7 +236,7 @@ public class Dataset {
 
 	}
 
-	public ByteArrayOutputStream exportAsCSV() throws IOException {
+	public ByteArrayOutputStream exportAsCSV(String type) throws IOException {
 
 		final String configFile = configurationService.getProperty("dspace.dir") + File.separator + "config"
 				+ File.separator + "local.cfg";
@@ -250,10 +250,10 @@ public class Dataset {
 
 		// Generate the item row
 		List<String> colLabels = new ArrayList<>();
-		if (getNbCols() == 3) {
-			colLabels = Arrays.asList(config.getProperty("export.columns.first"),
-					config.getProperty("export.columns.secondDownloads"), config.getProperty("export.columns.third"),
-					config.getProperty("export.columns.fourth"));
+		if(type.equals("TotalDownloads") || type.equals("TopDownloads")) {
+			colLabels = Arrays.asList(config.getProperty("export.columns.firstDownloads"),
+			config.getProperty("export.columns.secondDownloads"), config.getProperty("export.columns.third"),
+			config.getProperty("export.columns.fourth"));
 		} else {
 			colLabels = Arrays.asList(config.getProperty("export.columns.first"),
 					config.getProperty("export.columns.second"));

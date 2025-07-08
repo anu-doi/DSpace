@@ -122,13 +122,14 @@ public class UsageReportUtils {
 			globalUsageStats.setId(dso.getID().toString() + "_" + TOTAL_VISITS_REPORT_ID);
 			usageReports.add(globalUsageStats);
 
-			UsageReportRest totalViewsDownloadsStats = this.resolveGlobalViewCount(context);
+			UsageReportRest totalViewsDownloadsStats = this.resolveGlobalViewCount(context, dso);
 			totalViewsDownloadsStats.setId(dso.getID().toString() + "_" + TOTAL_VISITS_DOWNLOAD_ID);
 			usageReports.add(totalViewsDownloadsStats);
 
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_PER_MONTH_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_COUNTRIES_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOP_CITIES_REPORT_ID));
+			usageReports.add(this.createUsageReport(context, dso, TOP_DOWNLOADS_REPORT_ID));
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_ITEMS_COUNT_ID));
 		} else {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_VISITS_REPORT_ID));
@@ -140,8 +141,6 @@ public class UsageReportUtils {
 		}
 		if (dso instanceof Item || dso instanceof Bitstream) {
 			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
-		} else {
-			usageReports.add(this.createUsageReport(context, dso, TOP_DOWNLOADS_REPORT_ID));
 		}
 		
 		return usageReports;
@@ -243,7 +242,7 @@ public class UsageReportUtils {
 		return usageReportRest;
 	}
 
-	private UsageReportRest resolveGlobalViewCount(Context context)
+	private UsageReportRest resolveGlobalViewCount(Context context, DSpaceObject dso)
 			throws SQLException, IOException, ParseException, SolrServerException {
 		UsageReportRest usageReportRest = new UsageReportRest();
 		StatisticsListing viewListing = new StatisticsListing(new StatisticsViewsCountData());
@@ -251,7 +250,7 @@ public class UsageReportUtils {
 		dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1);
 		viewListing.addDatasetGenerator(dsoAxis);
 
-		StatisticsListing downloadListing = new StatisticsListing(new StatisticsViewsCountData());
+		StatisticsListing downloadListing = new StatisticsListing(new StatisticsViewsCountData(dso));
 		DatasetDSpaceObjectGenerator dsoAxis2 = new DatasetDSpaceObjectGenerator();
 		dsoAxis2.addDsoChild(Constants.BITSTREAM, 1, false, -1);
 		downloadListing.addDatasetGenerator(dsoAxis2);
@@ -595,11 +594,9 @@ public class UsageReportUtils {
 			usageReports.add(this.createUsageReportParameters(context, dso, TOTAL_ITEMS_COUNT_ID, startDate, endDate));
 		}
 		
-		if (dso instanceof Item || dso instanceof Bitstream) {
-			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
-		} else {
-			usageReports.add(this.createUsageReportParameters(context, dso, TOP_DOWNLOADS_REPORT_ID, startDate, endDate));
-		}
+//		if (dso instanceof Item || dso instanceof Bitstream) {
+//			usageReports.add(this.createUsageReport(context, dso, TOTAL_DOWNLOADS_REPORT_ID));
+//		}		
 		return usageReports;
 	}
 
@@ -680,7 +677,7 @@ public class UsageReportUtils {
 		StatisticsListing downloadListing = null;
 		if(dso instanceof Site) {
 			viewListing = new StatisticsListing(new StatisticsViewsCountData());
-			downloadListing = new StatisticsListing(new StatisticsViewsCountData());
+			downloadListing = new StatisticsListing(new StatisticsViewsCountData(dso));
 		}
 		else {
 			viewListing = new StatisticsListing(new StatisticsViewsCountData(dso));
@@ -859,7 +856,9 @@ public class UsageReportUtils {
 				totalDownloadsPoint.setId(dataset.getColLabelsAttrs().get(i).get("id"));
 				totalDownloadsPoint.setLabel(dataset.getColLabels().get(i));
 
-				totalDownloadsPoint.addValue("downloads", Integer.valueOf(dataset.getMatrix()[0][i]));
+				totalDownloadsPoint.addValue("Downloads", Integer.valueOf(dataset.getMatrix()[0][i]));
+				totalDownloadsPoint.addItemValue("Item", dataset.getMatrix()[1][i]);
+				totalDownloadsPoint.addItemValue("Handle", dataset.getMatrix()[2][i]);
 				usageReportRest.addPoint(totalDownloadsPoint);
 			}
 			return usageReportRest;
@@ -869,7 +868,8 @@ public class UsageReportUtils {
 
 	private UsageReportRest resolveTopDownloads(Context context, DSpaceObject dso, String startDate, String endDate)
 			throws SQLException, SolrServerException, ParseException, IOException {
-		StatisticsListing statListing = ((dso instanceof Site) ? new StatisticsListing(new StatisticsDataDownload()) : new StatisticsListing(new StatisticsDataDownload(dso)));
+		
+		StatisticsListing statListing = new StatisticsListing(new StatisticsDataDownload(dso));
 		DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
 		StatisticsSolrDateFilter dateFilter = new StatisticsSolrDateFilter();
 		statListing.addDatasetGenerator(dsoAxis);
@@ -906,6 +906,7 @@ public class UsageReportUtils {
 				topVisitPoint.setLabel(dataset.getColLabels().get(i));
 				topVisitPoint.addValue("downloads", Integer.valueOf(dataset.getMatrix()[0][i]));
 				topVisitPoint.addItemValue("Item name", dataset.getMatrix()[1][i]);
+				topVisitPoint.addItemValue("Handle", dataset.getMatrix()[2][i]);
 				usageReportRest.addPoint(topVisitPoint);
 			}
 		}
@@ -1050,7 +1051,7 @@ public class UsageReportUtils {
 		ByteArrayOutputStream baos = null;
 		OutputStream os;
 		dataset.flipRowCols();
-		baos = dataset.exportAsCSV();
+		baos = dataset.exportAsCSV(type);
 		os = response.getOutputStream();
 		baos.writeTo(os);
 
@@ -1072,12 +1073,12 @@ public class UsageReportUtils {
 				return dataset;
 			}
 		case TOTAL_VISITS_PER_MONTH_REPORT_ID:
-			StatisticsTable statisticsTable = new StatisticsTable(new StatisticsDataVisits(dso));
+			StatisticsTable statisticsTable = new StatisticsTable(new StatisticsDataMonthlyVisits(dso));
 			DatasetTimeGenerator timeAxis = new DatasetTimeGenerator();
 			timeAxis.setDateInterval("month", "-6", "+1");
 			statisticsTable.addDatasetGenerator(timeAxis);
 			DatasetDSpaceObjectGenerator dsoAxis = new DatasetDSpaceObjectGenerator();
-			dsoAxis.addDsoChild(dso.getType(), 1, false, -1);
+			dsoAxis.addDsoChild(Constants.ITEM, 1, false, -1);
 			statisticsTable.addDatasetGenerator(dsoAxis);
 			return statisticsTable.getDataset(context, 0);
 		case TOTAL_DOWNLOADS_REPORT_ID:
@@ -1090,7 +1091,7 @@ public class UsageReportUtils {
 			dataset = this.getTypeStatsDatasetTimeRange(context, dso, "city", 1, startDate, endDate);
 			return dataset;
 		case TOP_DOWNLOADS_REPORT_ID:
-				statsList = ((dso instanceof Site) ? new StatisticsListing(new StatisticsDataDownload()) : new StatisticsListing(new StatisticsDataDownload(dso)));
+				statsList = new StatisticsListing(new StatisticsDataDownload(dso));
 				break;
 		case TOTAL_ITEMS_COUNT_ID:
 			statsList = new StatisticsListing(new StatisticsDataItemCount(dso, getEndDate()));

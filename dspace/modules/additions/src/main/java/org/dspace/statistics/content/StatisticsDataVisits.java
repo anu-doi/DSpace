@@ -385,12 +385,25 @@ public class StatisticsDataVisits extends StatisticsData {
 
             } else {
                 // Make sure we have a dataSet
-                dataset = new Dataset(1, topCounts1.length);
+            	dataset = new Dataset(3, topCounts1.length);
                 for (int i = 0; i < topCounts1.length; i++) {
                     ObjectCount count = topCounts1[i];
+                    String dsoId = count.getValue();
                     dataset.setColLabel(i, getResultName(count.getValue(), firsDataset, context));
                     dataset.setColLabelAttr(i, getAttributes(count.getValue(), firsDataset, context));
                     dataset.addValueToMatrix(0, i, count.getCount());
+					Bitstream bit = bitstreamService.findByIdOrLegacyId(context, dsoId);
+					if (bit != null) {
+						Item owningItem = null;
+						List<Bundle> bunds = bit.getBundles();
+						if (0 < bunds.size() && 0 < bunds.get(0).getItems().size()) {
+							owningItem = bunds.get(0).getItems().get(0);
+						}
+						if (owningItem != null) {
+							dataset.addValueToMatrix(1, i, owningItem.getName());
+							dataset.addValueToMatrix(2, i, owningItem.getHandle());
+						}
+					}
                 }
             }
 

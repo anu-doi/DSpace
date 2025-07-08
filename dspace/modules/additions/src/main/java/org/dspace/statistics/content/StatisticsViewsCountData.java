@@ -356,6 +356,7 @@ public class StatisticsViewsCountData extends StatisticsData {
 		public String getQuery() {
 			// Time to construct our query
 			String query = "";
+			String owningStr = "";
 			// Check (& add if needed) the dsoType
 			if (dsoType != -1) {
 				query += "type: " + dsoType;
@@ -377,9 +378,10 @@ public class StatisticsViewsCountData extends StatisticsData {
 
 			if (owningDso != null && currentDso != null) {
 				query += (query.equals("") ? "" : " AND ");
-
-				String owningStr = "";
 				switch (currentDso.getType()) {
+				case Constants.SITE:
+					owningStr = "owningItem";
+					break;
 				case Constants.ITEM:
 					owningStr = "owningItem";
 					break;
@@ -396,7 +398,10 @@ public class StatisticsViewsCountData extends StatisticsData {
 					owningStr = "(" + owningStr + ":" + currentDso.getID() + " OR " + owningStr + ":"
 							+ ((DSpaceObjectLegacySupport) currentDso).getLegacyId() + ")";
 				} else {
-					owningStr += ":" + currentDso.getID();
+					if(currentDso.getType() != Constants.SITE) {
+						owningStr += ":" + currentDso.getID();
+					} else
+						owningStr += ":[* TO *]";
 				}
 
 				query += owningStr;
