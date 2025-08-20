@@ -511,6 +511,7 @@
                 <list name="values">
                     <string>Publication</string>
                     <string>publication</string>
+                    <string>ANUArchivesItem</string>
                     <!-- and other alternative names for publications types -->
                 </list>
             </Configuration>
