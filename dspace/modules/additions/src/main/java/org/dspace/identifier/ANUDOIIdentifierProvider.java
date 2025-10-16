@@ -1077,8 +1077,9 @@ public class ANUDOIIdentifierProvider extends FilteredIdentifierProvider {
 				boolean result = filter.getResult(context, (Item) dso);
 				log.debug("Result of filter for " + dso.getHandle() + " is " + result);
 				if (!result) {
-					throw new DOIIdentifierNotApplicableException("Item " + dso.getHandle() +
-						" was evaluated as 'false' by the item filter, not minting");
+					log.info("Item " + dso.getHandle() + " was evaluated as 'fasle by the item filters, not minting");
+//					throw new DOIIdentifierNotApplicableException("Item " + dso.getHandle() +
+//						" was evaluated as 'false' by the item filter, not minting");
 				}
 			} catch (LogicalStatementException e) {
 				log.error("Error evaluating item with logical filter: " + e.getLocalizedMessage());
