@@ -22,5 +22,7 @@ An additional message from ${params[3]} follows:
 ${params[5]}
 #end
 
+If the requested file is not attached to this email, please contact us on repository.admin@anu.edu.au.
+
 Best regards,
 The ${config.get('dspace.name')} Team

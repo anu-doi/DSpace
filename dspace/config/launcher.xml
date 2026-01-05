@@ -69,6 +69,13 @@
         </step>
     </command>
     <command>
+        <name>anu-doi-organiser</name>
+        <description>Run the ANU DOI organiser</description>
+        <step>
+            <class>org.dspace.identifier.doi.ANUDOIOrganiser</class>
+        </step>
+    </command>
+    <command>
         <name>dsprop</name>
         <description>View a DSpace property from dspace.cfg</description>
         <step>
