@@ -1580,6 +1580,11 @@
                  (namely those in "dspace-swordv2") still rely on log4j v1.  See that POM for more details. -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-1.2-api</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
