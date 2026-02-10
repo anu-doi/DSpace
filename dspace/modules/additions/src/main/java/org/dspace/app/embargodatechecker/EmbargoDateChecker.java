@@ -185,8 +185,11 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 			handler.handleException(e);
 			context.abort();
 		}
-		
-		handler.writeFilestream(context, filename, exportAsCSV(matrix), EXPORT_CSV);
+
+		if(matrix.size() > 1) {
+			handler.writeFilestream(context, filename, exportAsCSV(matrix), EXPORT_CSV);
+		}
+
 		context.restoreAuthSystemState();
 		context.complete();
 
