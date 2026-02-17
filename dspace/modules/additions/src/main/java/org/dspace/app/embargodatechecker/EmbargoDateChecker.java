@@ -303,11 +303,11 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 				metadataList.add("\"" + item.getName() + "\"");
 				metadataList.add(rp.getStartDate().toString());
 
-				List<MetadataValue> authors = this.itemService.getMetadata(item, "dc", "contributor", "author", null);
-				List<MetadataValue> types = this.itemService.getMetadata(item, "dc", "type", null, null);
-				List<MetadataValue> otherIds = this.itemService.getMetadata(item, "dc", "identifier", "other", null);
+				List<MetadataValue> authors = this.itemService.getMetadata(item, "dc", "contributor", "author", Item.ANY);
+				List<MetadataValue> types = this.itemService.getMetadata(item, "dc", "type", null, Item.ANY);
+				List<MetadataValue> otherIds = this.itemService.getMetadata(item, "dc", "identifier", "other", Item.ANY);
 				List<MetadataValue> emails = this.itemService.getMetadata(item, "local", "contributor", "authoremail",
-						null);
+						Item.ANY);
 
 				// Getting Author metadatavalues
 				for (MetadataValue metadataValue : authors) {
