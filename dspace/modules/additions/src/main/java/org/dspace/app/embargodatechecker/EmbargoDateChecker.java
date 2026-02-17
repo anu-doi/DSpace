@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+
 import org.apache.commons.cli.ParseException;
 import org.dspace.app.util.DSpaceObjectUtilsImpl;
 import org.dspace.app.util.service.DSpaceObjectUtils;
@@ -25,6 +26,7 @@ import org.dspace.content.Collection;
 import org.dspace.content.Community;
 import org.dspace.content.DSpaceObject;
 import org.dspace.content.Item;
+import org.dspace.content.MetadataValue;
 import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.service.BitstreamFormatService;
 import org.dspace.content.service.CommunityService;
@@ -37,17 +39,15 @@ import org.dspace.eperson.service.EPersonService;
 import org.dspace.scripts.DSpaceRunnable;
 import org.dspace.utils.DSpace;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 /**
- * Implementation of {@link DSpaceRunnable} to get the Embargo
- * lift/start dates of requested Collection or Community UUID or the whole
- * site between range of dates or specific duration 
- * (number of days) via CSV file.
+ * Implementation of {@link DSpaceRunnable} to get the Embargo lift/start dates
+ * of requested Collection or Community UUID or the whole site between range of
+ * dates or specific duration (number of days) via CSV file.
  *
  * @author Akshay Karthik
  *
@@ -77,17 +77,17 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 	protected CommunityService communityService;
 
 	private LocalDate durationTime;
-	
+
 	private LocalDate startDateTemp;
 
 	private Date startDate;
-	
+
 	private Date endDate;
-	
+
 	private boolean isValid;
-	
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	
+
 	String dateRegexPattern = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
 
 	private String filename = null;
@@ -105,25 +105,30 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 		this.ePersonService = EPersonServiceFactory.getInstance().getEPersonService();
 		this.communityService = ContentServiceFactory.getInstance().getCommunityService();
 		this.itemService = ContentServiceFactory.getInstance().getItemService();
-		
 
 		context = new Context();
-		
+
 		help = commandLine.hasOption('h');
 		try {
-			uuid = commandLine.hasOption('a') ? (ContentServiceFactory.getInstance().getSiteService().findSite(context).getID().toString()) : (commandLine.hasOption('u') ? commandLine.getOptionValue('u') : null);
+			uuid = commandLine.hasOption('a')
+					? (ContentServiceFactory.getInstance().getSiteService().findSite(context).getID().toString())
+					: (commandLine.hasOption('u') ? commandLine.getOptionValue('u') : null);
+
+			filename = commandLine.hasOption('f') ? commandLine.getOptionValue('f') : (uuid.toString() + ".csv");
+
+			ArrayList<String> columnNames = new ArrayList<>();
+			columnNames.add("Item UUID");
+			columnNames.add("Item Handle");
+			columnNames.add("Item Title");
+			columnNames.add("Lift date");
+			columnNames.add("dc.contributor.author");
+			columnNames.add("dc.type");
+			columnNames.add("dc.identifier.other");
+			columnNames.add("local.contributor.authoremail");
+			matrix.add(columnNames);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		filename = commandLine.hasOption('f')? commandLine.getOptionValue('f') : (uuid.toString() + ".csv");
-		
-		ArrayList<String> columnNames = new ArrayList<>();
-		columnNames.add("Item UUID");
-		columnNames.add("Item Handle");
-		columnNames.add("Item Title");
-		columnNames.add("Lift date");
-		matrix.add(columnNames);
 	}
 
 	@Override
@@ -136,14 +141,15 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 
 		context.turnOffAuthorisationSystem();
 		isValid = validate(context);
-        try {
-            context.setCurrentUser(ePersonService.find(context, this.getEpersonIdentifier()));
-        } catch (SQLException e) {
-            handler.handleException(e);
-        }
-		
+		try {
+			context.setCurrentUser(ePersonService.find(context, this.getEpersonIdentifier()));
+		} catch (SQLException e) {
+			handler.handleException(e);
+		}
+
 		if (!isValid) {
-			throw new IllegalArgumentException("Either '-d' duration or both start date '-s' and end date '-e' must be provided.");
+			throw new IllegalArgumentException(
+					"Either '-d' duration or both start date '-s' and end date '-e' must be provided.");
 		} else {
 			if (commandLine.hasOption('d')) {
 				duration = commandLine.getOptionValue('d');
@@ -157,19 +163,21 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 				rangeStartDate = commandLine.getOptionValue('s');
 				rangeEndDate = commandLine.getOptionValue('e');
 
-				if(rangeStartDate.matches(dateRegexPattern)) {
+				if (rangeStartDate.matches(dateRegexPattern)) {
 					startDate = (LocalDate.parse(rangeStartDate)).toDate();
 				} else {
-					handler.handleException("Invalid date format. Start date '-s' format should follow yyyy-MM-dd. For example, 1995-01-12.");
+					handler.handleException(
+							"Invalid date format. Start date '-s' format should follow yyyy-MM-dd. For example, 1995-01-12.");
 				}
-				
-				if(rangeEndDate.matches(dateRegexPattern)) {
+
+				if (rangeEndDate.matches(dateRegexPattern)) {
 					endDate = (LocalDate.parse(rangeEndDate)).toDate();
 				} else {
-					handler.handleException("Invalid date format. End date '-e' format should follow yyyy-MM-dd. For example, 1995-01-12.");
+					handler.handleException(
+							"Invalid date format. End date '-e' format should follow yyyy-MM-dd. For example, 1995-01-12.");
 				}
-				
-				if(startDate.after(endDate)) {
+
+				if (startDate.after(endDate)) {
 					handler.handleException("Start date should be before end date. Check the dates");
 				}
 				duration = null;
@@ -186,7 +194,7 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 			context.abort();
 		}
 
-		if(matrix.size() > 1) {
+		if (matrix.size() > 1) {
 			handler.writeFilestream(context, filename, exportAsCSV(matrix), EXPORT_CSV);
 		}
 
@@ -196,7 +204,6 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 	}
 
 	private boolean validate(Context context2) throws ParseException {
-		// TODO Auto-generated method stub
 		boolean durBool = commandLine.hasOption('d');
 		boolean sdBool = commandLine.hasOption('s');
 		boolean edBool = commandLine.hasOption('e');
@@ -258,8 +265,6 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 
 	protected void performObject(DSpaceObject dso, Date startDate, Date endDate)
 			throws SQLException, IOException, java.text.ParseException {
-		// By default this method only performs tasks on Items
-		// (You should override this method if you want to perform task on all objects)
 		if (dso.getType() == Constants.ITEM) {
 			performItem((Item) dso, startDate, endDate);
 		}
@@ -267,7 +272,6 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 
 	protected void performItem(Item item, Date startDate, Date endDate)
 			throws SQLException, IOException, java.text.ParseException {
-
 		for (Bundle bundle : item.getBundles()) {
 			if ("ORIGINAL".equals(bundle.getName())) {
 				for (Bitstream bs : bundle.getBitstreams()) {
@@ -281,14 +285,78 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 
 	protected void findAndCheckStartDates(ResourcePolicy rp, Item item, Date startDate, Date endDate)
 			throws IOException, java.text.ParseException {
+		ArrayList<String> metadataList = new ArrayList<>();
+
+		// Declaring StringBuilders for different metadata needed
+		StringBuilder authorsSb = new StringBuilder();
+		StringBuilder typesSb = new StringBuilder();
+		StringBuilder otherIdentifierSb = new StringBuilder();
+		StringBuilder emailsSb = new StringBuilder();
 
 		if (rp.getStartDate() != null) {
 			// Date calculator
 			if ((rp.getStartDate().after(startDate) || rp.getStartDate().equals(startDate))
 					&& (rp.getStartDate().before(endDate) || rp.getStartDate().equals(endDate))) {
+
+				metadataList.add(item.getID().toString());
+				metadataList.add(item.getHandle().toString());
+				metadataList.add("\"" + item.getName() + "\"");
+				metadataList.add(rp.getStartDate().toString());
+
+				List<MetadataValue> authors = this.itemService.getMetadata(item, "dc", "contributor", "author", null);
+				List<MetadataValue> types = this.itemService.getMetadata(item, "dc", "type", null, null);
+				List<MetadataValue> otherIds = this.itemService.getMetadata(item, "dc", "identifier", "other", null);
+				List<MetadataValue> emails = this.itemService.getMetadata(item, "local", "contributor", "authoremail",
+						null);
+
+				// Getting Author metadatavalues
+				for (MetadataValue metadataValue : authors) {
+					if (metadataValue.getValue() != null) {
+						if (authorsSb.length() > 0) {
+							authorsSb.append("||");
+						}
+						authorsSb.append(metadataValue.getValue().toString());
+					}
+				}
+
+				// Getting Types metadatavalues
+				for (MetadataValue metadataValue : types) {
+					if (metadataValue.getValue() != null) {
+						if (typesSb.length() > 0) {
+							typesSb.append("||");
+						}
+						typesSb.append(metadataValue.getValue().toString());
+					}
+				}
+
+				// Getting otherIds metadatavalues
+				for (MetadataValue metadataValue : otherIds) {
+					if (metadataValue.getValue() != null) {
+						if (otherIdentifierSb.length() > 0) {
+							otherIdentifierSb.append("||");
+						}
+						otherIdentifierSb.append(metadataValue.getValue().toString());
+					}
+				}
+
+				// Getting emails metadatavalues
+				for (MetadataValue metadataValue : emails) {
+					if (metadataValue.getValue() != null) {
+						if (emailsSb.length() > 0) {
+							emailsSb.append("||");
+						}
+						emailsSb.append(metadataValue.getValue().toString());
+					}
+				}
+
+				// Add the stringbuilders values to the metadataList
+				metadataList.add("\"" + authorsSb.toString() + "\"");
+				metadataList.add("\"" + typesSb.toString() + "\"");
+				metadataList.add("\"" + otherIdentifierSb.toString() + "\"");
+				metadataList.add("\"" + emailsSb.toString() + "\"");
+
 				logMessage(null, rp.getStartDate().toString(), item);
-				matrix.add(new ArrayList<String>(Arrays.asList(item.getID().toString(), item.getHandle().toString(),
-						"\"" + item.getName() + "\"", rp.getStartDate().toString())));
+				matrix.add(metadataList);
 			}
 		}
 	}
@@ -310,7 +378,6 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 	}
 
 	private void logMessage(String msg, String endDate, Item item) throws IOException {
-		// TODO Auto-generated method stub
 		try {
 			StringBuilder message = new StringBuilder();
 			message.append("\n").append("The end date for the item ").append(item.getName()).append(" (")
@@ -344,7 +411,6 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 	}
 
 	private void logExceptionMessage(String message) {
-		// TODO Auto-generated method stub
 		handler.logInfo(message.toString());
 	}
 
