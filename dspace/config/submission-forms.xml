@@ -2361,6 +2361,298 @@
 				</field>
 			</row>
 		</form>
+		
+		<form name="mapsStep">
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>title</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Title</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required>You must enter a main title for this item.</required>
+				</field>
+			</row>
+            <row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>title</dc-element>
+                    <dc-qualifier>alternative</dc-qualifier>
+                    <repeatable>true</repeatable>
+                    <label>Other Titles</label>
+                    <input-type>onebox</input-type>
+                    <hint>If the item has any alternative titles, please enter them here.</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Identifier</label>
+					<input-type>onebox</input-type>
+					<hint>Include the identifier from FIleMaker</hint>
+					<required>You must enter an identifier.</required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>other</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Other Identifier</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>coverage</dc-element>
+					<dc-qualifier>spatial</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Country and/or Scale</label>
+					<input-type>onebox</input-type>
+					<hint>Country and if available the scale of map i.e. 1:63 360 or 1:250 000</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>ispartofseries</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Series</label>
+					<input-type>onebox</input-type>
+					<hint>Series details for map if available i.e. Series: X551</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>sheetNumber</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Sheet No.</label>
+					<input-type>onebox</input-type>
+					<hint>Include sheet number if available i.e. Sheet 1</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>date</dc-element>
+					<dc-qualifier>issued</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Date of Issue</label>
+					<input-type>date</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>isversionof</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Edition</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>publisher</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Publisher</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>notes</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Notes</label>
+					<input-type>textarea</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+                <field>
+                    <dc-schema>dc</dc-schema>
+                    <dc-element>provenance</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Provenance</label>
+                    <input-type>onebox</input-type>
+                    <hint>Include date scanned</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>subject</dc-element>
+					<dc-qualifier>other</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Subject Other</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>type</dc-element>
+					<dc-qualifier/>
+					<repeatable>false</repeatable>
+					<label>Type</label>
+					<input-type value-pairs-name="maps_values">dropdown</input-type>
+					<hint/>
+					<required>Please provide a type</required>
+				</field>
+			</row>
+            <row>
+                <field>
+                    <dc-schema>dcterms</dc-schema>
+                    <dc-element>accessRights</dc-element>
+                    <dc-qualifier></dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Access Rights</label>
+                    <input-type>onebox</input-type>
+                    <hint>Indicate if the item is Open Access</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier>mimetype</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Mimetype</label>
+					<input-type value-pairs-name="mimetype_values">dropdown</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier>extent</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>DPI and/or Map Extent</label>
+					<input-type>onebox</input-type>
+					<hint>Include DPI the map was scanned at i.e. 600 dpi, and if available the dimensions of the physical map</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Format</label>
+					<input-type>onebox</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>language</dc-element>
+					<dc-qualifier>iso</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Language</label>
+					<input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+					<hint/>
+					<required/>
+				</field>
+			</row>
+            <row>
+                <field>
+                    <dc-schema>local</dc-schema>
+                    <dc-element>type</dc-element>
+                    <dc-qualifier>status</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Publication Status</label>
+					<input-type value-pairs-name="version_types">dropdown</input-type>
+                    <!--<input-type>onebox</input-type>-->
+                    <hint>The document's publication Version.</hint>
+                    <required></required>
+                </field>
+            </row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>authoremail</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>CargoGIS email</label>
+					<input-type>onebox</input-type>
+                    <hint>Enter the email address of the authors of this item.</hint>
+					<required>Please provide the CartoGIS Email</required>
+				</field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>abstract</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Map description</label>
+					<input-type>textarea</input-type>
+					<hint>Maximum 255 characters</hint>
+					<required/>
+				</field>
+			</row>
+			<row>
+				<field>
+                    <dc-schema>local</dc-schema>
+                    <dc-element>identifier</dc-element>
+                    <dc-qualifier>uidSubmittedBy</dc-qualifier>
+                    <repeatable>false</repeatable>
+                    <label>Submitter’s Uni ID</label>
+                    <input-type>onebox</input-type>
+                    <hint>Submitter's employee number: u123456789</hint>
+                    <required>We need to know who submitted here.</required>
+                </field>
+			</row>
+			<row>
+				<field>
+					<dc-schema>local</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>embargo</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Embargo Date</label>
+					<input-type>date</input-type>
+					<hint>If an embargo period applies to this item, please enter a date to indicate when the embargo will expire</hint>
+					<required/>
+				</field>
+			</row>
+		</form>
 
     </form-definitions>
 
@@ -3388,6 +3680,13 @@
 			</pair>
 		</value-pairs>
 		
+		
+		<value-pairs value-pairs-name="maps_values" dc-term="type">
+			<pair>
+				<displayed-value>Cartographic material</displayed-value>
+				<stored-value>Cartographic material</stored-value>
+			</pair>
+		</value-pairs>
 		
 		
 		<value-pairs value-pairs-name="mimetype_values" dc-term="type">

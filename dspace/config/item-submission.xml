@@ -130,6 +130,7 @@
         <name-map collection-entity-type="Journal" submission-name="Journal"/>
         <name-map collection-entity-type="JournalVolume" submission-name="JournalVolume"/>
         <name-map collection-entity-type="JournalIssue" submission-name="JournalIssue"/>
+        <name-map collection-entity-type="Maps" submission-name="Maps"/>
     </submission-map>
 
 
@@ -222,6 +223,11 @@
             <type>submission-form</type>
         </step-definition>
         <step-definition id="covidStep" mandatory="true">
+            <heading>submit.progressbar.describe.stepone</heading>
+            <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
+            <type>submission-form</type>
+        </step-definition>
+        <step-definition id="mapsStep" mandatory="true">
             <heading>submit.progressbar.describe.stepone</heading>
             <processing-class>org.dspace.app.rest.submit.step.DescribeStep</processing-class>
             <type>submission-form</type>
@@ -486,6 +492,12 @@
         <submission-process name="Covid">
             <step id="collection"/>
             <step id="covidStep"/>
+            <step id="upload"/>
+            <step id="license"/>
+        </submission-process>
+        <submission-process name="Maps">
+            <step id="collection"/>
+            <step id="mapsStep"/>
             <step id="upload"/>
             <step id="license"/>
         </submission-process>

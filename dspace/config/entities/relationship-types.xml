@@ -156,4 +156,17 @@
         </rightCardinality>
         <copyToRight>true</copyToRight>
     </type>
+	<type>
+        <leftType>Maps</leftType>
+        <rightType>Person</rightType>
+        <leftwardType>isPersonOfMaps</leftwardType>
+        <rightwardType>isMapsOfPerson</rightwardType>
+        <leftCardinality>
+            <min>0</min>
+        </leftCardinality>
+        <rightCardinality>
+            <min>0</min>
+        </rightCardinality>
+        <copyToRight>true</copyToRight>
+    </type>
 </relationships>
