@@ -119,14 +119,6 @@ public abstract class AInprogressItemConverter<T extends InProgressSubmission,
 	        }
 	    }
     }
-    
-    protected void fillFromModelTest(T obj, R witem, Projection projection) {
-        Collection collection = obj.getCollection();
-        Item item = obj.getItem();
-        EPerson submitter = null;
-        submitter = obj.getSubmitter();
-        witem.setId(obj.getID());
-    }
 
     private void addError(List<ErrorRest> errors, ErrorRest toAdd) {
 
