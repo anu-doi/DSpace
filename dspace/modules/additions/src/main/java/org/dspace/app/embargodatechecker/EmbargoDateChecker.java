@@ -110,10 +110,10 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 
 		help = commandLine.hasOption('h');
 		try {
-			uuid = commandLine.hasOption('a')
-					? (ContentServiceFactory.getInstance().getSiteService().findSite(context).getID().toString())
-					: (commandLine.hasOption('u') ? commandLine.getOptionValue('u') : null);
-
+//			uuid = commandLine.hasOption('a')
+//					? (ContentServiceFactory.getInstance().getSiteService().findSite(context).getID().toString())
+//					: (commandLine.hasOption('u') ? commandLine.getOptionValue('u') : null);
+			uuid = commandLine.hasOption('u') ? commandLine.getOptionValue('u') : null;
 			filename = commandLine.hasOption('f') ? commandLine.getOptionValue('f') : (uuid.toString() + ".csv");
 
 			ArrayList<String> columnNames = new ArrayList<>();
@@ -126,7 +126,7 @@ public class EmbargoDateChecker extends DSpaceRunnable<EmbargoDateCheckerScriptC
 			columnNames.add("dc.identifier.other");
 			columnNames.add("local.contributor.authoremail");
 			matrix.add(columnNames);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

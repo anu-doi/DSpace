@@ -30,7 +30,7 @@ public class EmbargoDateCheckerScriptConfiguration<T extends EmbargoDateChecker>
             options.addOption("u", "uuid", true, "target uuid of community or collection");
             options.getOption("u").setType(String.class);
             
-            options.addOption("a", "all", false, "run for the whole site");
+//            options.addOption("a", "all", false, "run for the whole site");
 
             options.addOption("d", "duration", true, "number of days");
             options.getOption("d").setType(String.class);
