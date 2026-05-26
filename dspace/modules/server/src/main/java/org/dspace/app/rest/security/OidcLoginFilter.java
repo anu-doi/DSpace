@@ -69,7 +69,6 @@ public class OidcLoginFilter extends StatelessLoginFilter {
      * @throws IOException
      */
     private void redirectAfterSuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	log.info("In redirect after success AKOIDC");
         // Get redirect URL from request parameter
         String redirectUrl = request.getParameter("redirectUrl");
         String state = request.getParameter("state");
@@ -79,7 +78,6 @@ public class OidcLoginFilter extends StatelessLoginFilter {
         	if(StringUtils.isNotEmpty(state)) {
                 redirectUrl = configurationService.getProperty("dspace.ui.url")
                 		+ URLUtils.decode(state);
-                log.info("AKOIDC redirectURL : "+ redirectUrl);
         	}
         }
 
