@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node id="Publishers" label="Publishers">
+	<isComposedBy>
+		<node label="ANU Research School of Pacific and Asian Studies, State, Society and Governance in Melanesia Program" />
+		<node id="APL" label="Asia-Pacific Linguistics" />
+		<node id="APP" label="Asia Pacific Press" />
+		<node id="ADSN" label="Australian Development Studies Network" />
+		<node id="BioMed" label="BioMed Central" />
+		<node id="Crawford" label="Crawford School of Economics and Government, The Australian National University" />
+		<node id="Elsevier" label="Elsevier" />
+		<node id="NCEPH" label="Health Transition Centre, National Centre for Epidemiology and Population Health, The Australian National University" />
+		<node id="Springer" label="Springer Verlag" />
+		<node id="TaylorFrancis" label="Taylor &amp; Francis" />
+		<node id="ANU" label="The Australian National University" />
+		<node id="Wiley" label="Wiley" />
+	</isComposedBy>
+</node>

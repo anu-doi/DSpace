@@ -75,6 +75,21 @@
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='identifier']/doc:element/doc:element/doc:field[@name='value']">
 				<dc:identifier><xsl:value-of select="." /></dc:identifier>
 			</xsl:for-each>
+			<!-- local.identifier.doi -->
+			<xsl:for-each select="doc:metadata/doc:element[@name='local']/doc:element[@name='identifier']/doc:element[@name='doi']/doc:element/doc:field[@name='value']">
+				<dc:identifier><xsl:value-of select="." /></dc:identifier>
+			</xsl:for-each>
+			<!-- INC0403458 Add Thumbnail Bitstream for Trove -->
+			<xsl:for-each select="doc:metadata/doc:element[@name='bundles']/doc:element/doc:field[text()='THUMBNAIL']">
+				<xsl:for-each select="../doc:element[@name='bitstreams']/doc:element">
+					<dc:identifier><xsl:value-of select="doc:field[@name='url']/text()" /></dc:identifier>
+				</xsl:for-each>
+			</xsl:for-each>
+			<xsl:for-each select="doc:metadata/doc:element[@name='bundles']/doc:element/doc:field[text()='ORIGINAL']">
+				<xsl:for-each select="../doc:element[@name='bitstreams']/doc:element">
+					<dc:identifier><xsl:value-of select="doc:field[@name='url']/text()" /></dc:identifier>
+				</xsl:for-each>
+			</xsl:for-each>
 			<!-- dc.language -->
 			<xsl:for-each select="doc:metadata/doc:element[@name='dc']/doc:element[@name='language']/doc:element/doc:field[@name='value']">
 				<dc:language><xsl:value-of select="." /></dc:language>

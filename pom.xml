@@ -1250,6 +1250,12 @@
                 <artifactId>spring-expression</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -1583,6 +1589,11 @@
             </dependency>
             <!-- This bridge forwards all log4j v1 logging to log4j v2. It is required because some dependencies
                  (namely those in "dspace-swordv2") still rely on log4j v1.  See that POM for more details. -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-web</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-1.2-api</artifactId>

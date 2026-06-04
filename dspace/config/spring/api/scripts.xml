@@ -91,4 +91,8 @@
         <property name="dspaceRunnableClass" value="org.dspace.app.bulkaccesscontrol.BulkAccessControlCli"/>
     </bean>
 
+	<bean id="embargo-date-checker" class="org.dspace.app.embargodatechecker.EmbargoDateCheckerCliScriptConfiguration">
+        <property name="description" value="Embargo date checker"/>
+        <property name="dspaceRunnableClass" value="org.dspace.app.embargodatechecker.EmbargoDateCheckerCli"/>
+    </bean>
 </beans>
